@@ -1,0 +1,2736 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module util
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _MoveTo
+                                     12 	.globl _SetR
+                                     13 	.globl _Border
+                                     14 	.globl _CursorShape
+                                     15 	.globl _ReadText
+                                     16 	.globl _Rnd
+                                     17 	.globl _GetKey
+                                     18 	.globl _Delay
+                                     19 	.globl _NoSound
+                                     20 	.globl _Sound
+                                     21 	.globl _Wherey
+                                     22 	.globl _Gotoxy
+                                     23 	.globl _TextBackground
+                                     24 	.globl _TextColor
+                                     25 	.globl _Wln
+                                     26 	.globl _WrC
+                                     27 	.globl _Wr
+                                     28 	.globl _UpCase
+                                     29 	.globl _StrCat
+                                     30 	.globl _StrCpy
+                                     31 	.globl _Insert
+                                     32 	.globl _Delete
+                                     33 	.globl _Len
+                                     34 	.globl _g_Scratch
+                                     35 	.globl _DOS_TPAUpperAddr
+                                     36 	.globl _g_SLTSL
+                                     37 	.globl _g_GRPACY
+                                     38 	.globl _g_GRPACX
+                                     39 	.globl _g_LOGOPR
+                                     40 	.globl _g_CMASK
+                                     41 	.globl _g_CLOC
+                                     42 	.globl _g_FNKSTR
+                                     43 	.globl _g_GETPNT
+                                     44 	.globl _g_PUTPNT
+                                     45 	.globl _g_ATRBYT
+                                     46 	.globl _g_BDRCLR
+                                     47 	.globl _g_BAKCLR
+                                     48 	.globl _g_FORCLR
+                                     49 	.globl _g_CSRX
+                                     50 	.globl _g_CSRY
+                                     51 	.globl _g_CLIKSW
+                                     52 	.globl _g_MLTPAT
+                                     53 	.globl _g_MLTATR
+                                     54 	.globl _g_MLTCGP
+                                     55 	.globl _g_MLTCOL
+                                     56 	.globl _g_MLTNAM
+                                     57 	.globl _g_GRPPAT
+                                     58 	.globl _g_GRPATR
+                                     59 	.globl _g_GRPCGP
+                                     60 	.globl _g_GRPCOL
+                                     61 	.globl _g_GRPNAM
+                                     62 	.globl _g_T32PAT
+                                     63 	.globl _g_T32ATR
+                                     64 	.globl _g_T32CGP
+                                     65 	.globl _g_T32COL
+                                     66 	.globl _g_T32NAM
+                                     67 	.globl _g_TXTPAT
+                                     68 	.globl _g_TXTATR
+                                     69 	.globl _g_TXTCGP
+                                     70 	.globl _g_TXTCOL
+                                     71 	.globl _g_TXTNAM
+                                     72 	.globl _g_CLMLST
+                                     73 	.globl _g_CRTCNT
+                                     74 	.globl _g_LINLEN
+                                     75 	.globl _g_LINL32
+                                     76 	.globl _g_LINL40
+                                     77 	.globl _g_BDOS
+                                     78 	.globl _g_MASTER
+                                     79 	.globl _g_RAMAD3
+                                     80 	.globl _g_RAMAD2
+                                     81 	.globl _g_RAMAD1
+                                     82 	.globl _g_RAMAD0
+                                     83 	.globl _g_BREAKV
+                                     84 	.globl _g_DISKVE
+                                     85 	.globl _g_KANJTABLE
+                                     86 	.globl _g_STRSRC
+                                     87 	.globl _g_SUBRID
+                                     88 	.globl _g_CHAR_16
+                                     89 	.globl _g_MSXMID
+                                     90 	.globl _g_MSXVER
+                                     91 	.globl _g_ROMVersion
+                                     92 	.globl _g_BASRVN
+                                     93 	.globl _g_VDP_DW
+                                     94 	.globl _g_VDP_DR
+                                     95 	.globl _g_CGTABL
+                                     96 	.globl _g_SVFFFD
+                                     97 	.globl _g_RG27SAV
+                                     98 	.globl _g_RG26SAV
+                                     99 	.globl _g_RG25SAV
+                                    100 	.globl _g_SVFFF8
+                                    101 	.globl _g_MINROM
+                                    102 	.globl _g_RG23SAV
+                                    103 	.globl _g_RG22SAV
+                                    104 	.globl _g_RG21SAV
+                                    105 	.globl _g_RG20SAV
+                                    106 	.globl _g_RG19SAV
+                                    107 	.globl _g_RG18SAV
+                                    108 	.globl _g_RG17SAV
+                                    109 	.globl _g_RG16SAV
+                                    110 	.globl _g_RG15SAV
+                                    111 	.globl _g_RG14SAV
+                                    112 	.globl _g_RG13SAV
+                                    113 	.globl _g_RG12SAV
+                                    114 	.globl _g_RG11SAV
+                                    115 	.globl _g_RG10SAV
+                                    116 	.globl _g_RG09SAV
+                                    117 	.globl _g_RG08SAV
+                                    118 	.globl _g_PROCNM
+                                    119 	.globl _g_SLTWRK
+                                    120 	.globl _g_SLTATR
+                                    121 	.globl _g_SLTTBL
+                                    122 	.globl _g_EXPTBL
+                                    123 	.globl _g_MNROM
+                                    124 	.globl _g_DRWANG
+                                    125 	.globl _g_DRWSCL
+                                    126 	.globl _g_DRWFLG
+                                    127 	.globl _g_GYPOS
+                                    128 	.globl _g_GXPOS
+                                    129 	.globl _g_BRDATR
+                                    130 	.globl _g_CASPRV
+                                    131 	.globl _g_OLDSCR
+                                    132 	.globl _g_SCRMOD
+                                    133 	.globl _g_FLBMEM
+                                    134 	.globl _g_KANAMD
+                                    135 	.globl _g_KANAST
+                                    136 	.globl _g_CAPST
+                                    137 	.globl _g_CSTYLE
+                                    138 	.globl _g_CSRSW
+                                    139 	.globl _g_INSFLG
+                                    140 	.globl _g_ESCCNT
+                                    141 	.globl _g_GRPHED
+                                    142 	.globl _g_WINWID
+                                    143 	.globl _g_LOWLIM
+                                    144 	.globl _g_INTCNT
+                                    145 	.globl _g_INTVAL
+                                    146 	.globl _g_JIFFY
+                                    147 	.globl _g_PADX
+                                    148 	.globl _g_PADY
+                                    149 	.globl _g_INTFLG
+                                    150 	.globl _g_RTYCNT
+                                    151 	.globl _g_TRPTBL
+                                    152 	.globl _g_HIMEM
+                                    153 	.globl _g_BOTTOM
+                                    154 	.globl _g_PATWRK
+                                    155 	.globl _g_LINWRK
+                                    156 	.globl _g_KEYBUF
+                                    157 	.globl _g_NEWKEY
+                                    158 	.globl _g_OLDKEY
+                                    159 	.globl _g_CLIKFL
+                                    160 	.globl _g_ONGSBF
+                                    161 	.globl _g_FNKFLG
+                                    162 	.globl _g_FNKSWI
+                                    163 	.globl _g_CODSAV
+                                    164 	.globl _g_FSTPOS
+                                    165 	.globl _g_LINTTB
+                                    166 	.globl _g_BASROM
+                                    167 	.globl _g_ENSTOP
+                                    168 	.globl _g_VCBC
+                                    169 	.globl _g_VCBB
+                                    170 	.globl _g_VCBA
+                                    171 	.globl _g_PLYCNT
+                                    172 	.globl _g_MUSICF
+                                    173 	.globl _g_QUEUEN
+                                    174 	.globl _g_MCLPTR
+                                    175 	.globl _g_MCLLEN
+                                    176 	.globl _g_SAVVOL
+                                    177 	.globl _g_VOICEN
+                                    178 	.globl _g_SAVSP
+                                    179 	.globl _g_PRSCNT
+                                    180 	.globl _g_LSTMOD
+                                    181 	.globl _g_LSTCOM
+                                    182 	.globl _g_COMMSK
+                                    183 	.globl _g_ESTBLS
+                                    184 	.globl _g_FLAGS
+                                    185 	.globl _g_ERRORS
+                                    186 	.globl _g_DATCNT
+                                    187 	.globl _g_DEVNUM
+                                    188 	.globl _g_OLDINT
+                                    189 	.globl _g_OLDSTT
+                                    190 	.globl _g_MEXBIh
+                                    191 	.globl _g_RSIQLN
+                                    192 	.globl _g_RSFCB
+                                    193 	.globl _g_TOCNT
+                                    194 	.globl _g_RSTMP
+                                    195 	.globl _g_YSAVE
+                                    196 	.globl _g_XSAVE
+                                    197 	.globl _g_NORUSE
+                                    198 	.globl _g_MODE
+                                    199 	.globl _g_ROMA
+                                    200 	.globl _g_CHRCNT
+                                    201 	.globl _g_EXBRSA
+                                    202 	.globl _g_AVCSAV
+                                    203 	.globl _g_ACPAGE
+                                    204 	.globl _g_DPPAGE
+                                    205 	.globl _g_RS2IQ
+                                    206 	.globl _g_VOICCQ
+                                    207 	.globl _g_VOICBQ
+                                    208 	.globl _g_VOICAQ
+                                    209 	.globl _g_QUEBAK
+                                    210 	.globl _g_QUETAB
+                                    211 	.globl _g_ASPCT2
+                                    212 	.globl _g_ASPCT1
+                                    213 	.globl _g_HEADER
+                                    214 	.globl _g_HIGH
+                                    215 	.globl _g_LOW
+                                    216 	.globl _g_CS240
+                                    217 	.globl _g_CS120
+                                    218 	.globl _g_REPCNT
+                                    219 	.globl _g_SCNCNT
+                                    220 	.globl _g_FRCNEW
+                                    221 	.globl _g_QUEUES
+                                    222 	.globl _g_MINUPD
+                                    223 	.globl _g_MAXUPD
+                                    224 	.globl _g_TRGFLG
+                                    225 	.globl _g_STATFL
+                                    226 	.globl _g_RG7SAV
+                                    227 	.globl _g_RG6SAV
+                                    228 	.globl _g_RG5SAV
+                                    229 	.globl _g_RG4SAV
+                                    230 	.globl _g_RG3SAV
+                                    231 	.globl _g_RG2SAV
+                                    232 	.globl _g_RG1SAV
+                                    233 	.globl _g_RG0SAV
+                                    234 	.globl _g_CNSDFG
+                                    235 	.globl _g_USRTAB
+                                    236 	.globl _g_CLPRIM
+                                    237 	.globl _g_WRPRIM
+                                    238 	.globl _g_RDPRIM
+                                    239 	.globl _SF
+                                    240 	.globl _Cur
+                                    241 	.globl _Col
+                                    242 	.globl _Bak
+                                    243 	.globl _Bor
+                                    244 	.globl _En
+                                    245 	.globl _Add
+                                    246 	.globl _Min
+                                    247 	.globl _Score
+                                    248 	.globl _Cn
+                                    249 	.globl _Pause
+                                    250 	.globl _Tune
+                                    251 	.globl _RegionSoundOn
+                                    252 	.globl _Play
+                                    253 	.globl _Explode
+                                    254 	.globl _Walls
+                                    255 	.globl _Static
+                                    256 	.globl _Blast
+                                    257 	.globl _DOpen
+                                    258 	.globl _DClose
+                                    259 	.globl _Door
+                                    260 	.globl _WrFN
+                                    261 	.globl _FN
+                                    262 	.globl _UpC
+                                    263 	.globl _Up
+                                    264 	.globl _Spaces
+                                    265 	.globl _QFormat
+                                    266 	.globl _LowerCase
+                                    267 	.globl _Here
+                                    268 	.globl _RL
+                                    269 	.globl _RS
+                                    270 	.globl _RR
+                                    271 	.globl _RC1
+                                    272 	.globl _RB
+                                    273 	.globl _RB2
+                                    274 	.globl _Val
+                                    275 	.globl _MC
+                                    276 	.globl _Van
+                                    277 	.globl _Crazy
+                                    278 	.globl _NoSense
+                                    279 	.globl _Say
+                                    280 	.globl _TransportNoise
+                                    281 	.globl _SetNoun
+                                    282 ;--------------------------------------------------------
+                                    283 ; special function registers
+                                    284 ;--------------------------------------------------------
+                         000000A0   285 _g_PSG_RegPort	=	0x00a0
+                         000000A1   286 _g_PSG_DataPort	=	0x00a1
+                         000000A2   287 _g_PSG_StatPort	=	0x00a2
+                         00000010   288 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   289 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   290 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   291 _g_Printer_ControlPort	=	0x0090
+                         00000091   292 _g_Printer_DataPort	=	0x0091
+                         0000007C   293 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   294 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   295 _g_VDP_DataPort	=	0x0098
+                         00000099   296 _g_VDP_RegPort	=	0x0099
+                         00000099   297 _g_VDP_AddrPort	=	0x0099
+                         00000099   298 _g_VDP_StatPort	=	0x0099
+                         0000009A   299 _g_VDP_PalPort	=	0x009a
+                         0000009B   300 _g_VDP_IRegPort	=	0x009b
+                         000000A8   301 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   302 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   303 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   304 _g_PortControl	=	0x00ab
+                         000000B4   305 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   306 _g_RTC_DataPort	=	0x00b5
+                         000000C0   307 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   308 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   309 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   310 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   311 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   312 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   313 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   314 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   315 _g_TimerLowPort	=	0x00e6
+                         000000E7   316 _g_TimerHighPort	=	0x00e7
+                                    317 ;--------------------------------------------------------
+                                    318 ; ram data
+                                    319 ;--------------------------------------------------------
+                                    320 	.area _DATA
+                         0000F3AE   321 _g_LINL40	=	0xf3ae
+                         0000F3AF   322 _g_LINL32	=	0xf3af
+                         0000F3B0   323 _g_LINLEN	=	0xf3b0
+                         0000F3B1   324 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   325 _g_CLMLST	=	0xf3b2
+                         0000F3B3   326 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   327 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   328 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   329 _g_TXTATR	=	0xf3b9
+                         0000F3BB   330 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   331 _g_T32NAM	=	0xf3bd
+                         0000F3BF   332 _g_T32COL	=	0xf3bf
+                         0000F3C1   333 _g_T32CGP	=	0xf3c1
+                         0000F3C3   334 _g_T32ATR	=	0xf3c3
+                         0000F3C5   335 _g_T32PAT	=	0xf3c5
+                         0000F3C7   336 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   337 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   338 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   339 _g_GRPATR	=	0xf3cd
+                         0000F3CF   340 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   341 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   342 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   343 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   344 _g_MLTATR	=	0xf3d7
+                         0000F3D9   345 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   346 _g_CLIKSW	=	0xf3db
+                         0000F3DC   347 _g_CSRY	=	0xf3dc
+                         0000F3DD   348 _g_CSRX	=	0xf3dd
+                         0000F3E9   349 _g_FORCLR	=	0xf3e9
+                         0000F3EA   350 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   351 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   352 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   353 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   354 _g_GETPNT	=	0xf3fa
+                         0000F87F   355 _g_FNKSTR	=	0xf87f
+                         0000F92A   356 _g_CLOC	=	0xf92a
+                         0000F92C   357 _g_CMASK	=	0xf92c
+                         0000FB02   358 _g_LOGOPR	=	0xfb02
+                         0000FCB7   359 _g_GRPACX	=	0xfcb7
+                         0000FCB9   360 _g_GRPACY	=	0xfcb9
+                         0000FFFF   361 _g_SLTSL	=	0xffff
+                         00000006   362 _DOS_TPAUpperAddr	=	0x0006
+                         0000D000   363 _g_Scratch	=	0xd000
+                                    364 ;--------------------------------------------------------
+                                    365 ; ram data
+                                    366 ;--------------------------------------------------------
+                                    367 	.area _INITIALIZED
+                                    368 ;--------------------------------------------------------
+                                    369 ; absolute ram data
+                                    370 ;--------------------------------------------------------
+                                    371 	.area _DABS (ABS)
+                                    372 	.area _DABS (ABS)
+                                    373 ;--------------------------------------------------------
+                                    374 ; global & static initialisations
+                                    375 ;--------------------------------------------------------
+                                    376 	.area _HOME
+                                    377 	.area _GSINIT
+                                    378 	.area _GSFINAL
+                                    379 	.area _GSINIT
+                                    380 ;--------------------------------------------------------
+                                    381 ; Home
+                                    382 ;--------------------------------------------------------
+                                    383 	.area _HOME
+                                    384 	.area _HOME
+                                    385 ;--------------------------------------------------------
+                                    386 ; code
+                                    387 ;--------------------------------------------------------
+                                    388 	.area _CODE
+                                    389 ;E:\supernova\msx\game\util.c:5: void SF(void) { SFlag = 1; }
+                                    390 ;	---------------------------------
+                                    391 ; Function SF
+                                    392 ; ---------------------------------
+    00000000                        393 _SF::
+    00000000 21r00r00         [10]  394 	ld	hl, #_SFlag
+    00000003 36 01            [10]  395 	ld	(hl), #0x01
+    00000005 C9               [10]  396 	ret
+                         0000F380   397 _g_RDPRIM	=	0xf380
+                         0000F385   398 _g_WRPRIM	=	0xf385
+                         0000F38C   399 _g_CLPRIM	=	0xf38c
+                         0000F39A   400 _g_USRTAB	=	0xf39a
+                         0000F3DE   401 _g_CNSDFG	=	0xf3de
+                         0000F3DF   402 _g_RG0SAV	=	0xf3df
+                         0000F3E0   403 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   404 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   405 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   406 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   407 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   408 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   409 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   410 _g_STATFL	=	0xf3e7
+                         0000F3E8   411 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   412 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   413 _g_MINUPD	=	0xf3ef
+                         0000F3F3   414 _g_QUEUES	=	0xf3f3
+                         0000F3F5   415 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   416 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   417 _g_REPCNT	=	0xf3f7
+                         0000F3FC   418 _g_CS120	=	0xf3fc
+                         0000F401   419 _g_CS240	=	0xf401
+                         0000F406   420 _g_LOW	=	0xf406
+                         0000F408   421 _g_HIGH	=	0xf408
+                         0000F40A   422 _g_HEADER	=	0xf40a
+                         0000F40B   423 _g_ASPCT1	=	0xf40b
+                         0000F40D   424 _g_ASPCT2	=	0xf40d
+                         0000F959   425 _g_QUETAB	=	0xf959
+                         0000F971   426 _g_QUEBAK	=	0xf971
+                         0000F975   427 _g_VOICAQ	=	0xf975
+                         0000F9F5   428 _g_VOICBQ	=	0xf9f5
+                         0000FA75   429 _g_VOICCQ	=	0xfa75
+                         0000FAF5   430 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   431 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   432 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   433 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   434 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   435 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   436 _g_ROMA	=	0xfafa
+                         0000FAFC   437 _g_MODE	=	0xfafc
+                         0000FAFD   438 _g_NORUSE	=	0xfafd
+                         0000FAFE   439 _g_XSAVE	=	0xfafe
+                         0000FB00   440 _g_YSAVE	=	0xfb00
+                         0000FB03   441 _g_RSTMP	=	0xfb03
+                         0000FB03   442 _g_TOCNT	=	0xfb03
+                         0000FB04   443 _g_RSFCB	=	0xfb04
+                         0000FB06   444 _g_RSIQLN	=	0xfb06
+                         0000FB07   445 _g_MEXBIh	=	0xfb07
+                         0000FB0C   446 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   447 _g_OLDINT	=	0xfb0c
+                         0000FB16   448 _g_DEVNUM	=	0xfb16
+                         0000FB17   449 _g_DATCNT	=	0xfb17
+                         0000FB1A   450 _g_ERRORS	=	0xfb1a
+                         0000FB1B   451 _g_FLAGS	=	0xfb1b
+                         0000FB1C   452 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   453 _g_COMMSK	=	0xfb1d
+                         0000FB1E   454 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   455 _g_LSTMOD	=	0xfb1f
+                         0000FB35   456 _g_PRSCNT	=	0xfb35
+                         0000FB36   457 _g_SAVSP	=	0xfb36
+                         0000FB38   458 _g_VOICEN	=	0xfb38
+                         0000FB39   459 _g_SAVVOL	=	0xfb39
+                         0000FB3B   460 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   461 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   462 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   463 _g_MUSICF	=	0xfb3f
+                         0000FB40   464 _g_PLYCNT	=	0xfb40
+                         0000FB41   465 _g_VCBA	=	0xfb41
+                         0000FB66   466 _g_VCBB	=	0xfb66
+                         0000FB8B   467 _g_VCBC	=	0xfb8b
+                         0000FBB0   468 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   469 _g_BASROM	=	0xfbb1
+                         0000FBB2   470 _g_LINTTB	=	0xfbb2
+                         0000FBCA   471 _g_FSTPOS	=	0xfbca
+                         0000FBCC   472 _g_CODSAV	=	0xfbcc
+                         0000FBCD   473 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   474 _g_FNKFLG	=	0xfbce
+                         0000FBD8   475 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   476 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   477 _g_OLDKEY	=	0xfbda
+                         0000FBE5   478 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   479 _g_KEYBUF	=	0xfbf0
+                         0000FC18   480 _g_LINWRK	=	0xfc18
+                         0000FC40   481 _g_PATWRK	=	0xfc40
+                         0000FC48   482 _g_BOTTOM	=	0xfc48
+                         0000FC4A   483 _g_HIMEM	=	0xfc4a
+                         0000FC4C   484 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   485 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   486 _g_INTFLG	=	0xfc9b
+                         0000FC9C   487 _g_PADY	=	0xfc9c
+                         0000FC9D   488 _g_PADX	=	0xfc9d
+                         0000FC9E   489 _g_JIFFY	=	0xfc9e
+                         0000FCA0   490 _g_INTVAL	=	0xfca0
+                         0000FCA2   491 _g_INTCNT	=	0xfca2
+                         0000FCA4   492 _g_LOWLIM	=	0xfca4
+                         0000FCA5   493 _g_WINWID	=	0xfca5
+                         0000FCA6   494 _g_GRPHED	=	0xfca6
+                         0000FCA7   495 _g_ESCCNT	=	0xfca7
+                         0000FCA8   496 _g_INSFLG	=	0xfca8
+                         0000FCA9   497 _g_CSRSW	=	0xfca9
+                         0000FCAA   498 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   499 _g_CAPST	=	0xfcab
+                         0000FCAC   500 _g_KANAST	=	0xfcac
+                         0000FCAD   501 _g_KANAMD	=	0xfcad
+                         0000FCAE   502 _g_FLBMEM	=	0xfcae
+                         0000FCAF   503 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   504 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   505 _g_CASPRV	=	0xfcb1
+                         0000FCB2   506 _g_BRDATR	=	0xfcb2
+                         0000FCB3   507 _g_GXPOS	=	0xfcb3
+                         0000FCB5   508 _g_GYPOS	=	0xfcb5
+                         0000FCBB   509 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   510 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   511 _g_DRWANG	=	0xfcbd
+                         0000FCC1   512 _g_MNROM	=	0xfcc1
+                         0000FCC1   513 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   514 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   515 _g_SLTATR	=	0xfcc9
+                         0000FD09   516 _g_SLTWRK	=	0xfd09
+                         0000FD89   517 _g_PROCNM	=	0xfd89
+                         0000FFE7   518 _g_RG08SAV	=	0xffe7
+                         0000FFE8   519 _g_RG09SAV	=	0xffe8
+                         0000FFE9   520 _g_RG10SAV	=	0xffe9
+                         0000FFEA   521 _g_RG11SAV	=	0xffea
+                         0000FFEB   522 _g_RG12SAV	=	0xffeb
+                         0000FFEC   523 _g_RG13SAV	=	0xffec
+                         0000FFED   524 _g_RG14SAV	=	0xffed
+                         0000FFEE   525 _g_RG15SAV	=	0xffee
+                         0000FFEF   526 _g_RG16SAV	=	0xffef
+                         0000FFF0   527 _g_RG17SAV	=	0xfff0
+                         0000FFF1   528 _g_RG18SAV	=	0xfff1
+                         0000FFF2   529 _g_RG19SAV	=	0xfff2
+                         0000FFF3   530 _g_RG20SAV	=	0xfff3
+                         0000FFF4   531 _g_RG21SAV	=	0xfff4
+                         0000FFF5   532 _g_RG22SAV	=	0xfff5
+                         0000FFF6   533 _g_RG23SAV	=	0xfff6
+                         0000FFF7   534 _g_MINROM	=	0xfff7
+                         0000FFF8   535 _g_SVFFF8	=	0xfff8
+                         0000FFFA   536 _g_RG25SAV	=	0xfffa
+                         0000FFFB   537 _g_RG26SAV	=	0xfffb
+                         0000FFFC   538 _g_RG27SAV	=	0xfffc
+                         0000FFFD   539 _g_SVFFFD	=	0xfffd
+                         00000004   540 _g_CGTABL	=	0x0004
+                         00000006   541 _g_VDP_DR	=	0x0006
+                         00000007   542 _g_VDP_DW	=	0x0007
+                         0000002B   543 _g_BASRVN	=	0x002b
+                         0000002B   544 _g_ROMVersion	=	0x002b
+                         0000002D   545 _g_MSXVER	=	0x002d
+                         0000002E   546 _g_MSXMID	=	0x002e
+                         00000034   547 _g_CHAR_16	=	0x0034
+    00000006                        548 ___str_0:
+    00000006 0A                     549 	.db 0x0a
+    00000007 0D                     550 	.db 0x0d
+    00000008 24                     551 	.ascii "$"
+    00000009 00                     552 	.db 0x00
+                         00000000   553 _g_SUBRID	=	0x0000
+                         00000002   554 _g_STRSRC	=	0x0002
+                         0000F30F   555 _g_KANJTABLE	=	0xf30f
+                         0000F323   556 _g_DISKVE	=	0xf323
+                         0000F325   557 _g_BREAKV	=	0xf325
+                         0000F341   558 _g_RAMAD0	=	0xf341
+                         0000F342   559 _g_RAMAD1	=	0xf342
+                         0000F343   560 _g_RAMAD2	=	0xf343
+                         0000F344   561 _g_RAMAD3	=	0xf344
+                         0000F348   562 _g_MASTER	=	0xf348
+                         0000F37D   563 _g_BDOS	=	0xf37d
+                                    564 ;E:\supernova\msx\game\util.c:7: void Cur(u8 n) { CursorShape(n); }
+                                    565 ;	---------------------------------
+                                    566 ; Function Cur
+                                    567 ; ---------------------------------
+    0000000A                        568 _Cur::
+    0000000A C3r00r00         [10]  569 	jp	_CursorShape
+                                    570 ;E:\supernova\msx\game\util.c:8: void Col(u8 a, u8 b) { (void)b; TextColor(a); }          // mono colour (b) is not used: always colour
+                                    571 ;	---------------------------------
+                                    572 ; Function Col
+                                    573 ; ---------------------------------
+    0000000D                        574 _Col::
+    0000000D C3r00r00         [10]  575 	jp	_TextColor
+                                    576 ;E:\supernova\msx\game\util.c:9: void Bak(u8 a, u8 b) { (void)b; TextBackground(a); }
+                                    577 ;	---------------------------------
+                                    578 ; Function Bak
+                                    579 ; ---------------------------------
+    00000010                        580 _Bak::
+    00000010 C3r00r00         [10]  581 	jp	_TextBackground
+                                    582 ;E:\supernova\msx\game\util.c:10: void Bor(u8 a, u8 b) { (void)b; Border(a); }
+                                    583 ;	---------------------------------
+                                    584 ; Function Bor
+                                    585 ; ---------------------------------
+    00000013                        586 _Bor::
+    00000013 C3r00r00         [10]  587 	jp	_Border
+                                    588 ;E:\supernova\msx\game\util.c:12: u8   En(u8 n) { return SET_IN(Events, n) != 0; }
+                                    589 ;	---------------------------------
+                                    590 ; Function En
+                                    591 ; ---------------------------------
+    00000016                        592 _En::
+    00000016 5F               [ 4]  593 	ld	e, a
+    00000017 6B               [ 4]  594 	ld	l, e
+    00000018 26 00            [ 7]  595 	ld	h, #0x00
+    0000001A 2B               [ 6]  596 	dec	hl
+    0000001B 06 03            [ 7]  597 	ld	b, #0x03
+    0000001D                        598 00103$:
+    0000001D CB 2C            [ 8]  599 	sra	h
+    0000001F CB 1D            [ 8]  600 	rr	l
+    00000021 10 FA            [13]  601 	djnz	00103$
+    00000023 01r00r00         [10]  602 	ld	bc, #_Events
+    00000026 09               [11]  603 	add	hl, bc
+    00000027 4E               [ 7]  604 	ld	c, (hl)
+    00000028 7B               [ 4]  605 	ld	a, e
+    00000029 3D               [ 4]  606 	dec	a
+    0000002A E6 07            [ 7]  607 	and	a, #0x07
+    0000002C 47               [ 4]  608 	ld	b, a
+    0000002D 79               [ 4]  609 	ld	a, c
+    0000002E 04               [ 4]  610 	inc	b
+    0000002F 18 02            [12]  611 	jr	00105$
+    00000031                        612 00104$:
+    00000031 CB 3F            [ 8]  613 	srl	a
+    00000033                        614 00105$:
+    00000033 10 FC            [13]  615 	djnz	00104$
+    00000035 E6 01            [ 7]  616 	and	a, #0x01
+    00000037 D6 01            [ 7]  617 	sub	a, #0x01
+    00000039 3E 00            [ 7]  618 	ld	a, #0x00
+    0000003B 17               [ 4]  619 	rla
+    0000003C EE 01            [ 7]  620 	xor	a, #0x01
+    0000003E C9               [10]  621 	ret
+                                    622 ;E:\supernova\msx\game\util.c:13: void Add(u8 n) { SET_ADD(Events, n); }
+                                    623 ;	---------------------------------
+                                    624 ; Function Add
+                                    625 ; ---------------------------------
+    0000003F                        626 _Add::
+    0000003F 5F               [ 4]  627 	ld	e, a
+    00000040 6B               [ 4]  628 	ld	l, e
+    00000041 26 00            [ 7]  629 	ld	h, #0x00
+    00000043 2B               [ 6]  630 	dec	hl
+    00000044 06 03            [ 7]  631 	ld	b, #0x03
+    00000046                        632 00103$:
+    00000046 CB 2C            [ 8]  633 	sra	h
+    00000048 CB 1D            [ 8]  634 	rr	l
+    0000004A 10 FA            [13]  635 	djnz	00103$
+    0000004C 01r00r00         [10]  636 	ld	bc, #_Events
+    0000004F 09               [11]  637 	add	hl, bc
+    00000050 4E               [ 7]  638 	ld	c, (hl)
+    00000051 7B               [ 4]  639 	ld	a, e
+    00000052 3D               [ 4]  640 	dec	a
+    00000053 E6 07            [ 7]  641 	and	a, #0x07
+    00000055 47               [ 4]  642 	ld	b, a
+    00000056 3E 01            [ 7]  643 	ld	a, #0x01
+    00000058 04               [ 4]  644 	inc	b
+    00000059 18 01            [12]  645 	jr	00105$
+    0000005B                        646 00104$:
+    0000005B 87               [ 4]  647 	add	a, a
+    0000005C                        648 00105$:
+    0000005C 10 FD            [13]  649 	djnz	00104$
+    0000005E B1               [ 4]  650 	or	a, c
+    0000005F 77               [ 7]  651 	ld	(hl), a
+    00000060 C9               [10]  652 	ret
+                                    653 ;E:\supernova\msx\game\util.c:14: void Min(u8 n) { SET_DEL(Events, n); }
+                                    654 ;	---------------------------------
+                                    655 ; Function Min
+                                    656 ; ---------------------------------
+    00000061                        657 _Min::
+    00000061 5F               [ 4]  658 	ld	e, a
+    00000062 6B               [ 4]  659 	ld	l, e
+    00000063 26 00            [ 7]  660 	ld	h, #0x00
+    00000065 2B               [ 6]  661 	dec	hl
+    00000066 06 03            [ 7]  662 	ld	b, #0x03
+    00000068                        663 00103$:
+    00000068 CB 2C            [ 8]  664 	sra	h
+    0000006A CB 1D            [ 8]  665 	rr	l
+    0000006C 10 FA            [13]  666 	djnz	00103$
+    0000006E 01r00r00         [10]  667 	ld	bc, #_Events
+    00000071 09               [11]  668 	add	hl, bc
+    00000072 4E               [ 7]  669 	ld	c, (hl)
+    00000073 7B               [ 4]  670 	ld	a, e
+    00000074 3D               [ 4]  671 	dec	a
+    00000075 E6 07            [ 7]  672 	and	a, #0x07
+    00000077 47               [ 4]  673 	ld	b, a
+    00000078 3E 01            [ 7]  674 	ld	a, #0x01
+    0000007A 04               [ 4]  675 	inc	b
+    0000007B 18 01            [12]  676 	jr	00105$
+    0000007D                        677 00104$:
+    0000007D 87               [ 4]  678 	add	a, a
+    0000007E                        679 00105$:
+    0000007E 10 FD            [13]  680 	djnz	00104$
+    00000080 2F               [ 4]  681 	cpl
+    00000081 A1               [ 4]  682 	and	a, c
+    00000082 77               [ 7]  683 	ld	(hl), a
+    00000083 C9               [10]  684 	ret
+                                    685 ;E:\supernova\msx\game\util.c:16: void Score(i16 n, i16 pointer)
+                                    686 ;	---------------------------------
+                                    687 ; Function Score
+                                    688 ; ---------------------------------
+    00000084                        689 _Score::
+                                    690 ;E:\supernova\msx\game\util.c:18: if (!En((u8)pointer)) { Sc += n; Add((u8)pointer); }
+    00000084 E5               [11]  691 	push	hl
+    00000085 D5               [11]  692 	push	de
+    00000086 7B               [ 4]  693 	ld	a, e
+    00000087 CDr16r00         [17]  694 	call	_En
+    0000008A D1               [10]  695 	pop	de
+    0000008B C1               [10]  696 	pop	bc
+    0000008C B7               [ 4]  697 	or	a, a
+    0000008D C0               [11]  698 	ret	nz
+    0000008E 21r00r00         [10]  699 	ld	hl, #_Sc
+    00000091 7E               [ 7]  700 	ld	a, (hl)
+    00000092 81               [ 4]  701 	add	a, c
+    00000093 77               [ 7]  702 	ld	(hl), a
+    00000094 23               [ 6]  703 	inc	hl
+    00000095 7E               [ 7]  704 	ld	a, (hl)
+    00000096 88               [ 4]  705 	adc	a, b
+    00000097 77               [ 7]  706 	ld	(hl), a
+    00000098 7B               [ 4]  707 	ld	a, e
+                                    708 ;E:\supernova\msx\game\util.c:19: }
+    00000099 C3r3Fr00         [10]  709 	jp	_Add
+                                    710 ;E:\supernova\msx\game\util.c:21: void Cn(const char* s)
+                                    711 ;	---------------------------------
+                                    712 ; Function Cn
+                                    713 ; ---------------------------------
+    0000009C                        714 _Cn::
+                                    715 ;E:\supernova\msx\game\util.c:23: Gotoxy(40 - (Len(s) / 2), Wherey());
+    0000009C E5               [11]  716 	push	hl
+    0000009D CDr00r00         [17]  717 	call	_Wherey
+    000000A0 6F               [ 4]  718 	ld	l, a
+    000000A1 D1               [10]  719 	pop	de
+    000000A2 EB               [ 4]  720 	ex	de, hl
+    000000A3 D5               [11]  721 	push	de
+    000000A4 E5               [11]  722 	push	hl
+    000000A5 CDr00r00         [17]  723 	call	_Len
+    000000A8 D1               [10]  724 	pop	de
+    000000A9 E1               [10]  725 	pop	hl
+    000000AA 4F               [ 4]  726 	ld	c, a
+    000000AB 06 00            [ 7]  727 	ld	b, #0x00
+    000000AD CB 28            [ 8]  728 	sra	b
+    000000AF CB 19            [ 8]  729 	rr	c
+    000000B1 3E 28            [ 7]  730 	ld	a, #0x28
+    000000B3 91               [ 4]  731 	sub	a, c
+    000000B4 D5               [11]  732 	push	de
+    000000B5 CDr00r00         [17]  733 	call	_Gotoxy
+    000000B8 D1               [10]  734 	pop	de
+                                    735 ;E:\supernova\msx\game\util.c:24: Wr(s); Wln();
+    000000B9 EB               [ 4]  736 	ex	de, hl
+    000000BA CDr00r00         [17]  737 	call	_Wr
+                                    738 ;E:\supernova\msx\game\util.c:25: }
+    000000BD C3r00r00         [10]  739 	jp	_Wln
+                                    740 ;E:\supernova\msx\game\util.c:27: void Pause(void)
+                                    741 ;	---------------------------------
+                                    742 ; Function Pause
+                                    743 ; ---------------------------------
+    000000C0                        744 _Pause::
+                                    745 ;E:\supernova\msx\game\util.c:29: Col(15, 15); Wr("Press any key to continue...");
+    000000C0 3E 0F            [ 7]  746 	ld	a,#0x0f
+    000000C2 6F               [ 4]  747 	ld	l,a
+    000000C3 CDr0Dr00         [17]  748 	call	_Col
+    000000C6 21rDDr00         [10]  749 	ld	hl, #___str_1
+    000000C9 CDr00r00         [17]  750 	call	_Wr
+                                    751 ;E:\supernova\msx\game\util.c:30: CFlag = (char)(GetKey() & 0xFF);
+    000000CC CDr00r00         [17]  752 	call	_GetKey
+    000000CF 21r00r00         [10]  753 	ld	hl, #_CFlag
+    000000D2 73               [ 7]  754 	ld	(hl), e
+                                    755 ;E:\supernova\msx\game\util.c:31: Col(11, 7); Wln();
+    000000D3 2E 07            [ 7]  756 	ld	l, #0x07
+    000000D5 3E 0B            [ 7]  757 	ld	a, #0x0b
+    000000D7 CDr0Dr00         [17]  758 	call	_Col
+                                    759 ;E:\supernova\msx\game\util.c:32: }
+    000000DA C3r00r00         [10]  760 	jp	_Wln
+    000000DD                        761 ___str_1:
+    000000DD 50 72 65 73 73 20 61   762 	.ascii "Press any key to continue..."
+             6E 79 20 6B 65 79 20
+             74 6F 20 63 6F 6E 74
+             69 6E 75 65 2E 2E 2E
+    000000F9 00                     763 	.db 0x00
+                                    764 ;E:\supernova\msx\game\util.c:37: void Tune(i16 octave, i16 note, i16 duration)
+                                    765 ;	---------------------------------
+                                    766 ; Function Tune
+                                    767 ; ---------------------------------
+    000000FA                        768 _Tune::
+    000000FA DD E5            [15]  769 	push	ix
+    000000FC DD 21 00 00      [14]  770 	ld	ix,	#0
+    00000100 DD 39            [15]  771 	add	ix, sp
+    00000102 F5               [11]  772 	push	af
+    00000103 F5               [11]  773 	push	af
+    00000104 4D               [ 4]  774 	ld	c, l
+    00000105 44               [ 4]  775 	ld	b, h
+    00000106 EB               [ 4]  776 	ex	de, hl
+                                    777 ;E:\supernova\msx\game\util.c:39: u32 f = g_NoteHz100[note - 1];
+    00000107 11r82r01         [10]  778 	ld	de, #_g_NoteHz100+0
+    0000010A 2D               [ 4]  779 	dec	l
+    0000010B 7D               [ 4]  780 	ld	a, l
+    0000010C 07               [ 4]  781 	rlca
+    0000010D 9F               [ 4]  782 	sbc	a, a
+    0000010E 67               [ 4]  783 	ld	h, a
+    0000010F 29               [11]  784 	add	hl, hl
+    00000110 19               [11]  785 	add	hl, de
+    00000111 5E               [ 7]  786 	ld	e, (hl)
+    00000112 23               [ 6]  787 	inc	hl
+    00000113 56               [ 7]  788 	ld	d, (hl)
+    00000114 E1               [10]  789 	pop	hl
+    00000115 D5               [11]  790 	push	de
+    00000116 AF               [ 4]  791 	xor	a, a
+    00000117 DD 77 FE         [19]  792 	ld	-2 (ix), a
+    0000011A DD 77 FF         [19]  793 	ld	-1 (ix), a
+                                    794 ;E:\supernova\msx\game\util.c:41: for (k = 1; k <= octave; k++) f *= 2;
+    0000011D 11 01 00         [10]  795 	ld	de, #0x0001
+    00000120                        796 00105$:
+    00000120 79               [ 4]  797 	ld	a, c
+    00000121 93               [ 4]  798 	sub	a, e
+    00000122 78               [ 4]  799 	ld	a, b
+    00000123 9A               [ 4]  800 	sbc	a, d
+    00000124 E2r29r01         [10]  801 	jp	po, 00134$
+    00000127 EE 80            [ 7]  802 	xor	a, #0x80
+    00000129                        803 00134$:
+    00000129 FAr3Fr01         [10]  804 	jp	m, 00101$
+    0000012C DD CB FC 26      [23]  805 	sla	-4 (ix)
+    00000130 DD CB FD 16      [23]  806 	rl	-3 (ix)
+    00000134 DD CB FE 16      [23]  807 	rl	-2 (ix)
+    00000138 DD CB FF 16      [23]  808 	rl	-1 (ix)
+    0000013C 13               [ 6]  809 	inc	de
+    0000013D 18 E1            [12]  810 	jr	00105$
+    0000013F                        811 00101$:
+                                    812 ;E:\supernova\msx\game\util.c:42: f = (f + 50) / 100;
+    0000013F DD 7E FC         [19]  813 	ld	a, -4 (ix)
+    00000142 C6 32            [ 7]  814 	add	a, #0x32
+    00000144 5F               [ 4]  815 	ld	e, a
+    00000145 DD 7E FD         [19]  816 	ld	a, -3 (ix)
+    00000148 CE 00            [ 7]  817 	adc	a, #0x00
+    0000014A 57               [ 4]  818 	ld	d, a
+    0000014B DD 7E FE         [19]  819 	ld	a, -2 (ix)
+    0000014E CE 00            [ 7]  820 	adc	a, #0x00
+    00000150 6F               [ 4]  821 	ld	l, a
+    00000151 DD 7E FF         [19]  822 	ld	a, -1 (ix)
+    00000154 CE 00            [ 7]  823 	adc	a, #0x00
+    00000156 01 00 00         [10]  824 	ld	bc, #0x0000
+    00000159 C5               [11]  825 	push	bc
+    0000015A 0E 64            [ 7]  826 	ld	c, #0x64
+    0000015C C5               [11]  827 	push	bc
+    0000015D 67               [ 4]  828 	ld	h, a
+                                    829 ;E:\supernova\msx\game\util.c:43: Sound((u16)f);
+    0000015E CDr00r00         [17]  830 	call	__divulong
+    00000161 F1               [10]  831 	pop	af
+    00000162 F1               [10]  832 	pop	af
+    00000163 EB               [ 4]  833 	ex	de, hl
+    00000164 CDr00r00         [17]  834 	call	_Sound
+                                    835 ;E:\supernova\msx\game\util.c:44: if (duration != 0) { Delay(duration); NoSound(); }
+    00000167 DD 7E 05         [19]  836 	ld	a, 5 (ix)
+    0000016A DD B6 04         [19]  837 	or	a, 4 (ix)
+    0000016D 28 0C            [12]  838 	jr	z, 00107$
+    0000016F DD 6E 04         [19]  839 	ld	l, 4 (ix)
+    00000172 DD 66 05         [19]  840 	ld	h, 5 (ix)
+    00000175 CDr00r00         [17]  841 	call	_Delay
+    00000178 CDr00r00         [17]  842 	call	_NoSound
+    0000017B                        843 00107$:
+                                    844 ;E:\supernova\msx\game\util.c:45: }
+    0000017B DD F9            [10]  845 	ld	sp, ix
+    0000017D DD E1            [14]  846 	pop	ix
+    0000017F E1               [10]  847 	pop	hl
+    00000180 F1               [10]  848 	pop	af
+    00000181 E9               [ 4]  849 	jp	(hl)
+    00000182                        850 _g_NoteHz100:
+    00000182 BF 0C                  851 	.dw #0x0cbf
+    00000184 81 0D                  852 	.dw #0x0d81
+    00000186 4E 0E                  853 	.dw #0x0e4e
+    00000188 28 0F                  854 	.dw #0x0f28
+    0000018A 0F 10                  855 	.dw #0x100f
+    0000018C 03 11                  856 	.dw #0x1103
+    0000018E 06 12                  857 	.dw #0x1206
+    00000190 19 13                  858 	.dw #0x1319
+    00000192 3C 14                  859 	.dw #0x143c
+    00000194 70 15                  860 	.dw #0x1570
+    00000196 B6 16                  861 	.dw #0x16b6
+    00000198 10 18                  862 	.dw #0x1810
+                                    863 ;E:\supernova\msx\game\util.c:47: void RegionSoundOn(void)
+                                    864 ;	---------------------------------
+                                    865 ; Function RegionSoundOn
+                                    866 ; ---------------------------------
+    0000019A                        867 _RegionSoundOn::
+                                    868 ;E:\supernova\msx\game\util.c:49: if (Region == 4) Sound(20);
+    0000019A 3Ar00r00         [13]  869 	ld	a, (_Region)
+    0000019D D6 04            [ 7]  870 	sub	a, #0x04
+    0000019F 20 06            [12]  871 	jr	nz, 00102$
+    000001A1 21 14 00         [10]  872 	ld	hl, #0x0014
+    000001A4 CDr00r00         [17]  873 	call	_Sound
+    000001A7                        874 00102$:
+                                    875 ;E:\supernova\msx\game\util.c:50: if (Region == 5) Sound(60);
+    000001A7 3Ar00r00         [13]  876 	ld	a, (_Region)
+    000001AA D6 05            [ 7]  877 	sub	a, #0x05
+    000001AC C0               [11]  878 	ret	nz
+    000001AD 21 3C 00         [10]  879 	ld	hl, #0x003c
+                                    880 ;E:\supernova\msx\game\util.c:51: }
+    000001B0 C3r00r00         [10]  881 	jp	_Sound
+                                    882 ;E:\supernova\msx\game\util.c:53: void Play(i16 start, i16 stop, i16 speed)
+                                    883 ;	---------------------------------
+                                    884 ; Function Play
+                                    885 ; ---------------------------------
+    000001B3                        886 _Play::
+    000001B3 DD E5            [15]  887 	push	ix
+    000001B5 DD 21 00 00      [14]  888 	ld	ix,	#0
+    000001B9 DD 39            [15]  889 	add	ix, sp
+    000001BB 4D               [ 4]  890 	ld	c, l
+                                    891 ;E:\supernova\msx\game\util.c:56: if (start <= stop) for (k = start; k <= stop; k++) { Sound(k); Delay(speed); }
+    000001BC 7B               [ 4]  892 	ld	a, e
+    000001BD 91               [ 4]  893 	sub	a, c
+    000001BE 7A               [ 4]  894 	ld	a, d
+    000001BF 9C               [ 4]  895 	sbc	a, h
+    000001C0 E2rC5r01         [10]  896 	jp	po, 00156$
+    000001C3 EE 80            [ 7]  897 	xor	a, #0x80
+    000001C5                        898 00156$:
+    000001C5 FArE8r01         [10]  899 	jp	m, 00123$
+    000001C8 69               [ 4]  900 	ld	l, c
+    000001C9                        901 00107$:
+    000001C9 7B               [ 4]  902 	ld	a, e
+    000001CA 95               [ 4]  903 	sub	a, l
+    000001CB 7A               [ 4]  904 	ld	a, d
+    000001CC 9C               [ 4]  905 	sbc	a, h
+    000001CD E2rD2r01         [10]  906 	jp	po, 00157$
+    000001D0 EE 80            [ 7]  907 	xor	a, #0x80
+    000001D2                        908 00157$:
+    000001D2 FAr08r02         [10]  909 	jp	m, 00105$
+    000001D5 E5               [11]  910 	push	hl
+    000001D6 D5               [11]  911 	push	de
+    000001D7 CDr00r00         [17]  912 	call	_Sound
+    000001DA DD 6E 04         [19]  913 	ld	l, 4 (ix)
+    000001DD DD 66 05         [19]  914 	ld	h, 5 (ix)
+    000001E0 CDr00r00         [17]  915 	call	_Delay
+    000001E3 D1               [10]  916 	pop	de
+    000001E4 E1               [10]  917 	pop	hl
+    000001E5 23               [ 6]  918 	inc	hl
+    000001E6 18 E1            [12]  919 	jr	00107$
+                                    920 ;E:\supernova\msx\game\util.c:57: else for (k = start; k >= stop; k--) { Sound(k); Delay(speed); }
+    000001E8                        921 00123$:
+    000001E8 69               [ 4]  922 	ld	l, c
+    000001E9                        923 00110$:
+    000001E9 7D               [ 4]  924 	ld	a, l
+    000001EA 93               [ 4]  925 	sub	a, e
+    000001EB 7C               [ 4]  926 	ld	a, h
+    000001EC 9A               [ 4]  927 	sbc	a, d
+    000001ED E2rF2r01         [10]  928 	jp	po, 00158$
+    000001F0 EE 80            [ 7]  929 	xor	a, #0x80
+    000001F2                        930 00158$:
+    000001F2 FAr08r02         [10]  931 	jp	m, 00105$
+    000001F5 E5               [11]  932 	push	hl
+    000001F6 D5               [11]  933 	push	de
+    000001F7 CDr00r00         [17]  934 	call	_Sound
+    000001FA DD 6E 04         [19]  935 	ld	l, 4 (ix)
+    000001FD DD 66 05         [19]  936 	ld	h, 5 (ix)
+    00000200 CDr00r00         [17]  937 	call	_Delay
+    00000203 D1               [10]  938 	pop	de
+    00000204 E1               [10]  939 	pop	hl
+    00000205 2B               [ 6]  940 	dec	hl
+    00000206 18 E1            [12]  941 	jr	00110$
+    00000208                        942 00105$:
+                                    943 ;E:\supernova\msx\game\util.c:58: NoSound(); RegionSoundOn();
+    00000208 CDr00r00         [17]  944 	call	_NoSound
+    0000020B CDr9Ar01         [17]  945 	call	_RegionSoundOn
+                                    946 ;E:\supernova\msx\game\util.c:59: }
+    0000020E DD E1            [14]  947 	pop	ix
+    00000210 E1               [10]  948 	pop	hl
+    00000211 F1               [10]  949 	pop	af
+    00000212 E9               [ 4]  950 	jp	(hl)
+                                    951 ;E:\supernova\msx\game\util.c:61: void Explode(u8 duration)
+                                    952 ;	---------------------------------
+                                    953 ; Function Explode
+                                    954 ; ---------------------------------
+    00000213                        955 _Explode::
+                                    956 ;E:\supernova\msx\game\util.c:64: for (k = duration * 999; k >= 20; k--) Sound(Rnd(k));
+    00000213 4F               [ 4]  957 	ld	c, a
+    00000214 06 00            [ 7]  958 	ld	b, #0x00
+    00000216 69               [ 4]  959 	ld	l, c
+    00000217 60               [ 4]  960 	ld	h, b
+    00000218 29               [11]  961 	add	hl, hl
+    00000219 09               [11]  962 	add	hl, bc
+    0000021A 29               [11]  963 	add	hl, hl
+    0000021B 09               [11]  964 	add	hl, bc
+    0000021C 29               [11]  965 	add	hl, hl
+    0000021D 09               [11]  966 	add	hl, bc
+    0000021E 29               [11]  967 	add	hl, hl
+    0000021F 09               [11]  968 	add	hl, bc
+    00000220 29               [11]  969 	add	hl, hl
+    00000221 29               [11]  970 	add	hl, hl
+    00000222 29               [11]  971 	add	hl, hl
+    00000223 09               [11]  972 	add	hl, bc
+    00000224 29               [11]  973 	add	hl, hl
+    00000225 09               [11]  974 	add	hl, bc
+    00000226 29               [11]  975 	add	hl, hl
+    00000227 09               [11]  976 	add	hl, bc
+    00000228                        977 00103$:
+    00000228 4D               [ 4]  978 	ld	c, l
+    00000229 44               [ 4]  979 	ld	b, h
+    0000022A 79               [ 4]  980 	ld	a, c
+    0000022B D6 14            [ 7]  981 	sub	a, #0x14
+    0000022D 78               [ 4]  982 	ld	a, b
+    0000022E 17               [ 4]  983 	rla
+    0000022F 3F               [ 4]  984 	ccf
+    00000230 1F               [ 4]  985 	rra
+    00000231 DE 80            [ 7]  986 	sbc	a, #0x80
+    00000233 DAr00r00         [10]  987 	jp	c, _NoSound
+    00000236 E5               [11]  988 	push	hl
+    00000237 CDr00r00         [17]  989 	call	_Rnd
+    0000023A E1               [10]  990 	pop	hl
+    0000023B EB               [ 4]  991 	ex	de, hl
+    0000023C D5               [11]  992 	push	de
+    0000023D CDr00r00         [17]  993 	call	_Sound
+    00000240 E1               [10]  994 	pop	hl
+    00000241 2B               [ 6]  995 	dec	hl
+                                    996 ;E:\supernova\msx\game\util.c:65: NoSound();
+                                    997 ;E:\supernova\msx\game\util.c:66: }
+    00000242 18 E4            [12]  998 	jr	00103$
+                                    999 ;E:\supernova\msx\game\util.c:68: void Walls(u8 duration)
+                                   1000 ;	---------------------------------
+                                   1001 ; Function Walls
+                                   1002 ; ---------------------------------
+    00000244                       1003 _Walls::
+                                   1004 ;E:\supernova\msx\game\util.c:70: i16 k, n = duration * 999;
+    00000244 4F               [ 4] 1005 	ld	c, a
+    00000245 06 00            [ 7] 1006 	ld	b, #0x00
+    00000247 69               [ 4] 1007 	ld	l, c
+    00000248 60               [ 4] 1008 	ld	h, b
+    00000249 29               [11] 1009 	add	hl, hl
+    0000024A 09               [11] 1010 	add	hl, bc
+    0000024B 29               [11] 1011 	add	hl, hl
+    0000024C 09               [11] 1012 	add	hl, bc
+    0000024D 29               [11] 1013 	add	hl, hl
+    0000024E 09               [11] 1014 	add	hl, bc
+    0000024F 29               [11] 1015 	add	hl, hl
+    00000250 09               [11] 1016 	add	hl, bc
+    00000251 29               [11] 1017 	add	hl, hl
+    00000252 29               [11] 1018 	add	hl, hl
+    00000253 29               [11] 1019 	add	hl, hl
+    00000254 09               [11] 1020 	add	hl, bc
+    00000255 29               [11] 1021 	add	hl, hl
+    00000256 09               [11] 1022 	add	hl, bc
+    00000257 29               [11] 1023 	add	hl, hl
+    00000258 09               [11] 1024 	add	hl, bc
+                                   1025 ;E:\supernova\msx\game\util.c:71: for (k = 1; k <= n; k++) Sound(Rnd(35) + 20);
+    00000259 01 01 00         [10] 1026 	ld	bc, #0x0001
+    0000025C                       1027 00103$:
+    0000025C 7D               [ 4] 1028 	ld	a, l
+    0000025D 91               [ 4] 1029 	sub	a, c
+    0000025E 7C               [ 4] 1030 	ld	a, h
+    0000025F 98               [ 4] 1031 	sbc	a, b
+    00000260 E2r65r02         [10] 1032 	jp	po, 00124$
+    00000263 EE 80            [ 7] 1033 	xor	a, #0x80
+    00000265                       1034 00124$:
+    00000265 FAr00r00         [10] 1035 	jp	m, _NoSound
+    00000268 E5               [11] 1036 	push	hl
+    00000269 C5               [11] 1037 	push	bc
+    0000026A 21 23 00         [10] 1038 	ld	hl, #0x0023
+    0000026D CDr00r00         [17] 1039 	call	_Rnd
+    00000270 C1               [10] 1040 	pop	bc
+    00000271 E1               [10] 1041 	pop	hl
+    00000272 7B               [ 4] 1042 	ld	a, e
+    00000273 C6 14            [ 7] 1043 	add	a, #0x14
+    00000275 5F               [ 4] 1044 	ld	e, a
+    00000276 30 01            [12] 1045 	jr	nc, 00125$
+    00000278 14               [ 4] 1046 	inc	d
+    00000279                       1047 00125$:
+    00000279 E5               [11] 1048 	push	hl
+    0000027A C5               [11] 1049 	push	bc
+    0000027B EB               [ 4] 1050 	ex	de, hl
+    0000027C CDr00r00         [17] 1051 	call	_Sound
+    0000027F C1               [10] 1052 	pop	bc
+    00000280 E1               [10] 1053 	pop	hl
+    00000281 03               [ 6] 1054 	inc	bc
+                                   1055 ;E:\supernova\msx\game\util.c:72: NoSound();
+                                   1056 ;E:\supernova\msx\game\util.c:73: }
+    00000282 18 D8            [12] 1057 	jr	00103$
+                                   1058 ;E:\supernova\msx\game\util.c:75: void Static(void)
+                                   1059 ;	---------------------------------
+                                   1060 ; Function Static
+                                   1061 ; ---------------------------------
+    00000284                       1062 _Static::
+    00000284 CDr00r00         [17] 1063 	call	___sdcc_enter_ix
+    00000287 F5               [11] 1064 	push	af
+                                   1065 ;E:\supernova\msx\game\util.c:78: for (k = 1; k <= 50; k++)
+    00000288 21 01 00         [10] 1066 	ld	hl, #0x0001
+    0000028B E3               [19] 1067 	ex	(sp), hl
+    0000028C                       1068 00111$:
+                                   1069 ;E:\supernova\msx\game\util.c:79: switch (Rnd(2))
+    0000028C 21 02 00         [10] 1070 	ld	hl, #0x0002
+    0000028F CDr00r00         [17] 1071 	call	_Rnd
+    00000292 7A               [ 4] 1072 	ld	a, d
+    00000293 B3               [ 4] 1073 	or	a, e
+    00000294 28 07            [12] 1074 	jr	z, 00101$
+    00000296 7B               [ 4] 1075 	ld	a, e
+    00000297 3D               [ 4] 1076 	dec	a
+    00000298 B2               [ 4] 1077 	or	a, d
+    00000299 28 37            [12] 1078 	jr	z, 00103$
+    0000029B 18 42            [12] 1079 	jr	00112$
+                                   1080 ;E:\supernova\msx\game\util.c:81: case 0: n = Rnd(70) + 10; for (l = 1; l <= n; l++) Sound(Rnd(4000) + 3000); break;
+    0000029D                       1081 00101$:
+    0000029D 21 46 00         [10] 1082 	ld	hl, #0x0046
+    000002A0 CDr00r00         [17] 1083 	call	_Rnd
+    000002A3 21 0A 00         [10] 1084 	ld	hl, #0x000a
+    000002A6 19               [11] 1085 	add	hl, de
+    000002A7 EB               [ 4] 1086 	ex	de, hl
+    000002A8 01 01 00         [10] 1087 	ld	bc, #0x0001
+    000002AB                       1088 00109$:
+    000002AB 7B               [ 4] 1089 	ld	a, e
+    000002AC 91               [ 4] 1090 	sub	a, c
+    000002AD 7A               [ 4] 1091 	ld	a, d
+    000002AE 98               [ 4] 1092 	sbc	a, b
+    000002AF E2rB4r02         [10] 1093 	jp	po, 00174$
+    000002B2 EE 80            [ 7] 1094 	xor	a, #0x80
+    000002B4                       1095 00174$:
+    000002B4 FArDFr02         [10] 1096 	jp	m, 00112$
+    000002B7 C5               [11] 1097 	push	bc
+    000002B8 D5               [11] 1098 	push	de
+    000002B9 21 A0 0F         [10] 1099 	ld	hl, #0x0fa0
+    000002BC CDr00r00         [17] 1100 	call	_Rnd
+    000002BF EB               [ 4] 1101 	ex	de, hl
+    000002C0 D1               [10] 1102 	pop	de
+    000002C1 C1               [10] 1103 	pop	bc
+    000002C2 D5               [11] 1104 	push	de
+    000002C3 11 B8 0B         [10] 1105 	ld	de, #0x0bb8
+    000002C6 19               [11] 1106 	add	hl, de
+    000002C7 D1               [10] 1107 	pop	de
+    000002C8 C5               [11] 1108 	push	bc
+    000002C9 D5               [11] 1109 	push	de
+    000002CA CDr00r00         [17] 1110 	call	_Sound
+    000002CD D1               [10] 1111 	pop	de
+    000002CE C1               [10] 1112 	pop	bc
+    000002CF 03               [ 6] 1113 	inc	bc
+    000002D0 18 D9            [12] 1114 	jr	00109$
+                                   1115 ;E:\supernova\msx\game\util.c:82: case 1: NoSound(); Delay(Rnd(29)); break;
+    000002D2                       1116 00103$:
+    000002D2 CDr00r00         [17] 1117 	call	_NoSound
+    000002D5 21 1D 00         [10] 1118 	ld	hl, #0x001d
+    000002D8 CDr00r00         [17] 1119 	call	_Rnd
+    000002DB EB               [ 4] 1120 	ex	de, hl
+    000002DC CDr00r00         [17] 1121 	call	_Delay
+                                   1122 ;E:\supernova\msx\game\util.c:83: }
+    000002DF                       1123 00112$:
+                                   1124 ;E:\supernova\msx\game\util.c:78: for (k = 1; k <= 50; k++)
+    000002DF DD 34 FE         [23] 1125 	inc	-2 (ix)
+    000002E2 20 03            [12] 1126 	jr	nz, 00175$
+    000002E4 DD 34 FF         [23] 1127 	inc	-1 (ix)
+    000002E7                       1128 00175$:
+    000002E7 C1               [10] 1129 	pop	bc
+    000002E8 C5               [11] 1130 	push	bc
+    000002E9 3E 32            [ 7] 1131 	ld	a, #0x32
+    000002EB B9               [ 4] 1132 	cp	a, c
+    000002EC 3E 00            [ 7] 1133 	ld	a, #0x00
+    000002EE 98               [ 4] 1134 	sbc	a, b
+    000002EF E2rF4r02         [10] 1135 	jp	po, 00176$
+    000002F2 EE 80            [ 7] 1136 	xor	a, #0x80
+    000002F4                       1137 00176$:
+    000002F4 F2r8Cr02         [10] 1138 	jp	p, 00111$
+                                   1139 ;E:\supernova\msx\game\util.c:84: NoSound(); if (Region == 5) Sound(60);
+    000002F7 CDr00r00         [17] 1140 	call	_NoSound
+    000002FA 3Ar00r00         [13] 1141 	ld	a, (_Region)
+    000002FD D6 05            [ 7] 1142 	sub	a, #0x05
+    000002FF 20 06            [12] 1143 	jr	nz, 00113$
+    00000301 21 3C 00         [10] 1144 	ld	hl, #0x003c
+    00000304 CDr00r00         [17] 1145 	call	_Sound
+    00000307                       1146 00113$:
+                                   1147 ;E:\supernova\msx\game\util.c:85: }
+    00000307 F1               [10] 1148 	pop	af
+    00000308 DD E1            [14] 1149 	pop	ix
+    0000030A C9               [10] 1150 	ret
+                                   1151 ;E:\supernova\msx\game\util.c:87: void Blast(void)
+                                   1152 ;	---------------------------------
+                                   1153 ; Function Blast
+                                   1154 ; ---------------------------------
+    0000030B                       1155 _Blast::
+    0000030B CDr00r00         [17] 1156 	call	___sdcc_enter_ix
+    0000030E 3B               [ 6] 1157 	dec	sp
+                                   1158 ;E:\supernova\msx\game\util.c:90: for (k = 1; k <= 40; k++) { Play(550 - k * 6, 600 + k * 6, 0); Play(600 + k * 6, 550 - k * 6, 0); }
+    0000030F DD 36 FF 01      [19] 1159 	ld	-1 (ix), #0x01
+    00000313                       1160 00102$:
+    00000313 DD 7E FF         [19] 1161 	ld	a, -1 (ix)
+    00000316 4F               [ 4] 1162 	ld	c, a
+    00000317 87               [ 4] 1163 	add	a, a
+    00000318 81               [ 4] 1164 	add	a, c
+    00000319 87               [ 4] 1165 	add	a, a
+    0000031A 5F               [ 4] 1166 	ld	e, a
+    0000031B 16 00            [ 7] 1167 	ld	d, #0x00
+    0000031D 21 58 02         [10] 1168 	ld	hl, #0x0258
+    00000320 19               [11] 1169 	add	hl, de
+    00000321 4D               [ 4] 1170 	ld	c, l
+    00000322 44               [ 4] 1171 	ld	b, h
+    00000323 21 26 02         [10] 1172 	ld	hl, #0x0226
+    00000326 BF               [ 4] 1173 	cp	a, a
+    00000327 ED 52            [15] 1174 	sbc	hl, de
+    00000329 E5               [11] 1175 	push	hl
+    0000032A C5               [11] 1176 	push	bc
+    0000032B 11 00 00         [10] 1177 	ld	de, #0x0000
+    0000032E D5               [11] 1178 	push	de
+    0000032F 59               [ 4] 1179 	ld	e, c
+    00000330 50               [ 4] 1180 	ld	d, b
+    00000331 CDrB3r01         [17] 1181 	call	_Play
+    00000334 C1               [10] 1182 	pop	bc
+    00000335 E1               [10] 1183 	pop	hl
+    00000336 11 00 00         [10] 1184 	ld	de, #0x0000
+    00000339 EB               [ 4] 1185 	ex	de, hl
+    0000033A E5               [11] 1186 	push	hl
+    0000033B 69               [ 4] 1187 	ld	l, c
+    0000033C 60               [ 4] 1188 	ld	h, b
+    0000033D CDrB3r01         [17] 1189 	call	_Play
+    00000340 DD 34 FF         [23] 1190 	inc	-1 (ix)
+    00000343 3E 28            [ 7] 1191 	ld	a, #0x28
+    00000345 DD 96 FF         [19] 1192 	sub	a, -1 (ix)
+    00000348 30 C9            [12] 1193 	jr	nc, 00102$
+                                   1194 ;E:\supernova\msx\game\util.c:91: Explode(2);
+    0000034A 3E 02            [ 7] 1195 	ld	a, #0x02
+    0000034C CDr13r02         [17] 1196 	call	_Explode
+                                   1197 ;E:\supernova\msx\game\util.c:92: }
+    0000034F 33               [ 6] 1198 	inc	sp
+    00000350 DD E1            [14] 1199 	pop	ix
+    00000352 C9               [10] 1200 	ret
+                                   1201 ;E:\supernova\msx\game\util.c:94: void DOpen(u8 num)
+                                   1202 ;	---------------------------------
+                                   1203 ; Function DOpen
+                                   1204 ; ---------------------------------
+    00000353                       1205 _DOpen::
+    00000353 4F               [ 4] 1206 	ld	c, a
+                                   1207 ;E:\supernova\msx\game\util.c:96: Wr("The door slides open..."); Wln();
+    00000354 C5               [11] 1208 	push	bc
+    00000355 21rACr03         [10] 1209 	ld	hl, #___str_2
+    00000358 CDr00r00         [17] 1210 	call	_Wr
+    0000035B CDr00r00         [17] 1211 	call	_Wln
+    0000035E C1               [10] 1212 	pop	bc
+                                   1213 ;E:\supernova\msx\game\util.c:97: if (num != 0) Play(50, 125 - num, num);
+    0000035F 79               [ 4] 1214 	ld	a, c
+    00000360 B7               [ 4] 1215 	or	a, a
+    00000361 28 12            [12] 1216 	jr	z, 00103$
+    00000363 69               [ 4] 1217 	ld	l, c
+    00000364 26 00            [ 7] 1218 	ld	h, #0x00
+    00000366 3E 7D            [ 7] 1219 	ld	a, #0x7d
+    00000368 91               [ 4] 1220 	sub	a, c
+    00000369 5F               [ 4] 1221 	ld	e, a
+    0000036A 9F               [ 4] 1222 	sbc	a, a
+    0000036B 57               [ 4] 1223 	ld	d, a
+    0000036C E5               [11] 1224 	push	hl
+    0000036D 21 32 00         [10] 1225 	ld	hl, #0x0032
+    00000370 CDrB3r01         [17] 1226 	call	_Play
+    00000373 18 2B            [12] 1227 	jr	00104$
+    00000375                       1228 00103$:
+                                   1229 ;E:\supernova\msx\game\util.c:98: else { for (i = 3500; i <= 5000; i++) Sound(Rnd(4500) + i); NoSound(); }
+    00000375 21 AC 0D         [10] 1230 	ld	hl, #0x0dac
+    00000378 22r00r00         [16] 1231 	ld	(_i), hl
+    0000037B                       1232 00107$:
+    0000037B 21 94 11         [10] 1233 	ld	hl, #0x1194
+    0000037E CDr00r00         [17] 1234 	call	_Rnd
+    00000381 2Ar00r00         [16] 1235 	ld	hl, (_i)
+    00000384 19               [11] 1236 	add	hl, de
+    00000385 CDr00r00         [17] 1237 	call	_Sound
+    00000388 2Ar00r00         [16] 1238 	ld	hl, (_i)
+    0000038B 23               [ 6] 1239 	inc	hl
+    0000038C 22r00r00         [16] 1240 	ld	(_i), hl
+    0000038F 3E 88            [ 7] 1241 	ld	a, #0x88
+    00000391 BD               [ 4] 1242 	cp	a, l
+    00000392 3E 13            [ 7] 1243 	ld	a, #0x13
+    00000394 9C               [ 4] 1244 	sbc	a, h
+    00000395 E2r9Ar03         [10] 1245 	jp	po, 00143$
+    00000398 EE 80            [ 7] 1246 	xor	a, #0x80
+    0000039A                       1247 00143$:
+    0000039A F2r7Br03         [10] 1248 	jp	p, 00107$
+    0000039D CDr00r00         [17] 1249 	call	_NoSound
+    000003A0                       1250 00104$:
+                                   1251 ;E:\supernova\msx\game\util.c:99: if (Region == 5) Sound(60);
+    000003A0 3Ar00r00         [13] 1252 	ld	a, (_Region)
+    000003A3 D6 05            [ 7] 1253 	sub	a, #0x05
+    000003A5 C0               [11] 1254 	ret	nz
+    000003A6 21 3C 00         [10] 1255 	ld	hl, #0x003c
+                                   1256 ;E:\supernova\msx\game\util.c:100: }
+    000003A9 C3r00r00         [10] 1257 	jp	_Sound
+    000003AC                       1258 ___str_2:
+    000003AC 54 68 65 20 64 6F 6F  1259 	.ascii "The door slides open..."
+             72 20 73 6C 69 64 65
+             73 20 6F 70 65 6E 2E
+             2E 2E
+    000003C3 00                    1260 	.db 0x00
+                                   1261 ;E:\supernova\msx\game\util.c:102: void DClose(u8 num)
+                                   1262 ;	---------------------------------
+                                   1263 ; Function DClose
+                                   1264 ; ---------------------------------
+    000003C4                       1265 _DClose::
+    000003C4 6F               [ 4] 1266 	ld	l, a
+                                   1267 ;E:\supernova\msx\game\util.c:104: Wr("The sliding door closes."); Wln();
+    000003C5 E5               [11] 1268 	push	hl
+    000003C6 21r1Er04         [10] 1269 	ld	hl, #___str_3
+    000003C9 CDr00r00         [17] 1270 	call	_Wr
+    000003CC CDr00r00         [17] 1271 	call	_Wln
+    000003CF E1               [10] 1272 	pop	hl
+                                   1273 ;E:\supernova\msx\game\util.c:105: if (num != 0) Play(125 - num, 50, num);
+    000003D0 7D               [ 4] 1274 	ld	a, l
+    000003D1 B7               [ 4] 1275 	or	a, a
+    000003D2 28 12            [12] 1276 	jr	z, 00103$
+    000003D4 4D               [ 4] 1277 	ld	c, l
+    000003D5 06 00            [ 7] 1278 	ld	b, #0x00
+    000003D7 3E 7D            [ 7] 1279 	ld	a, #0x7d
+    000003D9 95               [ 4] 1280 	sub	a, l
+    000003DA 6F               [ 4] 1281 	ld	l, a
+    000003DB 9F               [ 4] 1282 	sbc	a, a
+    000003DC 67               [ 4] 1283 	ld	h, a
+    000003DD C5               [11] 1284 	push	bc
+    000003DE 11 32 00         [10] 1285 	ld	de, #0x0032
+    000003E1 CDrB3r01         [17] 1286 	call	_Play
+    000003E4 18 2C            [12] 1287 	jr	00104$
+    000003E6                       1288 00103$:
+                                   1289 ;E:\supernova\msx\game\util.c:106: else { for (i = 5000; i >= 3500; i--) Sound(Rnd(4500) + i); NoSound(); }
+    000003E6 21 88 13         [10] 1290 	ld	hl, #0x1388
+    000003E9 22r00r00         [16] 1291 	ld	(_i), hl
+    000003EC                       1292 00107$:
+    000003EC 21 94 11         [10] 1293 	ld	hl, #0x1194
+    000003EF CDr00r00         [17] 1294 	call	_Rnd
+    000003F2 2Ar00r00         [16] 1295 	ld	hl, (_i)
+    000003F5 19               [11] 1296 	add	hl, de
+    000003F6 CDr00r00         [17] 1297 	call	_Sound
+    000003F9 2Ar00r00         [16] 1298 	ld	hl, (_i)
+    000003FC 2B               [ 6] 1299 	dec	hl
+    000003FD 22r00r00         [16] 1300 	ld	(_i), hl
+    00000400 ED 4Br00r00      [20] 1301 	ld	bc, (_i)
+    00000404 79               [ 4] 1302 	ld	a, c
+    00000405 D6 AC            [ 7] 1303 	sub	a, #0xac
+    00000407 78               [ 4] 1304 	ld	a, b
+    00000408 17               [ 4] 1305 	rla
+    00000409 3F               [ 4] 1306 	ccf
+    0000040A 1F               [ 4] 1307 	rra
+    0000040B DE 8D            [ 7] 1308 	sbc	a, #0x8d
+    0000040D 30 DD            [12] 1309 	jr	nc, 00107$
+    0000040F CDr00r00         [17] 1310 	call	_NoSound
+    00000412                       1311 00104$:
+                                   1312 ;E:\supernova\msx\game\util.c:107: if (Region == 5) Sound(60);
+    00000412 3Ar00r00         [13] 1313 	ld	a, (_Region)
+    00000415 D6 05            [ 7] 1314 	sub	a, #0x05
+    00000417 C0               [11] 1315 	ret	nz
+    00000418 21 3C 00         [10] 1316 	ld	hl, #0x003c
+                                   1317 ;E:\supernova\msx\game\util.c:108: }
+    0000041B C3r00r00         [10] 1318 	jp	_Sound
+    0000041E                       1319 ___str_3:
+    0000041E 54 68 65 20 73 6C 69  1320 	.ascii "The sliding door closes."
+             64 69 6E 67 20 64 6F
+             6F 72 20 63 6C 6F 73
+             65 73 2E
+    00000436 00                    1321 	.db 0x00
+                                   1322 ;E:\supernova\msx\game\util.c:110: void Door(u8 New, u8 num)
+                                   1323 ;	---------------------------------
+                                   1324 ; Function Door
+                                   1325 ; ---------------------------------
+    00000437                       1326 _Door::
+    00000437 67               [ 4] 1327 	ld	h, a
+                                   1328 ;E:\supernova\msx\game\util.c:112: if (En(7)) RL(22); else
+    00000438 E5               [11] 1329 	push	hl
+    00000439 3E 07            [ 7] 1330 	ld	a, #0x07
+    0000043B CDr16r00         [17] 1331 	call	_En
+    0000043E E1               [10] 1332 	pop	hl
+    0000043F B7               [ 4] 1333 	or	a, a
+    00000440 28 06            [12] 1334 	jr	z, 00105$
+    00000442 21 16 00         [10] 1335 	ld	hl, #0x0016
+    00000445 C3r12r07         [10] 1336 	jp	_RL
+    00000448                       1337 00105$:
+                                   1338 ;E:\supernova\msx\game\util.c:113: if (En(8)) RL(23); else { DOpen(num); MoveTo(New); DClose(num); }
+    00000448 E5               [11] 1339 	push	hl
+    00000449 3E 08            [ 7] 1340 	ld	a, #0x08
+    0000044B CDr16r00         [17] 1341 	call	_En
+    0000044E E1               [10] 1342 	pop	hl
+    0000044F B7               [ 4] 1343 	or	a, a
+    00000450 28 06            [12] 1344 	jr	z, 00102$
+    00000452 21 17 00         [10] 1345 	ld	hl, #0x0017
+    00000455 C3r12r07         [10] 1346 	jp	_RL
+    00000458                       1347 00102$:
+    00000458 E5               [11] 1348 	push	hl
+    00000459 7D               [ 4] 1349 	ld	a, l
+    0000045A CDr53r03         [17] 1350 	call	_DOpen
+    0000045D E1               [10] 1351 	pop	hl
+    0000045E E5               [11] 1352 	push	hl
+    0000045F 7C               [ 4] 1353 	ld	a, h
+    00000460 CDr00r00         [17] 1354 	call	_MoveTo
+    00000463 E1               [10] 1355 	pop	hl
+    00000464 7D               [ 4] 1356 	ld	a, l
+                                   1357 ;E:\supernova\msx\game\util.c:114: }
+    00000465 C3rC4r03         [10] 1358 	jp	_DClose
+                                   1359 ;E:\supernova\msx\game\util.c:117: void WrFN(u8 n)
+                                   1360 ;	---------------------------------
+                                   1361 ; Function WrFN
+                                   1362 ; ---------------------------------
+    00000468                       1363 _WrFN::
+    00000468 6F               [ 4] 1364 	ld	l, a
+                                   1365 ;E:\supernova\msx\game\util.c:119: const char* s = g_N[n];
+    00000469 01r00r00         [10] 1366 	ld	bc, #_g_N+0
+    0000046C 26 00            [ 7] 1367 	ld	h, #0x00
+    0000046E 29               [11] 1368 	add	hl, hl
+    0000046F 09               [11] 1369 	add	hl, bc
+    00000470 4E               [ 7] 1370 	ld	c, (hl)
+    00000471 23               [ 6] 1371 	inc	hl
+    00000472 46               [ 7] 1372 	ld	b, (hl)
+                                   1373 ;E:\supernova\msx\game\util.c:120: while (*s && *s != '\\') WrC(*s++);
+    00000473                       1374 00102$:
+    00000473 0A               [ 7] 1375 	ld	a, (bc)
+    00000474 B7               [ 4] 1376 	or	a, a
+    00000475 C8               [11] 1377 	ret	z
+    00000476 FE 5C            [ 7] 1378 	cp	a, #0x5c
+    00000478 C8               [11] 1379 	ret	z
+    00000479 03               [ 6] 1380 	inc	bc
+    0000047A C5               [11] 1381 	push	bc
+    0000047B CDr00r00         [17] 1382 	call	_WrC
+    0000047E C1               [10] 1383 	pop	bc
+                                   1384 ;E:\supernova\msx\game\util.c:121: }
+    0000047F 18 F2            [12] 1385 	jr	00102$
+                                   1386 ;E:\supernova\msx\game\util.c:123: void FN(u8 vnp, char* dst)
+                                   1387 ;	---------------------------------
+                                   1388 ; Function FN
+                                   1389 ; ---------------------------------
+    00000481                       1390 _FN::
+    00000481 6F               [ 4] 1391 	ld	l, a
+                                   1392 ;E:\supernova\msx\game\util.c:125: const char* s = g_N[vnp];
+    00000482 01r00r00         [10] 1393 	ld	bc, #_g_N+0
+    00000485 26 00            [ 7] 1394 	ld	h, #0x00
+    00000487 29               [11] 1395 	add	hl, hl
+    00000488 09               [11] 1396 	add	hl, bc
+    00000489 4E               [ 7] 1397 	ld	c, (hl)
+    0000048A 23               [ 6] 1398 	inc	hl
+    0000048B 46               [ 7] 1399 	ld	b, (hl)
+                                   1400 ;E:\supernova\msx\game\util.c:126: SF();
+    0000048C C5               [11] 1401 	push	bc
+    0000048D D5               [11] 1402 	push	de
+    0000048E CDr00r00         [17] 1403 	call	_SF
+    00000491 D1               [10] 1404 	pop	de
+    00000492 C1               [10] 1405 	pop	bc
+                                   1406 ;E:\supernova\msx\game\util.c:127: while (*s && *s != '\\') *dst++ = *s++;
+    00000493                       1407 00102$:
+    00000493 0A               [ 7] 1408 	ld	a, (bc)
+    00000494 B7               [ 4] 1409 	or	a, a
+    00000495 28 09            [12] 1410 	jr	z, 00104$
+    00000497 FE 5C            [ 7] 1411 	cp	a, #0x5c
+    00000499 28 05            [12] 1412 	jr	z, 00104$
+    0000049B 03               [ 6] 1413 	inc	bc
+    0000049C 12               [ 7] 1414 	ld	(de), a
+    0000049D 13               [ 6] 1415 	inc	de
+    0000049E 18 F3            [12] 1416 	jr	00102$
+    000004A0                       1417 00104$:
+                                   1418 ;E:\supernova\msx\game\util.c:128: *dst = 0;
+    000004A0 AF               [ 4] 1419 	xor	a, a
+    000004A1 12               [ 7] 1420 	ld	(de), a
+                                   1421 ;E:\supernova\msx\game\util.c:129: }
+    000004A2 C9               [10] 1422 	ret
+                                   1423 ;E:\supernova\msx\game\util.c:131: void UpC(char c)
+                                   1424 ;	---------------------------------
+                                   1425 ; Function UpC
+                                   1426 ; ---------------------------------
+    000004A3                       1427 _UpC::
+    000004A3 F5               [11] 1428 	push	af
+    000004A4 4F               [ 4] 1429 	ld	c, a
+                                   1430 ;E:\supernova\msx\game\util.c:134: t[0] = c; t[1] = 0;
+    000004A5 21 00 00         [10] 1431 	ld	hl, #0
+    000004A8 39               [11] 1432 	add	hl, sp
+    000004A9 71               [ 7] 1433 	ld	(hl), c
+    000004AA E5               [11] 1434 	push	hl
+    000004AB FD 21 03 00      [14] 1435 	ld	iy, #3
+    000004AF FD 39            [15] 1436 	add	iy, sp
+    000004B1 FD 36 00 00      [19] 1437 	ld	0 (iy), #0x00
+    000004B5 E1               [10] 1438 	pop	hl
+                                   1439 ;E:\supernova\msx\game\util.c:135: Up(t);
+    000004B6 CDrBBr04         [17] 1440 	call	_Up
+                                   1441 ;E:\supernova\msx\game\util.c:136: }
+    000004B9 F1               [10] 1442 	pop	af
+    000004BA C9               [10] 1443 	ret
+                                   1444 ;E:\supernova\msx\game\util.c:138: void Up(const char* w)
+                                   1445 ;	---------------------------------
+                                   1446 ; Function Up
+                                   1447 ; ---------------------------------
+    000004BB                       1448 _Up::
+    000004BB DD E5            [15] 1449 	push	ix
+    000004BD DD 21 00 00      [14] 1450 	ld	ix,	#0
+    000004C1 DD 39            [15] 1451 	add	ix, sp
+    000004C3 FD 21 78 FF      [14] 1452 	ld	iy, #-136
+    000004C7 FD 39            [15] 1453 	add	iy, sp
+    000004C9 FD F9            [10] 1454 	ld	sp, iy
+    000004CB EB               [ 4] 1455 	ex	de, hl
+                                   1456 ;E:\supernova\msx\game\util.c:142: StrCpy(b, w);
+    000004CC 21 00 00         [10] 1457 	ld	hl, #0
+    000004CF 39               [11] 1458 	add	hl, sp
+    000004D0 CDr00r00         [17] 1459 	call	_StrCpy
+                                   1460 ;E:\supernova\msx\game\util.c:143: if (b[0] == 'l' && b[1] == 0) Insert("ook", b, 2, 131);          // Word+' ' check: 'l' alone
+    000004D3 21 00 00         [10] 1461 	ld	hl, #0
+    000004D6 39               [11] 1462 	add	hl, sp
+    000004D7 7E               [ 7] 1463 	ld	a, (hl)
+    000004D8 FE 6C            [ 7] 1464 	cp	a, #0x6c
+    000004DA 3E 01            [ 7] 1465 	ld	a, #0x01
+    000004DC 28 01            [12] 1466 	jr	z, 00220$
+    000004DE AF               [ 4] 1467 	xor	a, a
+    000004DF                       1468 00220$:
+    000004DF 5F               [ 4] 1469 	ld	e, a
+    000004E0 21 01 00         [10] 1470 	ld	hl,#0x1
+    000004E3 39               [11] 1471 	add	hl,sp
+    000004E4 4D               [ 4] 1472 	ld	c, l
+    000004E5 44               [ 4] 1473 	ld	b, h
+    000004E6 7B               [ 4] 1474 	ld	a, e
+    000004E7 B7               [ 4] 1475 	or	a, a
+    000004E8 28 17            [12] 1476 	jr	z, 00105$
+    000004EA 0A               [ 7] 1477 	ld	a, (bc)
+    000004EB B7               [ 4] 1478 	or	a, a
+    000004EC 20 13            [12] 1479 	jr	nz, 00105$
+    000004EE C5               [11] 1480 	push	bc
+    000004EF 21 02 83         [10] 1481 	ld	hl, #0x8302
+    000004F2 E5               [11] 1482 	push	hl
+    000004F3 21 04 00         [10] 1483 	ld	hl, #4
+    000004F6 39               [11] 1484 	add	hl, sp
+    000004F7 EB               [ 4] 1485 	ex	de, hl
+    000004F8 21rB0r05         [10] 1486 	ld	hl, #___str_4
+    000004FB CDr00r00         [17] 1487 	call	_Insert
+    000004FE C1               [10] 1488 	pop	bc
+    000004FF 18 1A            [12] 1489 	jr	00106$
+    00000501                       1490 00105$:
+                                   1491 ;E:\supernova\msx\game\util.c:144: else if (b[0] == 'l' && b[1] == ' ') Insert("ook", b, 2, 131);
+    00000501 7B               [ 4] 1492 	ld	a, e
+    00000502 B7               [ 4] 1493 	or	a, a
+    00000503 28 16            [12] 1494 	jr	z, 00106$
+    00000505 0A               [ 7] 1495 	ld	a, (bc)
+    00000506 FE 20            [ 7] 1496 	cp	a, #0x20
+    00000508 20 11            [12] 1497 	jr	nz, 00106$
+    0000050A C5               [11] 1498 	push	bc
+    0000050B 21 02 83         [10] 1499 	ld	hl, #0x8302
+    0000050E E5               [11] 1500 	push	hl
+    0000050F 21 04 00         [10] 1501 	ld	hl, #4
+    00000512 39               [11] 1502 	add	hl, sp
+    00000513 EB               [ 4] 1503 	ex	de, hl
+    00000514 21rB0r05         [10] 1504 	ld	hl, #___str_4
+    00000517 CDr00r00         [17] 1505 	call	_Insert
+    0000051A C1               [10] 1506 	pop	bc
+    0000051B                       1507 00106$:
+                                   1508 ;E:\supernova\msx\game\util.c:145: if (b[0] == 'e' && b[1] == 'x' && b[2] == 0) Insert("amine", b, 3, 131);
+    0000051B 21 00 00         [10] 1509 	ld	hl, #0
+    0000051E 39               [11] 1510 	add	hl, sp
+    0000051F 7E               [ 7] 1511 	ld	a, (hl)
+    00000520 FE 65            [ 7] 1512 	cp	a, #0x65
+    00000522 3E 01            [ 7] 1513 	ld	a, #0x01
+    00000524 28 01            [12] 1514 	jr	z, 00224$
+    00000526 AF               [ 4] 1515 	xor	a, a
+    00000527                       1516 00224$:
+    00000527 5F               [ 4] 1517 	ld	e, a
+    00000528 21 02 00         [10] 1518 	ld	hl,#0x2
+    0000052B 39               [11] 1519 	add	hl,sp
+    0000052C 7B               [ 4] 1520 	ld	a, e
+    0000052D B7               [ 4] 1521 	or	a, a
+    0000052E 28 1A            [12] 1522 	jr	z, 00113$
+    00000530 0A               [ 7] 1523 	ld	a, (bc)
+    00000531 FE 78            [ 7] 1524 	cp	a, #0x78
+    00000533 20 15            [12] 1525 	jr	nz, 00113$
+    00000535 7E               [ 7] 1526 	ld	a, (hl)
+    00000536 B7               [ 4] 1527 	or	a, a
+    00000537 20 11            [12] 1528 	jr	nz, 00113$
+    00000539 21 03 83         [10] 1529 	ld	hl, #0x8303
+    0000053C E5               [11] 1530 	push	hl
+    0000053D 21 02 00         [10] 1531 	ld	hl, #2
+    00000540 39               [11] 1532 	add	hl, sp
+    00000541 EB               [ 4] 1533 	ex	de, hl
+    00000542 21rB4r05         [10] 1534 	ld	hl, #___str_5
+    00000545 CDr00r00         [17] 1535 	call	_Insert
+    00000548 18 1D            [12] 1536 	jr	00114$
+    0000054A                       1537 00113$:
+                                   1538 ;E:\supernova\msx\game\util.c:146: else if (b[0] == 'e' && b[1] == 'x' && b[2] == ' ') Insert("amine", b, 3, 131);
+    0000054A 7B               [ 4] 1539 	ld	a, e
+    0000054B B7               [ 4] 1540 	or	a, a
+    0000054C 28 19            [12] 1541 	jr	z, 00114$
+    0000054E 0A               [ 7] 1542 	ld	a, (bc)
+    0000054F FE 78            [ 7] 1543 	cp	a, #0x78
+    00000551 20 14            [12] 1544 	jr	nz, 00114$
+    00000553 7E               [ 7] 1545 	ld	a, (hl)
+    00000554 FE 20            [ 7] 1546 	cp	a, #0x20
+    00000556 20 0F            [12] 1547 	jr	nz, 00114$
+    00000558 21 03 83         [10] 1548 	ld	hl, #0x8303
+    0000055B E5               [11] 1549 	push	hl
+    0000055C 21 02 00         [10] 1550 	ld	hl, #2
+    0000055F 39               [11] 1551 	add	hl, sp
+    00000560 EB               [ 4] 1552 	ex	de, hl
+    00000561 21rB4r05         [10] 1553 	ld	hl, #___str_5
+    00000564 CDr00r00         [17] 1554 	call	_Insert
+    00000567                       1555 00114$:
+                                   1556 ;E:\supernova\msx\game\util.c:147: n = Len(b);
+    00000567 21 00 00         [10] 1557 	ld	hl, #0
+    0000056A 39               [11] 1558 	add	hl, sp
+    0000056B CDr00r00         [17] 1559 	call	_Len
+    0000056E 4F               [ 4] 1560 	ld	c, a
+                                   1561 ;E:\supernova\msx\game\util.c:148: for (x = 1; x <= n; x++) b[x - 1] = UpCase(b[x - 1]);
+    0000056F 21r00r00         [10] 1562 	ld	hl, #_x
+    00000572 36 01            [10] 1563 	ld	(hl), #0x01
+    00000574                       1564 00119$:
+    00000574 79               [ 4] 1565 	ld	a, c
+    00000575 21r00r00         [10] 1566 	ld	hl, #_x
+    00000578 96               [ 7] 1567 	sub	a, (hl)
+    00000579 38 1B            [12] 1568 	jr	c, 00117$
+    0000057B 3Ar00r00         [13] 1569 	ld	a, (_x+0)
+    0000057E 16 00            [ 7] 1570 	ld	d, #0x00
+    00000580 5F               [ 4] 1571 	ld	e, a
+    00000581 1B               [ 6] 1572 	dec	de
+    00000582 21 00 00         [10] 1573 	ld	hl, #0
+    00000585 39               [11] 1574 	add	hl, sp
+    00000586 19               [11] 1575 	add	hl, de
+    00000587 7E               [ 7] 1576 	ld	a, (hl)
+    00000588 E5               [11] 1577 	push	hl
+    00000589 C5               [11] 1578 	push	bc
+    0000058A CDr00r00         [17] 1579 	call	_UpCase
+    0000058D C1               [10] 1580 	pop	bc
+    0000058E E1               [10] 1581 	pop	hl
+    0000058F 77               [ 7] 1582 	ld	(hl), a
+    00000590 21r00r00         [10] 1583 	ld	hl, #_x
+    00000593 34               [11] 1584 	inc	(hl)
+    00000594 18 DE            [12] 1585 	jr	00119$
+    00000596                       1586 00117$:
+                                   1587 ;E:\supernova\msx\game\util.c:149: Col(12, 15); Wr(b); Col(11, 7);
+    00000596 2E 0F            [ 7] 1588 	ld	l, #0x0f
+    00000598 3E 0C            [ 7] 1589 	ld	a, #0x0c
+    0000059A CDr0Dr00         [17] 1590 	call	_Col
+    0000059D 21 00 00         [10] 1591 	ld	hl, #0
+    000005A0 39               [11] 1592 	add	hl, sp
+    000005A1 CDr00r00         [17] 1593 	call	_Wr
+    000005A4 2E 07            [ 7] 1594 	ld	l, #0x07
+    000005A6 3E 0B            [ 7] 1595 	ld	a, #0x0b
+    000005A8 CDr0Dr00         [17] 1596 	call	_Col
+                                   1597 ;E:\supernova\msx\game\util.c:150: }
+    000005AB DD F9            [10] 1598 	ld	sp, ix
+    000005AD DD E1            [14] 1599 	pop	ix
+    000005AF C9               [10] 1600 	ret
+    000005B0                       1601 ___str_4:
+    000005B0 6F 6F 6B              1602 	.ascii "ook"
+    000005B3 00                    1603 	.db 0x00
+    000005B4                       1604 ___str_5:
+    000005B4 61 6D 69 6E 65        1605 	.ascii "amine"
+    000005B9 00                    1606 	.db 0x00
+                                   1607 ;E:\supernova\msx\game\util.c:152: void Spaces(char* I)
+                                   1608 ;	---------------------------------
+                                   1609 ; Function Spaces
+                                   1610 ; ---------------------------------
+    000005BA                       1611 _Spaces::
+                                   1612 ;E:\supernova\msx\game\util.c:154: Insert(" ", I, 1, 131);
+    000005BA E5               [11] 1613 	push	hl
+    000005BB 11 01 83         [10] 1614 	ld	de, #0x8301
+    000005BE EB               [ 4] 1615 	ex	de, hl
+    000005BF E5               [11] 1616 	push	hl
+    000005C0 21rD2r05         [10] 1617 	ld	hl, #___str_6
+    000005C3 CDr00r00         [17] 1618 	call	_Insert
+    000005C6 E1               [10] 1619 	pop	hl
+                                   1620 ;E:\supernova\msx\game\util.c:155: StrCat(I, " ", 131);
+    000005C7 3E 83            [ 7] 1621 	ld	a, #0x83
+    000005C9 F5               [11] 1622 	push	af
+    000005CA 33               [ 6] 1623 	inc	sp
+    000005CB 11rD2r05         [10] 1624 	ld	de, #___str_6
+    000005CE CDr00r00         [17] 1625 	call	_StrCat
+                                   1626 ;E:\supernova\msx\game\util.c:156: }
+    000005D1 C9               [10] 1627 	ret
+    000005D2                       1628 ___str_6:
+    000005D2 20                    1629 	.ascii " "
+    000005D3 00                    1630 	.db 0x00
+                                   1631 ;E:\supernova\msx\game\util.c:158: void QFormat(char* I)
+                                   1632 ;	---------------------------------
+                                   1633 ; Function QFormat
+                                   1634 ; ---------------------------------
+    000005D4                       1635 _QFormat::
+                                   1636 ;E:\supernova\msx\game\util.c:161: if (I[0] == '.' || I[0] == ' ') Delete(I, 1, 1);
+    000005D4 7E               [ 7] 1637 	ld	a, (hl)
+    000005D5 FE 2E            [ 7] 1638 	cp	a, #0x2e
+    000005D7 28 04            [12] 1639 	jr	z, 00101$
+    000005D9 FE 20            [ 7] 1640 	cp	a, #0x20
+    000005DB 20 09            [12] 1641 	jr	nz, 00102$
+    000005DD                       1642 00101$:
+    000005DD E5               [11] 1643 	push	hl
+    000005DE 11 01 01         [10] 1644 	ld	de, #0x101
+    000005E1 D5               [11] 1645 	push	de
+    000005E2 CDr00r00         [17] 1646 	call	_Delete
+    000005E5 E1               [10] 1647 	pop	hl
+    000005E6                       1648 00102$:
+                                   1649 ;E:\supernova\msx\game\util.c:162: l = Len(I);
+    000005E6 E5               [11] 1650 	push	hl
+    000005E7 CDr00r00         [17] 1651 	call	_Len
+    000005EA 47               [ 4] 1652 	ld	b, a
+    000005EB E1               [10] 1653 	pop	hl
+                                   1654 ;E:\supernova\msx\game\util.c:163: if (l && (I[l - 1] == '.' || I[l - 1] == ' ')) Delete(I, l, 1);
+    000005EC 78               [ 4] 1655 	ld	a, b
+    000005ED B7               [ 4] 1656 	or	a, a
+    000005EE C8               [11] 1657 	ret	z
+    000005EF 78               [ 4] 1658 	ld	a, b
+    000005F0 3D               [ 4] 1659 	dec	a
+    000005F1 85               [ 4] 1660 	add	a, l
+    000005F2 5F               [ 4] 1661 	ld	e, a
+    000005F3 3E 00            [ 7] 1662 	ld	a, #0x00
+    000005F5 8C               [ 4] 1663 	adc	a, h
+    000005F6 57               [ 4] 1664 	ld	d, a
+    000005F7 1A               [ 7] 1665 	ld	a, (de)
+    000005F8 FE 2E            [ 7] 1666 	cp	a, #0x2e
+    000005FA 28 03            [12] 1667 	jr	z, 00104$
+    000005FC FE 20            [ 7] 1668 	cp	a, #0x20
+    000005FE C0               [11] 1669 	ret	nz
+    000005FF                       1670 00104$:
+    000005FF 3E 01            [ 7] 1671 	ld	a, #0x01
+    00000601 F5               [11] 1672 	push	af
+    00000602 33               [ 6] 1673 	inc	sp
+    00000603 C5               [11] 1674 	push	bc
+    00000604 33               [ 6] 1675 	inc	sp
+    00000605 CDr00r00         [17] 1676 	call	_Delete
+                                   1677 ;E:\supernova\msx\game\util.c:164: }
+    00000608 C9               [10] 1678 	ret
+                                   1679 ;E:\supernova\msx\game\util.c:166: void LowerCase(char* I)
+                                   1680 ;	---------------------------------
+                                   1681 ; Function LowerCase
+                                   1682 ; ---------------------------------
+    00000609                       1683 _LowerCase::
+    00000609 DD E5            [15] 1684 	push	ix
+    0000060B DD 21 00 00      [14] 1685 	ld	ix,	#0
+    0000060F DD 39            [15] 1686 	add	ix, sp
+    00000611 3B               [ 6] 1687 	dec	sp
+                                   1688 ;E:\supernova\msx\game\util.c:168: u8 n = Len(I);
+    00000612 E5               [11] 1689 	push	hl
+    00000613 CDr00r00         [17] 1690 	call	_Len
+    00000616 4F               [ 4] 1691 	ld	c, a
+    00000617 D1               [10] 1692 	pop	de
+                                   1693 ;E:\supernova\msx\game\util.c:169: for (x = 1; x <= n; x++)
+    00000618 21r00r00         [10] 1694 	ld	hl, #_x
+    0000061B 36 01            [10] 1695 	ld	(hl), #0x01
+    0000061D                       1696 00106$:
+    0000061D 79               [ 4] 1697 	ld	a, c
+    0000061E 21r00r00         [10] 1698 	ld	hl, #_x
+    00000621 96               [ 7] 1699 	sub	a, (hl)
+    00000622 38 23            [12] 1700 	jr	c, 00108$
+                                   1701 ;E:\supernova\msx\game\util.c:170: if (CH(I, x) >= 'A' && CH(I, x) <= 'Z') CH(I, x) += 32;
+    00000624 3Ar00r00         [13] 1702 	ld	a, (_x+0)
+    00000627 26 00            [ 7] 1703 	ld	h, #0x00
+    00000629 6F               [ 4] 1704 	ld	l, a
+    0000062A 2B               [ 6] 1705 	dec	hl
+    0000062B 19               [11] 1706 	add	hl, de
+    0000062C 7E               [ 7] 1707 	ld	a, (hl)
+    0000062D DD 77 FF         [19] 1708 	ld	-1 (ix), a
+    00000630 D6 41            [ 7] 1709 	sub	a, #0x41
+    00000632 38 0D            [12] 1710 	jr	c, 00107$
+    00000634 3E 5A            [ 7] 1711 	ld	a, #0x5a
+    00000636 DD 96 FF         [19] 1712 	sub	a, -1 (ix)
+    00000639 38 06            [12] 1713 	jr	c, 00107$
+    0000063B DD 7E FF         [19] 1714 	ld	a, -1 (ix)
+    0000063E C6 20            [ 7] 1715 	add	a, #0x20
+    00000640 77               [ 7] 1716 	ld	(hl), a
+    00000641                       1717 00107$:
+                                   1718 ;E:\supernova\msx\game\util.c:169: for (x = 1; x <= n; x++)
+    00000641 21r00r00         [10] 1719 	ld	hl, #_x
+    00000644 34               [11] 1720 	inc	(hl)
+    00000645 18 D6            [12] 1721 	jr	00106$
+    00000647                       1722 00108$:
+                                   1723 ;E:\supernova\msx\game\util.c:171: }
+    00000647 33               [ 6] 1724 	inc	sp
+    00000648 DD E1            [14] 1725 	pop	ix
+    0000064A C9               [10] 1726 	ret
+                                   1727 ;E:\supernova\msx\game\util.c:173: u8 Here(u8 obj)
+                                   1728 ;	---------------------------------
+                                   1729 ; Function Here
+                                   1730 ; ---------------------------------
+    0000064B                       1731 _Here::
+    0000064B CDr00r00         [17] 1732 	call	___sdcc_enter_ix
+    0000064E F5               [11] 1733 	push	af
+    0000064F 4F               [ 4] 1734 	ld	c, a
+                                   1735 ;E:\supernova\msx\game\util.c:175: u8 r = 0;
+    00000650 DD 36 FE 00      [19] 1736 	ld	-2 (ix), #0x00
+                                   1737 ;E:\supernova\msx\game\util.c:176: if (LOC_HAS(Prm, obj)) r = 1;
+    00000654 3Ar00r00         [13] 1738 	ld	a, (#_Prm + 0)
+    00000657 5F               [ 4] 1739 	ld	e, a
+    00000658 16 00            [ 7] 1740 	ld	d, #0x00
+    0000065A 6B               [ 4] 1741 	ld	l, e
+    0000065B 62               [ 4] 1742 	ld	h, d
+    0000065C 29               [11] 1743 	add	hl, hl
+    0000065D 29               [11] 1744 	add	hl, hl
+    0000065E 29               [11] 1745 	add	hl, hl
+    0000065F 29               [11] 1746 	add	hl, hl
+    00000660 19               [11] 1747 	add	hl, de
+    00000661 11r00r00         [10] 1748 	ld	de, #_g_Loc
+    00000664 19               [11] 1749 	add	hl, de
+    00000665 59               [ 4] 1750 	ld	e, c
+    00000666 16 00            [ 7] 1751 	ld	d, #0x00
+    00000668 1B               [ 6] 1752 	dec	de
+    00000669 06 03            [ 7] 1753 	ld	b, #0x03
+    0000066B                       1754 00219$:
+    0000066B CB 2A            [ 8] 1755 	sra	d
+    0000066D CB 1B            [ 8] 1756 	rr	e
+    0000066F 10 FA            [13] 1757 	djnz	00219$
+    00000671 19               [11] 1758 	add	hl, de
+    00000672 E5               [11] 1759 	push	hl
+    00000673 FD E1            [14] 1760 	pop	iy
+    00000675 79               [ 4] 1761 	ld	a, c
+    00000676 3D               [ 4] 1762 	dec	a
+    00000677 E6 07            [ 7] 1763 	and	a, #0x07
+    00000679 DD 77 FF         [19] 1764 	ld	-1 (ix), a
+    0000067C 47               [ 4] 1765 	ld	b, a
+    0000067D 21 01 00         [10] 1766 	ld	hl, #0x0001
+    00000680 04               [ 4] 1767 	inc	b
+    00000681 18 01            [12] 1768 	jr	00221$
+    00000683                       1769 00220$:
+    00000683 29               [11] 1770 	add	hl, hl
+    00000684                       1771 00221$:
+    00000684 10 FD            [13] 1772 	djnz	00220$
+    00000686 FD 7E 00         [19] 1773 	ld	a, (iy)
+    00000689 A5               [ 4] 1774 	and	a, l
+    0000068A 06 00            [ 7] 1775 	ld	b, #0x00
+    0000068C B0               [ 4] 1776 	or	a, b
+    0000068D 28 04            [12] 1777 	jr	z, 00102$
+    0000068F DD 36 FE 01      [19] 1778 	ld	-2 (ix), #0x01
+    00000693                       1779 00102$:
+                                   1780 ;E:\supernova\msx\game\util.c:177: if (obj == 79 && MugCon == 79 && IN29(Inv, 29)) r = 1;
+    00000693 79               [ 4] 1781 	ld	a, c
+    00000694 D6 4F            [ 7] 1782 	sub	a, #0x4f
+    00000696 20 16            [12] 1783 	jr	nz, 00104$
+    00000698 3Ar00r00         [13] 1784 	ld	a, (_MugCon)
+    0000069B D6 4F            [ 7] 1785 	sub	a, #0x4f
+    0000069D 20 0F            [12] 1786 	jr	nz, 00104$
+    0000069F 3Ar03r00         [13] 1787 	ld	a, (#(_Inv + 3) + 0)
+    000006A2 0F               [ 4] 1788 	rrca
+    000006A3 0F               [ 4] 1789 	rrca
+    000006A4 0F               [ 4] 1790 	rrca
+    000006A5 0F               [ 4] 1791 	rrca
+    000006A6 E6 01            [ 7] 1792 	and	a, #0x01
+    000006A8 28 04            [12] 1793 	jr	z, 00104$
+    000006AA DD 36 FE 01      [19] 1794 	ld	-2 (ix), #0x01
+    000006AE                       1795 00104$:
+                                   1796 ;E:\supernova\msx\game\util.c:178: if (obj <= MMax) if (R[obj] == Prm || IN29(Inv, obj)) r = 1;
+    000006AE 3E 1D            [ 7] 1797 	ld	a, #0x1d
+    000006B0 91               [ 4] 1798 	sub	a, c
+    000006B1 38 27            [12] 1799 	jr	c, 00115$
+    000006B3 21r00r00         [10] 1800 	ld	hl, #_R+0
+    000006B6 06 00            [ 7] 1801 	ld	b, #0x00
+    000006B8 09               [11] 1802 	add	hl, bc
+    000006B9 3Ar00r00         [13] 1803 	ld	a, (_Prm)
+    000006BC 96               [ 7] 1804 	sub	a, (hl)
+    000006BD 28 17            [12] 1805 	jr	z, 00109$
+    000006BF 79               [ 4] 1806 	ld	a, c
+    000006C0 D6 01            [ 7] 1807 	sub	a, #0x01
+    000006C2 38 16            [12] 1808 	jr	c, 00115$
+    000006C4 21r00r00         [10] 1809 	ld	hl, #_Inv+0
+    000006C7 19               [11] 1810 	add	hl, de
+    000006C8 7E               [ 7] 1811 	ld	a, (hl)
+    000006C9 DD 46 FF         [19] 1812 	ld	b, -1 (ix)
+    000006CC 04               [ 4] 1813 	inc	b
+    000006CD 18 02            [12] 1814 	jr	00228$
+    000006CF                       1815 00227$:
+    000006CF CB 3F            [ 8] 1816 	srl	a
+    000006D1                       1817 00228$:
+    000006D1 10 FC            [13] 1818 	djnz	00227$
+    000006D3 0F               [ 4] 1819 	rrca
+    000006D4 30 04            [12] 1820 	jr	nc, 00115$
+    000006D6                       1821 00109$:
+    000006D6 DD 36 FE 01      [19] 1822 	ld	-2 (ix), #0x01
+    000006DA                       1823 00115$:
+                                   1824 ;E:\supernova\msx\game\util.c:179: if (obj == 58 && (IN29(Inv, 3) || IN29(Inv, 4) || R[4] == Prm || R[3] == Prm)) r = 1;
+    000006DA 79               [ 4] 1825 	ld	a, c
+    000006DB D6 3A            [ 7] 1826 	sub	a, #0x3a
+    000006DD 20 29            [12] 1827 	jr	nz, 00117$
+    000006DF 21r00r00         [10] 1828 	ld	hl, #_Inv+0
+    000006E2 4E               [ 7] 1829 	ld	c, (hl)
+    000006E3 79               [ 4] 1830 	ld	a, c
+    000006E4 0F               [ 4] 1831 	rrca
+    000006E5 0F               [ 4] 1832 	rrca
+    000006E6 E6 01            [ 7] 1833 	and	a, #0x01
+    000006E8 20 1A            [12] 1834 	jr	nz, 00116$
+    000006EA 79               [ 4] 1835 	ld	a, c
+    000006EB 0F               [ 4] 1836 	rrca
+    000006EC 0F               [ 4] 1837 	rrca
+    000006ED 0F               [ 4] 1838 	rrca
+    000006EE E6 01            [ 7] 1839 	and	a, #0x01
+    000006F0 20 12            [12] 1840 	jr	nz, 00116$
+    000006F2 21r04r00         [10] 1841 	ld	hl, #_R + 4
+    000006F5 3Ar00r00         [13] 1842 	ld	a, (_Prm)
+    000006F8 96               [ 7] 1843 	sub	a, (hl)
+    000006F9 28 09            [12] 1844 	jr	z, 00116$
+    000006FB 21r03r00         [10] 1845 	ld	hl, #_R + 3
+    000006FE 3Ar00r00         [13] 1846 	ld	a, (_Prm)
+    00000701 96               [ 7] 1847 	sub	a, (hl)
+    00000702 20 04            [12] 1848 	jr	nz, 00117$
+    00000704                       1849 00116$:
+    00000704 DD 36 FE 01      [19] 1850 	ld	-2 (ix), #0x01
+    00000708                       1851 00117$:
+                                   1852 ;E:\supernova\msx\game\util.c:180: return r;
+    00000708 DD 7E FE         [19] 1853 	ld	a, -2 (ix)
+                                   1854 ;E:\supernova\msx\game\util.c:181: }
+    0000070B C1               [10] 1855 	pop	bc
+    0000070C DD E1            [14] 1856 	pop	ix
+    0000070E C9               [10] 1857 	ret
+                                   1858 ;E:\supernova\msx\game\util.c:188: static void WrRec(const char* s)
+                                   1859 ;	---------------------------------
+                                   1860 ; Function WrRec
+                                   1861 ; ---------------------------------
+    0000070F                       1862 _WrRec:
+                                   1863 ;E:\supernova\msx\game\util.c:190: Wr(s);
+                                   1864 ;E:\supernova\msx\game\util.c:191: }
+    0000070F C3r00r00         [10] 1865 	jp	_Wr
+                                   1866 ;E:\supernova\msx\game\util.c:193: void RL(i16 pointer) { SF(); ReadText(TK_L + pointer, g_Rec); WrRec(g_Rec); Wln(); }
+                                   1867 ;	---------------------------------
+                                   1868 ; Function RL
+                                   1869 ; ---------------------------------
+    00000712                       1870 _RL::
+    00000712 E5               [11] 1871 	push	hl
+    00000713 CDr00r00         [17] 1872 	call	_SF
+    00000716 E1               [10] 1873 	pop	hl
+    00000717 11 00 D0         [10] 1874 	ld	de, #_g_Scratch+0
+    0000071A 01 67 01         [10] 1875 	ld	bc, #0x0167
+    0000071D 09               [11] 1876 	add	hl, bc
+    0000071E CDr00r00         [17] 1877 	call	_ReadText
+    00000721 21 00 D0         [10] 1878 	ld	hl, #_g_Scratch
+    00000724 CDr0Fr07         [17] 1879 	call	_WrRec
+    00000727 C3r00r00         [10] 1880 	jp	_Wln
+                                   1881 ;E:\supernova\msx\game\util.c:194: void RS(i16 pointer) { SF(); ReadText(TK_S + pointer, g_Rec); WrRec(g_Rec); Wln(); }
+                                   1882 ;	---------------------------------
+                                   1883 ; Function RS
+                                   1884 ; ---------------------------------
+    0000072A                       1885 _RS::
+    0000072A E5               [11] 1886 	push	hl
+    0000072B CDr00r00         [17] 1887 	call	_SF
+    0000072E E1               [10] 1888 	pop	hl
+    0000072F 11 00 D0         [10] 1889 	ld	de, #_g_Scratch+0
+    00000732 01 6E 00         [10] 1890 	ld	bc, #0x006e
+    00000735 09               [11] 1891 	add	hl, bc
+    00000736 CDr00r00         [17] 1892 	call	_ReadText
+    00000739 21 00 D0         [10] 1893 	ld	hl, #_g_Scratch
+    0000073C CDr0Fr07         [17] 1894 	call	_WrRec
+    0000073F C3r00r00         [10] 1895 	jp	_Wln
+                                   1896 ;E:\supernova\msx\game\util.c:195: void RR(i16 pointer) { SF(); ReadText(TK_R + pointer, g_Rec); WrRec(g_Rec); Wln(); }
+                                   1897 ;	---------------------------------
+                                   1898 ; Function RR
+                                   1899 ; ---------------------------------
+    00000742                       1900 _RR::
+    00000742 E5               [11] 1901 	push	hl
+    00000743 CDr00r00         [17] 1902 	call	_SF
+    00000746 E1               [10] 1903 	pop	hl
+    00000747 11 00 D0         [10] 1904 	ld	de, #_g_Scratch+0
+    0000074A CDr00r00         [17] 1905 	call	_ReadText
+    0000074D 21 00 D0         [10] 1906 	ld	hl, #_g_Scratch
+    00000750 CDr0Fr07         [17] 1907 	call	_WrRec
+    00000753 C3r00r00         [10] 1908 	jp	_Wln
+                                   1909 ;E:\supernova\msx\game\util.c:196: void RC1(i16 pointer, char* dst) { ReadText(TK_C + pointer, dst); }      // C1 clue (read into Text5 by DEFAULT.PAS)
+                                   1910 ;	---------------------------------
+                                   1911 ; Function RC1
+                                   1912 ; ---------------------------------
+    00000756                       1913 _RC1::
+    00000756 01 C3 03         [10] 1914 	ld	bc, #0x03c3
+    00000759 09               [11] 1915 	add	hl, bc
+    0000075A C3r00r00         [10] 1916 	jp	_ReadText
+                                   1917 ;E:\supernova\msx\game\util.c:198: void RB(u8 pointer, u8 colour)
+                                   1918 ;	---------------------------------
+                                   1919 ; Function RB
+                                   1920 ; ---------------------------------
+    0000075D                       1921 _RB::
+    0000075D 4F               [ 4] 1922 	ld	c, a
+    0000075E 45               [ 4] 1923 	ld	b, l
+                                   1924 ;E:\supernova\msx\game\util.c:200: SF(); Col(colour, 7);
+    0000075F C5               [11] 1925 	push	bc
+    00000760 CDr00r00         [17] 1926 	call	_SF
+    00000763 C1               [10] 1927 	pop	bc
+    00000764 C5               [11] 1928 	push	bc
+    00000765 2E 07            [ 7] 1929 	ld	l, #0x07
+    00000767 78               [ 4] 1930 	ld	a, b
+    00000768 CDr0Dr00         [17] 1931 	call	_Col
+    0000076B C1               [10] 1932 	pop	bc
+                                   1933 ;E:\supernova\msx\game\util.c:201: ReadText(TK_M + pointer, g_Rec); WrRec(g_Rec); Wln();
+    0000076C 11 00 D0         [10] 1934 	ld	de, #_g_Scratch+0
+    0000076F 06 00            [ 7] 1935 	ld	b, #0x00
+    00000771 21 31 04         [10] 1936 	ld	hl, #0x0431
+    00000774 09               [11] 1937 	add	hl, bc
+    00000775 CDr00r00         [17] 1938 	call	_ReadText
+    00000778 21 00 D0         [10] 1939 	ld	hl, #_g_Scratch
+    0000077B CDr0Fr07         [17] 1940 	call	_WrRec
+    0000077E CDr00r00         [17] 1941 	call	_Wln
+                                   1942 ;E:\supernova\msx\game\util.c:202: Col(11, 7);
+    00000781 2E 07            [ 7] 1943 	ld	l, #0x07
+    00000783 3E 0B            [ 7] 1944 	ld	a, #0x0b
+                                   1945 ;E:\supernova\msx\game\util.c:203: }
+    00000785 C3r0Dr00         [10] 1946 	jp	_Col
+                                   1947 ;E:\supernova\msx\game\util.c:205: void RB2(u8 pointer, u8 colour)
+                                   1948 ;	---------------------------------
+                                   1949 ; Function RB2
+                                   1950 ; ---------------------------------
+    00000788                       1951 _RB2::
+    00000788 4F               [ 4] 1952 	ld	c, a
+    00000789 45               [ 4] 1953 	ld	b, l
+                                   1954 ;E:\supernova\msx\game\util.c:207: SF(); Col(colour, 7);
+    0000078A C5               [11] 1955 	push	bc
+    0000078B CDr00r00         [17] 1956 	call	_SF
+    0000078E C1               [10] 1957 	pop	bc
+    0000078F C5               [11] 1958 	push	bc
+    00000790 2E 07            [ 7] 1959 	ld	l, #0x07
+    00000792 78               [ 4] 1960 	ld	a, b
+    00000793 CDr0Dr00         [17] 1961 	call	_Col
+    00000796 C1               [10] 1962 	pop	bc
+                                   1963 ;E:\supernova\msx\game\util.c:208: ReadText(TK_B + pointer, g_Rec); WrRec(g_Rec); Wln();
+    00000797 11 00 D0         [10] 1964 	ld	de, #_g_Scratch+0
+    0000079A 06 00            [ 7] 1965 	ld	b, #0x00
+    0000079C 21 3F 04         [10] 1966 	ld	hl, #0x043f
+    0000079F 09               [11] 1967 	add	hl, bc
+    000007A0 CDr00r00         [17] 1968 	call	_ReadText
+    000007A3 21 00 D0         [10] 1969 	ld	hl, #_g_Scratch
+    000007A6 CDr0Fr07         [17] 1970 	call	_WrRec
+    000007A9 CDr00r00         [17] 1971 	call	_Wln
+                                   1972 ;E:\supernova\msx\game\util.c:209: Col(11, 7);
+    000007AC 2E 07            [ 7] 1973 	ld	l, #0x07
+    000007AE 3E 0B            [ 7] 1974 	ld	a, #0x0b
+                                   1975 ;E:\supernova\msx\game\util.c:210: }
+    000007B0 C3r0Dr00         [10] 1976 	jp	_Col
+                                   1977 ;E:\supernova\msx\game\util.c:213: void Val(const char* s, i16* code, i16* err)
+                                   1978 ;	---------------------------------
+                                   1979 ; Function Val
+                                   1980 ; ---------------------------------
+    000007B3                       1981 _Val::
+    000007B3 DD E5            [15] 1982 	push	ix
+    000007B5 DD 21 00 00      [14] 1983 	ld	ix,	#0
+    000007B9 DD 39            [15] 1984 	add	ix, sp
+    000007BB FD 21 F2 FF      [14] 1985 	ld	iy, #-14
+    000007BF FD 39            [15] 1986 	add	iy, sp
+    000007C1 FD F9            [10] 1987 	ld	sp, iy
+    000007C3 DD 75 FC         [19] 1988 	ld	-4 (ix), l
+    000007C6 DD 74 FD         [19] 1989 	ld	-3 (ix), h
+    000007C9 DD 73 FA         [19] 1990 	ld	-6 (ix), e
+    000007CC DD 72 FB         [19] 1991 	ld	-5 (ix), d
+                                   1992 ;E:\supernova\msx\game\util.c:215: i16 v = 0, k = 0;
+    000007CF 21 00 00         [10] 1993 	ld	hl, #0x0000
+    000007D2 E3               [19] 1994 	ex	(sp), hl
+    000007D3 AF               [ 4] 1995 	xor	a, a
+    000007D4 DD 77 F4         [19] 1996 	ld	-12 (ix), a
+    000007D7 DD 77 F5         [19] 1997 	ld	-11 (ix), a
+                                   1998 ;E:\supernova\msx\game\util.c:216: u8 neg = 0;
+    000007DA DD 36 F6 00      [19] 1999 	ld	-10 (ix), #0x00
+                                   2000 ;E:\supernova\msx\game\util.c:217: if (s[0] == '-') { neg = 1; k = 1; }
+    000007DE DD 6E FC         [19] 2001 	ld	l, -4 (ix)
+    000007E1 DD 66 FD         [19] 2002 	ld	h, -3 (ix)
+    000007E4 7E               [ 7] 2003 	ld	a, (hl)
+    000007E5 FE 2D            [ 7] 2004 	cp	a, #0x2d
+    000007E7 20 0E            [12] 2005 	jr	nz, 00104$
+    000007E9 DD 36 F6 01      [19] 2006 	ld	-10 (ix), #0x01
+    000007ED DD 36 F4 01      [19] 2007 	ld	-12 (ix), #0x01
+    000007F1 DD 36 F5 00      [19] 2008 	ld	-11 (ix), #0
+    000007F5 18 0C            [12] 2009 	jr	00105$
+    000007F7                       2010 00104$:
+                                   2011 ;E:\supernova\msx\game\util.c:218: else if (s[0] == '+') k = 1;
+    000007F7 FE 2B            [ 7] 2012 	cp	a, #0x2b
+    000007F9 20 08            [12] 2013 	jr	nz, 00105$
+    000007FB DD 36 F4 01      [19] 2014 	ld	-12 (ix), #0x01
+    000007FF DD 36 F5 00      [19] 2015 	ld	-11 (ix), #0
+    00000803                       2016 00105$:
+                                   2017 ;E:\supernova\msx\game\util.c:219: if (!s[k]) { *code = 0; *err = k + 1; return; }
+    00000803 DD 7E F4         [19] 2018 	ld	a, -12 (ix)
+    00000806 DD 86 FC         [19] 2019 	add	a, -4 (ix)
+    00000809 4F               [ 4] 2020 	ld	c, a
+    0000080A 3E 00            [ 7] 2021 	ld	a, #0x00
+    0000080C DD 8E FD         [19] 2022 	adc	a, -3 (ix)
+    0000080F 47               [ 4] 2023 	ld	b, a
+    00000810 0A               [ 7] 2024 	ld	a, (bc)
+    00000811 DD 77 FF         [19] 2025 	ld	-1 (ix), a
+    00000814 DD 7E 04         [19] 2026 	ld	a, 4 (ix)
+    00000817 DD 77 F7         [19] 2027 	ld	-9 (ix), a
+    0000081A DD 7E 05         [19] 2028 	ld	a, 5 (ix)
+    0000081D DD 77 F8         [19] 2029 	ld	-8 (ix), a
+    00000820 DD 7E FF         [19] 2030 	ld	a, -1 (ix)
+    00000823 B7               [ 4] 2031 	or	a, a
+    00000824 20 2D            [12] 2032 	jr	nz, 00131$
+    00000826 DD 6E FA         [19] 2033 	ld	l, -6 (ix)
+    00000829 DD 66 FB         [19] 2034 	ld	h, -5 (ix)
+    0000082C AF               [ 4] 2035 	xor	a, a
+    0000082D 77               [ 7] 2036 	ld	(hl), a
+    0000082E 23               [ 6] 2037 	inc	hl
+    0000082F 77               [ 7] 2038 	ld	(hl), a
+    00000830 DD 7E F4         [19] 2039 	ld	a, -12 (ix)
+    00000833 DD 77 FF         [19] 2040 	ld	-1 (ix), a
+    00000836 DD 34 FF         [23] 2041 	inc	-1 (ix)
+    00000839 DD 7E FF         [19] 2042 	ld	a, -1 (ix)
+    0000083C DD 77 FE         [19] 2043 	ld	-2 (ix), a
+    0000083F DD 36 FF 00      [19] 2044 	ld	-1 (ix), #0x00
+    00000843 DD 6E F7         [19] 2045 	ld	l, -9 (ix)
+    00000846 DD 66 F8         [19] 2046 	ld	h, -8 (ix)
+    00000849 DD 7E FE         [19] 2047 	ld	a, -2 (ix)
+    0000084C 77               [ 7] 2048 	ld	(hl), a
+    0000084D 23               [ 6] 2049 	inc	hl
+    0000084E AF               [ 4] 2050 	xor	a, a
+    0000084F 77               [ 7] 2051 	ld	(hl), a
+    00000850 C3rEFr08         [10] 2052 	jp	00115$
+    00000853                       2053 00131$:
+    00000853 DD 7E F4         [19] 2054 	ld	a, -12 (ix)
+    00000856 DD 77 FE         [19] 2055 	ld	-2 (ix), a
+    00000859 DD 36 FF 00      [19] 2056 	ld	-1 (ix), #0x00
+    0000085D                       2057 00113$:
+                                   2058 ;E:\supernova\msx\game\util.c:220: for (; s[k]; k++)
+    0000085D DD 7E FC         [19] 2059 	ld	a, -4 (ix)
+    00000860 DD 86 FE         [19] 2060 	add	a, -2 (ix)
+    00000863 4F               [ 4] 2061 	ld	c, a
+    00000864 DD 7E FD         [19] 2062 	ld	a, -3 (ix)
+    00000867 DD 8E FF         [19] 2063 	adc	a, -1 (ix)
+    0000086A 47               [ 4] 2064 	ld	b, a
+    0000086B 0A               [ 7] 2065 	ld	a, (bc)
+    0000086C DD 77 F9         [19] 2066 	ld	-7 (ix), a
+    0000086F B7               [ 4] 2067 	or	a, a
+    00000870 28 54            [12] 2068 	jr	z, 00111$
+                                   2069 ;E:\supernova\msx\game\util.c:222: if (s[k] < '0' || s[k] > '9') { *code = 0; *err = k + 1; return; }
+    00000872 DD 7E F9         [19] 2070 	ld	a, -7 (ix)
+    00000875 D6 30            [ 7] 2071 	sub	a, #0x30
+    00000877 38 07            [12] 2072 	jr	c, 00108$
+    00000879 3E 39            [ 7] 2073 	ld	a, #0x39
+    0000087B DD 96 F9         [19] 2074 	sub	a, -7 (ix)
+    0000087E 30 1A            [12] 2075 	jr	nc, 00109$
+    00000880                       2076 00108$:
+    00000880 DD 6E FA         [19] 2077 	ld	l, -6 (ix)
+    00000883 DD 66 FB         [19] 2078 	ld	h, -5 (ix)
+    00000886 AF               [ 4] 2079 	xor	a, a
+    00000887 77               [ 7] 2080 	ld	(hl), a
+    00000888 23               [ 6] 2081 	inc	hl
+    00000889 77               [ 7] 2082 	ld	(hl), a
+    0000088A E1               [10] 2083 	pop	hl
+    0000088B C1               [10] 2084 	pop	bc
+    0000088C C5               [11] 2085 	push	bc
+    0000088D E5               [11] 2086 	push	hl
+    0000088E 03               [ 6] 2087 	inc	bc
+    0000088F DD 6E F7         [19] 2088 	ld	l, -9 (ix)
+    00000892 DD 66 F8         [19] 2089 	ld	h, -8 (ix)
+    00000895 71               [ 7] 2090 	ld	(hl), c
+    00000896 23               [ 6] 2091 	inc	hl
+    00000897 70               [ 7] 2092 	ld	(hl), b
+    00000898 18 55            [12] 2093 	jr	00115$
+    0000089A                       2094 00109$:
+                                   2095 ;E:\supernova\msx\game\util.c:223: v = v * 10 + (s[k] - '0');
+    0000089A C1               [10] 2096 	pop	bc
+    0000089B C5               [11] 2097 	push	bc
+    0000089C 69               [ 4] 2098 	ld	l, c
+    0000089D 60               [ 4] 2099 	ld	h, b
+    0000089E 29               [11] 2100 	add	hl, hl
+    0000089F 29               [11] 2101 	add	hl, hl
+    000008A0 09               [11] 2102 	add	hl, bc
+    000008A1 29               [11] 2103 	add	hl, hl
+    000008A2 DD 7E F9         [19] 2104 	ld	a, -7 (ix)
+    000008A5 0E 00            [ 7] 2105 	ld	c, #0x00
+    000008A7 C6 D0            [ 7] 2106 	add	a, #0xd0
+    000008A9 5F               [ 4] 2107 	ld	e, a
+    000008AA 79               [ 4] 2108 	ld	a, c
+    000008AB CE FF            [ 7] 2109 	adc	a, #0xff
+    000008AD 57               [ 4] 2110 	ld	d, a
+    000008AE 19               [11] 2111 	add	hl, de
+    000008AF E3               [19] 2112 	ex	(sp), hl
+                                   2113 ;E:\supernova\msx\game\util.c:220: for (; s[k]; k++)
+    000008B0 DD 34 FE         [23] 2114 	inc	-2 (ix)
+    000008B3 20 03            [12] 2115 	jr	nz, 00179$
+    000008B5 DD 34 FF         [23] 2116 	inc	-1 (ix)
+    000008B8                       2117 00179$:
+    000008B8 DD 7E FE         [19] 2118 	ld	a, -2 (ix)
+    000008BB DD 77 F4         [19] 2119 	ld	-12 (ix), a
+    000008BE DD 7E FF         [19] 2120 	ld	a, -1 (ix)
+    000008C1 DD 77 F5         [19] 2121 	ld	-11 (ix), a
+    000008C4 18 97            [12] 2122 	jr	00113$
+    000008C6                       2123 00111$:
+                                   2124 ;E:\supernova\msx\game\util.c:225: *code = neg ? -v : v;
+    000008C6 DD 5E FA         [19] 2125 	ld	e, -6 (ix)
+    000008C9 DD 56 FB         [19] 2126 	ld	d, -5 (ix)
+    000008CC DD 7E F6         [19] 2127 	ld	a, -10 (ix)
+    000008CF B7               [ 4] 2128 	or	a, a
+    000008D0 28 0C            [12] 2129 	jr	z, 00117$
+    000008D2 AF               [ 4] 2130 	xor	a, a
+    000008D3 DD 96 F2         [19] 2131 	sub	a, -14 (ix)
+    000008D6 4F               [ 4] 2132 	ld	c, a
+    000008D7 9F               [ 4] 2133 	sbc	a, a
+    000008D8 DD 96 F3         [19] 2134 	sub	a, -13 (ix)
+    000008DB 47               [ 4] 2135 	ld	b, a
+    000008DC 18 02            [12] 2136 	jr	00118$
+    000008DE                       2137 00117$:
+    000008DE C1               [10] 2138 	pop	bc
+    000008DF C5               [11] 2139 	push	bc
+    000008E0                       2140 00118$:
+    000008E0 79               [ 4] 2141 	ld	a, c
+    000008E1 12               [ 7] 2142 	ld	(de), a
+    000008E2 13               [ 6] 2143 	inc	de
+    000008E3 78               [ 4] 2144 	ld	a, b
+    000008E4 12               [ 7] 2145 	ld	(de), a
+                                   2146 ;E:\supernova\msx\game\util.c:226: *err = 0;
+    000008E5 DD 6E F7         [19] 2147 	ld	l, -9 (ix)
+    000008E8 DD 66 F8         [19] 2148 	ld	h, -8 (ix)
+    000008EB AF               [ 4] 2149 	xor	a, a
+    000008EC 77               [ 7] 2150 	ld	(hl), a
+    000008ED 23               [ 6] 2151 	inc	hl
+    000008EE 77               [ 7] 2152 	ld	(hl), a
+    000008EF                       2153 00115$:
+                                   2154 ;E:\supernova\msx\game\util.c:227: }
+    000008EF DD F9            [10] 2155 	ld	sp, ix
+    000008F1 DD E1            [14] 2156 	pop	ix
+    000008F3 E1               [10] 2157 	pop	hl
+    000008F4 F1               [10] 2158 	pop	af
+    000008F5 E9               [ 4] 2159 	jp	(hl)
+                                   2160 ;E:\supernova\msx\game\util.c:229: void MC(u8 whichChar, u8 watchRoom, u8 toRoom, i16 messageNum)
+                                   2161 ;	---------------------------------
+                                   2162 ; Function MC
+                                   2163 ; ---------------------------------
+    000008F6                       2164 _MC::
+    000008F6 DD E5            [15] 2165 	push	ix
+    000008F8 DD 21 00 00      [14] 2166 	ld	ix,	#0
+    000008FC DD 39            [15] 2167 	add	ix, sp
+    000008FE 4F               [ 4] 2168 	ld	c, a
+                                   2169 ;E:\supernova\msx\game\util.c:231: if (Prm == watchRoom) RS(messageNum);
+    000008FF 3Ar00r00         [13] 2170 	ld	a, (_Prm)
+    00000902 95               [ 4] 2171 	sub	a, l
+    00000903 20 0B            [12] 2172 	jr	nz, 00102$
+    00000905 C5               [11] 2173 	push	bc
+    00000906 DD 6E 05         [19] 2174 	ld	l, 5 (ix)
+    00000909 DD 66 06         [19] 2175 	ld	h, 6 (ix)
+    0000090C CDr2Ar07         [17] 2176 	call	_RS
+    0000090F C1               [10] 2177 	pop	bc
+    00000910                       2178 00102$:
+                                   2179 ;E:\supernova\msx\game\util.c:234: case 1: LOC_DEL(AlienRm, 124); AlienRm = toRoom; LOC_ADD(AlienRm, 124); break;
+    00000910 DD 46 04         [19] 2180 	ld	b, 4 (ix)
+                                   2181 ;E:\supernova\msx\game\util.c:232: switch (whichChar)    // 1 = Aliens, 2 = Scientist
+    00000913 79               [ 4] 2182 	ld	a, c
+    00000914 3D               [ 4] 2183 	dec	a
+    00000915 28 07            [12] 2184 	jr	z, 00103$
+    00000917 79               [ 4] 2185 	ld	a, c
+    00000918 D6 02            [ 7] 2186 	sub	a, #0x02
+    0000091A 28 38            [12] 2187 	jr	z, 00104$
+    0000091C 18 6A            [12] 2188 	jr	00105$
+                                   2189 ;E:\supernova\msx\game\util.c:234: case 1: LOC_DEL(AlienRm, 124); AlienRm = toRoom; LOC_ADD(AlienRm, 124); break;
+    0000091E                       2190 00103$:
+    0000091E FD 21r00r00      [14] 2191 	ld	iy, #_AlienRm
+    00000922 FD 5E 00         [19] 2192 	ld	e, 0 (iy)
+    00000925 16 00            [ 7] 2193 	ld	d, #0x00
+    00000927 6B               [ 4] 2194 	ld	l, e
+    00000928 62               [ 4] 2195 	ld	h, d
+    00000929 29               [11] 2196 	add	hl, hl
+    0000092A 29               [11] 2197 	add	hl, hl
+    0000092B 29               [11] 2198 	add	hl, hl
+    0000092C 29               [11] 2199 	add	hl, hl
+    0000092D 19               [11] 2200 	add	hl, de
+    0000092E 11r00r00         [10] 2201 	ld	de, #_g_Loc
+    00000931 19               [11] 2202 	add	hl, de
+    00000932 11 0F 00         [10] 2203 	ld	de, #0x000f
+    00000935 19               [11] 2204 	add	hl, de
+    00000936 CB 9E            [15] 2205 	res	3, (hl)
+    00000938 21r00r00         [10] 2206 	ld	hl, #_AlienRm
+    0000093B 70               [ 7] 2207 	ld	(hl), b
+    0000093C FD 4E 00         [19] 2208 	ld	c, 0 (iy)
+    0000093F 06 00            [ 7] 2209 	ld	b, #0x00
+    00000941 69               [ 4] 2210 	ld	l, c
+    00000942 60               [ 4] 2211 	ld	h, b
+    00000943 29               [11] 2212 	add	hl, hl
+    00000944 29               [11] 2213 	add	hl, hl
+    00000945 29               [11] 2214 	add	hl, hl
+    00000946 29               [11] 2215 	add	hl, hl
+    00000947 09               [11] 2216 	add	hl, bc
+    00000948 11r00r00         [10] 2217 	ld	de, #_g_Loc
+    0000094B 19               [11] 2218 	add	hl, de
+    0000094C 01 0F 00         [10] 2219 	ld	bc, #0x000f
+    0000094F 09               [11] 2220 	add	hl, bc
+    00000950 CB DE            [15] 2221 	set	3, (hl)
+    00000952 18 34            [12] 2222 	jr	00105$
+                                   2223 ;E:\supernova\msx\game\util.c:235: case 2: LOC_DEL(FriendRm, 123); FriendRm = toRoom; LOC_ADD(FriendRm, 123); break;
+    00000954                       2224 00104$:
+    00000954 FD 21r00r00      [14] 2225 	ld	iy, #_FriendRm
+    00000958 FD 5E 00         [19] 2226 	ld	e, 0 (iy)
+    0000095B 16 00            [ 7] 2227 	ld	d, #0x00
+    0000095D 6B               [ 4] 2228 	ld	l, e
+    0000095E 62               [ 4] 2229 	ld	h, d
+    0000095F 29               [11] 2230 	add	hl, hl
+    00000960 29               [11] 2231 	add	hl, hl
+    00000961 29               [11] 2232 	add	hl, hl
+    00000962 29               [11] 2233 	add	hl, hl
+    00000963 19               [11] 2234 	add	hl, de
+    00000964 11r00r00         [10] 2235 	ld	de, #_g_Loc
+    00000967 19               [11] 2236 	add	hl, de
+    00000968 11 0F 00         [10] 2237 	ld	de, #0x000f
+    0000096B 19               [11] 2238 	add	hl, de
+    0000096C CB 96            [15] 2239 	res	2, (hl)
+    0000096E 21r00r00         [10] 2240 	ld	hl, #_FriendRm
+    00000971 70               [ 7] 2241 	ld	(hl), b
+    00000972 FD 4E 00         [19] 2242 	ld	c, 0 (iy)
+    00000975 06 00            [ 7] 2243 	ld	b, #0x00
+    00000977 69               [ 4] 2244 	ld	l, c
+    00000978 60               [ 4] 2245 	ld	h, b
+    00000979 29               [11] 2246 	add	hl, hl
+    0000097A 29               [11] 2247 	add	hl, hl
+    0000097B 29               [11] 2248 	add	hl, hl
+    0000097C 29               [11] 2249 	add	hl, hl
+    0000097D 09               [11] 2250 	add	hl, bc
+    0000097E 11r00r00         [10] 2251 	ld	de, #_g_Loc
+    00000981 19               [11] 2252 	add	hl, de
+    00000982 01 0F 00         [10] 2253 	ld	bc, #0x000f
+    00000985 09               [11] 2254 	add	hl, bc
+    00000986 CB D6            [15] 2255 	set	2, (hl)
+                                   2256 ;E:\supernova\msx\game\util.c:236: }
+    00000988                       2257 00105$:
+                                   2258 ;E:\supernova\msx\game\util.c:237: SFlag = 0;
+    00000988 AF               [ 4] 2259 	xor	a, a
+    00000989 32r00r00         [13] 2260 	ld	(#_SFlag), a
+                                   2261 ;E:\supernova\msx\game\util.c:238: }
+    0000098C DD E1            [14] 2262 	pop	ix
+    0000098E E1               [10] 2263 	pop	hl
+    0000098F F1               [10] 2264 	pop	af
+    00000990 33               [ 6] 2265 	inc	sp
+    00000991 E9               [ 4] 2266 	jp	(hl)
+                                   2267 ;E:\supernova\msx\game\util.c:240: void Van(u8 obj)
+                                   2268 ;	---------------------------------
+                                   2269 ; Function Van
+                                   2270 ; ---------------------------------
+    00000992                       2271 _Van::
+    00000992 CDr00r00         [17] 2272 	call	___sdcc_enter_ix
+    00000995 21 FB FF         [10] 2273 	ld	hl, #-5
+    00000998 39               [11] 2274 	add	hl, sp
+    00000999 F9               [ 6] 2275 	ld	sp, hl
+                                   2276 ;E:\supernova\msx\game\util.c:242: if (obj == 0) return;    // Van(Null): only touched variables that are already Null
+    0000099A 4F               [ 4] 2277 	ld	c, a
+    0000099B B7               [ 4] 2278 	or	a, a
+    0000099C CArC2r0A         [10] 2279 	jp	z, 00133$
+                                   2280 ;E:\supernova\msx\game\util.c:243: if (obj <= MMax) SET_DEL(Inv, obj);
+    0000099F 3E 1D            [ 7] 2281 	ld	a, #0x1d
+    000009A1 91               [ 4] 2282 	sub	a, c
+    000009A2 3E 00            [ 7] 2283 	ld	a, #0x00
+    000009A4 17               [ 4] 2284 	rla
+    000009A5 DD 77 FC         [19] 2285 	ld	-4 (ix), a
+    000009A8 59               [ 4] 2286 	ld	e, c
+    000009A9 16 00            [ 7] 2287 	ld	d, #0x00
+    000009AB 79               [ 4] 2288 	ld	a, c
+    000009AC 1B               [ 6] 2289 	dec	de
+    000009AD 3D               [ 4] 2290 	dec	a
+    000009AE 06 03            [ 7] 2291 	ld	b, #0x03
+    000009B0                       2292 00269$:
+    000009B0 CB 2A            [ 8] 2293 	sra	d
+    000009B2 CB 1B            [ 8] 2294 	rr	e
+    000009B4 10 FA            [13] 2295 	djnz	00269$
+    000009B6 E6 07            [ 7] 2296 	and	a, #0x07
+    000009B8 47               [ 4] 2297 	ld	b, a
+    000009B9 3E 01            [ 7] 2298 	ld	a, #0x01
+    000009BB 04               [ 4] 2299 	inc	b
+    000009BC 18 01            [12] 2300 	jr	00271$
+    000009BE                       2301 00270$:
+    000009BE 87               [ 4] 2302 	add	a, a
+    000009BF                       2303 00271$:
+    000009BF 10 FD            [13] 2304 	djnz	00270$
+    000009C1 2F               [ 4] 2305 	cpl
+    000009C2 DD 77 FB         [19] 2306 	ld	-5 (ix), a
+    000009C5 DD 77 FD         [19] 2307 	ld	-3 (ix), a
+    000009C8 DD CB FC 46      [20] 2308 	bit	0, -4 (ix)
+    000009CC 20 15            [12] 2309 	jr	nz, 00104$
+    000009CE 21r00r00         [10] 2310 	ld	hl, #_Inv
+    000009D1 19               [11] 2311 	add	hl, de
+    000009D2 DD 75 FE         [19] 2312 	ld	-2 (ix), l
+    000009D5 DD 74 FF         [19] 2313 	ld	-1 (ix), h
+    000009D8 7E               [ 7] 2314 	ld	a, (hl)
+    000009D9 DD A6 FD         [19] 2315 	and	a, -3 (ix)
+    000009DC DD 6E FE         [19] 2316 	ld	l, -2 (ix)
+    000009DF DD 66 FF         [19] 2317 	ld	h, -1 (ix)
+    000009E2 77               [ 7] 2318 	ld	(hl), a
+    000009E3                       2319 00104$:
+                                   2320 ;E:\supernova\msx\game\util.c:244: SetR(obj, Null);
+    000009E3 C5               [11] 2321 	push	bc
+    000009E4 D5               [11] 2322 	push	de
+    000009E5 2E 00            [ 7] 2323 	ld	l, #0x00
+    000009E7 79               [ 4] 2324 	ld	a, c
+    000009E8 CDr00r00         [17] 2325 	call	_SetR
+    000009EB D1               [10] 2326 	pop	de
+    000009EC C1               [10] 2327 	pop	bc
+                                   2328 ;E:\supernova\msx\game\util.c:245: LOC_DEL(Prm, obj);
+    000009ED D5               [11] 2329 	push	de
+    000009EE 3Ar00r00         [13] 2330 	ld	a, (#_Prm + 0)
+    000009F1 5F               [ 4] 2331 	ld	e, a
+    000009F2 16 00            [ 7] 2332 	ld	d, #0x00
+    000009F4 6B               [ 4] 2333 	ld	l, e
+    000009F5 62               [ 4] 2334 	ld	h, d
+    000009F6 29               [11] 2335 	add	hl, hl
+    000009F7 29               [11] 2336 	add	hl, hl
+    000009F8 29               [11] 2337 	add	hl, hl
+    000009F9 29               [11] 2338 	add	hl, hl
+    000009FA 19               [11] 2339 	add	hl, de
+    000009FB D1               [10] 2340 	pop	de
+    000009FC 3Er00            [ 7] 2341 	ld	a, #<(_g_Loc)
+    000009FE 85               [ 4] 2342 	add	a, l
+    000009FF 6F               [ 4] 2343 	ld	l, a
+    00000A00 3Es00            [ 7] 2344 	ld	a, #>(_g_Loc)
+    00000A02 8C               [ 4] 2345 	adc	a, h
+    00000A03 67               [ 4] 2346 	ld	h, a
+    00000A04 19               [11] 2347 	add	hl, de
+    00000A05 7E               [ 7] 2348 	ld	a, (hl)
+    00000A06 DD A6 FB         [19] 2349 	and	a, -5 (ix)
+    00000A09 77               [ 7] 2350 	ld	(hl), a
+                                   2351 ;E:\supernova\msx\game\util.c:246: if (IN29(Wear, obj)) SET_DEL(Wear, obj);
+    00000A0A 79               [ 4] 2352 	ld	a, c
+    00000A0B 3D               [ 4] 2353 	dec	a
+    00000A0C E6 07            [ 7] 2354 	and	a, #0x07
+    00000A0E DD 77 FE         [19] 2355 	ld	-2 (ix), a
+    00000A11 DD CB FC 46      [20] 2356 	bit	0, -4 (ix)
+    00000A15 20 1E            [12] 2357 	jr	nz, 00106$
+    00000A17 21r00r00         [10] 2358 	ld	hl, #_Wear+0
+    00000A1A 19               [11] 2359 	add	hl, de
+    00000A1B 7E               [ 7] 2360 	ld	a, (hl)
+    00000A1C DD 46 FE         [19] 2361 	ld	b, -2 (ix)
+    00000A1F DD 77 FF         [19] 2362 	ld	-1 (ix), a
+    00000A22 04               [ 4] 2363 	inc	b
+    00000A23 18 04            [12] 2364 	jr	00273$
+    00000A25                       2365 00272$:
+    00000A25 DD CB FF 3E      [23] 2366 	srl	-1 (ix)
+    00000A29                       2367 00273$:
+    00000A29 10 FA            [13] 2368 	djnz	00272$
+    00000A2B DD CB FF 46      [20] 2369 	bit	0, -1 (ix)
+    00000A2F 28 04            [12] 2370 	jr	z, 00106$
+    00000A31 DD A6 FD         [19] 2371 	and	a, -3 (ix)
+    00000A34 77               [ 7] 2372 	ld	(hl), a
+    00000A35                       2373 00106$:
+                                   2374 ;E:\supernova\msx\game\util.c:247: if (obj == SatchCon) SatchCon = Null;
+    00000A35 3Ar00r00         [13] 2375 	ld	a, (_SatchCon)
+    00000A38 91               [ 4] 2376 	sub	a, c
+    00000A39 20 03            [12] 2377 	jr	nz, 00110$
+    00000A3B 32r00r00         [13] 2378 	ld	(#_SatchCon), a
+    00000A3E                       2379 00110$:
+                                   2380 ;E:\supernova\msx\game\util.c:248: if (obj == MugCon) MugCon = Null;
+    00000A3E 3Ar00r00         [13] 2381 	ld	a, (_MugCon)
+    00000A41 91               [ 4] 2382 	sub	a, c
+    00000A42 20 03            [12] 2383 	jr	nz, 00112$
+    00000A44 32r00r00         [13] 2384 	ld	(#_MugCon), a
+    00000A47                       2385 00112$:
+                                   2386 ;E:\supernova\msx\game\util.c:249: if (obj == 16) Min(6);
+    00000A47 79               [ 4] 2387 	ld	a, c
+    00000A48 D6 10            [ 7] 2388 	sub	a, #0x10
+    00000A4A 3E 01            [ 7] 2389 	ld	a, #0x01
+    00000A4C 28 01            [12] 2390 	jr	z, 00280$
+    00000A4E AF               [ 4] 2391 	xor	a, a
+    00000A4F                       2392 00280$:
+    00000A4F 47               [ 4] 2393 	ld	b, a
+    00000A50 B7               [ 4] 2394 	or	a, a
+    00000A51 28 09            [12] 2395 	jr	z, 00114$
+    00000A53 C5               [11] 2396 	push	bc
+    00000A54 D5               [11] 2397 	push	de
+    00000A55 3E 06            [ 7] 2398 	ld	a, #0x06
+    00000A57 CDr61r00         [17] 2399 	call	_Min
+    00000A5A D1               [10] 2400 	pop	de
+    00000A5B C1               [10] 2401 	pop	bc
+    00000A5C                       2402 00114$:
+                                   2403 ;E:\supernova\msx\game\util.c:250: if (obj == NicheCon) NicheCon = Null;
+    00000A5C 3Ar00r00         [13] 2404 	ld	a, (_NicheCon)
+    00000A5F 91               [ 4] 2405 	sub	a, c
+    00000A60 20 03            [12] 2406 	jr	nz, 00116$
+    00000A62 32r00r00         [13] 2407 	ld	(#_NicheCon), a
+    00000A65                       2408 00116$:
+                                   2409 ;E:\supernova\msx\game\util.c:251: if (obj == PyraCon) PyraCon = Null;
+    00000A65 3Ar00r00         [13] 2410 	ld	a, (_PyraCon)
+    00000A68 91               [ 4] 2411 	sub	a, c
+    00000A69 20 03            [12] 2412 	jr	nz, 00118$
+    00000A6B 32r00r00         [13] 2413 	ld	(#_PyraCon), a
+    00000A6E                       2414 00118$:
+                                   2415 ;E:\supernova\msx\game\util.c:252: if (obj == HingeCon) HingeCon = Null;
+    00000A6E 3Ar00r00         [13] 2416 	ld	a, (_HingeCon)
+    00000A71 91               [ 4] 2417 	sub	a, c
+    00000A72 20 03            [12] 2418 	jr	nz, 00120$
+    00000A74 32r00r00         [13] 2419 	ld	(#_HingeCon), a
+    00000A77                       2420 00120$:
+                                   2421 ;E:\supernova\msx\game\util.c:253: if (obj == PodumCon) PodumCon = Null;
+    00000A77 3Ar00r00         [13] 2422 	ld	a, (_PodumCon)
+    00000A7A 91               [ 4] 2423 	sub	a, c
+    00000A7B 20 03            [12] 2424 	jr	nz, 00122$
+    00000A7D 32r00r00         [13] 2425 	ld	(#_PodumCon), a
+    00000A80                       2426 00122$:
+                                   2427 ;E:\supernova\msx\game\util.c:254: if (obj == 16) { Min(37); Min(6); }
+    00000A80 78               [ 4] 2428 	ld	a, b
+    00000A81 B7               [ 4] 2429 	or	a, a
+    00000A82 28 0E            [12] 2430 	jr	z, 00124$
+    00000A84 C5               [11] 2431 	push	bc
+    00000A85 D5               [11] 2432 	push	de
+    00000A86 3E 25            [ 7] 2433 	ld	a, #0x25
+    00000A88 CDr61r00         [17] 2434 	call	_Min
+    00000A8B 3E 06            [ 7] 2435 	ld	a, #0x06
+    00000A8D CDr61r00         [17] 2436 	call	_Min
+    00000A90 D1               [10] 2437 	pop	de
+    00000A91 C1               [10] 2438 	pop	bc
+    00000A92                       2439 00124$:
+                                   2440 ;E:\supernova\msx\game\util.c:255: if (obj == RobotCon) RobotCon = Null;
+    00000A92 3Ar00r00         [13] 2441 	ld	a, (_RobotCon)
+    00000A95 91               [ 4] 2442 	sub	a, c
+    00000A96 20 03            [12] 2443 	jr	nz, 00126$
+    00000A98 32r00r00         [13] 2444 	ld	(#_RobotCon), a
+    00000A9B                       2445 00126$:
+                                   2446 ;E:\supernova\msx\game\util.c:256: if (IN29(Socket, obj)) SET_DEL(Socket, obj);
+    00000A9B DD CB FC 46      [20] 2447 	bit	0, -4 (ix)
+    00000A9F 20 18            [12] 2448 	jr	nz, 00128$
+    00000AA1 21r00r00         [10] 2449 	ld	hl, #_Socket+0
+    00000AA4 19               [11] 2450 	add	hl, de
+    00000AA5 5E               [ 7] 2451 	ld	e, (hl)
+    00000AA6 DD 46 FE         [19] 2452 	ld	b, -2 (ix)
+    00000AA9 7B               [ 4] 2453 	ld	a, e
+    00000AAA 04               [ 4] 2454 	inc	b
+    00000AAB 18 02            [12] 2455 	jr	00292$
+    00000AAD                       2456 00291$:
+    00000AAD CB 3F            [ 8] 2457 	srl	a
+    00000AAF                       2458 00292$:
+    00000AAF 10 FC            [13] 2459 	djnz	00291$
+    00000AB1 0F               [ 4] 2460 	rrca
+    00000AB2 30 05            [12] 2461 	jr	nc, 00128$
+    00000AB4 7B               [ 4] 2462 	ld	a, e
+    00000AB5 DD A6 FD         [19] 2463 	and	a, -3 (ix)
+    00000AB8 77               [ 7] 2464 	ld	(hl), a
+    00000AB9                       2465 00128$:
+                                   2466 ;E:\supernova\msx\game\util.c:257: if (obj == HolstCon) HolstCon = Null;
+    00000AB9 3Ar00r00         [13] 2467 	ld	a, (_HolstCon)
+    00000ABC 91               [ 4] 2468 	sub	a, c
+    00000ABD 20 03            [12] 2469 	jr	nz, 00133$
+    00000ABF 32r00r00         [13] 2470 	ld	(#_HolstCon), a
+    00000AC2                       2471 00133$:
+                                   2472 ;E:\supernova\msx\game\util.c:258: }
+    00000AC2 DD F9            [10] 2473 	ld	sp, ix
+    00000AC4 DD E1            [14] 2474 	pop	ix
+    00000AC6 C9               [10] 2475 	ret
+                                   2476 ;E:\supernova\msx\game\util.c:260: void Crazy(void) { SF(); RL(Rnd(7) + 127); }
+                                   2477 ;	---------------------------------
+                                   2478 ; Function Crazy
+                                   2479 ; ---------------------------------
+    00000AC7                       2480 _Crazy::
+    00000AC7 CDr00r00         [17] 2481 	call	_SF
+    00000ACA 21 07 00         [10] 2482 	ld	hl, #0x0007
+    00000ACD CDr00r00         [17] 2483 	call	_Rnd
+    00000AD0 21 7F 00         [10] 2484 	ld	hl, #0x007f
+    00000AD3 19               [11] 2485 	add	hl, de
+    00000AD4 C3r12r07         [10] 2486 	jp	_RL
+                                   2487 ;E:\supernova\msx\game\util.c:262: void NoSense(void) { RL(190); }
+                                   2488 ;	---------------------------------
+                                   2489 ; Function NoSense
+                                   2490 ; ---------------------------------
+    00000AD7                       2491 _NoSense::
+    00000AD7 21 BE 00         [10] 2492 	ld	hl, #0x00be
+    00000ADA C3r12r07         [10] 2493 	jp	_RL
+                                   2494 ;E:\supernova\msx\game\util.c:264: void Say(const char* what1, const char* what2)
+                                   2495 ;	---------------------------------
+                                   2496 ; Function Say
+                                   2497 ; ---------------------------------
+    00000ADD                       2498 _Say::
+                                   2499 ;E:\supernova\msx\game\util.c:266: SF();
+    00000ADD E5               [11] 2500 	push	hl
+    00000ADE D5               [11] 2501 	push	de
+    00000ADF CDr00r00         [17] 2502 	call	_SF
+                                   2503 ;E:\supernova\msx\game\util.c:267: Wr("The "); Wr(what1); Wr(" is already "); Wr(what2); Wr("."); Wln();
+    00000AE2 21r02r0B         [10] 2504 	ld	hl, #___str_7
+    00000AE5 CDr00r00         [17] 2505 	call	_Wr
+    00000AE8 D1               [10] 2506 	pop	de
+    00000AE9 E1               [10] 2507 	pop	hl
+    00000AEA D5               [11] 2508 	push	de
+    00000AEB CDr00r00         [17] 2509 	call	_Wr
+    00000AEE 21r07r0B         [10] 2510 	ld	hl, #___str_8
+    00000AF1 CDr00r00         [17] 2511 	call	_Wr
+    00000AF4 D1               [10] 2512 	pop	de
+    00000AF5 EB               [ 4] 2513 	ex	de, hl
+    00000AF6 CDr00r00         [17] 2514 	call	_Wr
+    00000AF9 21r14r0B         [10] 2515 	ld	hl, #___str_9
+    00000AFC CDr00r00         [17] 2516 	call	_Wr
+                                   2517 ;E:\supernova\msx\game\util.c:268: }
+    00000AFF C3r00r00         [10] 2518 	jp	_Wln
+    00000B02                       2519 ___str_7:
+    00000B02 54 68 65 20           2520 	.ascii "The "
+    00000B06 00                    2521 	.db 0x00
+    00000B07                       2522 ___str_8:
+    00000B07 20 69 73 20 61 6C 72  2523 	.ascii " is already "
+             65 61 64 79 20
+    00000B13 00                    2524 	.db 0x00
+    00000B14                       2525 ___str_9:
+    00000B14 2E                    2526 	.ascii "."
+    00000B15 00                    2527 	.db 0x00
+                                   2528 ;E:\supernova\msx\game\util.c:271: void TransportNoise(void)
+                                   2529 ;	---------------------------------
+                                   2530 ; Function TransportNoise
+                                   2531 ; ---------------------------------
+    00000B16                       2532 _TransportNoise::
+                                   2533 ;E:\supernova\msx\game\util.c:274: for (yy = 60; yy >= 1; yy--) for (xx = 800; xx >= 1; xx--) Sound((u16)(xx * yy));
+    00000B16 11 3C 00         [10] 2534 	ld	de, #0x003c
+    00000B19                       2535 00113$:
+    00000B19 01 20 03         [10] 2536 	ld	bc, #0x0320
+    00000B1C                       2537 00103$:
+    00000B1C C5               [11] 2538 	push	bc
+    00000B1D D5               [11] 2539 	push	de
+    00000B1E 69               [ 4] 2540 	ld	l, c
+    00000B1F 60               [ 4] 2541 	ld	h, b
+    00000B20 CDr00r00         [17] 2542 	call	__mulint
+    00000B23 EB               [ 4] 2543 	ex	de, hl
+    00000B24 CDr00r00         [17] 2544 	call	_Sound
+    00000B27 D1               [10] 2545 	pop	de
+    00000B28 C1               [10] 2546 	pop	bc
+    00000B29 0B               [ 6] 2547 	dec	bc
+    00000B2A 69               [ 4] 2548 	ld	l, c
+    00000B2B 60               [ 4] 2549 	ld	h, b
+    00000B2C 7D               [ 4] 2550 	ld	a, l
+    00000B2D D6 01            [ 7] 2551 	sub	a, #0x01
+    00000B2F 7C               [ 4] 2552 	ld	a, h
+    00000B30 17               [ 4] 2553 	rla
+    00000B31 3F               [ 4] 2554 	ccf
+    00000B32 1F               [ 4] 2555 	rra
+    00000B33 DE 80            [ 7] 2556 	sbc	a, #0x80
+    00000B35 30 E5            [12] 2557 	jr	nc, 00103$
+    00000B37 1B               [ 6] 2558 	dec	de
+    00000B38 4B               [ 4] 2559 	ld	c, e
+    00000B39 42               [ 4] 2560 	ld	b, d
+    00000B3A 79               [ 4] 2561 	ld	a, c
+    00000B3B D6 01            [ 7] 2562 	sub	a, #0x01
+    00000B3D 78               [ 4] 2563 	ld	a, b
+    00000B3E 17               [ 4] 2564 	rla
+    00000B3F 3F               [ 4] 2565 	ccf
+    00000B40 1F               [ 4] 2566 	rra
+    00000B41 DE 80            [ 7] 2567 	sbc	a, #0x80
+    00000B43 30 D4            [12] 2568 	jr	nc, 00113$
+                                   2569 ;E:\supernova\msx\game\util.c:275: NoSound();
+                                   2570 ;E:\supernova\msx\game\util.c:276: }
+    00000B45 C3r00r00         [10] 2571 	jp	_NoSound
+                                   2572 ;E:\supernova\msx\game\util.c:299: void SetNoun(u8 n, u8 alt) { g_N[n] = g_NounAlt[alt]; }
+                                   2573 ;	---------------------------------
+                                   2574 ; Function SetNoun
+                                   2575 ; ---------------------------------
+    00000B48                       2576 _SetNoun::
+    00000B48 5F               [ 4] 2577 	ld	e, a
+    00000B49 4D               [ 4] 2578 	ld	c, l
+    00000B4A 21r00r00         [10] 2579 	ld	hl, #_g_N+0
+    00000B4D 16 00            [ 7] 2580 	ld	d, #0x00
+    00000B4F EB               [ 4] 2581 	ex	de, hl
+    00000B50 29               [11] 2582 	add	hl, hl
+    00000B51 EB               [ 4] 2583 	ex	de, hl
+    00000B52 19               [11] 2584 	add	hl, de
+    00000B53 EB               [ 4] 2585 	ex	de, hl
+    00000B54 69               [ 4] 2586 	ld	l, c
+    00000B55 26 00            [ 7] 2587 	ld	h, #0x00
+    00000B57 29               [11] 2588 	add	hl, hl
+    00000B58 01r65r0B         [10] 2589 	ld	bc, #_g_NounAlt
+    00000B5B 09               [11] 2590 	add	hl, bc
+    00000B5C 4E               [ 7] 2591 	ld	c, (hl)
+    00000B5D 23               [ 6] 2592 	inc	hl
+    00000B5E 46               [ 7] 2593 	ld	b, (hl)
+    00000B5F 79               [ 4] 2594 	ld	a, c
+    00000B60 12               [ 7] 2595 	ld	(de), a
+    00000B61 13               [ 6] 2596 	inc	de
+    00000B62 78               [ 4] 2597 	ld	a, b
+    00000B63 12               [ 7] 2598 	ld	(de), a
+    00000B64 C9               [10] 2599 	ret
+    00000B65                       2600 _g_NounAlt:
+    00000B65r83r0B                 2601 	.dw __str_10
+    00000B67r94r0B                 2602 	.dw __str_11
+    00000B69rAEr0B                 2603 	.dw __str_12
+    00000B6BrC3r0B                 2604 	.dw __str_13
+    00000B6DrC8r0B                 2605 	.dw __str_14
+    00000B6FrDFr0B                 2606 	.dw __str_15
+    00000B71rF6r0B                 2607 	.dw __str_16
+    00000B73r06r0C                 2608 	.dw __str_17
+    00000B75r1Dr0C                 2609 	.dw __str_18
+    00000B77r26r0C                 2610 	.dw __str_19
+    00000B79r38r0C                 2611 	.dw __str_20
+    00000B7Br55r0C                 2612 	.dw __str_21
+    00000B7Dr5Er0C                 2613 	.dw __str_22
+    00000B7Fr73r0C                 2614 	.dw __str_23
+    00000B81r83r0C                 2615 	.dw __str_24
+    00000B83                       2616 __str_10:
+    00000B83 72 65 61 63 74 6F 72  2617 	.ascii "reactor regulat"
+             20 72 65 67 75 6C 61
+             74
+    00000B92 5C                    2618 	.db 0x5c
+    00000B93 00                    2619 	.db 0x00
+    00000B94                       2620 __str_11:
+    00000B94 68 69 6E 67 65 64 20  2621 	.ascii "hinged mouth"
+             6D 6F 75 74 68
+    00000BA0 5C                    2622 	.db 0x5c
+    00000BA1 6D 6F 75 74 68        2623 	.ascii "mouth"
+    00000BA6 5C                    2624 	.db 0x5c
+    00000BA7 68 69 6E 67 65        2625 	.ascii "hinge"
+    00000BAC 5C                    2626 	.db 0x5c
+    00000BAD 00                    2627 	.db 0x00
+    00000BAE                       2628 __str_12:
+    00000BAE 6D 69 64 64 6C 65 20  2629 	.ascii "middle table"
+             74 61 62 6C 65
+    00000BBA 5C                    2630 	.db 0x5c
+    00000BBB 6D 69 64 64 6C 65     2631 	.ascii "middle"
+    00000BC1 5C                    2632 	.db 0x5c
+    00000BC2 00                    2633 	.db 0x00
+    00000BC3                       2634 __str_13:
+    00000BC3 62 61 72              2635 	.ascii "bar"
+    00000BC6 5C                    2636 	.db 0x5c
+    00000BC7 00                    2637 	.db 0x00
+    00000BC8                       2638 __str_14:
+    00000BC8 67 6C 61 73 73 20 62  2639 	.ascii "glass ball"
+             61 6C 6C
+    00000BD2 5C                    2640 	.db 0x5c
+    00000BD3 62 61 6C 6C           2641 	.ascii "ball"
+    00000BD7 5C                    2642 	.db 0x5c
+    00000BD8 67 6C 61 73 73        2643 	.ascii "glass"
+    00000BDD 5C                    2644 	.db 0x5c
+    00000BDE 00                    2645 	.db 0x00
+    00000BDF                       2646 __str_15:
+    00000BDF 64 75 73 74 79 20 62  2647 	.ascii "dusty ball"
+             61 6C 6C
+    00000BE9 5C                    2648 	.db 0x5c
+    00000BEA 62 61 6C 6C           2649 	.ascii "ball"
+    00000BEE 5C                    2650 	.db 0x5c
+    00000BEF 64 75 73 74 79        2651 	.ascii "dusty"
+    00000BF4 5C                    2652 	.db 0x5c
+    00000BF5 00                    2653 	.db 0x00
+    00000BF6                       2654 __str_16:
+    00000BF6 73 6F 63 6B 65 74 73  2655 	.ascii "sockets"
+    00000BFD 5C                    2656 	.db 0x5c
+    00000BFE 73 6F 63 6B 65 74     2657 	.ascii "socket"
+    00000C04 5C                    2658 	.db 0x5c
+    00000C05 00                    2659 	.db 0x00
+    00000C06                       2660 __str_17:
+    00000C06 6C 61 73 65 72 20 62  2661 	.ascii "laser beam"
+             65 61 6D
+    00000C10 5C                    2662 	.db 0x5c
+    00000C11 62 65 61 6D           2663 	.ascii "beam"
+    00000C15 5C                    2664 	.db 0x5c
+    00000C16 6C 61 73 65 72        2665 	.ascii "laser"
+    00000C1B 5C                    2666 	.db 0x5c
+    00000C1C 00                    2667 	.db 0x00
+    00000C1D                       2668 __str_18:
+    00000C1D 73 70 65 61 6B 65 72  2669 	.ascii "speaker"
+    00000C24 5C                    2670 	.db 0x5c
+    00000C25 00                    2671 	.db 0x00
+    00000C26                       2672 __str_19:
+    00000C26 63 79 61 6E 20 62 75  2673 	.ascii "cyan button"
+             74 74 6F 6E
+    00000C31 5C                    2674 	.db 0x5c
+    00000C32 63 79 61 6E           2675 	.ascii "cyan"
+    00000C36 5C                    2676 	.db 0x5c
+    00000C37 00                    2677 	.db 0x00
+    00000C38                       2678 __str_20:
+    00000C38 73 6F 6C 61 72 20 6D  2679 	.ascii "solar map"
+             61 70
+    00000C41 5C                    2680 	.db 0x5c
+    00000C42 6D 61 70              2681 	.ascii "map"
+    00000C45 5C                    2682 	.db 0x5c
+    00000C46 73 6F 6C 61 72        2683 	.ascii "solar"
+    00000C4B 5C                    2684 	.db 0x5c
+    00000C4C 64 72 61 77 69 6E 67  2685 	.ascii "drawing"
+    00000C53 5C                    2686 	.db 0x5c
+    00000C54 00                    2687 	.db 0x00
+    00000C55                       2688 __str_21:
+    00000C55 6B 65 79 68 6F 6C 65  2689 	.ascii "keyhole"
+    00000C5C 5C                    2690 	.db 0x5c
+    00000C5D 00                    2691 	.db 0x00
+    00000C5E                       2692 __str_22:
+    00000C5E 70 6F 64 69 75 6D     2693 	.ascii "podium"
+    00000C64 5C                    2694 	.db 0x5c
+    00000C65 61 6C 74 65 72        2695 	.ascii "alter"
+    00000C6A 5C                    2696 	.db 0x5c
+    00000C6B 63 6F 6C 75 6D 6E     2697 	.ascii "column"
+    00000C71 5C                    2698 	.db 0x5c
+    00000C72 00                    2699 	.db 0x00
+    00000C73                       2700 __str_23:
+    00000C73 70 79 72 61 6D 69 64  2701 	.ascii "pyramid"
+    00000C7A 5C                    2702 	.db 0x5c
+    00000C7B 70 6F 64 69 75 6D     2703 	.ascii "podium"
+    00000C81 5C                    2704 	.db 0x5c
+    00000C82 00                    2705 	.db 0x00
+    00000C83                       2706 __str_24:
+    00000C83 6C 61 73 65 72 20 62  2707 	.ascii "laser beam"
+             65 61 6D
+    00000C8D 5C                    2708 	.db 0x5c
+    00000C8E 6C 61 73 65 72        2709 	.ascii "laser"
+    00000C93 5C                    2710 	.db 0x5c
+    00000C94 62 65 61 6D           2711 	.ascii "beam"
+    00000C98 5C                    2712 	.db 0x5c
+    00000C99 00                    2713 	.db 0x00
+                                   2714 	.area _CODE
+                                   2715 	.area _INITIALIZER
+                                   2716 	.area _CABS (ABS)

@@ -1,0 +1,85 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module memory
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _g_StackAddress
+                                     12 	.globl _Mem_GetStackAddress
+                                     13 	.globl _Mem_Set_16b
+                                     14 ;--------------------------------------------------------
+                                     15 ; special function registers
+                                     16 ;--------------------------------------------------------
+                                     17 ;--------------------------------------------------------
+                                     18 ; ram data
+                                     19 ;--------------------------------------------------------
+                                     20 	.area _DATA
+    00000000                         21 _g_StackAddress::
+    00000000                         22 	.ds 2
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area _INITIALIZED
+                                     27 ;--------------------------------------------------------
+                                     28 ; absolute ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area _DABS (ABS)
+                                     31 	.area _DABS (ABS)
+                                     32 ;--------------------------------------------------------
+                                     33 ; global & static initialisations
+                                     34 ;--------------------------------------------------------
+                                     35 	.area _HOME
+                                     36 	.area _GSINIT
+                                     37 	.area _GSFINAL
+                                     38 	.area _GSINIT
+                                     39 ;--------------------------------------------------------
+                                     40 ; Home
+                                     41 ;--------------------------------------------------------
+                                     42 	.area _HOME
+                                     43 	.area _HOME
+                                     44 ;--------------------------------------------------------
+                                     45 ; code
+                                     46 ;--------------------------------------------------------
+                                     47 	.area _CODE
+                                     48 ;E:\supernova\MSXgl\engine/src/memory.c:29: u16 Mem_GetStackAddress() __NAKED
+                                     49 ;	---------------------------------
+                                     50 ; Function Mem_GetStackAddress
+                                     51 ; ---------------------------------
+    00000000                         52 _Mem_GetStackAddress::
+                                     53 ;E:\supernova\MSXgl\engine/src/memory.c:35: __endasm;
+    00000000 ED 73r00r00      [20]   54 	ld (_g_StackAddress), sp
+    00000004 ED 5Br00r00      [20]   55 	ld de, (_g_StackAddress)
+    00000008 C9               [10]   56 	ret
+                                     57 ;E:\supernova\MSXgl\engine/src/memory.c:36: }
+                                     58 ;E:\supernova\MSXgl\engine/src/memory.c:150: void Mem_Set_16b(u16 val, void* dest, u16 size)
+                                     59 ;	---------------------------------
+                                     60 ; Function Mem_Set_16b
+                                     61 ; ---------------------------------
+    00000009                         62 _Mem_Set_16b::
+                                     63 ;E:\supernova\MSXgl\engine/src/memory.c:185: __endasm;
+    00000009 D5               [11]   64 	push de
+    0000000A EB               [ 4]   65 	ex de, hl
+    0000000B 72               [ 7]   66 	ld (hl), d
+    0000000C 23               [ 6]   67 	inc hl
+    0000000D 73               [ 7]   68 	ld (hl), e
+    0000000E 23               [ 6]   69 	inc hl
+    0000000F EB               [ 4]   70 	ex de, hl
+    00000010 E1               [10]   71 	pop hl
+    00000011 FD E1            [14]   72 	pop iy
+    00000013 C1               [10]   73 	pop bc
+    00000014 0B               [ 6]   74 	dec bc
+    00000015 0B               [ 6]   75 	dec bc
+    00000016 ED B0            [21]   76 	ldir
+    00000018                         77 mem_fill16_end:
+    00000018 FD E9            [ 8]   78 	jp (iy)
+                                     79 ;E:\supernova\MSXgl\engine/src/memory.c:186: }
+    0000001A E1               [10]   80 	pop	hl
+    0000001B F1               [10]   81 	pop	af
+    0000001C E9               [ 4]   82 	jp	(hl)
+                                     83 	.area _CODE
+                                     84 	.area _INITIALIZER
+                                     85 	.area _CABS (ABS)

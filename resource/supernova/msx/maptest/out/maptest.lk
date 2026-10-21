@@ -1,0 +1,12 @@
+-mjwx
+-i E:\supernova\msx\maptest/out/maptest.ihx
+-b _CODE = 0x0100
+-b _DATA = 0x0000
+-k E:\supernova\MSXgl\tools/sdcc/lib/z80
+-k E:\supernova\MSXgl\tools/sdcc/bin\..\lib\z80
+-l E:\supernova\msx\maptest/out/msxgl.lib
+-l z80
+E:\supernova\msx\maptest/out/crt0_dos.rel
+E:\supernova\msx\maptest/out/maptest.rel
+
+-e

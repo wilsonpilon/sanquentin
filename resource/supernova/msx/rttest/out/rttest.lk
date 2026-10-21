@@ -1,0 +1,15 @@
+-mjwx
+-i E:\supernova\msx\rttest/out/rttest.ihx
+-b _CODE = 0x0100
+-b _DATA = 0x0000
+-k E:\supernova\MSXgl\tools/sdcc/lib/z80
+-k E:\supernova\MSXgl\tools/sdcc/bin\..\lib\z80
+-l E:\supernova\msx\rttest/out/msxgl.lib
+-l z80
+E:\supernova\msx\rttest/out/crt0_dos.rel
+E:\supernova\msx\rttest/out/rttest.rel
+E:\supernova\msx\rttest/out/rt_msx.rel
+E:\supernova\msx\rttest/out/txt.rel
+E:\supernova\msx\rttest/out/textpool.rel
+
+-e

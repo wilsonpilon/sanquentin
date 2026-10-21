@@ -1,0 +1,38 @@
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   0 _Call13     00000140 GR  |   0 _ChopSev    00000059 GR
+  0 _DEAD       00000147 GR  |     _DOSMapp    ******** GX  |   0 _Default    000000DE GR
+  0 _Default    000000E5 GR  |   0 _Default    0000014E GR  |   0 _Default    00000155 GR
+  0 _Default    0000015C GR  |   0 _Default    00000163 GR  |   0 _Default    0000016A GR
+  0 _Default    000000EC GR  |   0 _Default    000000F3 GR  |   0 _Default    000000FA GR
+  0 _Default    00000171 GR  |   0 _Default    00000178 GR  |   0 _Default    0000017F GR
+  0 _Default    00000186 GR  |   0 _Default    0000018D GR  |   0 _Init1      00000194 GR
+  0 _Init2      0000019B GR  |   0 _Init3      000001A2 GR  |   0 _MoreTha    00000060 GR
+  0 _Parser_    00000067 GR  |   0 _PlayerI    0000006E GR  |   0 _Present    00000075 GR
+  0 _Restore    000001A9 GR  |   0 _Room1      0000007C GR  |   0 _Room10     00000083 GR
+  0 _Room11     0000008A GR  |   0 _Room12     00000091 GR  |   0 _Room13     00000098 GR
+  0 _Room14     0000009F GR  |   0 _Room15     00000101 GR  |   0 _Room16     00000108 GR
+  0 _Room17     0000010F GR  |   0 _Room18     00000116 GR  |   0 _Room19     0000011D GR
+  0 _Room2      000000A6 GR  |   0 _Room20     00000124 GR  |   0 _Room21     0000012B GR
+  0 _Room22     00000132 GR  |   0 _Room23     00000139 GR  |   0 _Room3      000000AD GR
+  0 _Room4      000000B4 GR  |   0 _Room5      000000BB GR  |   0 _Room6      000000C2 GR
+  0 _Room7      000000C9 GR  |   0 _Room8      000000D0 GR  |   0 _Room9      000000D7 GR
+  0 _Save       000001B0 GR  |   0 _Time1      000001B7 GR  |   0 _Time2A     000001BE GR
+  0 _Time2B     000001C5 GR  |   0 _Time2C     000001CC GR  |   0 _Time2D     000001D3 GR
+  0 _Title      000001DA GR  |   0 _Won        000001E1 GR  |   0 __ovl_ca    00000000 R
+  0 __ovl_ca    0000000A R   |   0 __ovl_ca    00000014 R   |   0 __ovl_ca    0000001E R
+  0 __ovl_ca    00000028 R   |   0 __ovl_go    00000032 R   |   0 __ovl_re    0000004A R
+  1 __ovl_tm    00000000 R   |     _g_OvlSe    ******** GX  |     _g_Page2    ******** GX
+
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size      1E8   flags    0
+   1 _DATA      size        2   flags    0
+

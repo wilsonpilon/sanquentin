@@ -1,0 +1,150 @@
+// ____________________________
+// |  ___  ___  ___  _        |
+// | |_ _|| . || . || |_      |   San Quentin - MSX1 edition
+// |  | | | . ||   || . |     |   Tela de abertura (BASIC 2450-2910)
+// |  |_| |___||_|_||___|     |
+// |__________________________|
+//
+// Transcricao fiel das linhas 2450 a 2910 de basic/quentin.asc. Cada bloco
+// traz, em comentario, a linha BASIC correspondente.
+//
+//-----------------------------------------------------------------------------
+#include "sq_gfx2.h"
+#include "sq_input.h"
+#include "sq_title.h"
+#include "sq_random.h"
+
+//-----------------------------------------------------------------------------
+// CONSTANTES
+//-----------------------------------------------------------------------------
+
+#define STAR_COUNT		91		// FOR W=0 TO 90
+
+// Aspectos usados pelos CIRCLE da abertura, como fracoes exatas.
+#define ASPECT_3_10		3, 10	// .3
+#define ASPECT_7_10		7, 10	// .7
+
+//-----------------------------------------------------------------------------
+// TELA DE ABERTURA
+//-----------------------------------------------------------------------------
+
+void Title_Draw(void)
+{
+	u8 w;
+	i16 j, k;
+
+	// 2450 OPEN"grp:"AS1
+	// 2460 COLOR 7,1,1
+	// 2470 SCREEN2:K=85
+	G2_Begin(COLOR_CYAN, COLOR_BLACK, COLOR_BLACK);
+	k = 85;
+
+	// 2480 DEFUSR=&H41:A=USR(0)   -> DISSCR
+#if (DEBUG == 0)
+	G2_DisplayOff();
+#endif
+
+	// 2490 FORW=0TO90
+	// 2500 X=256*RND(1)
+	// 2510 Y=70*RND(1)
+	// 2520 PSET(X,Y)
+	// 2530 NEXT
+	for(w = 0; w < STAR_COUNT; ++w)
+	{
+		i16 x, y;
+		Random_Next(&g_RandomState);
+		x = (i16)Random_Range(&g_RandomState, 256);
+		Random_Next(&g_RandomState);
+		y = (i16)Random_Range(&g_RandomState, 70);
+		G2_PSet(x, y);
+	}
+	G2_Step();
+
+	// 2540 CIRCLE(179,170),25,7,.2,3,.3
+	G2_Arc(179, 170, 25, G2_AspectY(25, ASPECT_3_10), ANG_0_2, ANG_3_0);
+	G2_Step();
+	// 2550 CIRCLE(179,168),25,7,.2,3,.3
+	G2_Arc(179, 168, 25, G2_AspectY(25, ASPECT_3_10), ANG_0_2, ANG_3_0);
+	G2_Step();
+	// 2560 CIRCLE(17,115),10,7,,,.3
+	G2_Ellipse(17, 115, 10, G2_AspectY(10, ASPECT_3_10));
+	G2_Step();
+	// 2570 CIRCLE(245,145),10,7,,,.3
+	G2_Ellipse(245, 145, 10, G2_AspectY(10, ASPECT_3_10));
+	G2_Step();
+	// 2580 CIRCLE(19,117),10,7,4.5,5.6,.7
+	G2_Arc(19, 117, 10, G2_AspectY(10, ASPECT_7_10), ANG_4_5, ANG_5_6);
+	G2_Step();
+	// 2590 CIRCLE(19,121),10,7,4.5,5.6,.7
+	G2_Arc(19, 121, 10, G2_AspectY(10, ASPECT_7_10), ANG_4_5, ANG_5_6);
+	G2_Step();
+	// 2600 CIRCLE(243,145),10,7,4,4.9,.7
+	G2_Arc(243, 145, 10, G2_AspectY(10, ASPECT_7_10), ANG_4_0, ANG_4_9);
+	G2_Step();
+	// 2610 CIRCLE(243,149),10,7,4,4.9,.7
+	G2_Arc(243, 149, 10, G2_AspectY(10, ASPECT_7_10), ANG_4_0, ANG_4_9);
+	G2_Step();
+
+	// 2620 PRESET(35,40):PRINT#1,"AVENTURA EM SAN QUENTIN"
+	G2_PReset(35, 40);
+	G2_Text(35, 40, "AVENTURA EM SAN QUENTIN");
+	G2_Step();
+
+	// 2630 DRAW"BM235,145M235,170BM16,124M16,128BM245,152M245,156"
+	G2_Draw("BM235,145M235,170BM16,124M16,128BM245,152M245,156");
+
+	// 2660 DRAW"BM7,115M7,140M150,185M210,185M255,165M255,145"
+	G2_Draw("BM7,115M7,140M150,185M210,185M255,165M255,145");
+
+	// 2670 DRAW"BM7,113M7,138M150,183BM210,183M255,163"
+	G2_Draw("BM7,113M7,138M150,183BM210,183M255,163");
+
+	// 2680 DRAW"BM7,140M7,155M115,191BM27,115M27,143BM27,125M60,110M60,120M27,135"
+	G2_Draw("BM7,140M7,155M115,191BM27,115M27,143BM27,125M60,110M60,120M27,135");
+
+	// 2700 DRAW"BM27,123M60,108BM60,75M140,75M140,120M110,120M110,115M90,115M90,120M60,120M60,75"
+	G2_Draw("BM27,123M60,108BM60,75M140,75M140,120M110,120M110,115M90,115M90,120M60,120M60,75");
+
+	// 2710 DRAW"BM60,75M140,75M140,120M110,120M110,115M90,115M90,120M60,120M60,75"
+	G2_Draw("BM60,75M140,75M140,120M110,120M110,115M90,115M90,120M60,120M60,75");
+
+	// 2720 FORJ=64TO140STEP10
+	// 2730 DRAW"BM=J;,=K;U3R3D3L3"
+	// 2740 NEXT:K=K+7:IFK=120THEN2750ELSE2720
+	for(;;)
+	{
+		for(j = 64; j <= 140; j += 10)
+		{
+			G2_SetPos(j, k);
+			G2_Draw("U3R3D3L3");
+		}
+		k += 7;
+		if(k == 120)
+			break;
+	}
+
+	// 2750 DRAW"BM99,115M99,120BM140,75M181,85M181,131M163,127M163,120M158,118M158,125M140,119"
+	G2_Draw("BM99,115M99,120BM140,75M181,85M181,131M163,127M163,120M158,118M158,125M140,119");
+
+	// 2770 DRAW"BM180,132M200,125M200,85M180,85BM200,84M160,75M140,75BM150,191U20E4D24BM208,191U19H4D24"
+	G2_Draw("BM180,132M200,125M200,85M180,85BM200,84M160,75M140,75BM150,191U20E4D24BM208,191U19H4D24");
+
+	// 2810 DRAW"BM155,173R48D1L48BM178,173D20R2U20BM158,173U6E3D9R3U9E3D12R3U12R3D12R3U12R3D12R3U12R3D12R3U12R3D12R3U10R3D10R3U6R3D2"
+	G2_Draw("BM155,173R48D1L48BM178,173D20R2U20BM158,173U6E3D9R3U9E3D12R3U12R3D12R3U12R3D12R3U12R3D12R3U12R3D12R3U10R3D10R3U6R3D2");
+
+	// 2820 DRAW"BM240,191M255,183BM147,87M175,94D5M147,92U5BM147,98M175,105D5M147,103U5BM154,89D4BM161,91D4BM168,93D4"
+	G2_Draw("BM240,191M255,183BM147,87M175,94D5M147,92U5BM147,98M175,105D5M147,103U5BM154,89D4BM161,91D4BM168,93D4");
+
+	// 2830 DRAW"BM154,100D4BM161,102D4BM168,104D4BM255,139M219,97M200,92BM255,137M220,95M200,90D11M215,107M244,140"
+	G2_Draw("BM154,100D4BM161,102D4BM168,104D4BM255,139M219,97M200,92BM255,137M220,95M200,90D11M215,107M244,140");
+
+	// 2890 DEFUSR=&H44:A=USR(0)   -> ENASCR
+	G2_DisplayOn();
+}
+
+void Title_Show(void)
+{
+	Title_Draw();
+	// 2900 IF INKEY$=""THEN2900
+	Input_WaitKey();
+}

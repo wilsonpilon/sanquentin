@@ -1,0 +1,1980 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module game
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _DEAD
+                                     12 	.globl _Default14
+                                     13 	.globl _Default13
+                                     14 	.globl _Default12
+                                     15 	.globl _Default11
+                                     16 	.globl _Default10
+                                     17 	.globl _Default9
+                                     18 	.globl _Default8
+                                     19 	.globl _Default7
+                                     20 	.globl _Default6
+                                     21 	.globl _Default5
+                                     22 	.globl _Default4
+                                     23 	.globl _Default3
+                                     24 	.globl _Default2
+                                     25 	.globl _Default1
+                                     26 	.globl _Default0
+                                     27 	.globl _Room23
+                                     28 	.globl _Room22
+                                     29 	.globl _Room21
+                                     30 	.globl _Room20
+                                     31 	.globl _Room19
+                                     32 	.globl _Room18
+                                     33 	.globl _Room17
+                                     34 	.globl _Room16
+                                     35 	.globl _Room15
+                                     36 	.globl _Room14
+                                     37 	.globl _Room13
+                                     38 	.globl _Room12
+                                     39 	.globl _Room11
+                                     40 	.globl _Room10
+                                     41 	.globl _Room9
+                                     42 	.globl _Room8
+                                     43 	.globl _Room7
+                                     44 	.globl _Room6
+                                     45 	.globl _Room5
+                                     46 	.globl _Room4
+                                     47 	.globl _Room3
+                                     48 	.globl _Room2
+                                     49 	.globl _Room1
+                                     50 	.globl _Parser_Syntax
+                                     51 	.globl _MoreThanOne
+                                     52 	.globl _Init3
+                                     53 	.globl _Init2
+                                     54 	.globl _Init1
+                                     55 	.globl _Title
+                                     56 	.globl _PlayerInput
+                                     57 	.globl _RR
+                                     58 	.globl _RS
+                                     59 	.globl _RL
+                                     60 	.globl _Present
+                                     61 	.globl _WrFN
+                                     62 	.globl _FN
+                                     63 	.globl _Time2D
+                                     64 	.globl _Time2C
+                                     65 	.globl _Time2B
+                                     66 	.globl _Time2A
+                                     67 	.globl _Time1
+                                     68 	.globl _Min
+                                     69 	.globl _En
+                                     70 	.globl _Col
+                                     71 	.globl _SF
+                                     72 	.globl _ScreenBegin
+                                     73 	.globl _OvlLoadAll
+                                     74 	.globl _Wln
+                                     75 	.globl _Wr
+                                     76 	.globl _Len
+                                     77 	.globl _Vocab_Init
+                                     78 	.globl _DOS_TPAUpperAddr
+                                     79 	.globl _g_SLTSL
+                                     80 	.globl _g_GRPACY
+                                     81 	.globl _g_GRPACX
+                                     82 	.globl _g_LOGOPR
+                                     83 	.globl _g_CMASK
+                                     84 	.globl _g_CLOC
+                                     85 	.globl _g_FNKSTR
+                                     86 	.globl _g_GETPNT
+                                     87 	.globl _g_PUTPNT
+                                     88 	.globl _g_ATRBYT
+                                     89 	.globl _g_BDRCLR
+                                     90 	.globl _g_BAKCLR
+                                     91 	.globl _g_FORCLR
+                                     92 	.globl _g_CSRX
+                                     93 	.globl _g_CSRY
+                                     94 	.globl _g_CLIKSW
+                                     95 	.globl _g_MLTPAT
+                                     96 	.globl _g_MLTATR
+                                     97 	.globl _g_MLTCGP
+                                     98 	.globl _g_MLTCOL
+                                     99 	.globl _g_MLTNAM
+                                    100 	.globl _g_GRPPAT
+                                    101 	.globl _g_GRPATR
+                                    102 	.globl _g_GRPCGP
+                                    103 	.globl _g_GRPCOL
+                                    104 	.globl _g_GRPNAM
+                                    105 	.globl _g_T32PAT
+                                    106 	.globl _g_T32ATR
+                                    107 	.globl _g_T32CGP
+                                    108 	.globl _g_T32COL
+                                    109 	.globl _g_T32NAM
+                                    110 	.globl _g_TXTPAT
+                                    111 	.globl _g_TXTATR
+                                    112 	.globl _g_TXTCGP
+                                    113 	.globl _g_TXTCOL
+                                    114 	.globl _g_TXTNAM
+                                    115 	.globl _g_CLMLST
+                                    116 	.globl _g_CRTCNT
+                                    117 	.globl _g_LINLEN
+                                    118 	.globl _g_LINL32
+                                    119 	.globl _g_LINL40
+                                    120 	.globl _g_BDOS
+                                    121 	.globl _g_MASTER
+                                    122 	.globl _g_RAMAD3
+                                    123 	.globl _g_RAMAD2
+                                    124 	.globl _g_RAMAD1
+                                    125 	.globl _g_RAMAD0
+                                    126 	.globl _g_BREAKV
+                                    127 	.globl _g_DISKVE
+                                    128 	.globl _g_KANJTABLE
+                                    129 	.globl _g_STRSRC
+                                    130 	.globl _g_SUBRID
+                                    131 	.globl _g_CHAR_16
+                                    132 	.globl _g_MSXMID
+                                    133 	.globl _g_MSXVER
+                                    134 	.globl _g_ROMVersion
+                                    135 	.globl _g_BASRVN
+                                    136 	.globl _g_VDP_DW
+                                    137 	.globl _g_VDP_DR
+                                    138 	.globl _g_CGTABL
+                                    139 	.globl _g_SVFFFD
+                                    140 	.globl _g_RG27SAV
+                                    141 	.globl _g_RG26SAV
+                                    142 	.globl _g_RG25SAV
+                                    143 	.globl _g_SVFFF8
+                                    144 	.globl _g_MINROM
+                                    145 	.globl _g_RG23SAV
+                                    146 	.globl _g_RG22SAV
+                                    147 	.globl _g_RG21SAV
+                                    148 	.globl _g_RG20SAV
+                                    149 	.globl _g_RG19SAV
+                                    150 	.globl _g_RG18SAV
+                                    151 	.globl _g_RG17SAV
+                                    152 	.globl _g_RG16SAV
+                                    153 	.globl _g_RG15SAV
+                                    154 	.globl _g_RG14SAV
+                                    155 	.globl _g_RG13SAV
+                                    156 	.globl _g_RG12SAV
+                                    157 	.globl _g_RG11SAV
+                                    158 	.globl _g_RG10SAV
+                                    159 	.globl _g_RG09SAV
+                                    160 	.globl _g_RG08SAV
+                                    161 	.globl _g_PROCNM
+                                    162 	.globl _g_SLTWRK
+                                    163 	.globl _g_SLTATR
+                                    164 	.globl _g_SLTTBL
+                                    165 	.globl _g_EXPTBL
+                                    166 	.globl _g_MNROM
+                                    167 	.globl _g_DRWANG
+                                    168 	.globl _g_DRWSCL
+                                    169 	.globl _g_DRWFLG
+                                    170 	.globl _g_GYPOS
+                                    171 	.globl _g_GXPOS
+                                    172 	.globl _g_BRDATR
+                                    173 	.globl _g_CASPRV
+                                    174 	.globl _g_OLDSCR
+                                    175 	.globl _g_SCRMOD
+                                    176 	.globl _g_FLBMEM
+                                    177 	.globl _g_KANAMD
+                                    178 	.globl _g_KANAST
+                                    179 	.globl _g_CAPST
+                                    180 	.globl _g_CSTYLE
+                                    181 	.globl _g_CSRSW
+                                    182 	.globl _g_INSFLG
+                                    183 	.globl _g_ESCCNT
+                                    184 	.globl _g_GRPHED
+                                    185 	.globl _g_WINWID
+                                    186 	.globl _g_LOWLIM
+                                    187 	.globl _g_INTCNT
+                                    188 	.globl _g_INTVAL
+                                    189 	.globl _g_JIFFY
+                                    190 	.globl _g_PADX
+                                    191 	.globl _g_PADY
+                                    192 	.globl _g_INTFLG
+                                    193 	.globl _g_RTYCNT
+                                    194 	.globl _g_TRPTBL
+                                    195 	.globl _g_HIMEM
+                                    196 	.globl _g_BOTTOM
+                                    197 	.globl _g_PATWRK
+                                    198 	.globl _g_LINWRK
+                                    199 	.globl _g_KEYBUF
+                                    200 	.globl _g_NEWKEY
+                                    201 	.globl _g_OLDKEY
+                                    202 	.globl _g_CLIKFL
+                                    203 	.globl _g_ONGSBF
+                                    204 	.globl _g_FNKFLG
+                                    205 	.globl _g_FNKSWI
+                                    206 	.globl _g_CODSAV
+                                    207 	.globl _g_FSTPOS
+                                    208 	.globl _g_LINTTB
+                                    209 	.globl _g_BASROM
+                                    210 	.globl _g_ENSTOP
+                                    211 	.globl _g_VCBC
+                                    212 	.globl _g_VCBB
+                                    213 	.globl _g_VCBA
+                                    214 	.globl _g_PLYCNT
+                                    215 	.globl _g_MUSICF
+                                    216 	.globl _g_QUEUEN
+                                    217 	.globl _g_MCLPTR
+                                    218 	.globl _g_MCLLEN
+                                    219 	.globl _g_SAVVOL
+                                    220 	.globl _g_VOICEN
+                                    221 	.globl _g_SAVSP
+                                    222 	.globl _g_PRSCNT
+                                    223 	.globl _g_LSTMOD
+                                    224 	.globl _g_LSTCOM
+                                    225 	.globl _g_COMMSK
+                                    226 	.globl _g_ESTBLS
+                                    227 	.globl _g_FLAGS
+                                    228 	.globl _g_ERRORS
+                                    229 	.globl _g_DATCNT
+                                    230 	.globl _g_DEVNUM
+                                    231 	.globl _g_OLDINT
+                                    232 	.globl _g_OLDSTT
+                                    233 	.globl _g_MEXBIh
+                                    234 	.globl _g_RSIQLN
+                                    235 	.globl _g_RSFCB
+                                    236 	.globl _g_TOCNT
+                                    237 	.globl _g_RSTMP
+                                    238 	.globl _g_YSAVE
+                                    239 	.globl _g_XSAVE
+                                    240 	.globl _g_NORUSE
+                                    241 	.globl _g_MODE
+                                    242 	.globl _g_ROMA
+                                    243 	.globl _g_CHRCNT
+                                    244 	.globl _g_EXBRSA
+                                    245 	.globl _g_AVCSAV
+                                    246 	.globl _g_ACPAGE
+                                    247 	.globl _g_DPPAGE
+                                    248 	.globl _g_RS2IQ
+                                    249 	.globl _g_VOICCQ
+                                    250 	.globl _g_VOICBQ
+                                    251 	.globl _g_VOICAQ
+                                    252 	.globl _g_QUEBAK
+                                    253 	.globl _g_QUETAB
+                                    254 	.globl _g_ASPCT2
+                                    255 	.globl _g_ASPCT1
+                                    256 	.globl _g_HEADER
+                                    257 	.globl _g_HIGH
+                                    258 	.globl _g_LOW
+                                    259 	.globl _g_CS240
+                                    260 	.globl _g_CS120
+                                    261 	.globl _g_REPCNT
+                                    262 	.globl _g_SCNCNT
+                                    263 	.globl _g_FRCNEW
+                                    264 	.globl _g_QUEUES
+                                    265 	.globl _g_MINUPD
+                                    266 	.globl _g_MAXUPD
+                                    267 	.globl _g_TRGFLG
+                                    268 	.globl _g_STATFL
+                                    269 	.globl _g_RG7SAV
+                                    270 	.globl _g_RG6SAV
+                                    271 	.globl _g_RG5SAV
+                                    272 	.globl _g_RG4SAV
+                                    273 	.globl _g_RG3SAV
+                                    274 	.globl _g_RG2SAV
+                                    275 	.globl _g_RG1SAV
+                                    276 	.globl _g_RG0SAV
+                                    277 	.globl _g_CNSDFG
+                                    278 	.globl _g_USRTAB
+                                    279 	.globl _g_CLPRIM
+                                    280 	.globl _g_WRPRIM
+                                    281 	.globl _g_RDPRIM
+                                    282 	.globl _Describe
+                                    283 	.globl _MoveTo
+                                    284 	.globl _SetR
+                                    285 	.globl _RestartGame
+                                    286 	.globl _GameMain
+                                    287 ;--------------------------------------------------------
+                                    288 ; special function registers
+                                    289 ;--------------------------------------------------------
+                         000000A0   290 _g_PSG_RegPort	=	0x00a0
+                         000000A1   291 _g_PSG_DataPort	=	0x00a1
+                         000000A2   292 _g_PSG_StatPort	=	0x00a2
+                         00000010   293 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   294 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   295 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   296 _g_Printer_ControlPort	=	0x0090
+                         00000091   297 _g_Printer_DataPort	=	0x0091
+                         0000007C   298 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   299 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   300 _g_VDP_DataPort	=	0x0098
+                         00000099   301 _g_VDP_RegPort	=	0x0099
+                         00000099   302 _g_VDP_AddrPort	=	0x0099
+                         00000099   303 _g_VDP_StatPort	=	0x0099
+                         0000009A   304 _g_VDP_PalPort	=	0x009a
+                         0000009B   305 _g_VDP_IRegPort	=	0x009b
+                         000000A8   306 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   307 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   308 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   309 _g_PortControl	=	0x00ab
+                         000000B4   310 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   311 _g_RTC_DataPort	=	0x00b5
+                         000000C0   312 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   313 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   314 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   315 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   316 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   317 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   318 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   319 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   320 _g_TimerLowPort	=	0x00e6
+                         000000E7   321 _g_TimerHighPort	=	0x00e7
+                                    322 ;--------------------------------------------------------
+                                    323 ; ram data
+                                    324 ;--------------------------------------------------------
+                                    325 	.area _DATA
+                         0000F3AE   326 _g_LINL40	=	0xf3ae
+                         0000F3AF   327 _g_LINL32	=	0xf3af
+                         0000F3B0   328 _g_LINLEN	=	0xf3b0
+                         0000F3B1   329 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   330 _g_CLMLST	=	0xf3b2
+                         0000F3B3   331 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   332 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   333 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   334 _g_TXTATR	=	0xf3b9
+                         0000F3BB   335 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   336 _g_T32NAM	=	0xf3bd
+                         0000F3BF   337 _g_T32COL	=	0xf3bf
+                         0000F3C1   338 _g_T32CGP	=	0xf3c1
+                         0000F3C3   339 _g_T32ATR	=	0xf3c3
+                         0000F3C5   340 _g_T32PAT	=	0xf3c5
+                         0000F3C7   341 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   342 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   343 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   344 _g_GRPATR	=	0xf3cd
+                         0000F3CF   345 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   346 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   347 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   348 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   349 _g_MLTATR	=	0xf3d7
+                         0000F3D9   350 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   351 _g_CLIKSW	=	0xf3db
+                         0000F3DC   352 _g_CSRY	=	0xf3dc
+                         0000F3DD   353 _g_CSRX	=	0xf3dd
+                         0000F3E9   354 _g_FORCLR	=	0xf3e9
+                         0000F3EA   355 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   356 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   357 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   358 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   359 _g_GETPNT	=	0xf3fa
+                         0000F87F   360 _g_FNKSTR	=	0xf87f
+                         0000F92A   361 _g_CLOC	=	0xf92a
+                         0000F92C   362 _g_CMASK	=	0xf92c
+                         0000FB02   363 _g_LOGOPR	=	0xfb02
+                         0000FCB7   364 _g_GRPACX	=	0xfcb7
+                         0000FCB9   365 _g_GRPACY	=	0xfcb9
+                         0000FFFF   366 _g_SLTSL	=	0xffff
+                         00000006   367 _DOS_TPAUpperAddr	=	0x0006
+                                    368 ;--------------------------------------------------------
+                                    369 ; ram data
+                                    370 ;--------------------------------------------------------
+                                    371 	.area _INITIALIZED
+                                    372 ;--------------------------------------------------------
+                                    373 ; absolute ram data
+                                    374 ;--------------------------------------------------------
+                                    375 	.area _DABS (ABS)
+                                    376 	.area _DABS (ABS)
+                                    377 ;--------------------------------------------------------
+                                    378 ; global & static initialisations
+                                    379 ;--------------------------------------------------------
+                                    380 	.area _HOME
+                                    381 	.area _GSINIT
+                                    382 	.area _GSFINAL
+                                    383 	.area _GSINIT
+                                    384 ;--------------------------------------------------------
+                                    385 ; Home
+                                    386 ;--------------------------------------------------------
+                                    387 	.area _HOME
+                                    388 	.area _HOME
+                                    389 ;--------------------------------------------------------
+                                    390 ; code
+                                    391 ;--------------------------------------------------------
+                                    392 	.area _CODE
+                                    393 ;./../game/game.c:4: void Describe(u8 room)
+                                    394 ;	---------------------------------
+                                    395 ; Function Describe
+                                    396 ; ---------------------------------
+    00000000                        397 _Describe::
+    00000000 CDr00r00         [17]  398 	call	___sdcc_enter_ix
+    00000003 21 E1 FF         [10]  399 	ld	hl, #-31
+    00000006 39               [11]  400 	add	hl, sp
+    00000007 F9               [ 6]  401 	ld	sp, hl
+    00000008 DD 77 FF         [19]  402 	ld	-1 (ix), a
+                                    403 ;./../game/game.c:7: Col(9, 9); Wr(g_RN[Prm]); Col(11, 7); Wln();
+    0000000B 3E 09            [ 7]  404 	ld	a,#0x09
+    0000000D 6F               [ 4]  405 	ld	l,a
+    0000000E CDr00r00         [17]  406 	call	_Col
+    00000011 01r00r00         [10]  407 	ld	bc, #_g_RN+0
+    00000014 3Ar00r00         [13]  408 	ld	a, (_Prm)
+    00000017 6F               [ 4]  409 	ld	l, a
+    00000018 26 00            [ 7]  410 	ld	h, #0x00
+    0000001A 29               [11]  411 	add	hl, hl
+    0000001B 09               [11]  412 	add	hl, bc
+    0000001C 7E               [ 7]  413 	ld	a, (hl)
+    0000001D 23               [ 6]  414 	inc	hl
+    0000001E 66               [ 7]  415 	ld	h, (hl)
+    0000001F 6F               [ 4]  416 	ld	l, a
+    00000020 CDr00r00         [17]  417 	call	_Wr
+    00000023 2E 07            [ 7]  418 	ld	l, #0x07
+    00000025 3E 0B            [ 7]  419 	ld	a, #0x0b
+    00000027 CDr00r00         [17]  420 	call	_Col
+    0000002A CDr00r00         [17]  421 	call	_Wln
+                                    422 ;./../game/game.c:8: if (En(1) || (!En(1) && !SET_IN(Brief, Prm)))
+    0000002D 3E 01            [ 7]  423 	ld	a, #0x01
+    0000002F CDr00r00         [17]  424 	call	_En
+    00000032 B7               [ 4]  425 	or	a, a
+    00000033 20 30            [12]  426 	jr	nz, 00119$
+    00000035 3E 01            [ 7]  427 	ld	a, #0x01
+    00000037 CDr00r00         [17]  428 	call	_En
+    0000003A B7               [ 4]  429 	or	a, a
+    0000003B C2r19r01         [10]  430 	jp	nz, 00120$
+    0000003E 11r00r00         [10]  431 	ld	de, #_Brief+0
+    00000041 3Ar00r00         [13]  432 	ld	a, (_Prm)
+    00000044 6F               [ 4]  433 	ld	l, a
+    00000045 26 00            [ 7]  434 	ld	h, #0x00
+    00000047 2B               [ 6]  435 	dec	hl
+    00000048 06 03            [ 7]  436 	ld	b, #0x03
+    0000004A                        437 00661$:
+    0000004A CB 2C            [ 8]  438 	sra	h
+    0000004C CB 1D            [ 8]  439 	rr	l
+    0000004E 10 FA            [13]  440 	djnz	00661$
+    00000050 19               [11]  441 	add	hl, de
+    00000051 4E               [ 7]  442 	ld	c, (hl)
+    00000052 3Ar00r00         [13]  443 	ld	a, (_Prm)
+    00000055 3D               [ 4]  444 	dec	a
+    00000056 E6 07            [ 7]  445 	and	a, #0x07
+    00000058 47               [ 4]  446 	ld	b, a
+    00000059 79               [ 4]  447 	ld	a, c
+    0000005A 04               [ 4]  448 	inc	b
+    0000005B 18 02            [12]  449 	jr	00663$
+    0000005D                        450 00662$:
+    0000005D CB 3F            [ 8]  451 	srl	a
+    0000005F                        452 00663$:
+    0000005F 10 FC            [13]  453 	djnz	00662$
+    00000061 0F               [ 4]  454 	rrca
+    00000062 DAr19r01         [10]  455 	jp	c, 00120$
+    00000065                        456 00119$:
+                                    457 ;./../game/game.c:10: SET_ADD(Brief, Prm);
+    00000065 11r00r00         [10]  458 	ld	de, #_Brief+0
+    00000068 3Ar00r00         [13]  459 	ld	a, (_Prm)
+    0000006B 6F               [ 4]  460 	ld	l, a
+    0000006C 26 00            [ 7]  461 	ld	h, #0x00
+    0000006E 2B               [ 6]  462 	dec	hl
+    0000006F 06 03            [ 7]  463 	ld	b, #0x03
+    00000071                        464 00666$:
+    00000071 CB 2C            [ 8]  465 	sra	h
+    00000073 CB 1D            [ 8]  466 	rr	l
+    00000075 10 FA            [13]  467 	djnz	00666$
+    00000077 19               [11]  468 	add	hl, de
+    00000078 4E               [ 7]  469 	ld	c, (hl)
+    00000079 3Ar00r00         [13]  470 	ld	a, (_Prm+0)
+    0000007C 3D               [ 4]  471 	dec	a
+    0000007D E6 07            [ 7]  472 	and	a, #0x07
+    0000007F 47               [ 4]  473 	ld	b, a
+    00000080 3E 01            [ 7]  474 	ld	a, #0x01
+    00000082 04               [ 4]  475 	inc	b
+    00000083 18 01            [12]  476 	jr	00668$
+    00000085                        477 00667$:
+    00000085 87               [ 4]  478 	add	a, a
+    00000086                        479 00668$:
+    00000086 10 FD            [13]  480 	djnz	00667$
+    00000088 B1               [ 4]  481 	or	a, c
+    00000089 77               [ 7]  482 	ld	(hl), a
+                                    483 ;./../game/game.c:11: switch (Prm)    // alternate room descriptions
+    0000008A 3Ar00r00         [13]  484 	ld	a, (_Prm)
+    0000008D FE 1D            [ 7]  485 	cp	a, #0x1d
+    0000008F 28 0E            [12]  486 	jr	z, 00101$
+    00000091 FE 22            [ 7]  487 	cp	a, #0x22
+    00000093 28 28            [12]  488 	jr	z, 00105$
+    00000095 FE 34            [ 7]  489 	cp	a, #0x34
+    00000097 28 42            [12]  490 	jr	z, 00109$
+    00000099 D6 5B            [ 7]  491 	sub	a, #0x5b
+    0000009B 28 56            [12]  492 	jr	z, 00113$
+    0000009D 18 72            [12]  493 	jr	00117$
+                                    494 ;./../game/game.c:13: case 29: if (En(35)) { RS(130); RS(131); } else RR(29); break;
+    0000009F                        495 00101$:
+    0000009F 3E 23            [ 7]  496 	ld	a, #0x23
+    000000A1 CDr00r00         [17]  497 	call	_En
+    000000A4 B7               [ 4]  498 	or	a, a
+    000000A5 28 0E            [12]  499 	jr	z, 00103$
+    000000A7 21 82 00         [10]  500 	ld	hl, #0x0082
+    000000AA CDr00r00         [17]  501 	call	_RS
+    000000AD 21 83 00         [10]  502 	ld	hl, #0x0083
+    000000B0 CDr00r00         [17]  503 	call	_RS
+    000000B3 18 64            [12]  504 	jr	00120$
+    000000B5                        505 00103$:
+    000000B5 21 1D 00         [10]  506 	ld	hl, #0x001d
+    000000B8 CDr00r00         [17]  507 	call	_RR
+    000000BB 18 5C            [12]  508 	jr	00120$
+                                    509 ;./../game/game.c:14: case 34: if (En(30)) { RS(81); RS(82); } else RR(34); break;
+    000000BD                        510 00105$:
+    000000BD 3E 1E            [ 7]  511 	ld	a, #0x1e
+    000000BF CDr00r00         [17]  512 	call	_En
+    000000C2 B7               [ 4]  513 	or	a, a
+    000000C3 28 0E            [12]  514 	jr	z, 00107$
+    000000C5 21 51 00         [10]  515 	ld	hl, #0x0051
+    000000C8 CDr00r00         [17]  516 	call	_RS
+    000000CB 21 52 00         [10]  517 	ld	hl, #0x0052
+    000000CE CDr00r00         [17]  518 	call	_RS
+    000000D1 18 46            [12]  519 	jr	00120$
+    000000D3                        520 00107$:
+    000000D3 21 22 00         [10]  521 	ld	hl, #0x0022
+    000000D6 CDr00r00         [17]  522 	call	_RR
+    000000D9 18 3E            [12]  523 	jr	00120$
+                                    524 ;./../game/game.c:15: case 52: if (En(39)) RS(126); else RR(52); break;
+    000000DB                        525 00109$:
+    000000DB 3E 27            [ 7]  526 	ld	a, #0x27
+    000000DD CDr00r00         [17]  527 	call	_En
+    000000E0 B7               [ 4]  528 	or	a, a
+    000000E1 28 08            [12]  529 	jr	z, 00111$
+    000000E3 21 7E 00         [10]  530 	ld	hl, #0x007e
+    000000E6 CDr00r00         [17]  531 	call	_RS
+    000000E9 18 2E            [12]  532 	jr	00120$
+    000000EB                        533 00111$:
+    000000EB 21 34 00         [10]  534 	ld	hl, #0x0034
+    000000EE CDr00r00         [17]  535 	call	_RR
+    000000F1 18 26            [12]  536 	jr	00120$
+                                    537 ;./../game/game.c:16: case 91: if (En(51)) { RS(157); RS(158); } else RR(91); break;
+    000000F3                        538 00113$:
+    000000F3 3E 33            [ 7]  539 	ld	a, #0x33
+    000000F5 CDr00r00         [17]  540 	call	_En
+    000000F8 B7               [ 4]  541 	or	a, a
+    000000F9 28 0E            [12]  542 	jr	z, 00115$
+    000000FB 21 9D 00         [10]  543 	ld	hl, #0x009d
+    000000FE CDr00r00         [17]  544 	call	_RS
+    00000101 21 9E 00         [10]  545 	ld	hl, #0x009e
+    00000104 CDr00r00         [17]  546 	call	_RS
+    00000107 18 10            [12]  547 	jr	00120$
+    00000109                        548 00115$:
+    00000109 21 5B 00         [10]  549 	ld	hl, #0x005b
+    0000010C CDr00r00         [17]  550 	call	_RR
+    0000010F 18 08            [12]  551 	jr	00120$
+                                    552 ;./../game/game.c:17: default: RR(room);
+    00000111                        553 00117$:
+    00000111 DD 6E FF         [19]  554 	ld	l, -1 (ix)
+    00000114 26 00            [ 7]  555 	ld	h, #0x00
+    00000116 CDr00r00         [17]  556 	call	_RR
+                                    557 ;./../game/game.c:18: }
+    00000119                        558 00120$:
+                                    559 ;./../game/game.c:20: switch (Prm)    // for initial object's description
+    00000119 3Ar00r00         [13]  560 	ld	a, (_Prm)
+    0000011C 3D               [ 4]  561 	dec	a
+    0000011D 28 28            [12]  562 	jr	z, 00123$
+    0000011F 3Ar00r00         [13]  563 	ld	a, (_Prm)
+    00000122 FE 26            [ 7]  564 	cp	a, #0x26
+    00000124 28 41            [12]  565 	jr	z, 00129$
+    00000126 FE 29            [ 7]  566 	cp	a, #0x29
+    00000128 28 4B            [12]  567 	jr	z, 00132$
+    0000012A FE 37            [ 7]  568 	cp	a, #0x37
+    0000012C 28 5E            [12]  569 	jr	z, 00136$
+    0000012E FE 3F            [ 7]  570 	cp	a, #0x3f
+    00000130 28 69            [12]  571 	jr	z, 00139$
+    00000132 FE 49            [ 7]  572 	cp	a, #0x49
+    00000134 28 74            [12]  573 	jr	z, 00142$
+    00000136 FE 50            [ 7]  574 	cp	a, #0x50
+    00000138 CArB9r01         [10]  575 	jp	z, 00145$
+    0000013B FE 5E            [ 7]  576 	cp	a, #0x5e
+    0000013D CArC7r01         [10]  577 	jp	z, 00148$
+    00000140 D6 6B            [ 7]  578 	sub	a, #0x6b
+    00000142 28 13            [12]  579 	jr	z, 00126$
+    00000144 C3rE1r01         [10]  580 	jp	00153$
+                                    581 ;./../game/game.c:22: case 1: if (LOC_HAS(1, 16)) RL(150); break;
+    00000147                        582 00123$:
+    00000147 3Ar12r00         [13]  583 	ld	a, (#(_g_Loc + 18) + 0)
+    0000014A 07               [ 4]  584 	rlca
+    0000014B D2rE1r01         [10]  585 	jp	nc, 00153$
+    0000014E 21 96 00         [10]  586 	ld	hl, #0x0096
+    00000151 CDr00r00         [17]  587 	call	_RL
+    00000154 C3rE1r01         [10]  588 	jp	00153$
+                                    589 ;./../game/game.c:23: case 107: if (LOC_HAS(107, 19)) RL(518); break;
+    00000157                        590 00126$:
+    00000157 3Ar1Dr07         [13]  591 	ld	a, (#(_g_Loc + 1821) + 0)
+    0000015A CB 57            [ 8]  592 	bit	2, a
+    0000015C CArE1r01         [10]  593 	jp	z, 00153$
+    0000015F 21 06 02         [10]  594 	ld	hl, #0x0206
+    00000162 CDr00r00         [17]  595 	call	_RL
+    00000165 18 7A            [12]  596 	jr	00153$
+                                    597 ;./../game/game.c:24: case 38: if (LOC_HAS(38, 17)) RL(260); break;
+    00000167                        598 00129$:
+    00000167 3Ar88r02         [13]  599 	ld	a, (#(_g_Loc + 648) + 0)
+    0000016A 0F               [ 4]  600 	rrca
+    0000016B 30 74            [12]  601 	jr	nc, 00153$
+    0000016D 21 04 01         [10]  602 	ld	hl, #0x0104
+    00000170 CDr00r00         [17]  603 	call	_RL
+    00000173 18 6C            [12]  604 	jr	00153$
+                                    605 ;./../game/game.c:25: case 41: if (LOC_HAS(41, 18) && !En(34)) RS(96); break;
+    00000175                        606 00132$:
+    00000175 3ArBBr02         [13]  607 	ld	a, (#(_g_Loc + 699) + 0)
+    00000178 CB 4F            [ 8]  608 	bit	1, a
+    0000017A 28 65            [12]  609 	jr	z, 00153$
+    0000017C 3E 22            [ 7]  610 	ld	a, #0x22
+    0000017E CDr00r00         [17]  611 	call	_En
+    00000181 B7               [ 4]  612 	or	a, a
+    00000182 20 5D            [12]  613 	jr	nz, 00153$
+    00000184 21 60 00         [10]  614 	ld	hl, #0x0060
+    00000187 CDr00r00         [17]  615 	call	_RS
+    0000018A 18 55            [12]  616 	jr	00153$
+                                    617 ;./../game/game.c:26: case 55: if (LOC_HAS(55, 11)) RL(290); break;
+    0000018C                        618 00136$:
+    0000018C 3ArA8r03         [13]  619 	ld	a, (#(_g_Loc + 936) + 0)
+    0000018F CB 57            [ 8]  620 	bit	2, a
+    00000191 28 4E            [12]  621 	jr	z, 00153$
+    00000193 21 22 01         [10]  622 	ld	hl, #0x0122
+    00000196 CDr00r00         [17]  623 	call	_RL
+    00000199 18 46            [12]  624 	jr	00153$
+                                    625 ;./../game/game.c:27: case 63: if (LOC_HAS(63, 20)) RL(356); break;
+    0000019B                        626 00139$:
+    0000019B 3Ar31r04         [13]  627 	ld	a, (#(_g_Loc + 1073) + 0)
+    0000019E CB 5F            [ 8]  628 	bit	3, a
+    000001A0 28 3F            [12]  629 	jr	z, 00153$
+    000001A2 21 64 01         [10]  630 	ld	hl, #0x0164
+    000001A5 CDr00r00         [17]  631 	call	_RL
+    000001A8 18 37            [12]  632 	jr	00153$
+                                    633 ;./../game/game.c:28: case 73: if (LOC_HAS(73, 28)) RL(352); break;
+    000001AA                        634 00142$:
+    000001AA 3ArDCr04         [13]  635 	ld	a, (#(_g_Loc + 1244) + 0)
+    000001AD CB 5F            [ 8]  636 	bit	3, a
+    000001AF 28 30            [12]  637 	jr	z, 00153$
+    000001B1 21 60 01         [10]  638 	ld	hl, #0x0160
+    000001B4 CDr00r00         [17]  639 	call	_RL
+    000001B7 18 28            [12]  640 	jr	00153$
+                                    641 ;./../game/game.c:29: case 80: if (LOC_HAS(80, 17)) RL(395); break;
+    000001B9                        642 00145$:
+    000001B9 3Ar52r05         [13]  643 	ld	a, (#(_g_Loc + 1362) + 0)
+    000001BC 0F               [ 4]  644 	rrca
+    000001BD 30 22            [12]  645 	jr	nc, 00153$
+    000001BF 21 8B 01         [10]  646 	ld	hl, #0x018b
+    000001C2 CDr00r00         [17]  647 	call	_RL
+    000001C5 18 1A            [12]  648 	jr	00153$
+                                    649 ;./../game/game.c:30: case 94: if (LOC_HAS(94, 26)) RL(397); if (LOC_HAS(94, 2)) RL(398); break;
+    000001C7                        650 00148$:
+    000001C7 3Ar41r06         [13]  651 	ld	a, (#_g_Loc + 1601)
+    000001CA CB 4F            [ 8]  652 	bit	1, a
+    000001CC 28 06            [12]  653 	jr	z, 00150$
+    000001CE 21 8D 01         [10]  654 	ld	hl, #0x018d
+    000001D1 CDr00r00         [17]  655 	call	_RL
+    000001D4                        656 00150$:
+    000001D4 3Ar3Er06         [13]  657 	ld	a, (#_g_Loc + 1598)
+    000001D7 CB 4F            [ 8]  658 	bit	1, a
+    000001D9 28 06            [12]  659 	jr	z, 00153$
+    000001DB 21 8E 01         [10]  660 	ld	hl, #0x018e
+    000001DE CDr00r00         [17]  661 	call	_RL
+                                    662 ;./../game/game.c:31: }
+    000001E1                        663 00153$:
+                                    664 ;./../game/game.c:32: for (o = 1; o <= MMax; o++)    // print the objects that are lying in the room
+    000001E1 21r00r00         [10]  665 	ld	hl, #_o
+    000001E4 36 01            [10]  666 	ld	(hl), #0x01
+    000001E6                        667 00201$:
+                                    668 ;./../game/game.c:33: if (R[o] == Prm)
+    000001E6 21r00r00         [10]  669 	ld	hl, #_R
+    000001E9 3Ar00r00         [13]  670 	ld	a, (_o)
+    000001EC 5F               [ 4]  671 	ld	e, a
+    000001ED 16 00            [ 7]  672 	ld	d, #0x00
+    000001EF 19               [11]  673 	add	hl, de
+    000001F0 3Ar00r00         [13]  674 	ld	a, (_Prm)
+    000001F3 96               [ 7]  675 	sub	a, (hl)
+    000001F4 C2r69r03         [10]  676 	jp	nz, 00202$
+                                    677 ;./../game/game.c:35: if (o == 6) { Wr("There is some "); WrFN(o); Wr(" here."); }
+    000001F7 3Ar00r00         [13]  678 	ld	a, (_o)
+    000001FA D6 06            [ 7]  679 	sub	a, #0x06
+    000001FC 20 14            [12]  680 	jr	nz, 00162$
+    000001FE 21r7Fr03         [10]  681 	ld	hl, #___str_1
+    00000201 CDr00r00         [17]  682 	call	_Wr
+    00000204 3Ar00r00         [13]  683 	ld	a, (_o)
+    00000207 CDr00r00         [17]  684 	call	_WrFN
+    0000020A 21r8Er03         [10]  685 	ld	hl, #___str_2
+    0000020D CDr00r00         [17]  686 	call	_Wr
+    00000210 18 48            [12]  687 	jr	00163$
+    00000212                        688 00162$:
+                                    689 ;./../game/game.c:38: FN(o, w);
+    00000212 21 00 00         [10]  690 	ld	hl, #0
+    00000215 39               [11]  691 	add	hl, sp
+    00000216 EB               [ 4]  692 	ex	de, hl
+    00000217 3Ar00r00         [13]  693 	ld	a, (_o)
+    0000021A CDr00r00         [17]  694 	call	_FN
+                                    695 ;./../game/game.c:39: if (w[0] == 'a' || w[0] == 'e' || w[0] == 'i' || w[0] == 'o' || w[0] == 'u')
+    0000021D DD 7E E1         [19]  696 	ld	a, -31 (ix)
+    00000220 FE 61            [ 7]  697 	cp	a, #0x61
+    00000222 28 10            [12]  698 	jr	z, 00154$
+    00000224 FE 65            [ 7]  699 	cp	a, #0x65
+    00000226 28 0C            [12]  700 	jr	z, 00154$
+    00000228 FE 69            [ 7]  701 	cp	a, #0x69
+    0000022A 28 08            [12]  702 	jr	z, 00154$
+    0000022C FE 6F            [ 7]  703 	cp	a, #0x6f
+    0000022E 28 04            [12]  704 	jr	z, 00154$
+    00000230 FE 75            [ 7]  705 	cp	a, #0x75
+    00000232 20 14            [12]  706 	jr	nz, 00155$
+    00000234                        707 00154$:
+                                    708 ;./../game/game.c:40: { Wr("There is an "); WrFN(o); Wr(" here."); }
+    00000234 21r95r03         [10]  709 	ld	hl, #___str_3
+    00000237 CDr00r00         [17]  710 	call	_Wr
+    0000023A 3Ar00r00         [13]  711 	ld	a, (_o)
+    0000023D CDr00r00         [17]  712 	call	_WrFN
+    00000240 21r8Er03         [10]  713 	ld	hl, #___str_2
+    00000243 CDr00r00         [17]  714 	call	_Wr
+    00000246 18 12            [12]  715 	jr	00163$
+    00000248                        716 00155$:
+                                    717 ;./../game/game.c:41: else { Wr("There is a "); WrFN(o); Wr(" here."); }
+    00000248 21rA2r03         [10]  718 	ld	hl, #___str_4
+    0000024B CDr00r00         [17]  719 	call	_Wr
+    0000024E 3Ar00r00         [13]  720 	ld	a, (_o)
+    00000251 CDr00r00         [17]  721 	call	_WrFN
+    00000254 21r8Er03         [10]  722 	ld	hl, #___str_2
+    00000257 CDr00r00         [17]  723 	call	_Wr
+    0000025A                        724 00163$:
+                                    725 ;./../game/game.c:43: if ((o == 29 && MugCon != Null) || (o == 7 && HolstCon != Null) || (o == 5 && SatchCon != Null))
+    0000025A 3Ar00r00         [13]  726 	ld	a, (_o)
+    0000025D D6 1D            [ 7]  727 	sub	a, #0x1d
+    0000025F 20 06            [12]  728 	jr	nz, 00168$
+    00000261 3Ar00r00         [13]  729 	ld	a, (_MugCon+0)
+    00000264 B7               [ 4]  730 	or	a, a
+    00000265 20 1A            [12]  731 	jr	nz, 00164$
+    00000267                        732 00168$:
+    00000267 3Ar00r00         [13]  733 	ld	a, (_o)
+    0000026A D6 07            [ 7]  734 	sub	a, #0x07
+    0000026C 20 06            [12]  735 	jr	nz, 00170$
+    0000026E 3Ar00r00         [13]  736 	ld	a, (_HolstCon+0)
+    00000271 B7               [ 4]  737 	or	a, a
+    00000272 20 0D            [12]  738 	jr	nz, 00164$
+    00000274                        739 00170$:
+    00000274 3Ar00r00         [13]  740 	ld	a, (_o)
+    00000277 D6 05            [ 7]  741 	sub	a, #0x05
+    00000279 20 0C            [12]  742 	jr	nz, 00165$
+    0000027B 3Ar00r00         [13]  743 	ld	a, (_SatchCon+0)
+    0000027E B7               [ 4]  744 	or	a, a
+    0000027F 28 06            [12]  745 	jr	z, 00165$
+    00000281                        746 00164$:
+                                    747 ;./../game/game.c:44: Wr("  (with something in it)");
+    00000281 21rAEr03         [10]  748 	ld	hl, #___str_5
+    00000284 CDr00r00         [17]  749 	call	_Wr
+    00000287                        750 00165$:
+                                    751 ;./../game/game.c:45: if (o == 5 && R[5] == 20) Wr("  (lying in some trash)");
+    00000287 3Ar00r00         [13]  752 	ld	a, (_o)
+    0000028A D6 05            [ 7]  753 	sub	a, #0x05
+    0000028C 20 0D            [12]  754 	jr	nz, 00172$
+    0000028E 3Ar05r00         [13]  755 	ld	a, (#_R + 5)
+    00000291 FE 14            [ 7]  756 	cp	a, #0x14
+    00000293 20 06            [12]  757 	jr	nz, 00172$
+    00000295 21rC7r03         [10]  758 	ld	hl, #___str_6
+    00000298 CDr00r00         [17]  759 	call	_Wr
+    0000029B                        760 00172$:
+                                    761 ;./../game/game.c:46: if (o == 7 && LOC_HAS(12, 7) && R[7] == 12) Wr("  (on the shelf)");
+    0000029B 3Ar00r00         [13]  762 	ld	a, (_o)
+    0000029E D6 07            [ 7]  763 	sub	a, #0x07
+    000002A0 20 14            [12]  764 	jr	nz, 00175$
+    000002A2 3ArCCr00         [13]  765 	ld	a, (#(_g_Loc + 204) + 0)
+    000002A5 CB 77            [ 8]  766 	bit	6, a
+    000002A7 28 0D            [12]  767 	jr	z, 00175$
+    000002A9 3Ar07r00         [13]  768 	ld	a, (#_R + 7)
+    000002AC FE 0C            [ 7]  769 	cp	a, #0x0c
+    000002AE 20 06            [12]  770 	jr	nz, 00175$
+    000002B0 21rDFr03         [10]  771 	ld	hl, #___str_7
+    000002B3 CDr00r00         [17]  772 	call	_Wr
+    000002B6                        773 00175$:
+                                    774 ;./../game/game.c:47: if (o == NicheCon) Wr("  (on the niche)");
+    000002B6 3Ar00r00         [13]  775 	ld	a, (_o)
+    000002B9 21r00r00         [10]  776 	ld	hl, #_NicheCon
+    000002BC 96               [ 7]  777 	sub	a, (hl)
+    000002BD 20 06            [12]  778 	jr	nz, 00179$
+    000002BF 21rF0r03         [10]  779 	ld	hl, #___str_8
+    000002C2 CDr00r00         [17]  780 	call	_Wr
+    000002C5                        781 00179$:
+                                    782 ;./../game/game.c:48: if (En(6) && o == 16) Wr("  (on the seat)");
+    000002C5 3E 06            [ 7]  783 	ld	a, #0x06
+    000002C7 CDr00r00         [17]  784 	call	_En
+    000002CA B7               [ 4]  785 	or	a, a
+    000002CB 28 0D            [12]  786 	jr	z, 00181$
+    000002CD 3Ar00r00         [13]  787 	ld	a, (_o)
+    000002D0 D6 10            [ 7]  788 	sub	a, #0x10
+    000002D2 20 06            [12]  789 	jr	nz, 00181$
+    000002D4 21r01r04         [10]  790 	ld	hl, #___str_9
+    000002D7 CDr00r00         [17]  791 	call	_Wr
+    000002DA                        792 00181$:
+                                    793 ;./../game/game.c:49: if (o == PyraCon) Wr("  (in the pyramid's slot)");
+    000002DA 3Ar00r00         [13]  794 	ld	a, (_o)
+    000002DD 21r00r00         [10]  795 	ld	hl, #_PyraCon
+    000002E0 96               [ 7]  796 	sub	a, (hl)
+    000002E1 20 06            [12]  797 	jr	nz, 00184$
+    000002E3 21r11r04         [10]  798 	ld	hl, #___str_10
+    000002E6 CDr00r00         [17]  799 	call	_Wr
+    000002E9                        800 00184$:
+                                    801 ;./../game/game.c:50: if (o == HingeCon) Wr("  (inside the statue's mouth)");
+    000002E9 3Ar00r00         [13]  802 	ld	a, (_o)
+    000002EC 21r00r00         [10]  803 	ld	hl, #_HingeCon
+    000002EF 96               [ 7]  804 	sub	a, (hl)
+    000002F0 20 06            [12]  805 	jr	nz, 00186$
+    000002F2 21r2Br04         [10]  806 	ld	hl, #___str_11
+    000002F5 CDr00r00         [17]  807 	call	_Wr
+    000002F8                        808 00186$:
+                                    809 ;./../game/game.c:51: if (o == PodumCon) Wr("  (on top of the podium)");
+    000002F8 3Ar00r00         [13]  810 	ld	a, (_o)
+    000002FB 21r00r00         [10]  811 	ld	hl, #_PodumCon
+    000002FE 96               [ 7]  812 	sub	a, (hl)
+    000002FF 20 06            [12]  813 	jr	nz, 00188$
+    00000301 21r49r04         [10]  814 	ld	hl, #___str_12
+    00000304 CDr00r00         [17]  815 	call	_Wr
+    00000307                        816 00188$:
+                                    817 ;./../game/game.c:52: if (o == 16 && En(37)) Wr("  (under the crystal)");
+    00000307 3Ar00r00         [13]  818 	ld	a, (_o)
+    0000030A D6 10            [ 7]  819 	sub	a, #0x10
+    0000030C 20 0E            [12]  820 	jr	nz, 00190$
+    0000030E 3E 25            [ 7]  821 	ld	a, #0x25
+    00000310 CDr00r00         [17]  822 	call	_En
+    00000313 B7               [ 4]  823 	or	a, a
+    00000314 28 06            [12]  824 	jr	z, 00190$
+    00000316 21r62r04         [10]  825 	ld	hl, #___str_13
+    00000319 CDr00r00         [17]  826 	call	_Wr
+    0000031C                        827 00190$:
+                                    828 ;./../game/game.c:53: if (o == RobotCon) Wr("  (in the robot's panel)");
+    0000031C 3Ar00r00         [13]  829 	ld	a, (_o)
+    0000031F 21r00r00         [10]  830 	ld	hl, #_RobotCon
+    00000322 96               [ 7]  831 	sub	a, (hl)
+    00000323 20 06            [12]  832 	jr	nz, 00193$
+    00000325 21r78r04         [10]  833 	ld	hl, #___str_14
+    00000328 CDr00r00         [17]  834 	call	_Wr
+    0000032B                        835 00193$:
+                                    836 ;./../game/game.c:54: if (IN29(Socket, o)) Wr("  (in one of the regulator's sockets)");
+    0000032B 3Ar00r00         [13]  837 	ld	a, (_o+0)
+    0000032E D6 01            [ 7]  838 	sub	a, #0x01
+    00000330 38 34            [12]  839 	jr	c, 00195$
+    00000332 3E 1D            [ 7]  840 	ld	a, #0x1d
+    00000334 21r00r00         [10]  841 	ld	hl, #_o
+    00000337 96               [ 7]  842 	sub	a, (hl)
+    00000338 38 2C            [12]  843 	jr	c, 00195$
+    0000033A 3Ar00r00         [13]  844 	ld	a, (_o+0)
+    0000033D 16 00            [ 7]  845 	ld	d, #0x00
+    0000033F 5F               [ 4]  846 	ld	e, a
+    00000340 1B               [ 6]  847 	dec	de
+    00000341 06 03            [ 7]  848 	ld	b, #0x03
+    00000343                        849 00731$:
+    00000343 CB 2A            [ 8]  850 	sra	d
+    00000345 CB 1B            [ 8]  851 	rr	e
+    00000347 10 FA            [13]  852 	djnz	00731$
+    00000349 21r00r00         [10]  853 	ld	hl, #_Socket
+    0000034C 19               [11]  854 	add	hl, de
+    0000034D 4E               [ 7]  855 	ld	c, (hl)
+    0000034E 3Ar00r00         [13]  856 	ld	a, (_o+0)
+    00000351 3D               [ 4]  857 	dec	a
+    00000352 E6 07            [ 7]  858 	and	a, #0x07
+    00000354 47               [ 4]  859 	ld	b, a
+    00000355 79               [ 4]  860 	ld	a, c
+    00000356 04               [ 4]  861 	inc	b
+    00000357 18 02            [12]  862 	jr	00733$
+    00000359                        863 00732$:
+    00000359 CB 3F            [ 8]  864 	srl	a
+    0000035B                        865 00733$:
+    0000035B 10 FC            [13]  866 	djnz	00732$
+    0000035D 0F               [ 4]  867 	rrca
+    0000035E 30 06            [12]  868 	jr	nc, 00195$
+    00000360 21r91r04         [10]  869 	ld	hl, #___str_15
+    00000363 CDr00r00         [17]  870 	call	_Wr
+    00000366                        871 00195$:
+                                    872 ;./../game/game.c:55: Wln();
+    00000366 CDr00r00         [17]  873 	call	_Wln
+    00000369                        874 00202$:
+                                    875 ;./../game/game.c:32: for (o = 1; o <= MMax; o++)    // print the objects that are lying in the room
+    00000369 21r00r00         [10]  876 	ld	hl, #_o
+    0000036C 34               [11]  877 	inc	(hl)
+    0000036D 3E 1D            [ 7]  878 	ld	a, #0x1d
+    0000036F 21r00r00         [10]  879 	ld	hl, #_o
+    00000372 96               [ 7]  880 	sub	a, (hl)
+    00000373 D2rE6r01         [10]  881 	jp	nc, 00201$
+                                    882 ;./../game/game.c:57: }
+    00000376 DD F9            [10]  883 	ld	sp, ix
+    00000378 DD E1            [14]  884 	pop	ix
+    0000037A C9               [10]  885 	ret
+                         0000F380   886 _g_RDPRIM	=	0xf380
+                         0000F385   887 _g_WRPRIM	=	0xf385
+                         0000F38C   888 _g_CLPRIM	=	0xf38c
+                         0000F39A   889 _g_USRTAB	=	0xf39a
+                         0000F3DE   890 _g_CNSDFG	=	0xf3de
+                         0000F3DF   891 _g_RG0SAV	=	0xf3df
+                         0000F3E0   892 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   893 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   894 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   895 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   896 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   897 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   898 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   899 _g_STATFL	=	0xf3e7
+                         0000F3E8   900 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   901 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   902 _g_MINUPD	=	0xf3ef
+                         0000F3F3   903 _g_QUEUES	=	0xf3f3
+                         0000F3F5   904 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   905 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   906 _g_REPCNT	=	0xf3f7
+                         0000F3FC   907 _g_CS120	=	0xf3fc
+                         0000F401   908 _g_CS240	=	0xf401
+                         0000F406   909 _g_LOW	=	0xf406
+                         0000F408   910 _g_HIGH	=	0xf408
+                         0000F40A   911 _g_HEADER	=	0xf40a
+                         0000F40B   912 _g_ASPCT1	=	0xf40b
+                         0000F40D   913 _g_ASPCT2	=	0xf40d
+                         0000F959   914 _g_QUETAB	=	0xf959
+                         0000F971   915 _g_QUEBAK	=	0xf971
+                         0000F975   916 _g_VOICAQ	=	0xf975
+                         0000F9F5   917 _g_VOICBQ	=	0xf9f5
+                         0000FA75   918 _g_VOICCQ	=	0xfa75
+                         0000FAF5   919 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   920 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   921 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   922 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   923 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   924 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   925 _g_ROMA	=	0xfafa
+                         0000FAFC   926 _g_MODE	=	0xfafc
+                         0000FAFD   927 _g_NORUSE	=	0xfafd
+                         0000FAFE   928 _g_XSAVE	=	0xfafe
+                         0000FB00   929 _g_YSAVE	=	0xfb00
+                         0000FB03   930 _g_RSTMP	=	0xfb03
+                         0000FB03   931 _g_TOCNT	=	0xfb03
+                         0000FB04   932 _g_RSFCB	=	0xfb04
+                         0000FB06   933 _g_RSIQLN	=	0xfb06
+                         0000FB07   934 _g_MEXBIh	=	0xfb07
+                         0000FB0C   935 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   936 _g_OLDINT	=	0xfb0c
+                         0000FB16   937 _g_DEVNUM	=	0xfb16
+                         0000FB17   938 _g_DATCNT	=	0xfb17
+                         0000FB1A   939 _g_ERRORS	=	0xfb1a
+                         0000FB1B   940 _g_FLAGS	=	0xfb1b
+                         0000FB1C   941 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   942 _g_COMMSK	=	0xfb1d
+                         0000FB1E   943 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   944 _g_LSTMOD	=	0xfb1f
+                         0000FB35   945 _g_PRSCNT	=	0xfb35
+                         0000FB36   946 _g_SAVSP	=	0xfb36
+                         0000FB38   947 _g_VOICEN	=	0xfb38
+                         0000FB39   948 _g_SAVVOL	=	0xfb39
+                         0000FB3B   949 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   950 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   951 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   952 _g_MUSICF	=	0xfb3f
+                         0000FB40   953 _g_PLYCNT	=	0xfb40
+                         0000FB41   954 _g_VCBA	=	0xfb41
+                         0000FB66   955 _g_VCBB	=	0xfb66
+                         0000FB8B   956 _g_VCBC	=	0xfb8b
+                         0000FBB0   957 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   958 _g_BASROM	=	0xfbb1
+                         0000FBB2   959 _g_LINTTB	=	0xfbb2
+                         0000FBCA   960 _g_FSTPOS	=	0xfbca
+                         0000FBCC   961 _g_CODSAV	=	0xfbcc
+                         0000FBCD   962 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   963 _g_FNKFLG	=	0xfbce
+                         0000FBD8   964 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   965 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   966 _g_OLDKEY	=	0xfbda
+                         0000FBE5   967 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   968 _g_KEYBUF	=	0xfbf0
+                         0000FC18   969 _g_LINWRK	=	0xfc18
+                         0000FC40   970 _g_PATWRK	=	0xfc40
+                         0000FC48   971 _g_BOTTOM	=	0xfc48
+                         0000FC4A   972 _g_HIMEM	=	0xfc4a
+                         0000FC4C   973 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   974 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   975 _g_INTFLG	=	0xfc9b
+                         0000FC9C   976 _g_PADY	=	0xfc9c
+                         0000FC9D   977 _g_PADX	=	0xfc9d
+                         0000FC9E   978 _g_JIFFY	=	0xfc9e
+                         0000FCA0   979 _g_INTVAL	=	0xfca0
+                         0000FCA2   980 _g_INTCNT	=	0xfca2
+                         0000FCA4   981 _g_LOWLIM	=	0xfca4
+                         0000FCA5   982 _g_WINWID	=	0xfca5
+                         0000FCA6   983 _g_GRPHED	=	0xfca6
+                         0000FCA7   984 _g_ESCCNT	=	0xfca7
+                         0000FCA8   985 _g_INSFLG	=	0xfca8
+                         0000FCA9   986 _g_CSRSW	=	0xfca9
+                         0000FCAA   987 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   988 _g_CAPST	=	0xfcab
+                         0000FCAC   989 _g_KANAST	=	0xfcac
+                         0000FCAD   990 _g_KANAMD	=	0xfcad
+                         0000FCAE   991 _g_FLBMEM	=	0xfcae
+                         0000FCAF   992 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   993 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   994 _g_CASPRV	=	0xfcb1
+                         0000FCB2   995 _g_BRDATR	=	0xfcb2
+                         0000FCB3   996 _g_GXPOS	=	0xfcb3
+                         0000FCB5   997 _g_GYPOS	=	0xfcb5
+                         0000FCBB   998 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   999 _g_DRWSCL	=	0xfcbc
+                         0000FCBD  1000 _g_DRWANG	=	0xfcbd
+                         0000FCC1  1001 _g_MNROM	=	0xfcc1
+                         0000FCC1  1002 _g_EXPTBL	=	0xfcc1
+                         0000FCC5  1003 _g_SLTTBL	=	0xfcc5
+                         0000FCC9  1004 _g_SLTATR	=	0xfcc9
+                         0000FD09  1005 _g_SLTWRK	=	0xfd09
+                         0000FD89  1006 _g_PROCNM	=	0xfd89
+                         0000FFE7  1007 _g_RG08SAV	=	0xffe7
+                         0000FFE8  1008 _g_RG09SAV	=	0xffe8
+                         0000FFE9  1009 _g_RG10SAV	=	0xffe9
+                         0000FFEA  1010 _g_RG11SAV	=	0xffea
+                         0000FFEB  1011 _g_RG12SAV	=	0xffeb
+                         0000FFEC  1012 _g_RG13SAV	=	0xffec
+                         0000FFED  1013 _g_RG14SAV	=	0xffed
+                         0000FFEE  1014 _g_RG15SAV	=	0xffee
+                         0000FFEF  1015 _g_RG16SAV	=	0xffef
+                         0000FFF0  1016 _g_RG17SAV	=	0xfff0
+                         0000FFF1  1017 _g_RG18SAV	=	0xfff1
+                         0000FFF2  1018 _g_RG19SAV	=	0xfff2
+                         0000FFF3  1019 _g_RG20SAV	=	0xfff3
+                         0000FFF4  1020 _g_RG21SAV	=	0xfff4
+                         0000FFF5  1021 _g_RG22SAV	=	0xfff5
+                         0000FFF6  1022 _g_RG23SAV	=	0xfff6
+                         0000FFF7  1023 _g_MINROM	=	0xfff7
+                         0000FFF8  1024 _g_SVFFF8	=	0xfff8
+                         0000FFFA  1025 _g_RG25SAV	=	0xfffa
+                         0000FFFB  1026 _g_RG26SAV	=	0xfffb
+                         0000FFFC  1027 _g_RG27SAV	=	0xfffc
+                         0000FFFD  1028 _g_SVFFFD	=	0xfffd
+                         00000004  1029 _g_CGTABL	=	0x0004
+                         00000006  1030 _g_VDP_DR	=	0x0006
+                         00000007  1031 _g_VDP_DW	=	0x0007
+                         0000002B  1032 _g_BASRVN	=	0x002b
+                         0000002B  1033 _g_ROMVersion	=	0x002b
+                         0000002D  1034 _g_MSXVER	=	0x002d
+                         0000002E  1035 _g_MSXMID	=	0x002e
+                         00000034  1036 _g_CHAR_16	=	0x0034
+    0000037B                       1037 ___str_0:
+    0000037B 0A                    1038 	.db 0x0a
+    0000037C 0D                    1039 	.db 0x0d
+    0000037D 24                    1040 	.ascii "$"
+    0000037E 00                    1041 	.db 0x00
+                         00000000  1042 _g_SUBRID	=	0x0000
+                         00000002  1043 _g_STRSRC	=	0x0002
+                         0000F30F  1044 _g_KANJTABLE	=	0xf30f
+                         0000F323  1045 _g_DISKVE	=	0xf323
+                         0000F325  1046 _g_BREAKV	=	0xf325
+                         0000F341  1047 _g_RAMAD0	=	0xf341
+                         0000F342  1048 _g_RAMAD1	=	0xf342
+                         0000F343  1049 _g_RAMAD2	=	0xf343
+                         0000F344  1050 _g_RAMAD3	=	0xf344
+                         0000F348  1051 _g_MASTER	=	0xf348
+                         0000F37D  1052 _g_BDOS	=	0xf37d
+    0000037F                       1053 ___str_1:
+    0000037F 54 68 65 72 65 20 69  1054 	.ascii "There is some "
+             73 20 73 6F 6D 65 20
+    0000038D 00                    1055 	.db 0x00
+    0000038E                       1056 ___str_2:
+    0000038E 20 68 65 72 65 2E     1057 	.ascii " here."
+    00000394 00                    1058 	.db 0x00
+    00000395                       1059 ___str_3:
+    00000395 54 68 65 72 65 20 69  1060 	.ascii "There is an "
+             73 20 61 6E 20
+    000003A1 00                    1061 	.db 0x00
+    000003A2                       1062 ___str_4:
+    000003A2 54 68 65 72 65 20 69  1063 	.ascii "There is a "
+             73 20 61 20
+    000003AD 00                    1064 	.db 0x00
+    000003AE                       1065 ___str_5:
+    000003AE 20 20 28 77 69 74 68  1066 	.ascii "  (with something in it)"
+             20 73 6F 6D 65 74 68
+             69 6E 67 20 69 6E 20
+             69 74 29
+    000003C6 00                    1067 	.db 0x00
+    000003C7                       1068 ___str_6:
+    000003C7 20 20 28 6C 79 69 6E  1069 	.ascii "  (lying in some trash)"
+             67 20 69 6E 20 73 6F
+             6D 65 20 74 72 61 73
+             68 29
+    000003DE 00                    1070 	.db 0x00
+    000003DF                       1071 ___str_7:
+    000003DF 20 20 28 6F 6E 20 74  1072 	.ascii "  (on the shelf)"
+             68 65 20 73 68 65 6C
+             66 29
+    000003EF 00                    1073 	.db 0x00
+    000003F0                       1074 ___str_8:
+    000003F0 20 20 28 6F 6E 20 74  1075 	.ascii "  (on the niche)"
+             68 65 20 6E 69 63 68
+             65 29
+    00000400 00                    1076 	.db 0x00
+    00000401                       1077 ___str_9:
+    00000401 20 20 28 6F 6E 20 74  1078 	.ascii "  (on the seat)"
+             68 65 20 73 65 61 74
+             29
+    00000410 00                    1079 	.db 0x00
+    00000411                       1080 ___str_10:
+    00000411 20 20 28 69 6E 20 74  1081 	.ascii "  (in the pyramid's slot)"
+             68 65 20 70 79 72 61
+             6D 69 64 27 73 20 73
+             6C 6F 74 29
+    0000042A 00                    1082 	.db 0x00
+    0000042B                       1083 ___str_11:
+    0000042B 20 20 28 69 6E 73 69  1084 	.ascii "  (inside the statue's mouth)"
+             64 65 20 74 68 65 20
+             73 74 61 74 75 65 27
+             73 20 6D 6F 75 74 68
+             29
+    00000448 00                    1085 	.db 0x00
+    00000449                       1086 ___str_12:
+    00000449 20 20 28 6F 6E 20 74  1087 	.ascii "  (on top of the podium)"
+             6F 70 20 6F 66 20 74
+             68 65 20 70 6F 64 69
+             75 6D 29
+    00000461 00                    1088 	.db 0x00
+    00000462                       1089 ___str_13:
+    00000462 20 20 28 75 6E 64 65  1090 	.ascii "  (under the crystal)"
+             72 20 74 68 65 20 63
+             72 79 73 74 61 6C 29
+    00000477 00                    1091 	.db 0x00
+    00000478                       1092 ___str_14:
+    00000478 20 20 28 69 6E 20 74  1093 	.ascii "  (in the robot's panel)"
+             68 65 20 72 6F 62 6F
+             74 27 73 20 70 61 6E
+             65 6C 29
+    00000490 00                    1094 	.db 0x00
+    00000491                       1095 ___str_15:
+    00000491 20 20 28 69 6E 20 6F  1096 	.ascii "  (in one of the regulator's sockets)"
+             6E 65 20 6F 66 20 74
+             68 65 20 72 65 67 75
+             6C 61 74 6F 72 27 73
+             20 73 6F 63 6B 65 74
+             73 29
+    000004B6 00                    1097 	.db 0x00
+                                   1098 ;./../game/game.c:59: void MoveTo(u8 New)
+                                   1099 ;	---------------------------------
+                                   1100 ; Function MoveTo
+                                   1101 ; ---------------------------------
+    000004B7                       1102 _MoveTo::
+    000004B7 CDr00r00         [17] 1103 	call	___sdcc_enter_ix
+    000004BA 3B               [ 6] 1104 	dec	sp
+    000004BB DD 77 FF         [19] 1105 	ld	-1 (ix), a
+                                   1106 ;./../game/game.c:61: SF();
+    000004BE CDr00r00         [17] 1107 	call	_SF
+                                   1108 ;./../game/game.c:62: if (En(7)) RL(22); else
+    000004C1 3E 07            [ 7] 1109 	ld	a, #0x07
+    000004C3 CDr00r00         [17] 1110 	call	_En
+    000004C6 B7               [ 4] 1111 	or	a, a
+    000004C7 28 09            [12] 1112 	jr	z, 00122$
+    000004C9 21 16 00         [10] 1113 	ld	hl, #0x0016
+    000004CC CDr00r00         [17] 1114 	call	_RL
+    000004CF C3r3Fr06         [10] 1115 	jp	00124$
+    000004D2                       1116 00122$:
+                                   1117 ;./../game/game.c:63: if (En(8)) RL(23); else
+    000004D2 3E 08            [ 7] 1118 	ld	a, #0x08
+    000004D4 CDr00r00         [17] 1119 	call	_En
+    000004D7 B7               [ 4] 1120 	or	a, a
+    000004D8 28 09            [12] 1121 	jr	z, 00119$
+    000004DA 21 17 00         [10] 1122 	ld	hl, #0x0017
+    000004DD CDr00r00         [17] 1123 	call	_RL
+    000004E0 C3r3Fr06         [10] 1124 	jp	00124$
+    000004E3                       1125 00119$:
+                                   1126 ;./../game/game.c:66: { if (Prm != 8) LOC_DEL(Prm, MugCon); LOC_ADD(New, MugCon); }
+    000004E3 DD 4E FF         [19] 1127 	ld	c, -1 (ix)
+    000004E6 06 00            [ 7] 1128 	ld	b, #0x00
+    000004E8 69               [ 4] 1129 	ld	l, c
+    000004E9 60               [ 4] 1130 	ld	h, b
+    000004EA 29               [11] 1131 	add	hl, hl
+    000004EB 29               [11] 1132 	add	hl, hl
+    000004EC 29               [11] 1133 	add	hl, hl
+    000004ED 29               [11] 1134 	add	hl, hl
+    000004EE 09               [11] 1135 	add	hl, bc
+    000004EF EB               [ 4] 1136 	ex	de, hl
+                                   1137 ;./../game/game.c:65: if (MugCon != Null && IN29(Inv, 29))
+    000004F0 3Ar00r00         [13] 1138 	ld	a, (_MugCon+0)
+    000004F3 B7               [ 4] 1139 	or	a, a
+    000004F4 28 6C            [12] 1140 	jr	z, 00104$
+    000004F6 3Ar03r00         [13] 1141 	ld	a, (#(_Inv + 3) + 0)
+    000004F9 0F               [ 4] 1142 	rrca
+    000004FA 0F               [ 4] 1143 	rrca
+    000004FB 0F               [ 4] 1144 	rrca
+    000004FC 0F               [ 4] 1145 	rrca
+    000004FD E6 01            [ 7] 1146 	and	a, #0x01
+    000004FF 28 61            [12] 1147 	jr	z, 00104$
+                                   1148 ;./../game/game.c:66: { if (Prm != 8) LOC_DEL(Prm, MugCon); LOC_ADD(New, MugCon); }
+    00000501 3Ar00r00         [13] 1149 	ld	a, (_Prm)
+    00000504 D6 08            [ 7] 1150 	sub	a, #0x08
+    00000506 28 34            [12] 1151 	jr	z, 00102$
+    00000508 3Ar00r00         [13] 1152 	ld	a, (#_Prm + 0)
+    0000050B 4F               [ 4] 1153 	ld	c, a
+    0000050C 06 00            [ 7] 1154 	ld	b, #0x00
+    0000050E 69               [ 4] 1155 	ld	l, c
+    0000050F 60               [ 4] 1156 	ld	h, b
+    00000510 29               [11] 1157 	add	hl, hl
+    00000511 29               [11] 1158 	add	hl, hl
+    00000512 29               [11] 1159 	add	hl, hl
+    00000513 29               [11] 1160 	add	hl, hl
+    00000514 09               [11] 1161 	add	hl, bc
+    00000515 01r00r00         [10] 1162 	ld	bc, #_g_Loc
+    00000518 09               [11] 1163 	add	hl, bc
+    00000519 3Ar00r00         [13] 1164 	ld	a, (_MugCon+0)
+    0000051C 4F               [ 4] 1165 	ld	c, a
+    0000051D 06 00            [ 7] 1166 	ld	b, #0x00
+    0000051F 0B               [ 6] 1167 	dec	bc
+    00000520 3E 03            [ 7] 1168 	ld	a, #0x03
+    00000522                       1169 00199$:
+    00000522 CB 28            [ 8] 1170 	sra	b
+    00000524 CB 19            [ 8] 1171 	rr	c
+    00000526 3D               [ 4] 1172 	dec	a
+    00000527 20 F9            [12] 1173 	jr	nz, 00199$
+    00000529 09               [11] 1174 	add	hl, bc
+    0000052A 3Ar00r00         [13] 1175 	ld	a, (_MugCon+0)
+    0000052D 3D               [ 4] 1176 	dec	a
+    0000052E E6 07            [ 7] 1177 	and	a, #0x07
+    00000530 47               [ 4] 1178 	ld	b, a
+    00000531 3E 01            [ 7] 1179 	ld	a, #0x01
+    00000533 04               [ 4] 1180 	inc	b
+    00000534 18 01            [12] 1181 	jr	00201$
+    00000536                       1182 00200$:
+    00000536 87               [ 4] 1183 	add	a, a
+    00000537                       1184 00201$:
+    00000537 10 FD            [13] 1185 	djnz	00200$
+    00000539 2F               [ 4] 1186 	cpl
+    0000053A A6               [ 7] 1187 	and	a, (hl)
+    0000053B 77               [ 7] 1188 	ld	(hl), a
+    0000053C                       1189 00102$:
+    0000053C 21r00r00         [10] 1190 	ld	hl, #_g_Loc
+    0000053F 19               [11] 1191 	add	hl, de
+    00000540 3Ar00r00         [13] 1192 	ld	a, (_MugCon+0)
+    00000543 06 00            [ 7] 1193 	ld	b, #0x00
+    00000545 4F               [ 4] 1194 	ld	c, a
+    00000546 0B               [ 6] 1195 	dec	bc
+    00000547 3E 03            [ 7] 1196 	ld	a, #0x03
+    00000549                       1197 00202$:
+    00000549 CB 28            [ 8] 1198 	sra	b
+    0000054B CB 19            [ 8] 1199 	rr	c
+    0000054D 3D               [ 4] 1200 	dec	a
+    0000054E 20 F9            [12] 1201 	jr	nz, 00202$
+    00000550 09               [11] 1202 	add	hl, bc
+    00000551 3Ar00r00         [13] 1203 	ld	a, (_MugCon+0)
+    00000554 3D               [ 4] 1204 	dec	a
+    00000555 E6 07            [ 7] 1205 	and	a, #0x07
+    00000557 47               [ 4] 1206 	ld	b, a
+    00000558 3E 01            [ 7] 1207 	ld	a, #0x01
+    0000055A 04               [ 4] 1208 	inc	b
+    0000055B 18 01            [12] 1209 	jr	00204$
+    0000055D                       1210 00203$:
+    0000055D 87               [ 4] 1211 	add	a, a
+    0000055E                       1212 00204$:
+    0000055E 10 FD            [13] 1213 	djnz	00203$
+    00000560 B6               [ 7] 1214 	or	a, (hl)
+    00000561 77               [ 7] 1215 	ld	(hl), a
+    00000562                       1216 00104$:
+                                   1217 ;./../game/game.c:67: if (SatchCon != Null && IN29(Inv, 5)) { LOC_DEL(Prm, SatchCon); LOC_ADD(New, SatchCon); }
+    00000562 3Ar00r00         [13] 1218 	ld	a, (_SatchCon+0)
+    00000565 B7               [ 4] 1219 	or	a, a
+    00000566 28 65            [12] 1220 	jr	z, 00109$
+    00000568 3Ar00r00         [13] 1221 	ld	a, (#_Inv + 0)
+    0000056B 0F               [ 4] 1222 	rrca
+    0000056C 0F               [ 4] 1223 	rrca
+    0000056D 0F               [ 4] 1224 	rrca
+    0000056E 0F               [ 4] 1225 	rrca
+    0000056F E6 01            [ 7] 1226 	and	a, #0x01
+    00000571 28 5A            [12] 1227 	jr	z, 00109$
+    00000573 3Ar00r00         [13] 1228 	ld	a, (#_Prm + 0)
+    00000576 4F               [ 4] 1229 	ld	c, a
+    00000577 06 00            [ 7] 1230 	ld	b, #0x00
+    00000579 69               [ 4] 1231 	ld	l, c
+    0000057A 60               [ 4] 1232 	ld	h, b
+    0000057B 29               [11] 1233 	add	hl, hl
+    0000057C 29               [11] 1234 	add	hl, hl
+    0000057D 29               [11] 1235 	add	hl, hl
+    0000057E 29               [11] 1236 	add	hl, hl
+    0000057F 09               [11] 1237 	add	hl, bc
+    00000580 01r00r00         [10] 1238 	ld	bc, #_g_Loc
+    00000583 09               [11] 1239 	add	hl, bc
+    00000584 3Ar00r00         [13] 1240 	ld	a, (_SatchCon+0)
+    00000587 06 00            [ 7] 1241 	ld	b, #0x00
+    00000589 4F               [ 4] 1242 	ld	c, a
+    0000058A 0B               [ 6] 1243 	dec	bc
+    0000058B 3E 03            [ 7] 1244 	ld	a, #0x03
+    0000058D                       1245 00205$:
+    0000058D CB 28            [ 8] 1246 	sra	b
+    0000058F CB 19            [ 8] 1247 	rr	c
+    00000591 3D               [ 4] 1248 	dec	a
+    00000592 20 F9            [12] 1249 	jr	nz, 00205$
+    00000594 09               [11] 1250 	add	hl, bc
+    00000595 3Ar00r00         [13] 1251 	ld	a, (_SatchCon+0)
+    00000598 3D               [ 4] 1252 	dec	a
+    00000599 E6 07            [ 7] 1253 	and	a, #0x07
+    0000059B 47               [ 4] 1254 	ld	b, a
+    0000059C 3E 01            [ 7] 1255 	ld	a, #0x01
+    0000059E 04               [ 4] 1256 	inc	b
+    0000059F 18 01            [12] 1257 	jr	00207$
+    000005A1                       1258 00206$:
+    000005A1 87               [ 4] 1259 	add	a, a
+    000005A2                       1260 00207$:
+    000005A2 10 FD            [13] 1261 	djnz	00206$
+    000005A4 2F               [ 4] 1262 	cpl
+    000005A5 A6               [ 7] 1263 	and	a, (hl)
+    000005A6 77               [ 7] 1264 	ld	(hl), a
+    000005A7 21r00r00         [10] 1265 	ld	hl, #_g_Loc
+    000005AA 19               [11] 1266 	add	hl, de
+    000005AB 3Ar00r00         [13] 1267 	ld	a, (_SatchCon+0)
+    000005AE 06 00            [ 7] 1268 	ld	b, #0x00
+    000005B0 4F               [ 4] 1269 	ld	c, a
+    000005B1 0B               [ 6] 1270 	dec	bc
+    000005B2 3E 03            [ 7] 1271 	ld	a, #0x03
+    000005B4                       1272 00208$:
+    000005B4 CB 28            [ 8] 1273 	sra	b
+    000005B6 CB 19            [ 8] 1274 	rr	c
+    000005B8 3D               [ 4] 1275 	dec	a
+    000005B9 20 F9            [12] 1276 	jr	nz, 00208$
+    000005BB 09               [11] 1277 	add	hl, bc
+    000005BC 3Ar00r00         [13] 1278 	ld	a, (_SatchCon+0)
+    000005BF 3D               [ 4] 1279 	dec	a
+    000005C0 E6 07            [ 7] 1280 	and	a, #0x07
+    000005C2 47               [ 4] 1281 	ld	b, a
+    000005C3 3E 01            [ 7] 1282 	ld	a, #0x01
+    000005C5 04               [ 4] 1283 	inc	b
+    000005C6 18 01            [12] 1284 	jr	00210$
+    000005C8                       1285 00209$:
+    000005C8 87               [ 4] 1286 	add	a, a
+    000005C9                       1287 00210$:
+    000005C9 10 FD            [13] 1288 	djnz	00209$
+    000005CB B6               [ 7] 1289 	or	a, (hl)
+    000005CC 77               [ 7] 1290 	ld	(hl), a
+    000005CD                       1291 00109$:
+                                   1292 ;./../game/game.c:68: if (HolstCon != Null && IN29(Inv, 7)) { LOC_DEL(Prm, HolstCon); LOC_ADD(New, HolstCon); }
+    000005CD 3Ar00r00         [13] 1293 	ld	a, (_HolstCon+0)
+    000005D0 B7               [ 4] 1294 	or	a, a
+    000005D1 28 60            [12] 1295 	jr	z, 00114$
+    000005D3 3Ar00r00         [13] 1296 	ld	a, (#_Inv + 0)
+    000005D6 07               [ 4] 1297 	rlca
+    000005D7 07               [ 4] 1298 	rlca
+    000005D8 30 59            [12] 1299 	jr	nc, 00114$
+    000005DA 3Ar00r00         [13] 1300 	ld	a, (#_Prm + 0)
+    000005DD 4F               [ 4] 1301 	ld	c, a
+    000005DE 06 00            [ 7] 1302 	ld	b, #0x00
+    000005E0 69               [ 4] 1303 	ld	l, c
+    000005E1 60               [ 4] 1304 	ld	h, b
+    000005E2 29               [11] 1305 	add	hl, hl
+    000005E3 29               [11] 1306 	add	hl, hl
+    000005E4 29               [11] 1307 	add	hl, hl
+    000005E5 29               [11] 1308 	add	hl, hl
+    000005E6 09               [11] 1309 	add	hl, bc
+    000005E7 01r00r00         [10] 1310 	ld	bc, #_g_Loc
+    000005EA 09               [11] 1311 	add	hl, bc
+    000005EB 3Ar00r00         [13] 1312 	ld	a, (_HolstCon+0)
+    000005EE 06 00            [ 7] 1313 	ld	b, #0x00
+    000005F0 4F               [ 4] 1314 	ld	c, a
+    000005F1 0B               [ 6] 1315 	dec	bc
+    000005F2 3E 03            [ 7] 1316 	ld	a, #0x03
+    000005F4                       1317 00211$:
+    000005F4 CB 28            [ 8] 1318 	sra	b
+    000005F6 CB 19            [ 8] 1319 	rr	c
+    000005F8 3D               [ 4] 1320 	dec	a
+    000005F9 20 F9            [12] 1321 	jr	nz, 00211$
+    000005FB 09               [11] 1322 	add	hl, bc
+    000005FC 3Ar00r00         [13] 1323 	ld	a, (_HolstCon+0)
+    000005FF 3D               [ 4] 1324 	dec	a
+    00000600 E6 07            [ 7] 1325 	and	a, #0x07
+    00000602 47               [ 4] 1326 	ld	b, a
+    00000603 3E 01            [ 7] 1327 	ld	a, #0x01
+    00000605 04               [ 4] 1328 	inc	b
+    00000606 18 01            [12] 1329 	jr	00213$
+    00000608                       1330 00212$:
+    00000608 87               [ 4] 1331 	add	a, a
+    00000609                       1332 00213$:
+    00000609 10 FD            [13] 1333 	djnz	00212$
+    0000060B 2F               [ 4] 1334 	cpl
+    0000060C A6               [ 7] 1335 	and	a, (hl)
+    0000060D 77               [ 7] 1336 	ld	(hl), a
+    0000060E 21r00r00         [10] 1337 	ld	hl, #_g_Loc
+    00000611 19               [11] 1338 	add	hl, de
+    00000612 3Ar00r00         [13] 1339 	ld	a, (_HolstCon+0)
+    00000615 16 00            [ 7] 1340 	ld	d, #0x00
+    00000617 5F               [ 4] 1341 	ld	e, a
+    00000618 1B               [ 6] 1342 	dec	de
+    00000619 06 03            [ 7] 1343 	ld	b, #0x03
+    0000061B                       1344 00214$:
+    0000061B CB 2A            [ 8] 1345 	sra	d
+    0000061D CB 1B            [ 8] 1346 	rr	e
+    0000061F 10 FA            [13] 1347 	djnz	00214$
+    00000621 19               [11] 1348 	add	hl, de
+    00000622 3Ar00r00         [13] 1349 	ld	a, (_HolstCon+0)
+    00000625 3D               [ 4] 1350 	dec	a
+    00000626 E6 07            [ 7] 1351 	and	a, #0x07
+    00000628 47               [ 4] 1352 	ld	b, a
+    00000629 3E 01            [ 7] 1353 	ld	a, #0x01
+    0000062B 04               [ 4] 1354 	inc	b
+    0000062C 18 01            [12] 1355 	jr	00216$
+    0000062E                       1356 00215$:
+    0000062E 87               [ 4] 1357 	add	a, a
+    0000062F                       1358 00216$:
+    0000062F 10 FD            [13] 1359 	djnz	00215$
+    00000631 B6               [ 7] 1360 	or	a, (hl)
+    00000632 77               [ 7] 1361 	ld	(hl), a
+    00000633                       1362 00114$:
+                                   1363 ;./../game/game.c:69: Prm = New;
+    00000633 DD 7E FF         [19] 1364 	ld	a, -1 (ix)
+    00000636 32r00r00         [13] 1365 	ld	(#_Prm), a
+                                   1366 ;./../game/game.c:70: Describe(Prm);
+    00000639 3Ar00r00         [13] 1367 	ld	a, (_Prm)
+    0000063C CDr00r00         [17] 1368 	call	_Describe
+    0000063F                       1369 00124$:
+                                   1370 ;./../game/game.c:72: }
+    0000063F 33               [ 6] 1371 	inc	sp
+    00000640 DD E1            [14] 1372 	pop	ix
+    00000642 C9               [10] 1373 	ret
+                                   1374 ;./../game/game.c:74: static void TimeEvents(void)
+                                   1375 ;	---------------------------------
+                                   1376 ; Function TimeEvents
+                                   1377 ; ---------------------------------
+    00000643                       1378 _TimeEvents:
+                                   1379 ;./../game/game.c:76: Time1();
+    00000643 CDr00r00         [17] 1380 	call	_Time1
+                                   1381 ;./../game/game.c:77: switch (TFlag)
+    00000646 3Ar00r00         [13] 1382 	ld	a, (_TFlag)
+    00000649 3D               [ 4] 1383 	dec	a
+    0000064A CAr00r00         [10] 1384 	jp	z, _Time2A
+    0000064D 3Ar00r00         [13] 1385 	ld	a, (_TFlag)
+    00000650 D6 02            [ 7] 1386 	sub	a, #0x02
+    00000652 CAr00r00         [10] 1387 	jp	z, _Time2B
+    00000655 3Ar00r00         [13] 1388 	ld	a, (_TFlag)
+    00000658 D6 03            [ 7] 1389 	sub	a, #0x03
+    0000065A CAr00r00         [10] 1390 	jp	z, _Time2C
+    0000065D 3Ar00r00         [13] 1391 	ld	a, (_TFlag)
+    00000660 D6 04            [ 7] 1392 	sub	a, #0x04
+    00000662 CAr00r00         [10] 1393 	jp	z, _Time2D
+                                   1394 ;./../game/game.c:79: case 1: Time2A(); break;
+                                   1395 ;./../game/game.c:80: case 2: Time2B(); break;
+                                   1396 ;./../game/game.c:81: case 3: Time2C(); break;
+                                   1397 ;./../game/game.c:82: case 4: Time2D(); break;
+                                   1398 ;./../game/game.c:83: }
+                                   1399 ;./../game/game.c:84: }
+    00000665 C9               [10] 1400 	ret
+                                   1401 ;./../game/game.c:86: static void RoomRoutine(void)
+                                   1402 ;	---------------------------------
+                                   1403 ; Function RoomRoutine
+                                   1404 ; ---------------------------------
+    00000666                       1405 _RoomRoutine:
+                                   1406 ;./../game/game.c:88: if (Prm == 1) Room1();
+    00000666 3Ar00r00         [13] 1407 	ld	a, (_Prm)
+    00000669 3D               [ 4] 1408 	dec	a
+    0000066A CAr00r00         [10] 1409 	jp	z, _Room1
+                                   1410 ;./../game/game.c:89: else if (Prm == 2 || Prm == 3) Room2();
+    0000066D 3Ar00r00         [13] 1411 	ld	a, (_Prm)
+    00000670 D6 02            [ 7] 1412 	sub	a, #0x02
+    00000672 CAr00r00         [10] 1413 	jp	z, _Room2
+    00000675 3Ar00r00         [13] 1414 	ld	a, (_Prm)
+    00000678 D6 03            [ 7] 1415 	sub	a, #0x03
+    0000067A CAr00r00         [10] 1416 	jp	z, _Room2
+                                   1417 ;./../game/game.c:90: else if (IN_RANGE(Prm, 4, 7)) Room3();
+    0000067D 3Ar00r00         [13] 1418 	ld	a, (_Prm+0)
+    00000680 D6 04            [ 7] 1419 	sub	a, #0x04
+    00000682 38 09            [12] 1420 	jr	c, 00186$
+    00000684 3E 07            [ 7] 1421 	ld	a, #0x07
+    00000686 21r00r00         [10] 1422 	ld	hl, #_Prm
+    00000689 96               [ 7] 1423 	sub	a, (hl)
+    0000068A D2r00r00         [10] 1424 	jp	nc, _Room3
+    0000068D                       1425 00186$:
+                                   1426 ;./../game/game.c:91: else if (IN_RANGE(Prm, 8, 12)) Room4();
+    0000068D 3Ar00r00         [13] 1427 	ld	a, (_Prm+0)
+    00000690 D6 08            [ 7] 1428 	sub	a, #0x08
+    00000692 38 09            [12] 1429 	jr	c, 00182$
+    00000694 3E 0C            [ 7] 1430 	ld	a, #0x0c
+    00000696 21r00r00         [10] 1431 	ld	hl, #_Prm
+    00000699 96               [ 7] 1432 	sub	a, (hl)
+    0000069A D2r00r00         [10] 1433 	jp	nc, _Room4
+    0000069D                       1434 00182$:
+                                   1435 ;./../game/game.c:92: else if (IN_RANGE(Prm, 13, 22)) Room5();
+    0000069D 3Ar00r00         [13] 1436 	ld	a, (_Prm+0)
+    000006A0 D6 0D            [ 7] 1437 	sub	a, #0x0d
+    000006A2 38 09            [12] 1438 	jr	c, 00178$
+    000006A4 3E 16            [ 7] 1439 	ld	a, #0x16
+    000006A6 21r00r00         [10] 1440 	ld	hl, #_Prm
+    000006A9 96               [ 7] 1441 	sub	a, (hl)
+    000006AA D2r00r00         [10] 1442 	jp	nc, _Room5
+    000006AD                       1443 00178$:
+                                   1444 ;./../game/game.c:93: else if (IN_RANGE(Prm, 23, 29)) Room6();
+    000006AD 3Ar00r00         [13] 1445 	ld	a, (_Prm+0)
+    000006B0 D6 17            [ 7] 1446 	sub	a, #0x17
+    000006B2 38 09            [12] 1447 	jr	c, 00174$
+    000006B4 3E 1D            [ 7] 1448 	ld	a, #0x1d
+    000006B6 21r00r00         [10] 1449 	ld	hl, #_Prm
+    000006B9 96               [ 7] 1450 	sub	a, (hl)
+    000006BA D2r00r00         [10] 1451 	jp	nc, _Room6
+    000006BD                       1452 00174$:
+                                   1453 ;./../game/game.c:94: else if (IN_RANGE(Prm, 30, 34)) Room7();
+    000006BD 3Ar00r00         [13] 1454 	ld	a, (_Prm+0)
+    000006C0 D6 1E            [ 7] 1455 	sub	a, #0x1e
+    000006C2 38 09            [12] 1456 	jr	c, 00170$
+    000006C4 3E 22            [ 7] 1457 	ld	a, #0x22
+    000006C6 21r00r00         [10] 1458 	ld	hl, #_Prm
+    000006C9 96               [ 7] 1459 	sub	a, (hl)
+    000006CA D2r00r00         [10] 1460 	jp	nc, _Room7
+    000006CD                       1461 00170$:
+                                   1462 ;./../game/game.c:95: else if (IN_RANGE(Prm, 35, 38)) Room8();
+    000006CD 3Ar00r00         [13] 1463 	ld	a, (_Prm+0)
+    000006D0 D6 23            [ 7] 1464 	sub	a, #0x23
+    000006D2 38 09            [12] 1465 	jr	c, 00166$
+    000006D4 3E 26            [ 7] 1466 	ld	a, #0x26
+    000006D6 21r00r00         [10] 1467 	ld	hl, #_Prm
+    000006D9 96               [ 7] 1468 	sub	a, (hl)
+    000006DA D2r00r00         [10] 1469 	jp	nc, _Room8
+    000006DD                       1470 00166$:
+                                   1471 ;./../game/game.c:96: else if (IN_RANGE(Prm, 39, 41)) Room9();
+    000006DD 3Ar00r00         [13] 1472 	ld	a, (_Prm+0)
+    000006E0 D6 27            [ 7] 1473 	sub	a, #0x27
+    000006E2 38 09            [12] 1474 	jr	c, 00162$
+    000006E4 3E 29            [ 7] 1475 	ld	a, #0x29
+    000006E6 21r00r00         [10] 1476 	ld	hl, #_Prm
+    000006E9 96               [ 7] 1477 	sub	a, (hl)
+    000006EA D2r00r00         [10] 1478 	jp	nc, _Room9
+    000006ED                       1479 00162$:
+                                   1480 ;./../game/game.c:97: else if (IN_RANGE(Prm, 42, 50)) Room10();
+    000006ED 3Ar00r00         [13] 1481 	ld	a, (_Prm+0)
+    000006F0 D6 2A            [ 7] 1482 	sub	a, #0x2a
+    000006F2 38 09            [12] 1483 	jr	c, 00158$
+    000006F4 3E 32            [ 7] 1484 	ld	a, #0x32
+    000006F6 21r00r00         [10] 1485 	ld	hl, #_Prm
+    000006F9 96               [ 7] 1486 	sub	a, (hl)
+    000006FA D2r00r00         [10] 1487 	jp	nc, _Room10
+    000006FD                       1488 00158$:
+                                   1489 ;./../game/game.c:98: else if (IN_RANGE(Prm, 51, 55)) Room11();
+    000006FD 3Ar00r00         [13] 1490 	ld	a, (_Prm+0)
+    00000700 D6 33            [ 7] 1491 	sub	a, #0x33
+    00000702 38 09            [12] 1492 	jr	c, 00154$
+    00000704 3E 37            [ 7] 1493 	ld	a, #0x37
+    00000706 21r00r00         [10] 1494 	ld	hl, #_Prm
+    00000709 96               [ 7] 1495 	sub	a, (hl)
+    0000070A D2r00r00         [10] 1496 	jp	nc, _Room11
+    0000070D                       1497 00154$:
+                                   1498 ;./../game/game.c:99: else if (Prm == 56) Room12();
+    0000070D 3Ar00r00         [13] 1499 	ld	a, (_Prm)
+    00000710 D6 38            [ 7] 1500 	sub	a, #0x38
+    00000712 CAr00r00         [10] 1501 	jp	z, _Room12
+                                   1502 ;./../game/game.c:100: else if (IN_RANGE(Prm, 57, 63)) Room13();
+    00000715 3Ar00r00         [13] 1503 	ld	a, (_Prm+0)
+    00000718 D6 39            [ 7] 1504 	sub	a, #0x39
+    0000071A 38 09            [12] 1505 	jr	c, 00147$
+    0000071C 3E 3F            [ 7] 1506 	ld	a, #0x3f
+    0000071E 21r00r00         [10] 1507 	ld	hl, #_Prm
+    00000721 96               [ 7] 1508 	sub	a, (hl)
+    00000722 D2r00r00         [10] 1509 	jp	nc, _Room13
+    00000725                       1510 00147$:
+                                   1511 ;./../game/game.c:101: else if (IN_RANGE(Prm, 64, 67) || Prm == 71 || Prm == 72) Room14();
+    00000725 3Ar00r00         [13] 1512 	ld	a, (_Prm+0)
+    00000728 D6 40            [ 7] 1513 	sub	a, #0x40
+    0000072A 38 09            [12] 1514 	jr	c, 00144$
+    0000072C 3E 43            [ 7] 1515 	ld	a, #0x43
+    0000072E 21r00r00         [10] 1516 	ld	hl, #_Prm
+    00000731 96               [ 7] 1517 	sub	a, (hl)
+    00000732 D2r00r00         [10] 1518 	jp	nc, _Room14
+    00000735                       1519 00144$:
+    00000735 3Ar00r00         [13] 1520 	ld	a, (_Prm)
+    00000738 D6 47            [ 7] 1521 	sub	a, #0x47
+    0000073A CAr00r00         [10] 1522 	jp	z, _Room14
+    0000073D 3Ar00r00         [13] 1523 	ld	a, (_Prm)
+    00000740 D6 48            [ 7] 1524 	sub	a, #0x48
+    00000742 CAr00r00         [10] 1525 	jp	z, _Room14
+                                   1526 ;./../game/game.c:102: else if (IN_RANGE(Prm, 68, 70)) Room15();
+    00000745 3Ar00r00         [13] 1527 	ld	a, (_Prm+0)
+    00000748 D6 44            [ 7] 1528 	sub	a, #0x44
+    0000074A 38 09            [12] 1529 	jr	c, 00137$
+    0000074C 3E 46            [ 7] 1530 	ld	a, #0x46
+    0000074E 21r00r00         [10] 1531 	ld	hl, #_Prm
+    00000751 96               [ 7] 1532 	sub	a, (hl)
+    00000752 D2r00r00         [10] 1533 	jp	nc, _Room15
+    00000755                       1534 00137$:
+                                   1535 ;./../game/game.c:103: else if (IN_RANGE(Prm, 73, 77)) Room16();
+    00000755 3Ar00r00         [13] 1536 	ld	a, (_Prm+0)
+    00000758 D6 49            [ 7] 1537 	sub	a, #0x49
+    0000075A 38 09            [12] 1538 	jr	c, 00133$
+    0000075C 3E 4D            [ 7] 1539 	ld	a, #0x4d
+    0000075E 21r00r00         [10] 1540 	ld	hl, #_Prm
+    00000761 96               [ 7] 1541 	sub	a, (hl)
+    00000762 D2r00r00         [10] 1542 	jp	nc, _Room16
+    00000765                       1543 00133$:
+                                   1544 ;./../game/game.c:104: else if (IN_RANGE(Prm, 78, 80)) Room17();
+    00000765 3Ar00r00         [13] 1545 	ld	a, (_Prm+0)
+    00000768 D6 4E            [ 7] 1546 	sub	a, #0x4e
+    0000076A 38 09            [12] 1547 	jr	c, 00129$
+    0000076C 3E 50            [ 7] 1548 	ld	a, #0x50
+    0000076E 21r00r00         [10] 1549 	ld	hl, #_Prm
+    00000771 96               [ 7] 1550 	sub	a, (hl)
+    00000772 D2r00r00         [10] 1551 	jp	nc, _Room17
+    00000775                       1552 00129$:
+                                   1553 ;./../game/game.c:105: else if (IN_RANGE(Prm, 81, 83) || Prm == 93 || Prm == 95 || Prm == 96) Room18();
+    00000775 3Ar00r00         [13] 1554 	ld	a, (_Prm+0)
+    00000778 D6 51            [ 7] 1555 	sub	a, #0x51
+    0000077A 38 09            [12] 1556 	jr	c, 00125$
+    0000077C 3E 53            [ 7] 1557 	ld	a, #0x53
+    0000077E 21r00r00         [10] 1558 	ld	hl, #_Prm
+    00000781 96               [ 7] 1559 	sub	a, (hl)
+    00000782 D2r00r00         [10] 1560 	jp	nc, _Room18
+    00000785                       1561 00125$:
+    00000785 3Ar00r00         [13] 1562 	ld	a, (_Prm)
+    00000788 D6 5D            [ 7] 1563 	sub	a, #0x5d
+    0000078A CAr00r00         [10] 1564 	jp	z, _Room18
+    0000078D 3Ar00r00         [13] 1565 	ld	a, (_Prm)
+    00000790 D6 5F            [ 7] 1566 	sub	a, #0x5f
+    00000792 CAr00r00         [10] 1567 	jp	z, _Room18
+    00000795 3Ar00r00         [13] 1568 	ld	a, (_Prm)
+    00000798 D6 60            [ 7] 1569 	sub	a, #0x60
+    0000079A CAr00r00         [10] 1570 	jp	z, _Room18
+                                   1571 ;./../game/game.c:106: else if (IN_RANGE(Prm, 84, 89)) Room19();
+    0000079D 3Ar00r00         [13] 1572 	ld	a, (_Prm+0)
+    000007A0 D6 54            [ 7] 1573 	sub	a, #0x54
+    000007A2 38 09            [12] 1574 	jr	c, 00118$
+    000007A4 3E 59            [ 7] 1575 	ld	a, #0x59
+    000007A6 21r00r00         [10] 1576 	ld	hl, #_Prm
+    000007A9 96               [ 7] 1577 	sub	a, (hl)
+    000007AA D2r00r00         [10] 1578 	jp	nc, _Room19
+    000007AD                       1579 00118$:
+                                   1580 ;./../game/game.c:107: else if (IN_RANGE(Prm, 90, 92)) Room20();
+    000007AD 3Ar00r00         [13] 1581 	ld	a, (_Prm+0)
+    000007B0 D6 5A            [ 7] 1582 	sub	a, #0x5a
+    000007B2 38 09            [12] 1583 	jr	c, 00114$
+    000007B4 3E 5C            [ 7] 1584 	ld	a, #0x5c
+    000007B6 21r00r00         [10] 1585 	ld	hl, #_Prm
+    000007B9 96               [ 7] 1586 	sub	a, (hl)
+    000007BA D2r00r00         [10] 1587 	jp	nc, _Room20
+    000007BD                       1588 00114$:
+                                   1589 ;./../game/game.c:108: else if (Prm == 94 || IN_RANGE(Prm, 97, 100)) Room21();
+    000007BD 3Ar00r00         [13] 1590 	ld	a, (_Prm)
+    000007C0 D6 5E            [ 7] 1591 	sub	a, #0x5e
+    000007C2 CAr00r00         [10] 1592 	jp	z, _Room21
+    000007C5 3Ar00r00         [13] 1593 	ld	a, (_Prm+0)
+    000007C8 D6 61            [ 7] 1594 	sub	a, #0x61
+    000007CA 38 09            [12] 1595 	jr	c, 00109$
+    000007CC 3E 64            [ 7] 1596 	ld	a, #0x64
+    000007CE 21r00r00         [10] 1597 	ld	hl, #_Prm
+    000007D1 96               [ 7] 1598 	sub	a, (hl)
+    000007D2 D2r00r00         [10] 1599 	jp	nc, _Room21
+    000007D5                       1600 00109$:
+                                   1601 ;./../game/game.c:109: else if (IN_RANGE(Prm, 101, 105)) Room22();
+    000007D5 3Ar00r00         [13] 1602 	ld	a, (_Prm+0)
+    000007D8 D6 65            [ 7] 1603 	sub	a, #0x65
+    000007DA 38 09            [12] 1604 	jr	c, 00105$
+    000007DC 3E 69            [ 7] 1605 	ld	a, #0x69
+    000007DE 21r00r00         [10] 1606 	ld	hl, #_Prm
+    000007E1 96               [ 7] 1607 	sub	a, (hl)
+    000007E2 D2r00r00         [10] 1608 	jp	nc, _Room22
+    000007E5                       1609 00105$:
+                                   1610 ;./../game/game.c:110: else if (IN_RANGE(Prm, 106, 108)) Room23();
+    000007E5 3Ar00r00         [13] 1611 	ld	a, (_Prm+0)
+    000007E8 D6 6A            [ 7] 1612 	sub	a, #0x6a
+    000007EA D8               [11] 1613 	ret	c
+    000007EB 3E 6C            [ 7] 1614 	ld	a, #0x6c
+    000007ED 21r00r00         [10] 1615 	ld	hl, #_Prm
+    000007F0 96               [ 7] 1616 	sub	a, (hl)
+    000007F1 D2r00r00         [10] 1617 	jp	nc, _Room23
+                                   1618 ;./../game/game.c:111: }
+    000007F4 C9               [10] 1619 	ret
+                                   1620 ;./../game/game.c:113: static void DefaultRoutine(void)
+                                   1621 ;	---------------------------------
+                                   1622 ; Function DefaultRoutine
+                                   1623 ; ---------------------------------
+    000007F5                       1624 _DefaultRoutine:
+                                   1625 ;./../game/game.c:115: switch (Vb)
+    000007F5 3E 5F            [ 7] 1626 	ld	a, #0x5f
+    000007F7 FD 21r00r00      [14] 1627 	ld	iy, #_Vb
+    000007FB FD 96 00         [19] 1628 	sub	a, 0 (iy)
+    000007FE D8               [11] 1629 	ret	c
+    000007FF FD 4E 00         [19] 1630 	ld	c, 0 (iy)
+    00000802 06 00            [ 7] 1631 	ld	b, #0x00
+    00000804 21r0Er08         [10] 1632 	ld	hl, #00190$
+    00000807 09               [11] 1633 	add	hl, bc
+    00000808 09               [11] 1634 	add	hl, bc
+    00000809 4E               [ 7] 1635 	ld	c, (hl)
+    0000080A 23               [ 6] 1636 	inc	hl
+    0000080B 66               [ 7] 1637 	ld	h, (hl)
+    0000080C 69               [ 4] 1638 	ld	l, c
+    0000080D E9               [ 4] 1639 	jp	(hl)
+    0000080E                       1640 00190$:
+    0000080ErFBr08                 1641 	.dw	00180$
+    00000810rCEr08                 1642 	.dw	00111$
+    00000812rCEr08                 1643 	.dw	00111$
+    00000814rCEr08                 1644 	.dw	00111$
+    00000816rCEr08                 1645 	.dw	00111$
+    00000818rCEr08                 1646 	.dw	00111$
+    0000081ArCEr08                 1647 	.dw	00111$
+    0000081CrCEr08                 1648 	.dw	00111$
+    0000081ErCEr08                 1649 	.dw	00111$
+    00000820rD4r08                 1650 	.dw	00127$
+    00000822rD4r08                 1651 	.dw	00127$
+    00000824rD4r08                 1652 	.dw	00127$
+    00000826rD4r08                 1653 	.dw	00127$
+    00000828rD4r08                 1654 	.dw	00127$
+    0000082ArD4r08                 1655 	.dw	00127$
+    0000082CrD4r08                 1656 	.dw	00127$
+    0000082ErD1r08                 1657 	.dw	00114$
+    00000830rD1r08                 1658 	.dw	00114$
+    00000832rD1r08                 1659 	.dw	00114$
+    00000834rF5r08                 1660 	.dw	00173$
+    00000836rE9r08                 1661 	.dw	00156$
+    00000838rF8r08                 1662 	.dw	00178$
+    0000083ArE9r08                 1663 	.dw	00156$
+    0000083CrFBr08                 1664 	.dw	00180$
+    0000083ErE9r08                 1665 	.dw	00156$
+    00000840rF8r08                 1666 	.dw	00178$
+    00000842rE9r08                 1667 	.dw	00156$
+    00000844rFBr08                 1668 	.dw	00180$
+    00000846rD7r08                 1669 	.dw	00129$
+    00000848rFBr08                 1670 	.dw	00180$
+    0000084ArCEr08                 1671 	.dw	00111$
+    0000084CrE3r08                 1672 	.dw	00147$
+    0000084ErD4r08                 1673 	.dw	00127$
+    00000850rECr08                 1674 	.dw	00157$
+    00000852rFBr08                 1675 	.dw	00180$
+    00000854rD4r08                 1676 	.dw	00127$
+    00000856rFBr08                 1677 	.dw	00180$
+    00000858rDAr08                 1678 	.dw	00131$
+    0000085ArFBr08                 1679 	.dw	00180$
+    0000085CrDAr08                 1680 	.dw	00131$
+    0000085ErFBr08                 1681 	.dw	00180$
+    00000860rE6r08                 1682 	.dw	00150$
+    00000862rEFr08                 1683 	.dw	00164$
+    00000864rFBr08                 1684 	.dw	00180$
+    00000866rEFr08                 1685 	.dw	00164$
+    00000868rFBr08                 1686 	.dw	00180$
+    0000086ArDDr08                 1687 	.dw	00133$
+    0000086CrD7r08                 1688 	.dw	00129$
+    0000086ErF2r08                 1689 	.dw	00166$
+    00000870rF8r08                 1690 	.dw	00178$
+    00000872rE6r08                 1691 	.dw	00150$
+    00000874rD4r08                 1692 	.dw	00127$
+    00000876rFBr08                 1693 	.dw	00180$
+    00000878rF5r08                 1694 	.dw	00173$
+    0000087ArF2r08                 1695 	.dw	00166$
+    0000087CrFBr08                 1696 	.dw	00180$
+    0000087ErF5r08                 1697 	.dw	00173$
+    00000880rFBr08                 1698 	.dw	00180$
+    00000882rFBr08                 1699 	.dw	00180$
+    00000884rF8r08                 1700 	.dw	00178$
+    00000886rFBr08                 1701 	.dw	00180$
+    00000888rFBr08                 1702 	.dw	00180$
+    0000088ArD4r08                 1703 	.dw	00127$
+    0000088CrFBr08                 1704 	.dw	00180$
+    0000088ErDDr08                 1705 	.dw	00133$
+    00000890rE3r08                 1706 	.dw	00147$
+    00000892rE0r08                 1707 	.dw	00138$
+    00000894rE0r08                 1708 	.dw	00138$
+    00000896rE0r08                 1709 	.dw	00138$
+    00000898rE0r08                 1710 	.dw	00138$
+    0000089ArE9r08                 1711 	.dw	00156$
+    0000089CrE0r08                 1712 	.dw	00138$
+    0000089ErF5r08                 1713 	.dw	00173$
+    000008A0rEFr08                 1714 	.dw	00164$
+    000008A2rF5r08                 1715 	.dw	00173$
+    000008A4rE3r08                 1716 	.dw	00147$
+    000008A6rE9r08                 1717 	.dw	00156$
+    000008A8rD4r08                 1718 	.dw	00127$
+    000008AArF5r08                 1719 	.dw	00173$
+    000008ACrD4r08                 1720 	.dw	00127$
+    000008AErE3r08                 1721 	.dw	00147$
+    000008B0rE3r08                 1722 	.dw	00147$
+    000008B2rCEr08                 1723 	.dw	00111$
+    000008B4rE3r08                 1724 	.dw	00147$
+    000008B6rE3r08                 1725 	.dw	00147$
+    000008B8rFBr08                 1726 	.dw	00180$
+    000008BArEFr08                 1727 	.dw	00164$
+    000008BCrCEr08                 1728 	.dw	00111$
+    000008BErE6r08                 1729 	.dw	00150$
+    000008C0rEFr08                 1730 	.dw	00164$
+    000008C2rEFr08                 1731 	.dw	00164$
+    000008C4rF5r08                 1732 	.dw	00173$
+    000008C6rF8r08                 1733 	.dw	00178$
+    000008C8rE3r08                 1734 	.dw	00147$
+    000008CArEFr08                 1735 	.dw	00164$
+    000008CCrE3r08                 1736 	.dw	00147$
+                                   1737 ;./../game/game.c:117: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 30: case 82: case 87: Default0(); break;
+    000008CE                       1738 00111$:
+    000008CE C3r00r00         [10] 1739 	jp	_Default0
+                                   1740 ;./../game/game.c:118: case 16: case 17: case 18: Default1(); break;
+    000008D1                       1741 00114$:
+    000008D1 C3r00r00         [10] 1742 	jp	_Default1
+                                   1743 ;./../game/game.c:119: case 9: case 10: case 11: case 12: case 13: case 14: case 15: case 32: case 35: case 51: case 77: case 79: case 62: Default2(); break;
+    000008D4                       1744 00127$:
+    000008D4 C3r00r00         [10] 1745 	jp	_Default2
+                                   1746 ;./../game/game.c:120: case 28: case 47: Default3(); break;
+    000008D7                       1747 00129$:
+    000008D7 C3r00r00         [10] 1748 	jp	_Default3
+                                   1749 ;./../game/game.c:121: case 37: case 39: Default4(); break;
+    000008DA                       1750 00131$:
+    000008DA C3r00r00         [10] 1751 	jp	_Default4
+                                   1752 ;./../game/game.c:122: case 46: case 64: Default5(); break;
+    000008DD                       1753 00133$:
+    000008DD C3r00r00         [10] 1754 	jp	_Default5
+                                   1755 ;./../game/game.c:123: case 66: case 67: case 68: case 69: case 71: Default6(); break;
+    000008E0                       1756 00138$:
+    000008E0 C3r00r00         [10] 1757 	jp	_Default6
+                                   1758 ;./../game/game.c:124: case 31: case 65: case 75: case 80: case 81: case 83: case 84: case 93: case 95: Default7(); break;
+    000008E3                       1759 00147$:
+    000008E3 C3r00r00         [10] 1760 	jp	_Default7
+                                   1761 ;./../game/game.c:125: case 41: case 50: case 88: Default8(); break;
+    000008E6                       1762 00150$:
+    000008E6 C3r00r00         [10] 1763 	jp	_Default8
+                                   1764 ;./../game/game.c:126: case 20: case 22: case 24: case 26: case 70: case 76: Default9(); break;
+    000008E9                       1765 00156$:
+    000008E9 C3r00r00         [10] 1766 	jp	_Default9
+                                   1767 ;./../game/game.c:127: case 33: Default10(); break;
+    000008EC                       1768 00157$:
+    000008EC C3r00r00         [10] 1769 	jp	_Default10
+                                   1770 ;./../game/game.c:128: case 42: case 44: case 73: case 86: case 89: case 90: case 94: Default11(); break;
+    000008EF                       1771 00164$:
+    000008EF C3r00r00         [10] 1772 	jp	_Default11
+                                   1773 ;./../game/game.c:129: case 48: case 54: Default12(); break;
+    000008F2                       1774 00166$:
+    000008F2 C3r00r00         [10] 1775 	jp	_Default12
+                                   1776 ;./../game/game.c:130: case 19: case 53: case 56: case 72: case 74: case 78: case 91: Default13(); break;
+    000008F5                       1777 00173$:
+    000008F5 C3r00r00         [10] 1778 	jp	_Default13
+                                   1779 ;./../game/game.c:131: case 21: case 25: case 49: case 59: case 92: Default14(); break;
+    000008F8                       1780 00178$:
+    000008F8 C3r00r00         [10] 1781 	jp	_Default14
+                                   1782 ;./../game/game.c:132: }
+    000008FB                       1783 00180$:
+                                   1784 ;./../game/game.c:133: }
+    000008FB C9               [10] 1785 	ret
+                                   1786 ;./../game/game.c:135: void SetR(u8 obj, u8 room)
+                                   1787 ;	---------------------------------
+                                   1788 ; Function SetR
+                                   1789 ; ---------------------------------
+    000008FC                       1790 _SetR::
+    000008FC 4F               [ 4] 1791 	ld	c, a
+    000008FD 5D               [ 4] 1792 	ld	e, l
+                                   1793 ;./../game/game.c:137: if (obj >= 1 && obj <= MMax) R[obj] = room;
+    000008FE 79               [ 4] 1794 	ld	a, c
+    000008FF D6 01            [ 7] 1795 	sub	a, #0x01
+    00000901 D8               [11] 1796 	ret	c
+    00000902 3E 1D            [ 7] 1797 	ld	a, #0x1d
+    00000904 91               [ 4] 1798 	sub	a, c
+    00000905 D8               [11] 1799 	ret	c
+    00000906 21r00r00         [10] 1800 	ld	hl, #_R+0
+    00000909 06 00            [ 7] 1801 	ld	b, #0x00
+    0000090B 09               [11] 1802 	add	hl, bc
+    0000090C 73               [ 7] 1803 	ld	(hl), e
+                                   1804 ;./../game/game.c:138: }
+    0000090D C9               [10] 1805 	ret
+                                   1806 ;./../game/game.c:140: static void GameRun(void)
+                                   1807 ;	---------------------------------
+                                   1808 ; Function GameRun
+                                   1809 ; ---------------------------------
+    0000090E                       1810 _GameRun:
+                                   1811 ;./../game/game.c:142: Title();
+    0000090E CDr00r00         [17] 1812 	call	_Title
+                                   1813 ;./../game/game.c:143: Init1(); Init2(); Init3();
+    00000911 CDr00r00         [17] 1814 	call	_Init1
+    00000914 CDr00r00         [17] 1815 	call	_Init2
+    00000917 CDr00r00         [17] 1816 	call	_Init3
+                                   1817 ;./../game/game.c:144: Describe(Prm);
+    0000091A 3Ar00r00         [13] 1818 	ld	a, (_Prm)
+    0000091D CDr00r00         [17] 1819 	call	_Describe
+    00000920                       1820 00126$:
+                                   1821 ;./../game/game.c:147: PlayerInput(Line);
+    00000920 21r00r00         [10] 1822 	ld	hl, #_Line
+    00000923 CDr00r00         [17] 1823 	call	_PlayerInput
+                                   1824 ;./../game/game.c:148: if (Len(Input) > 0) Parser_Syntax(Input);
+    00000926 21r00r00         [10] 1825 	ld	hl, #_Input
+    00000929 CDr00r00         [17] 1826 	call	_Len
+    0000092C B7               [ 4] 1827 	or	a, a
+    0000092D 28 06            [12] 1828 	jr	z, 00102$
+    0000092F 21r00r00         [10] 1829 	ld	hl, #_Input
+    00000932 CDr00r00         [17] 1830 	call	_Parser_Syntax
+    00000935                       1831 00102$:
+                                   1832 ;./../game/game.c:149: if (EFlag == Legal)
+    00000935 3Ar00r00         [13] 1833 	ld	a, (_EFlag)
+    00000938 3C               [ 4] 1834 	inc	a
+    00000939 20 E5            [12] 1835 	jr	nz, 00126$
+                                   1836 ;./../game/game.c:151: MoreThanOne();
+    0000093B CDr00r00         [17] 1837 	call	_MoreThanOne
+                                   1838 ;./../game/game.c:152: if (Present())
+    0000093E CDr00r00         [17] 1839 	call	_Present
+    00000941 B7               [ 4] 1840 	or	a, a
+    00000942 28 DC            [12] 1841 	jr	z, 00126$
+                                   1842 ;./../game/game.c:154: if (T[2] > 1)
+    00000944 2Ar04r00         [16] 1843 	ld	hl, (#(_T + 4) + 0)
+    00000947 3E 01            [ 7] 1844 	ld	a, #0x01
+    00000949 BD               [ 4] 1845 	cp	a, l
+    0000094A 3E 00            [ 7] 1846 	ld	a, #0x00
+    0000094C 9C               [ 4] 1847 	sbc	a, h
+    0000094D E2r52r09         [10] 1848 	jp	po, 00252$
+    00000950 EE 80            [ 7] 1849 	xor	a, #0x80
+    00000952                       1850 00252$:
+    00000952 F2r60r09         [10] 1851 	jp	p, 00119$
+                                   1852 ;./../game/game.c:156: RL(11); TimeEvents();
+    00000955 21 0B 00         [10] 1853 	ld	hl, #0x000b
+    00000958 CDr00r00         [17] 1854 	call	_RL
+    0000095B CDr43r06         [17] 1855 	call	_TimeEvents
+    0000095E 18 C0            [12] 1856 	jr	00126$
+    00000960                       1857 00119$:
+                                   1858 ;./../game/game.c:160: SFlag = 0;
+    00000960 AF               [ 4] 1859 	xor	a, a
+    00000961 32r00r00         [13] 1860 	ld	(#_SFlag), a
+                                   1861 ;./../game/game.c:161: if (Vb == 71 && Prm == 55 && !En(35)) Vb = 1;
+    00000964 3Ar00r00         [13] 1862 	ld	a, (_Vb)
+    00000967 D6 47            [ 7] 1863 	sub	a, #0x47
+    00000969 20 14            [12] 1864 	jr	nz, 00104$
+    0000096B 3Ar00r00         [13] 1865 	ld	a, (_Prm)
+    0000096E D6 37            [ 7] 1866 	sub	a, #0x37
+    00000970 20 0D            [12] 1867 	jr	nz, 00104$
+    00000972 3E 23            [ 7] 1868 	ld	a, #0x23
+    00000974 CDr00r00         [17] 1869 	call	_En
+    00000977 B7               [ 4] 1870 	or	a, a
+    00000978 20 05            [12] 1871 	jr	nz, 00104$
+    0000097A 21r00r00         [10] 1872 	ld	hl, #_Vb
+    0000097D 36 01            [10] 1873 	ld	(hl), #0x01
+    0000097F                       1874 00104$:
+                                   1875 ;./../game/game.c:162: RoomRoutine();
+    0000097F CDr66r06         [17] 1876 	call	_RoomRoutine
+                                   1877 ;./../game/game.c:163: if (!SFlag) DefaultRoutine();
+    00000982 3Ar00r00         [13] 1878 	ld	a, (_SFlag+0)
+    00000985 B7               [ 4] 1879 	or	a, a
+    00000986 20 03            [12] 1880 	jr	nz, 00108$
+    00000988 CDrF5r07         [17] 1881 	call	_DefaultRoutine
+    0000098B                       1882 00108$:
+                                   1883 ;./../game/game.c:164: if (En(128)) DEAD();
+    0000098B 3E 80            [ 7] 1884 	ld	a, #0x80
+    0000098D CDr00r00         [17] 1885 	call	_En
+    00000990 B7               [ 4] 1886 	or	a, a
+    00000991 28 03            [12] 1887 	jr	z, 00110$
+    00000993 CDr00r00         [17] 1888 	call	_DEAD
+    00000996                       1889 00110$:
+                                   1890 ;./../game/game.c:165: Min(128);
+    00000996 3E 80            [ 7] 1891 	ld	a, #0x80
+    00000998 CDr00r00         [17] 1892 	call	_Min
+                                   1893 ;./../game/game.c:166: if (!(IN_RANGE(Vb, 77, 79) || Vb == 82 || Vb == 86 || Vb == 87 || Vb == 95)) TimeEvents();
+    0000099B 3Ar00r00         [13] 1894 	ld	a, (_Vb+0)
+    0000099E D6 4D            [ 7] 1895 	sub	a, #0x4d
+    000009A0 38 09            [12] 1896 	jr	c, 00114$
+    000009A2 3E 4F            [ 7] 1897 	ld	a, #0x4f
+    000009A4 21r00r00         [10] 1898 	ld	hl, #_Vb
+    000009A7 96               [ 7] 1899 	sub	a, (hl)
+    000009A8 D2r20r09         [10] 1900 	jp	nc, 00126$
+    000009AB                       1901 00114$:
+    000009AB 3Ar00r00         [13] 1902 	ld	a, (_Vb)
+    000009AE FE 52            [ 7] 1903 	cp	a, #0x52
+    000009B0 CAr20r09         [10] 1904 	jp	z, 00126$
+    000009B3 FE 56            [ 7] 1905 	cp	a, #0x56
+    000009B5 CAr20r09         [10] 1906 	jp	z, 00126$
+    000009B8 FE 57            [ 7] 1907 	cp	a, #0x57
+    000009BA CAr20r09         [10] 1908 	jp	z, 00126$
+    000009BD D6 5F            [ 7] 1909 	sub	a, #0x5f
+    000009BF CAr20r09         [10] 1910 	jp	z, 00126$
+    000009C2 CDr43r06         [17] 1911 	call	_TimeEvents
+                                   1912 ;./../game/game.c:171: }
+    000009C5 C3r20r09         [10] 1913 	jp	00126$
+                                   1914 ;./../game/game.c:173: void RestartGame(void)
+                                   1915 ;	---------------------------------
+                                   1916 ; Function RestartGame
+                                   1917 ; ---------------------------------
+    000009C8                       1918 _RestartGame::
+                                   1919 ;./../game/game.c:175: Vocab_Init();
+    000009C8 CDr00r00         [17] 1920 	call	_Vocab_Init
+                                   1921 ;./../game/game.c:176: GameRun();
+                                   1922 ;./../game/game.c:177: }
+    000009CB C3r0Er09         [10] 1923 	jp	_GameRun
+                                   1924 ;./../game/game.c:179: void GameMain(void)
+                                   1925 ;	---------------------------------
+                                   1926 ; Function GameMain
+                                   1927 ; ---------------------------------
+    000009CE                       1928 _GameMain::
+                                   1929 ;./../game/game.c:181: Vocab_Init();
+    000009CE CDr00r00         [17] 1930 	call	_Vocab_Init
+                                   1931 ;./../game/game.c:182: ScreenBegin();
+    000009D1 CDr00r00         [17] 1932 	call	_ScreenBegin
+                                   1933 ;./../game/game.c:184: if (!OvlLoadAll())
+    000009D4 CDr00r00         [17] 1934 	call	_OvlLoadAll
+    000009D7 B7               [ 4] 1935 	or	a, a
+    000009D8 C2r0Er09         [10] 1936 	jp	nz, _GameRun
+                                   1937 ;E:\supernova\MSXgl\engine/src/system.h:145: inline void Halt() { __asm__("halt"); }
+    000009DB 76               [ 4] 1938 	halt
+                                   1939 ;./../game/game.c:186: Halt();
+                                   1940 ;./../game/game.c:189: GameRun();
+                                   1941 ;./../game/game.c:190: }
+    000009DC C3r0Er09         [10] 1942 	jp	_GameRun
+                                   1943 	.area _CODE
+                                   1944 	.area _INITIALIZER
+                                   1945 	.area _CABS (ABS)

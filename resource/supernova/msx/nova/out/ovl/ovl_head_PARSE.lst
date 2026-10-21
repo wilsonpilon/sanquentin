@@ -1,0 +1,13 @@
+                                      1 ; generated - jump table of overlay PARSE
+                                      2 	.module ovl_head_PARSE
+                                      3 	.globl	_ChopSeven
+                                      4 	.globl	_MoreThanOne
+                                      5 	.globl	_Parser_Syntax
+                                      6 	.globl	_PlayerInput
+                                      7 	.globl	_Present
+                                      8 	.area	_CODE
+    00000000 C3r00r00         [10]    9 	jp	_ChopSeven
+    00000003 C3r00r00         [10]   10 	jp	_MoreThanOne
+    00000006 C3r00r00         [10]   11 	jp	_Parser_Syntax
+    00000009 C3r00r00         [10]   12 	jp	_PlayerInput
+    0000000C C3r00r00         [10]   13 	jp	_Present

@@ -1,0 +1,1040 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module txt
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _VDP_CommandSetupR36
+                                     12 	.globl _VDP_CommandSetupR32
+                                     13 	.globl _VDP_CommandWait
+                                     14 	.globl _g_TabC
+                                     15 	.globl _g_TabB
+                                     16 	.globl _g_TabA
+                                     17 	.globl _g_Plane
+                                     18 	.globl _DOS_TPAUpperAddr
+                                     19 	.globl _g_SLTSL
+                                     20 	.globl _g_GRPACY
+                                     21 	.globl _g_GRPACX
+                                     22 	.globl _g_LOGOPR
+                                     23 	.globl _g_CMASK
+                                     24 	.globl _g_CLOC
+                                     25 	.globl _g_FNKSTR
+                                     26 	.globl _g_GETPNT
+                                     27 	.globl _g_PUTPNT
+                                     28 	.globl _g_ATRBYT
+                                     29 	.globl _g_BDRCLR
+                                     30 	.globl _g_BAKCLR
+                                     31 	.globl _g_FORCLR
+                                     32 	.globl _g_CSRX
+                                     33 	.globl _g_CSRY
+                                     34 	.globl _g_CLIKSW
+                                     35 	.globl _g_MLTPAT
+                                     36 	.globl _g_MLTATR
+                                     37 	.globl _g_MLTCGP
+                                     38 	.globl _g_MLTCOL
+                                     39 	.globl _g_MLTNAM
+                                     40 	.globl _g_GRPPAT
+                                     41 	.globl _g_GRPATR
+                                     42 	.globl _g_GRPCGP
+                                     43 	.globl _g_GRPCOL
+                                     44 	.globl _g_GRPNAM
+                                     45 	.globl _g_T32PAT
+                                     46 	.globl _g_T32ATR
+                                     47 	.globl _g_T32CGP
+                                     48 	.globl _g_T32COL
+                                     49 	.globl _g_T32NAM
+                                     50 	.globl _g_TXTPAT
+                                     51 	.globl _g_TXTATR
+                                     52 	.globl _g_TXTCGP
+                                     53 	.globl _g_TXTCOL
+                                     54 	.globl _g_TXTNAM
+                                     55 	.globl _g_CLMLST
+                                     56 	.globl _g_CRTCNT
+                                     57 	.globl _g_LINLEN
+                                     58 	.globl _g_LINL32
+                                     59 	.globl _g_LINL40
+                                     60 	.globl _g_BDOS
+                                     61 	.globl _g_MASTER
+                                     62 	.globl _g_RAMAD3
+                                     63 	.globl _g_RAMAD2
+                                     64 	.globl _g_RAMAD1
+                                     65 	.globl _g_RAMAD0
+                                     66 	.globl _g_BREAKV
+                                     67 	.globl _g_DISKVE
+                                     68 	.globl _g_KANJTABLE
+                                     69 	.globl _g_STRSRC
+                                     70 	.globl _g_SUBRID
+                                     71 	.globl _g_CHAR_16
+                                     72 	.globl _g_MSXMID
+                                     73 	.globl _g_MSXVER
+                                     74 	.globl _g_ROMVersion
+                                     75 	.globl _g_BASRVN
+                                     76 	.globl _g_VDP_DW
+                                     77 	.globl _g_VDP_DR
+                                     78 	.globl _g_CGTABL
+                                     79 	.globl _g_SVFFFD
+                                     80 	.globl _g_RG27SAV
+                                     81 	.globl _g_RG26SAV
+                                     82 	.globl _g_RG25SAV
+                                     83 	.globl _g_SVFFF8
+                                     84 	.globl _g_MINROM
+                                     85 	.globl _g_RG23SAV
+                                     86 	.globl _g_RG22SAV
+                                     87 	.globl _g_RG21SAV
+                                     88 	.globl _g_RG20SAV
+                                     89 	.globl _g_RG19SAV
+                                     90 	.globl _g_RG18SAV
+                                     91 	.globl _g_RG17SAV
+                                     92 	.globl _g_RG16SAV
+                                     93 	.globl _g_RG15SAV
+                                     94 	.globl _g_RG14SAV
+                                     95 	.globl _g_RG13SAV
+                                     96 	.globl _g_RG12SAV
+                                     97 	.globl _g_RG11SAV
+                                     98 	.globl _g_RG10SAV
+                                     99 	.globl _g_RG09SAV
+                                    100 	.globl _g_RG08SAV
+                                    101 	.globl _g_PROCNM
+                                    102 	.globl _g_SLTWRK
+                                    103 	.globl _g_SLTATR
+                                    104 	.globl _g_SLTTBL
+                                    105 	.globl _g_EXPTBL
+                                    106 	.globl _g_MNROM
+                                    107 	.globl _g_DRWANG
+                                    108 	.globl _g_DRWSCL
+                                    109 	.globl _g_DRWFLG
+                                    110 	.globl _g_GYPOS
+                                    111 	.globl _g_GXPOS
+                                    112 	.globl _g_BRDATR
+                                    113 	.globl _g_CASPRV
+                                    114 	.globl _g_OLDSCR
+                                    115 	.globl _g_SCRMOD
+                                    116 	.globl _g_FLBMEM
+                                    117 	.globl _g_KANAMD
+                                    118 	.globl _g_KANAST
+                                    119 	.globl _g_CAPST
+                                    120 	.globl _g_CSTYLE
+                                    121 	.globl _g_CSRSW
+                                    122 	.globl _g_INSFLG
+                                    123 	.globl _g_ESCCNT
+                                    124 	.globl _g_GRPHED
+                                    125 	.globl _g_WINWID
+                                    126 	.globl _g_LOWLIM
+                                    127 	.globl _g_INTCNT
+                                    128 	.globl _g_INTVAL
+                                    129 	.globl _g_JIFFY
+                                    130 	.globl _g_PADX
+                                    131 	.globl _g_PADY
+                                    132 	.globl _g_INTFLG
+                                    133 	.globl _g_RTYCNT
+                                    134 	.globl _g_TRPTBL
+                                    135 	.globl _g_HIMEM
+                                    136 	.globl _g_BOTTOM
+                                    137 	.globl _g_PATWRK
+                                    138 	.globl _g_LINWRK
+                                    139 	.globl _g_KEYBUF
+                                    140 	.globl _g_NEWKEY
+                                    141 	.globl _g_OLDKEY
+                                    142 	.globl _g_CLIKFL
+                                    143 	.globl _g_ONGSBF
+                                    144 	.globl _g_FNKFLG
+                                    145 	.globl _g_FNKSWI
+                                    146 	.globl _g_CODSAV
+                                    147 	.globl _g_FSTPOS
+                                    148 	.globl _g_LINTTB
+                                    149 	.globl _g_BASROM
+                                    150 	.globl _g_ENSTOP
+                                    151 	.globl _g_VCBC
+                                    152 	.globl _g_VCBB
+                                    153 	.globl _g_VCBA
+                                    154 	.globl _g_PLYCNT
+                                    155 	.globl _g_MUSICF
+                                    156 	.globl _g_QUEUEN
+                                    157 	.globl _g_MCLPTR
+                                    158 	.globl _g_MCLLEN
+                                    159 	.globl _g_SAVVOL
+                                    160 	.globl _g_VOICEN
+                                    161 	.globl _g_SAVSP
+                                    162 	.globl _g_PRSCNT
+                                    163 	.globl _g_LSTMOD
+                                    164 	.globl _g_LSTCOM
+                                    165 	.globl _g_COMMSK
+                                    166 	.globl _g_ESTBLS
+                                    167 	.globl _g_FLAGS
+                                    168 	.globl _g_ERRORS
+                                    169 	.globl _g_DATCNT
+                                    170 	.globl _g_DEVNUM
+                                    171 	.globl _g_OLDINT
+                                    172 	.globl _g_OLDSTT
+                                    173 	.globl _g_MEXBIh
+                                    174 	.globl _g_RSIQLN
+                                    175 	.globl _g_RSFCB
+                                    176 	.globl _g_TOCNT
+                                    177 	.globl _g_RSTMP
+                                    178 	.globl _g_YSAVE
+                                    179 	.globl _g_XSAVE
+                                    180 	.globl _g_NORUSE
+                                    181 	.globl _g_MODE
+                                    182 	.globl _g_ROMA
+                                    183 	.globl _g_CHRCNT
+                                    184 	.globl _g_EXBRSA
+                                    185 	.globl _g_AVCSAV
+                                    186 	.globl _g_ACPAGE
+                                    187 	.globl _g_DPPAGE
+                                    188 	.globl _g_RS2IQ
+                                    189 	.globl _g_VOICCQ
+                                    190 	.globl _g_VOICBQ
+                                    191 	.globl _g_VOICAQ
+                                    192 	.globl _g_QUEBAK
+                                    193 	.globl _g_QUETAB
+                                    194 	.globl _g_ASPCT2
+                                    195 	.globl _g_ASPCT1
+                                    196 	.globl _g_HEADER
+                                    197 	.globl _g_HIGH
+                                    198 	.globl _g_LOW
+                                    199 	.globl _g_CS240
+                                    200 	.globl _g_CS120
+                                    201 	.globl _g_REPCNT
+                                    202 	.globl _g_SCNCNT
+                                    203 	.globl _g_FRCNEW
+                                    204 	.globl _g_QUEUES
+                                    205 	.globl _g_MINUPD
+                                    206 	.globl _g_MAXUPD
+                                    207 	.globl _g_TRGFLG
+                                    208 	.globl _g_STATFL
+                                    209 	.globl _g_RG7SAV
+                                    210 	.globl _g_RG6SAV
+                                    211 	.globl _g_RG5SAV
+                                    212 	.globl _g_RG4SAV
+                                    213 	.globl _g_RG3SAV
+                                    214 	.globl _g_RG2SAV
+                                    215 	.globl _g_RG1SAV
+                                    216 	.globl _g_RG0SAV
+                                    217 	.globl _g_CNSDFG
+                                    218 	.globl _g_USRTAB
+                                    219 	.globl _g_CLPRIM
+                                    220 	.globl _g_WRPRIM
+                                    221 	.globl _g_RDPRIM
+                                    222 	.globl _Txt_SetColor
+                                    223 	.globl _Txt_Init
+                                    224 	.globl _Txt_Draw
+                                    225 	.globl _Txt_ClearRow
+                                    226 	.globl _Txt_Scroll
+                                    227 ;--------------------------------------------------------
+                                    228 ; special function registers
+                                    229 ;--------------------------------------------------------
+                         000000A0   230 _g_PSG_RegPort	=	0x00a0
+                         000000A1   231 _g_PSG_DataPort	=	0x00a1
+                         000000A2   232 _g_PSG_StatPort	=	0x00a2
+                         00000010   233 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   234 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   235 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   236 _g_Printer_ControlPort	=	0x0090
+                         00000091   237 _g_Printer_DataPort	=	0x0091
+                         0000007C   238 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   239 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   240 _g_VDP_DataPort	=	0x0098
+                         00000099   241 _g_VDP_RegPort	=	0x0099
+                         00000099   242 _g_VDP_AddrPort	=	0x0099
+                         00000099   243 _g_VDP_StatPort	=	0x0099
+                         0000009A   244 _g_VDP_PalPort	=	0x009a
+                         0000009B   245 _g_VDP_IRegPort	=	0x009b
+                         000000A8   246 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   247 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   248 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   249 _g_PortControl	=	0x00ab
+                         000000B4   250 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   251 _g_RTC_DataPort	=	0x00b5
+                         000000C0   252 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   253 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   254 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   255 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   256 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   257 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   258 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   259 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   260 _g_TimerLowPort	=	0x00e6
+                         000000E7   261 _g_TimerHighPort	=	0x00e7
+                                    262 ;--------------------------------------------------------
+                                    263 ; ram data
+                                    264 ;--------------------------------------------------------
+                                    265 	.area _DATA
+                         0000F3AE   266 _g_LINL40	=	0xf3ae
+                         0000F3AF   267 _g_LINL32	=	0xf3af
+                         0000F3B0   268 _g_LINLEN	=	0xf3b0
+                         0000F3B1   269 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   270 _g_CLMLST	=	0xf3b2
+                         0000F3B3   271 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   272 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   273 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   274 _g_TXTATR	=	0xf3b9
+                         0000F3BB   275 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   276 _g_T32NAM	=	0xf3bd
+                         0000F3BF   277 _g_T32COL	=	0xf3bf
+                         0000F3C1   278 _g_T32CGP	=	0xf3c1
+                         0000F3C3   279 _g_T32ATR	=	0xf3c3
+                         0000F3C5   280 _g_T32PAT	=	0xf3c5
+                         0000F3C7   281 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   282 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   283 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   284 _g_GRPATR	=	0xf3cd
+                         0000F3CF   285 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   286 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   287 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   288 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   289 _g_MLTATR	=	0xf3d7
+                         0000F3D9   290 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   291 _g_CLIKSW	=	0xf3db
+                         0000F3DC   292 _g_CSRY	=	0xf3dc
+                         0000F3DD   293 _g_CSRX	=	0xf3dd
+                         0000F3E9   294 _g_FORCLR	=	0xf3e9
+                         0000F3EA   295 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   296 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   297 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   298 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   299 _g_GETPNT	=	0xf3fa
+                         0000F87F   300 _g_FNKSTR	=	0xf87f
+                         0000F92A   301 _g_CLOC	=	0xf92a
+                         0000F92C   302 _g_CMASK	=	0xf92c
+                         0000FB02   303 _g_LOGOPR	=	0xfb02
+                         0000FCB7   304 _g_GRPACX	=	0xfcb7
+                         0000FCB9   305 _g_GRPACY	=	0xfcb9
+                         0000FFFF   306 _g_SLTSL	=	0xffff
+                         00000006   307 _DOS_TPAUpperAddr	=	0x0006
+                         0000C000   308 _g_Plane	=	0xc000
+                         0000C800   309 _g_TabA	=	0xc800
+                         0000C900   310 _g_TabB	=	0xc900
+                         0000CA00   311 _g_TabC	=	0xca00
+    00000000                        312 _s_Str:
+    00000000                        313 	.ds 2
+    00000002                        314 _s_Vram:
+    00000002                        315 	.ds 2
+    00000004                        316 _s_Len:
+    00000004                        317 	.ds 1
+    00000005                        318 _s_Row:
+    00000005                        319 	.ds 1
+                                    320 ;--------------------------------------------------------
+                                    321 ; ram data
+                                    322 ;--------------------------------------------------------
+                                    323 	.area _INITIALIZED
+    00000000                        324 _s_Fg:
+    00000000                        325 	.ds 1
+    00000001                        326 _s_Bg:
+    00000001                        327 	.ds 1
+                                    328 ;--------------------------------------------------------
+                                    329 ; absolute ram data
+                                    330 ;--------------------------------------------------------
+                                    331 	.area _DABS (ABS)
+                                    332 	.area _DABS (ABS)
+                                    333 ;--------------------------------------------------------
+                                    334 ; global & static initialisations
+                                    335 ;--------------------------------------------------------
+                                    336 	.area _HOME
+                                    337 	.area _GSINIT
+                                    338 	.area _GSFINAL
+                                    339 	.area _GSINIT
+                                    340 ;--------------------------------------------------------
+                                    341 ; Home
+                                    342 ;--------------------------------------------------------
+                                    343 	.area _HOME
+                                    344 	.area _HOME
+                                    345 ;--------------------------------------------------------
+                                    346 ; code
+                                    347 ;--------------------------------------------------------
+                                    348 	.area _CODE
+                                    349 ;E:\supernova\msx\txt.c:20: void Txt_SetColor(u8 fg, u8 bg)
+                                    350 ;	---------------------------------
+                                    351 ; Function Txt_SetColor
+                                    352 ; ---------------------------------
+    00000000                        353 _Txt_SetColor::
+    00000000 DD E5            [15]  354 	push	ix
+    00000002 DD 21 00 00      [14]  355 	ld	ix,	#0
+    00000006 DD 39            [15]  356 	add	ix, sp
+    00000008 F5               [11]  357 	push	af
+    00000009 F5               [11]  358 	push	af
+    0000000A F5               [11]  359 	push	af
+    0000000B 3B               [ 6]  360 	dec	sp
+    0000000C DD 77 FE         [19]  361 	ld	-2 (ix), a
+    0000000F DD 75 FD         [19]  362 	ld	-3 (ix), l
+                                    363 ;E:\supernova\msx\txt.c:22: if (fg == s_Fg && bg == s_Bg)
+    00000012 3Ar00r00         [13]  364 	ld	a, (_s_Fg)
+    00000015 DD 96 FE         [19]  365 	sub	a, -2 (ix)
+    00000018 20 09            [12]  366 	jr	nz, 00102$
+    0000001A 3Ar01r00         [13]  367 	ld	a, (_s_Bg)
+    0000001D DD 96 FD         [19]  368 	sub	a, -3 (ix)
+    00000020 CArE7r00         [10]  369 	jp	z, 00116$
+                                    370 ;E:\supernova\msx\txt.c:23: return;
+    00000023                        371 00102$:
+                                    372 ;E:\supernova\msx\txt.c:24: s_Fg = fg;
+    00000023 DD 7E FE         [19]  373 	ld	a, -2 (ix)
+    00000026 32r00r00         [13]  374 	ld	(#_s_Fg), a
+                                    375 ;E:\supernova\msx\txt.c:25: s_Bg = bg;
+    00000029 DD 7E FD         [19]  376 	ld	a, -3 (ix)
+    0000002C 32r01r00         [13]  377 	ld	(#_s_Bg), a
+                                    378 ;E:\supernova\msx\txt.c:27: t[0] = (bg << 4) | bg;
+    0000002F DD 7E FD         [19]  379 	ld	a, -3 (ix)
+    00000032 87               [ 4]  380 	add	a, a
+    00000033 87               [ 4]  381 	add	a, a
+    00000034 87               [ 4]  382 	add	a, a
+    00000035 87               [ 4]  383 	add	a, a
+    00000036 4F               [ 4]  384 	ld	c, a
+    00000037 DD B6 FD         [19]  385 	or	a, -3 (ix)
+    0000003A DD 77 F9         [19]  386 	ld	-7 (ix), a
+                                    387 ;E:\supernova\msx\txt.c:28: t[1] = (bg << 4) | fg;
+    0000003D 79               [ 4]  388 	ld	a, c
+    0000003E DD B6 FE         [19]  389 	or	a, -2 (ix)
+    00000041 DD 77 FA         [19]  390 	ld	-6 (ix), a
+                                    391 ;E:\supernova\msx\txt.c:29: t[2] = (fg << 4) | bg;
+    00000044 DD 7E FE         [19]  392 	ld	a, -2 (ix)
+    00000047 87               [ 4]  393 	add	a, a
+    00000048 87               [ 4]  394 	add	a, a
+    00000049 87               [ 4]  395 	add	a, a
+    0000004A 87               [ 4]  396 	add	a, a
+    0000004B 4F               [ 4]  397 	ld	c, a
+    0000004C DD B6 FD         [19]  398 	or	a, -3 (ix)
+    0000004F DD 77 FB         [19]  399 	ld	-5 (ix), a
+                                    400 ;E:\supernova\msx\txt.c:30: t[3] = (fg << 4) | fg;
+    00000052 79               [ 4]  401 	ld	a, c
+    00000053 DD B6 FE         [19]  402 	or	a, -2 (ix)
+    00000056 DD 77 FC         [19]  403 	ld	-4 (ix), a
+                                    404 ;E:\supernova\msx\txt.c:31: for (u8 i = 0; i < 4; i++)
+    00000059 0E 00            [ 7]  405 	ld	c, #0x00
+    0000005B                        406 00108$:
+    0000005B 79               [ 4]  407 	ld	a, c
+    0000005C D6 04            [ 7]  408 	sub	a, #0x04
+    0000005E 30 25            [12]  409 	jr	nc, 00104$
+                                    410 ;E:\supernova\msx\txt.c:32: Mem_Set(t[i], &g_TabA[i * 64], 64);
+    00000060 11 00 C8         [10]  411 	ld	de, #_g_TabA+0
+    00000063 69               [ 4]  412 	ld	l, c
+    00000064 26 00            [ 7]  413 	ld	h, #0x00
+    00000066 29               [11]  414 	add	hl, hl
+    00000067 29               [11]  415 	add	hl, hl
+    00000068 29               [11]  416 	add	hl, hl
+    00000069 29               [11]  417 	add	hl, hl
+    0000006A 29               [11]  418 	add	hl, hl
+    0000006B 29               [11]  419 	add	hl, hl
+    0000006C 19               [11]  420 	add	hl, de
+    0000006D FD 21 00 00      [14]  421 	ld	iy, #0
+    00000071 FD 39            [15]  422 	add	iy, sp
+    00000073 C5               [11]  423 	push	bc
+    00000074 06 00            [ 7]  424 	ld	b, #0x00
+    00000076 FD 09            [15]  425 	add	iy, bc
+    00000078 C1               [10]  426 	pop	bc
+    00000079 FD 5E 00         [19]  427 	ld	e, (iy)
+    0000007C 06 40            [ 7]  428 	ld	b, #0x40
+    0000007E                        429 00189$:
+    0000007E 73               [ 7]  430 	ld	(hl), e
+    0000007F 23               [ 6]  431 	inc	hl
+    00000080 10 FC            [13]  432 	djnz	00189$
+                                    433 ;E:\supernova\msx\txt.c:31: for (u8 i = 0; i < 4; i++)
+    00000082 0C               [ 4]  434 	inc	c
+    00000083 18 D6            [12]  435 	jr	00108$
+    00000085                        436 00104$:
+                                    437 ;E:\supernova\msx\txt.c:33: for (u8 i = 0; i < 16; i++)
+    00000085 0E 00            [ 7]  438 	ld	c, #0x00
+    00000087                        439 00111$:
+    00000087 79               [ 4]  440 	ld	a, c
+    00000088 D6 10            [ 7]  441 	sub	a, #0x10
+    0000008A 30 2A            [12]  442 	jr	nc, 00105$
+                                    443 ;E:\supernova\msx\txt.c:34: Mem_Set(t[i & 3], &g_TabB[i * 16], 16);
+    0000008C 59               [ 4]  444 	ld	e, c
+    0000008D 16 00            [ 7]  445 	ld	d, #0x00
+    0000008F 6B               [ 4]  446 	ld	l, e
+    00000090 62               [ 4]  447 	ld	h, d
+    00000091 29               [11]  448 	add	hl, hl
+    00000092 29               [11]  449 	add	hl, hl
+    00000093 29               [11]  450 	add	hl, hl
+    00000094 29               [11]  451 	add	hl, hl
+    00000095 D5               [11]  452 	push	de
+    00000096 11 00 C9         [10]  453 	ld	de, #_g_TabB
+    00000099 19               [11]  454 	add	hl, de
+    0000009A D1               [10]  455 	pop	de
+    0000009B E5               [11]  456 	push	hl
+    0000009C FD E1            [14]  457 	pop	iy
+    0000009E 7B               [ 4]  458 	ld	a, e
+    0000009F E6 03            [ 7]  459 	and	a, #0x03
+    000000A1 5F               [ 4]  460 	ld	e, a
+    000000A2 16 00            [ 7]  461 	ld	d, #0x00
+    000000A4 21 00 00         [10]  462 	ld	hl, #0
+    000000A7 39               [11]  463 	add	hl, sp
+    000000A8 19               [11]  464 	add	hl, de
+    000000A9 5E               [ 7]  465 	ld	e, (hl)
+    000000AA FD E5            [15]  466 	push	iy
+    000000AC E1               [10]  467 	pop	hl
+    000000AD 06 10            [ 7]  468 	ld	b, #0x10
+    000000AF                        469 00191$:
+    000000AF 73               [ 7]  470 	ld	(hl), e
+    000000B0 23               [ 6]  471 	inc	hl
+    000000B1 10 FC            [13]  472 	djnz	00191$
+                                    473 ;E:\supernova\msx\txt.c:33: for (u8 i = 0; i < 16; i++)
+    000000B3 0C               [ 4]  474 	inc	c
+    000000B4 18 D1            [12]  475 	jr	00111$
+    000000B6                        476 00105$:
+                                    477 ;E:\supernova\msx\txt.c:35: for (u8 i = 0; i < 64; i++)
+    000000B6 DD 36 FF 00      [19]  478 	ld	-1 (ix), #0x00
+    000000BA                        479 00114$:
+    000000BA DD 7E FF         [19]  480 	ld	a, -1 (ix)
+    000000BD D6 40            [ 7]  481 	sub	a, #0x40
+    000000BF 30 26            [12]  482 	jr	nc, 00116$
+                                    483 ;E:\supernova\msx\txt.c:36: Mem_Set(t[i & 3], &g_TabC[i * 4], 4);
+    000000C1 DD 4E FF         [19]  484 	ld	c, -1 (ix)
+    000000C4 06 00            [ 7]  485 	ld	b, #0x00
+    000000C6 69               [ 4]  486 	ld	l, c
+    000000C7 60               [ 4]  487 	ld	h, b
+    000000C8 29               [11]  488 	add	hl, hl
+    000000C9 29               [11]  489 	add	hl, hl
+    000000CA 11 00 CA         [10]  490 	ld	de, #_g_TabC
+    000000CD 19               [11]  491 	add	hl, de
+    000000CE EB               [ 4]  492 	ex	de, hl
+    000000CF 79               [ 4]  493 	ld	a, c
+    000000D0 E6 03            [ 7]  494 	and	a, #0x03
+    000000D2 4F               [ 4]  495 	ld	c, a
+    000000D3 06 00            [ 7]  496 	ld	b, #0x00
+    000000D5 21 00 00         [10]  497 	ld	hl, #0
+    000000D8 39               [11]  498 	add	hl, sp
+    000000D9 09               [11]  499 	add	hl, bc
+    000000DA 4E               [ 7]  500 	ld	c, (hl)
+    000000DB EB               [ 4]  501 	ex	de, hl
+    000000DC 06 04            [ 7]  502 	ld	b, #0x04
+    000000DE                        503 00193$:
+    000000DE 71               [ 7]  504 	ld	(hl), c
+    000000DF 23               [ 6]  505 	inc	hl
+    000000E0 10 FC            [13]  506 	djnz	00193$
+                                    507 ;E:\supernova\msx\txt.c:35: for (u8 i = 0; i < 64; i++)
+    000000E2 DD 34 FF         [23]  508 	inc	-1 (ix)
+    000000E5 18 D3            [12]  509 	jr	00114$
+    000000E7                        510 00116$:
+                                    511 ;E:\supernova\msx\txt.c:39: }
+    000000E7 DD F9            [10]  512 	ld	sp, ix
+    000000E9 DD E1            [14]  513 	pop	ix
+    000000EB C9               [10]  514 	ret
+                         0000F380   515 _g_RDPRIM	=	0xf380
+                         0000F385   516 _g_WRPRIM	=	0xf385
+                         0000F38C   517 _g_CLPRIM	=	0xf38c
+                         0000F39A   518 _g_USRTAB	=	0xf39a
+                         0000F3DE   519 _g_CNSDFG	=	0xf3de
+                         0000F3DF   520 _g_RG0SAV	=	0xf3df
+                         0000F3E0   521 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   522 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   523 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   524 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   525 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   526 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   527 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   528 _g_STATFL	=	0xf3e7
+                         0000F3E8   529 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   530 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   531 _g_MINUPD	=	0xf3ef
+                         0000F3F3   532 _g_QUEUES	=	0xf3f3
+                         0000F3F5   533 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   534 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   535 _g_REPCNT	=	0xf3f7
+                         0000F3FC   536 _g_CS120	=	0xf3fc
+                         0000F401   537 _g_CS240	=	0xf401
+                         0000F406   538 _g_LOW	=	0xf406
+                         0000F408   539 _g_HIGH	=	0xf408
+                         0000F40A   540 _g_HEADER	=	0xf40a
+                         0000F40B   541 _g_ASPCT1	=	0xf40b
+                         0000F40D   542 _g_ASPCT2	=	0xf40d
+                         0000F959   543 _g_QUETAB	=	0xf959
+                         0000F971   544 _g_QUEBAK	=	0xf971
+                         0000F975   545 _g_VOICAQ	=	0xf975
+                         0000F9F5   546 _g_VOICBQ	=	0xf9f5
+                         0000FA75   547 _g_VOICCQ	=	0xfa75
+                         0000FAF5   548 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   549 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   550 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   551 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   552 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   553 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   554 _g_ROMA	=	0xfafa
+                         0000FAFC   555 _g_MODE	=	0xfafc
+                         0000FAFD   556 _g_NORUSE	=	0xfafd
+                         0000FAFE   557 _g_XSAVE	=	0xfafe
+                         0000FB00   558 _g_YSAVE	=	0xfb00
+                         0000FB03   559 _g_RSTMP	=	0xfb03
+                         0000FB03   560 _g_TOCNT	=	0xfb03
+                         0000FB04   561 _g_RSFCB	=	0xfb04
+                         0000FB06   562 _g_RSIQLN	=	0xfb06
+                         0000FB07   563 _g_MEXBIh	=	0xfb07
+                         0000FB0C   564 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   565 _g_OLDINT	=	0xfb0c
+                         0000FB16   566 _g_DEVNUM	=	0xfb16
+                         0000FB17   567 _g_DATCNT	=	0xfb17
+                         0000FB1A   568 _g_ERRORS	=	0xfb1a
+                         0000FB1B   569 _g_FLAGS	=	0xfb1b
+                         0000FB1C   570 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   571 _g_COMMSK	=	0xfb1d
+                         0000FB1E   572 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   573 _g_LSTMOD	=	0xfb1f
+                         0000FB35   574 _g_PRSCNT	=	0xfb35
+                         0000FB36   575 _g_SAVSP	=	0xfb36
+                         0000FB38   576 _g_VOICEN	=	0xfb38
+                         0000FB39   577 _g_SAVVOL	=	0xfb39
+                         0000FB3B   578 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   579 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   580 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   581 _g_MUSICF	=	0xfb3f
+                         0000FB40   582 _g_PLYCNT	=	0xfb40
+                         0000FB41   583 _g_VCBA	=	0xfb41
+                         0000FB66   584 _g_VCBB	=	0xfb66
+                         0000FB8B   585 _g_VCBC	=	0xfb8b
+                         0000FBB0   586 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   587 _g_BASROM	=	0xfbb1
+                         0000FBB2   588 _g_LINTTB	=	0xfbb2
+                         0000FBCA   589 _g_FSTPOS	=	0xfbca
+                         0000FBCC   590 _g_CODSAV	=	0xfbcc
+                         0000FBCD   591 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   592 _g_FNKFLG	=	0xfbce
+                         0000FBD8   593 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   594 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   595 _g_OLDKEY	=	0xfbda
+                         0000FBE5   596 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   597 _g_KEYBUF	=	0xfbf0
+                         0000FC18   598 _g_LINWRK	=	0xfc18
+                         0000FC40   599 _g_PATWRK	=	0xfc40
+                         0000FC48   600 _g_BOTTOM	=	0xfc48
+                         0000FC4A   601 _g_HIMEM	=	0xfc4a
+                         0000FC4C   602 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   603 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   604 _g_INTFLG	=	0xfc9b
+                         0000FC9C   605 _g_PADY	=	0xfc9c
+                         0000FC9D   606 _g_PADX	=	0xfc9d
+                         0000FC9E   607 _g_JIFFY	=	0xfc9e
+                         0000FCA0   608 _g_INTVAL	=	0xfca0
+                         0000FCA2   609 _g_INTCNT	=	0xfca2
+                         0000FCA4   610 _g_LOWLIM	=	0xfca4
+                         0000FCA5   611 _g_WINWID	=	0xfca5
+                         0000FCA6   612 _g_GRPHED	=	0xfca6
+                         0000FCA7   613 _g_ESCCNT	=	0xfca7
+                         0000FCA8   614 _g_INSFLG	=	0xfca8
+                         0000FCA9   615 _g_CSRSW	=	0xfca9
+                         0000FCAA   616 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   617 _g_CAPST	=	0xfcab
+                         0000FCAC   618 _g_KANAST	=	0xfcac
+                         0000FCAD   619 _g_KANAMD	=	0xfcad
+                         0000FCAE   620 _g_FLBMEM	=	0xfcae
+                         0000FCAF   621 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   622 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   623 _g_CASPRV	=	0xfcb1
+                         0000FCB2   624 _g_BRDATR	=	0xfcb2
+                         0000FCB3   625 _g_GXPOS	=	0xfcb3
+                         0000FCB5   626 _g_GYPOS	=	0xfcb5
+                         0000FCBB   627 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   628 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   629 _g_DRWANG	=	0xfcbd
+                         0000FCC1   630 _g_MNROM	=	0xfcc1
+                         0000FCC1   631 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   632 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   633 _g_SLTATR	=	0xfcc9
+                         0000FD09   634 _g_SLTWRK	=	0xfd09
+                         0000FD89   635 _g_PROCNM	=	0xfd89
+                         0000FFE7   636 _g_RG08SAV	=	0xffe7
+                         0000FFE8   637 _g_RG09SAV	=	0xffe8
+                         0000FFE9   638 _g_RG10SAV	=	0xffe9
+                         0000FFEA   639 _g_RG11SAV	=	0xffea
+                         0000FFEB   640 _g_RG12SAV	=	0xffeb
+                         0000FFEC   641 _g_RG13SAV	=	0xffec
+                         0000FFED   642 _g_RG14SAV	=	0xffed
+                         0000FFEE   643 _g_RG15SAV	=	0xffee
+                         0000FFEF   644 _g_RG16SAV	=	0xffef
+                         0000FFF0   645 _g_RG17SAV	=	0xfff0
+                         0000FFF1   646 _g_RG18SAV	=	0xfff1
+                         0000FFF2   647 _g_RG19SAV	=	0xfff2
+                         0000FFF3   648 _g_RG20SAV	=	0xfff3
+                         0000FFF4   649 _g_RG21SAV	=	0xfff4
+                         0000FFF5   650 _g_RG22SAV	=	0xfff5
+                         0000FFF6   651 _g_RG23SAV	=	0xfff6
+                         0000FFF7   652 _g_MINROM	=	0xfff7
+                         0000FFF8   653 _g_SVFFF8	=	0xfff8
+                         0000FFFA   654 _g_RG25SAV	=	0xfffa
+                         0000FFFB   655 _g_RG26SAV	=	0xfffb
+                         0000FFFC   656 _g_RG27SAV	=	0xfffc
+                         0000FFFD   657 _g_SVFFFD	=	0xfffd
+                         00000004   658 _g_CGTABL	=	0x0004
+                         00000006   659 _g_VDP_DR	=	0x0006
+                         00000007   660 _g_VDP_DW	=	0x0007
+                         0000002B   661 _g_BASRVN	=	0x002b
+                         0000002B   662 _g_ROMVersion	=	0x002b
+                         0000002D   663 _g_MSXVER	=	0x002d
+                         0000002E   664 _g_MSXMID	=	0x002e
+                         00000034   665 _g_CHAR_16	=	0x0034
+    000000EC                        666 ___str_0:
+    000000EC 0A                     667 	.db 0x0a
+    000000ED 0D                     668 	.db 0x0d
+    000000EE 24                     669 	.ascii "$"
+    000000EF 00                     670 	.db 0x00
+                         00000000   671 _g_SUBRID	=	0x0000
+                         00000002   672 _g_STRSRC	=	0x0002
+                         0000F30F   673 _g_KANJTABLE	=	0xf30f
+                         0000F323   674 _g_DISKVE	=	0xf323
+                         0000F325   675 _g_BREAKV	=	0xf325
+                         0000F341   676 _g_RAMAD0	=	0xf341
+                         0000F342   677 _g_RAMAD1	=	0xf342
+                         0000F343   678 _g_RAMAD2	=	0xf343
+                         0000F344   679 _g_RAMAD3	=	0xf344
+                         0000F348   680 _g_MASTER	=	0xf348
+                         0000F37D   681 _g_BDOS	=	0xf37d
+                                    682 ;E:\supernova\msx\txt.c:42: void Txt_Init(const u8* f)
+                                    683 ;	---------------------------------
+                                    684 ; Function Txt_Init
+                                    685 ; ---------------------------------
+    000000F0                        686 _Txt_Init::
+    000000F0 DD E5            [15]  687 	push	ix
+    000000F2 DD 21 00 00      [14]  688 	ld	ix,	#0
+    000000F6 DD 39            [15]  689 	add	ix, sp
+    000000F8 F5               [11]  690 	push	af
+    000000F9 F5               [11]  691 	push	af
+    000000FA DD 75 FE         [19]  692 	ld	-2 (ix), l
+    000000FD DD 74 FF         [19]  693 	ld	-1 (ix), h
+                                    694 ;E:\supernova\msx\txt.c:44: for (u16 c = 0; c < 255; c++)
+    00000100 01 00 00         [10]  695 	ld	bc, #0x0000
+    00000103                        696 00107$:
+    00000103 59               [ 4]  697 	ld	e, c
+    00000104 50               [ 4]  698 	ld	d, b
+    00000105 7B               [ 4]  699 	ld	a, e
+    00000106 D6 FF            [ 7]  700 	sub	a, #0xff
+    00000108 7A               [ 4]  701 	ld	a, d
+    00000109 DE 00            [ 7]  702 	sbc	a, #0x00
+    0000010B 30 31            [12]  703 	jr	nc, 00102$
+                                    704 ;E:\supernova\msx\txt.c:45: for (u8 r = 0; r < 8; r++)
+    0000010D 1E 00            [ 7]  705 	ld	e, #0x00
+    0000010F                        706 00104$:
+    0000010F 7B               [ 4]  707 	ld	a, e
+    00000110 D6 08            [ 7]  708 	sub	a, #0x08
+    00000112 30 27            [12]  709 	jr	nc, 00108$
+                                    710 ;E:\supernova\msx\txt.c:46: g_Plane[r][c] = f[c * 8 + r];
+    00000114 63               [ 4]  711 	ld	h, e
+    00000115 2E 00            [ 7]  712 	ld	l, #<(_g_Plane)
+    00000117 3E C0            [ 7]  713 	ld	a, #>(_g_Plane)
+    00000119 84               [ 4]  714 	add	a, h
+    0000011A 67               [ 4]  715 	ld	h, a
+    0000011B 09               [11]  716 	add	hl, bc
+    0000011C E3               [19]  717 	ex	(sp), hl
+    0000011D 69               [ 4]  718 	ld	l, c
+    0000011E 60               [ 4]  719 	ld	h, b
+    0000011F 29               [11]  720 	add	hl, hl
+    00000120 29               [11]  721 	add	hl, hl
+    00000121 29               [11]  722 	add	hl, hl
+    00000122 7B               [ 4]  723 	ld	a, e
+    00000123 16 00            [ 7]  724 	ld	d, #0x00
+    00000125 85               [ 4]  725 	add	a, l
+    00000126 6F               [ 4]  726 	ld	l, a
+    00000127 7A               [ 4]  727 	ld	a, d
+    00000128 8C               [ 4]  728 	adc	a, h
+    00000129 67               [ 4]  729 	ld	h, a
+    0000012A 7D               [ 4]  730 	ld	a, l
+    0000012B DD 86 FE         [19]  731 	add	a, -2 (ix)
+    0000012E 6F               [ 4]  732 	ld	l, a
+    0000012F 7C               [ 4]  733 	ld	a, h
+    00000130 DD 8E FF         [19]  734 	adc	a, -1 (ix)
+    00000133 67               [ 4]  735 	ld	h, a
+    00000134 7E               [ 7]  736 	ld	a, (hl)
+    00000135 E1               [10]  737 	pop	hl
+    00000136 E5               [11]  738 	push	hl
+    00000137 77               [ 7]  739 	ld	(hl), a
+                                    740 ;E:\supernova\msx\txt.c:45: for (u8 r = 0; r < 8; r++)
+    00000138 1C               [ 4]  741 	inc	e
+    00000139 18 D4            [12]  742 	jr	00104$
+    0000013B                        743 00108$:
+                                    744 ;E:\supernova\msx\txt.c:44: for (u16 c = 0; c < 255; c++)
+    0000013B 03               [ 6]  745 	inc	bc
+    0000013C 18 C5            [12]  746 	jr	00107$
+    0000013E                        747 00102$:
+                                    748 ;E:\supernova\msx\txt.c:47: s_Fg = 255;
+    0000013E 21r00r00         [10]  749 	ld	hl, #_s_Fg
+    00000141 36 FF            [10]  750 	ld	(hl), #0xff
+                                    751 ;E:\supernova\msx\txt.c:48: Txt_SetColor(7, 0);
+    00000143 2E 00            [ 7]  752 	ld	l, #0x00
+    00000145 3E 07            [ 7]  753 	ld	a, #0x07
+    00000147 CDr00r00         [17]  754 	call	_Txt_SetColor
+                                    755 ;E:\supernova\msx\txt.c:49: }
+    0000014A DD F9            [10]  756 	ld	sp, ix
+    0000014C DD E1            [14]  757 	pop	ix
+    0000014E C9               [10]  758 	ret
+                                    759 ;E:\supernova\msx\txt.c:53: static void Blit() __naked
+                                    760 ;	---------------------------------
+                                    761 ; Function Blit
+                                    762 ; ---------------------------------
+    0000014F                        763 _Blit:
+                                    764 ;E:\supernova\msx\txt.c:115: __endasm;
+    0000014F 3Ar04r00         [13]  765 	ld a, (_s_Len)
+    00000152 B7               [ 4]  766 	or a
+    00000153 C8               [11]  767 	ret z
+    00000154 0E C0            [ 7]  768 	ld c, #0xC0
+    00000156 AF               [ 4]  769 	xor a
+    00000157 32r05r00         [13]  770 	ld (_s_Row), a
+    0000015A                        771 blit_row:
+    0000015A 2Ar02r00         [16]  772 	ld hl, (_s_Vram)
+    0000015D 3Ar05r00         [13]  773 	ld a, (_s_Row)
+    00000160 84               [ 4]  774 	add a, h
+    00000161 67               [ 4]  775 	ld h, a
+    00000162 F3               [ 4]  776 	di
+    00000163 07               [ 4]  777 	rlca
+    00000164 07               [ 4]  778 	rlca
+    00000165 E6 03            [ 7]  779 	and a, #3
+    00000167 D3 99            [11]  780 	out (#0x99), a
+    00000169 3E 8E            [ 7]  781 	ld a, #0x8E
+    0000016B D3 99            [11]  782 	out (#0x99), a
+    0000016D 7D               [ 4]  783 	ld a, l
+    0000016E D3 99            [11]  784 	out (#0x99), a
+    00000170 7C               [ 4]  785 	ld a, h
+    00000171 E6 3F            [ 7]  786 	and a, #0x3F
+    00000173 F6 40            [ 7]  787 	or a, #0x40
+    00000175 D3 99            [11]  788 	out (#0x99), a
+    00000177 FB               [ 4]  789 	ei
+    00000178 ED 5Br00r00      [20]  790 	ld de, (_s_Str)
+    0000017C 3Ar04r00         [13]  791 	ld a, (_s_Len)
+    0000017F 47               [ 4]  792 	ld b, a
+    00000180                        793 1$:
+    00000180 1A               [ 7]  794 	ld a, (de)
+    00000181 13               [ 6]  795 	inc de
+    00000182 61               [ 4]  796 	ld h, c
+    00000183 6F               [ 4]  797 	ld l, a
+    00000184 7E               [ 7]  798 	ld a, (hl)
+    00000185 6F               [ 4]  799 	ld l, a
+    00000186 26 C8            [ 7]  800 	ld h, #0xC8
+    00000188 7E               [ 7]  801 	ld a, (hl)
+    00000189 D3 98            [11]  802 	out (#0x98), a
+    0000018B 24               [ 4]  803 	inc h
+    0000018C 7E               [ 7]  804 	ld a, (hl)
+    0000018D D3 98            [11]  805 	out (#0x98), a
+    0000018F 24               [ 4]  806 	inc h
+    00000190 7E               [ 7]  807 	ld a, (hl)
+    00000191 D3 98            [11]  808 	out (#0x98), a
+    00000193 10 EB            [13]  809 	djnz 1$
+    00000195 0C               [ 4]  810 	inc c
+    00000196 3Ar05r00         [13]  811 	ld a, (_s_Row)
+    00000199 3C               [ 4]  812 	inc a
+    0000019A 32r05r00         [13]  813 	ld (_s_Row), a
+    0000019D FE 08            [ 7]  814 	cp a, #8
+    0000019F 20 B9            [12]  815 	jr nz, blit_row
+    000001A1 F3               [ 4]  816 	di
+    000001A2 AF               [ 4]  817 	xor a
+    000001A3 D3 99            [11]  818 	out (#0x99), a
+    000001A5 3E 8E            [ 7]  819 	ld a, #0x8E
+    000001A7 D3 99            [11]  820 	out (#0x99), a
+    000001A9 FB               [ 4]  821 	ei
+    000001AA C9               [10]  822 	ret
+                                    823 ;E:\supernova\msx\txt.c:116: }
+                                    824 ;E:\supernova\msx\txt.c:118: void Txt_Draw(u8 col, u8 row, const c8* str)
+                                    825 ;	---------------------------------
+                                    826 ; Function Txt_Draw
+                                    827 ; ---------------------------------
+    000001AB                        828 _Txt_Draw::
+    000001AB DD E5            [15]  829 	push	ix
+    000001AD DD 21 00 00      [14]  830 	ld	ix,	#0
+    000001B1 DD 39            [15]  831 	add	ix, sp
+    000001B3 F5               [11]  832 	push	af
+    000001B4 3B               [ 6]  833 	dec	sp
+    000001B5 4F               [ 4]  834 	ld	c, a
+    000001B6 DD 75 FF         [19]  835 	ld	-1 (ix), l
+                                    836 ;E:\supernova\msx\txt.c:121: while (str[len]) len++;
+    000001B9 1E 00            [ 7]  837 	ld	e, #0x00
+    000001BB                        838 00101$:
+    000001BB DD 6E 04         [19]  839 	ld	l, 4 (ix)
+    000001BE DD 66 05         [19]  840 	ld	h, 5 (ix)
+    000001C1 16 00            [ 7]  841 	ld	d, #0x00
+    000001C3 19               [11]  842 	add	hl, de
+    000001C4 7E               [ 7]  843 	ld	a, (hl)
+    000001C5 B7               [ 4]  844 	or	a, a
+    000001C6 28 03            [12]  845 	jr	z, 00114$
+    000001C8 1C               [ 4]  846 	inc	e
+    000001C9 18 F0            [12]  847 	jr	00101$
+    000001CB                        848 00114$:
+    000001CB 43               [ 4]  849 	ld	b, e
+                                    850 ;E:\supernova\msx\txt.c:122: if (col + len > TXT_COLS) len = TXT_COLS - col;
+    000001CC DD 71 FD         [19]  851 	ld	-3 (ix), c
+    000001CF DD 36 FE 00      [19]  852 	ld	-2 (ix), #0x00
+    000001D3 16 00            [ 7]  853 	ld	d, #0x00
+    000001D5 E1               [10]  854 	pop	hl
+    000001D6 E5               [11]  855 	push	hl
+    000001D7 19               [11]  856 	add	hl, de
+    000001D8 3E 50            [ 7]  857 	ld	a, #0x50
+    000001DA BD               [ 4]  858 	cp	a, l
+    000001DB 3E 00            [ 7]  859 	ld	a, #0x00
+    000001DD 9C               [ 4]  860 	sbc	a, h
+    000001DE 30 04            [12]  861 	jr	nc, 00105$
+    000001E0 3E 50            [ 7]  862 	ld	a, #0x50
+    000001E2 91               [ 4]  863 	sub	a, c
+    000001E3 47               [ 4]  864 	ld	b, a
+    000001E4                        865 00105$:
+                                    866 ;E:\supernova\msx\txt.c:123: s_Len = len;
+    000001E4 21r04r00         [10]  867 	ld	hl, #_s_Len
+    000001E7 70               [ 7]  868 	ld	(hl), b
+                                    869 ;E:\supernova\msx\txt.c:124: s_Str = (const u8*)str;
+    000001E8 DD 6E 04         [19]  870 	ld	l, 4 (ix)
+    000001EB DD 66 05         [19]  871 	ld	h, 5 (ix)
+    000001EE 22r00r00         [16]  872 	ld	(_s_Str), hl
+                                    873 ;E:\supernova\msx\txt.c:125: s_Vram = (u16)(Y0 + row * 8) * 256 + X0B + col * 3;
+    000001F1 DD 6E FF         [19]  874 	ld	l, -1 (ix)
+    000001F4 26 00            [ 7]  875 	ld	h, #0x00
+    000001F6 29               [11]  876 	add	hl, hl
+    000001F7 29               [11]  877 	add	hl, hl
+    000001F8 29               [11]  878 	add	hl, hl
+    000001F9 01 06 00         [10]  879 	ld	bc, #0x0006
+    000001FC 09               [11]  880 	add	hl, bc
+    000001FD 65               [ 4]  881 	ld	h, l
+    000001FE 0E 08            [ 7]  882 	ld	c, #0x08
+    00000200 44               [ 4]  883 	ld	b, h
+    00000201 DD 5E FD         [19]  884 	ld	e, -3 (ix)
+    00000204 16 00            [ 7]  885 	ld	d, #0x00
+    00000206 6B               [ 4]  886 	ld	l, e
+    00000207 62               [ 4]  887 	ld	h, d
+    00000208 29               [11]  888 	add	hl, hl
+    00000209 19               [11]  889 	add	hl, de
+    0000020A 09               [11]  890 	add	hl, bc
+    0000020B 22r02r00         [16]  891 	ld	(_s_Vram), hl
+                                    892 ;E:\supernova\msx\txt.c:126: Blit();
+    0000020E CDr4Fr01         [17]  893 	call	_Blit
+                                    894 ;E:\supernova\msx\txt.c:127: }
+    00000211 DD F9            [10]  895 	ld	sp, ix
+    00000213 DD E1            [14]  896 	pop	ix
+    00000215 E1               [10]  897 	pop	hl
+    00000216 F1               [10]  898 	pop	af
+    00000217 E9               [ 4]  899 	jp	(hl)
+                                    900 ;E:\supernova\msx\txt.c:129: void Txt_ClearRow(u8 row, u8 bg)
+                                    901 ;	---------------------------------
+                                    902 ; Function Txt_ClearRow
+                                    903 ; ---------------------------------
+    00000218                        904 _Txt_ClearRow::
+    00000218 5F               [ 4]  905 	ld	e, a
+                                    906 ;E:\supernova\msx\txt.c:131: VDP_CommandHMMV(X0B * 2, Y0 + row * 8, TXT_COLS * 6, 8, (bg << 4) | bg);
+    00000219 7D               [ 4]  907 	ld	a, l
+    0000021A 87               [ 4]  908 	add	a, a
+    0000021B 87               [ 4]  909 	add	a, a
+    0000021C 87               [ 4]  910 	add	a, a
+    0000021D 87               [ 4]  911 	add	a, a
+    0000021E B5               [ 4]  912 	or	a, l
+    0000021F 4F               [ 4]  913 	ld	c, a
+    00000220 16 00            [ 7]  914 	ld	d, #0x00
+    00000222 EB               [ 4]  915 	ex	de, hl
+    00000223 29               [11]  916 	add	hl, hl
+    00000224 29               [11]  917 	add	hl, hl
+    00000225 29               [11]  918 	add	hl, hl
+    00000226 11 06 00         [10]  919 	ld	de, #0x0006
+    00000229 19               [11]  920 	add	hl, de
+                                    921 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:167: g_VDP_Command.DX = dx; 
+    0000022A 11 10 00         [10]  922 	ld	de, #0x0010
+    0000022D ED 53r04r00      [20]  923 	ld	((_g_VDP_Command + 4)), de
+                                    924 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:168: g_VDP_Command.DY = dy; 
+    00000231 22r06r00         [16]  925 	ld	((_g_VDP_Command + 6)), hl
+                                    926 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:169: g_VDP_Command.NX = nx; 
+    00000234 21 E0 01         [10]  927 	ld	hl, #0x01e0
+    00000237 22r08r00         [16]  928 	ld	((_g_VDP_Command + 8)), hl
+                                    929 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:170: g_VDP_Command.NY = ny; 
+    0000023A 21 08 00         [10]  930 	ld	hl, #0x0008
+    0000023D 22r0Ar00         [16]  931 	ld	((_g_VDP_Command + 10)), hl
+                                    932 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:171: g_VDP_Command.CLR = col; 
+    00000240 21r0Cr00         [10]  933 	ld	hl, #(_g_VDP_Command + 12)
+    00000243 71               [ 7]  934 	ld	(hl), c
+                                    935 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:172: g_VDP_Command.ARG = arg; 
+    00000244 21r0Dr00         [10]  936 	ld	hl, #_g_VDP_Command + 13
+    00000247 36 00            [10]  937 	ld	(hl), #0x00
+                                    938 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:173: g_VDP_Command.CMD = VDP_CMD_HMMV;
+    00000249 21r0Er00         [10]  939 	ld	hl, #_g_VDP_Command + 14
+    0000024C 36 C0            [10]  940 	ld	(hl), #0xc0
+                                    941 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:174: VDP_CommandSetupR36();
+    0000024E CDr00r00         [17]  942 	call	_VDP_CommandSetupR36
+                                    943 ;E:\supernova\msx\txt.c:132: VDP_CommandWait();
+                                    944 ;E:\supernova\msx\txt.c:133: }
+    00000251 C3r00r00         [10]  945 	jp	_VDP_CommandWait
+                                    946 ;E:\supernova\msx\txt.c:135: void Txt_Scroll(u8 row0, u8 row1, u8 n)
+                                    947 ;	---------------------------------
+                                    948 ; Function Txt_Scroll
+                                    949 ; ---------------------------------
+    00000254                        950 _Txt_Scroll::
+    00000254 DD E5            [15]  951 	push	ix
+    00000256 DD 21 00 00      [14]  952 	ld	ix,	#0
+    0000025A DD 39            [15]  953 	add	ix, sp
+    0000025C F5               [11]  954 	push	af
+                                    955 ;E:\supernova\msx\txt.c:137: VDP_CommandHMMM(X0B * 2, Y0 + (row0 + n) * 8, X0B * 2, Y0 + row0 * 8, TXT_COLS * 6, (row1 - row0 + 1 - n) * 8);
+    0000025D 26 00            [ 7]  956 	ld	h, #0x00
+    0000025F 4F               [ 4]  957 	ld	c, a
+    00000260 06 00            [ 7]  958 	ld	b, #0x00
+    00000262 BF               [ 4]  959 	cp	a, a
+    00000263 ED 42            [15]  960 	sbc	hl, bc
+    00000265 EB               [ 4]  961 	ex	de, hl
+    00000266 13               [ 6]  962 	inc	de
+    00000267 DD 6E 04         [19]  963 	ld	l, 4 (ix)
+    0000026A 26 00            [ 7]  964 	ld	h, #0x00
+    0000026C 7B               [ 4]  965 	ld	a, e
+    0000026D 95               [ 4]  966 	sub	a, l
+    0000026E 5F               [ 4]  967 	ld	e, a
+    0000026F 7A               [ 4]  968 	ld	a, d
+    00000270 9C               [ 4]  969 	sbc	a, h
+    00000271 57               [ 4]  970 	ld	d, a
+    00000272 EB               [ 4]  971 	ex	de, hl
+    00000273 29               [11]  972 	add	hl, hl
+    00000274 29               [11]  973 	add	hl, hl
+    00000275 29               [11]  974 	add	hl, hl
+    00000276 EB               [ 4]  975 	ex	de, hl
+    00000277 33               [ 6]  976 	inc	sp
+    00000278 33               [ 6]  977 	inc	sp
+    00000279 D5               [11]  978 	push	de
+    0000027A 59               [ 4]  979 	ld	e, c
+    0000027B 50               [ 4]  980 	ld	d, b
+    0000027C EB               [ 4]  981 	ex	de, hl
+    0000027D 29               [11]  982 	add	hl, hl
+    0000027E 29               [11]  983 	add	hl, hl
+    0000027F 29               [11]  984 	add	hl, hl
+    00000280 EB               [ 4]  985 	ex	de, hl
+    00000281 7B               [ 4]  986 	ld	a, e
+    00000282 C6 06            [ 7]  987 	add	a, #0x06
+    00000284 5F               [ 4]  988 	ld	e, a
+    00000285 30 01            [12]  989 	jr	nc, 00105$
+    00000287 14               [ 4]  990 	inc	d
+    00000288                        991 00105$:
+    00000288 09               [11]  992 	add	hl, bc
+    00000289 29               [11]  993 	add	hl, hl
+    0000028A 29               [11]  994 	add	hl, hl
+    0000028B 29               [11]  995 	add	hl, hl
+    0000028C 01 06 00         [10]  996 	ld	bc, #0x0006
+    0000028F 09               [11]  997 	add	hl, bc
+                                    998 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:105: g_VDP_Command.SX = sx;
+    00000290 01 10 00         [10]  999 	ld	bc, #0x0010
+    00000293 ED 43r00r00      [20] 1000 	ld	(_g_VDP_Command), bc
+                                   1001 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:106: g_VDP_Command.SY = sy;
+    00000297 22r02r00         [16] 1002 	ld	((_g_VDP_Command + 2)), hl
+                                   1003 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:107: g_VDP_Command.DX = dx;
+    0000029A 21 10 00         [10] 1004 	ld	hl, #0x0010
+    0000029D 22r04r00         [16] 1005 	ld	((_g_VDP_Command + 4)), hl
+                                   1006 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:108: g_VDP_Command.DY = dy;
+    000002A0 ED 53r06r00      [20] 1007 	ld	((_g_VDP_Command + 6)), de
+                                   1008 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:109: g_VDP_Command.NX = nx;
+    000002A4 21 E0 01         [10] 1009 	ld	hl, #0x01e0
+    000002A7 22r08r00         [16] 1010 	ld	((_g_VDP_Command + 8)), hl
+                                   1011 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:110: g_VDP_Command.NY = ny;
+    000002AA 21r0Ar00         [10] 1012 	ld	hl, #(_g_VDP_Command + 10)
+    000002AD DD 7E FE         [19] 1013 	ld	a, -2 (ix)
+    000002B0 77               [ 7] 1014 	ld	(hl), a
+    000002B1 23               [ 6] 1015 	inc	hl
+    000002B2 DD 7E FF         [19] 1016 	ld	a, -1 (ix)
+    000002B5 77               [ 7] 1017 	ld	(hl), a
+                                   1018 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:111: g_VDP_Command.ARG = arg; 
+    000002B6 21r0Dr00         [10] 1019 	ld	hl, #_g_VDP_Command + 13
+    000002B9 36 00            [10] 1020 	ld	(hl), #0x00
+                                   1021 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:112: g_VDP_Command.CMD = VDP_CMD_HMMM;
+    000002BB 21r0Er00         [10] 1022 	ld	hl, #_g_VDP_Command + 14
+    000002BE 36 D0            [10] 1023 	ld	(hl), #0xd0
+                                   1024 ;E:\supernova\MSXgl/engine/src/vdp_inl.h:113: VDP_CommandSetupR32();
+    000002C0 CDr00r00         [17] 1025 	call	_VDP_CommandSetupR32
+                                   1026 ;E:\supernova\msx\txt.c:138: VDP_CommandWait();
+    000002C3 CDr00r00         [17] 1027 	call	_VDP_CommandWait
+                                   1028 ;E:\supernova\msx\txt.c:139: }
+    000002C6 F1               [10] 1029 	pop	af
+    000002C7 DD E1            [14] 1030 	pop	ix
+    000002C9 E1               [10] 1031 	pop	hl
+    000002CA 33               [ 6] 1032 	inc	sp
+    000002CB E9               [ 4] 1033 	jp	(hl)
+                                   1034 	.area _CODE
+                                   1035 	.area _INITIALIZER
+    00000000                       1036 __xinit__s_Fg:
+    00000000 FF                    1037 	.db #0xff	; 255
+    00000001                       1038 __xinit__s_Bg:
+    00000001 FF                    1039 	.db #0xff	; 255
+                                   1040 	.area _CABS (ABS)

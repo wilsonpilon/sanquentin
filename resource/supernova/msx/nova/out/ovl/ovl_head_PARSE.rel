@@ -1,0 +1,14 @@
+XL4
+H 1 areas 6 global symbols
+M ovl_head_PARSE
+S _Present Ref00000000
+S _PlayerInput Ref00000000
+S .__.ABS. Def00000000
+S _MoreThanOne Ref00000000
+S _ChopSeven Ref00000000
+S _Parser_Syntax Ref00000000
+A _CODE size F flags 0 addr 0
+T 00 00 00 00 C3 00 00 C3 00 00 C3 00 00 C3
+R 00 00 00 00 02 05 04 00 02 08 03 00 02 0B 05 00
+T 0A 00 00 00 00 00 C3 00 00
+R 00 00 00 00 02 04 01 00 02 07 00 00

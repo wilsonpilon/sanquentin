@@ -1,0 +1,19 @@
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     _Room1      ******** GX  |     _Room10     ******** GX
+    _Room11     ******** GX  |     _Room12     ******** GX  |     _Room13     ******** GX
+    _Room14     ******** GX  |     _Room2      ******** GX  |     _Room3      ******** GX
+    _Room4      ******** GX  |     _Room5      ******** GX  |     _Room6      ******** GX
+    _Room7      ******** GX  |     _Room8      ******** GX  |     _Room9      ******** GX
+
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size       2A   flags    0
+

@@ -1,0 +1,61 @@
+ASxxxx Linker V05.50.4-SDLD,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000076  l__CODE                         
+     00008000  s__CODE                         
+     0000BF00  s__DATA                         
+     0000BF00  s__GSFINAL                      
+     0000BF00  s__GSINIT                       
+     0000BF00  s__HOME                         
+     0000BF00  s__INITIALIZED                  
+     0000BF00  s__INITIALIZER                  
+
+ASxxxx Linker V05.50.4-SDLD,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008000    00000076 =         118. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00008000  _OvlB_Main                         ovlb
+     00008074  ___sdcc_call_iy                    
+
+ASxxxx Linker V05.50.4-SDLD,  page 3.
+
+Files Linked                              [ module(s) ]
+
+E:\supernova\msx\maptest\out\ovlb.rel     [ ovlb ]
+
+
+Libraries Linked                          [ object file ]
+
+E:\supernova\MSXgl\tools\sdcc\bin\..\lib\z80/z80.lib
+                                          [ __sdcc_call_iy.rel ]
+
+ASxxxx Linker V05.50.4-SDLD,  page 4.
+
+User Base Address Definitions
+
+_CODE = 0x8000
+_DATA = 0xbf00
+
+

@@ -1,0 +1,9 @@
+-mjwx
+-i E:\supernova\msx\maptest\out\ovla.ihx
+-b _CODE = 0x8000
+-b _DATA = 0xbf00
+-k E:\supernova\MSXgl\tools\sdcc\bin\..\lib\z80
+-l z80
+E:\supernova\msx\maptest\out\ovla.rel
+
+-e

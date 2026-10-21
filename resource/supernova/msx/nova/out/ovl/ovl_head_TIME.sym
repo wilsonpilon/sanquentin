@@ -1,0 +1,19 @@
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     _Init1      ******** GX  |     _Init2      ******** GX
+    _Init3      ******** GX  |     _Restore    ******** GX  |     _Save       ******** GX
+    _Time1      ******** GX  |     _Time2A     ******** GX  |     _Time2B     ******** GX
+    _Time2C     ******** GX  |     _Time2D     ******** GX  |     _Title      ******** GX
+    _Won        ******** GX
+
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size       24   flags    0
+

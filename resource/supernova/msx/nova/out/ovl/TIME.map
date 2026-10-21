@@ -1,0 +1,573 @@
+ASxxxx Linker V05.50.4-SDLD,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  _g_SUBRID                          ui2
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000002  _g_STRSRC                          ui2
+     00000004  _g_CGTABL                          ui2
+     00000006  _DOS_TPAUpperAddr                  ui2
+     00000006  _g_VDP_DR                          ui2
+     00000007  _g_VDP_DW                          ui2
+     0000002B  _g_BASRVN                          ui2
+     0000002B  _g_ROMVersion                      ui2
+     0000002D  _g_MSXVER                          ui2
+     0000002E  _g_MSXMID                          ui2
+     00000034  _g_CHAR_16                         ui2
+     00000188  _SetEmpty                       
+     000001F7  _SetClear                       
+     0000020D  _Len                            
+     0000021D  _Pos                            
+     000002A3  _Delete                         
+     000004A4  _StrCpy                         
+     000004AC  _StrCat                         
+     000004FE  _UpCase                         
+     00000507  _SF                             
+     00000511  _Cur                            
+     00000514  _Col                            
+     00000517  _Bak                            
+     0000051A  _Bor                            
+     0000051D  _En                             
+     00000546  _Add                            
+     00000568  _Min                            
+     0000058B  _Score                          
+     000005A3  _Cn                             
+     000005C7  _Pause                          
+     00000601  _Tune                           
+     000006A1  _RegionSoundOn                  
+     000006BA  _Play                           
+     0000071A  _Explode                        
+     0000074B  _Walls                          
+     0000078B  _Static                         
+     00000812  _Blast                          
+     0000085A  _DOpen                          
+     000008CB  _DClose                         
+ASxxxx Linker V05.50.4-SDLD,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000096F  _WrFN                           
+     000009C2  _Up                             
+     00000B10  _LowerCase                      
+     00000B52  _Here                           
+     00000C19  _RL                             
+     00000C31  _RS                             
+     00000C64  _RB                             
+     00000C8F  _RB2                            
+     00000DFD  _MC                             
+     00000E99  _Van                            
+     0000104F  _SetNoun                        
+     00002149  _Wr                             
+     000021F4  _WrC                            
+     000022BA  _Wln                            
+     000022BD  _TextColor                      
+     000022D5  _Gotoxy                         
+     00002310  _Window                         
+     00002340  _ClrScr                         
+     0000236A  _InsLine                        
+     000024EA  _KeyPressed                     
+     000024FA  _GetKey                         
+     000025A3  _ReadLn                         
+     00002622  _Delay                          
+     0000265F  _Randomize                      
+     00002689  _Rnd                            
+     000026EA  _Sound                          
+     00002741  _NoSound                        
+     00002751  _FileWrite2                     
+     000027EB  _FileRead2                      
+     0000286B  _ListSaveFiles                  
+     00003506  l__CODE                         
+     00005845  _ChopSeven                      
+     0000592C  _Call13                         
+     00005933  _DEAD                           
+     00006B75  _Mov                            
+     00006B79  _Inv                            
+     00006B7D  _Socket                         
+     00006B81  _Wear                           
+     00006B85  _Brief                          
+     00006BA4  _Events                         
+     00006BC4  _PStat                          
+     00006BC5  _NoNounOnly                     
+     00006BD1  _OneNounMaybe                   
+     00006BDD  _ToNounOnly                     
+     00006BE9  _ToNounMaybe                    
+     00006BF5  _MugCon                         
+     00006BF6  _FoodCon                        
+     00006BF7  _SatchCon                       
+     00006BF8  _HolstCon                       
+     00006BF9  _NicheCon                       
+     00006BFA  _PyraCon                        
+ASxxxx Linker V05.50.4-SDLD,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00006BFB  _HingeCon                       
+     00006BFC  _PodumCon                       
+     00006BFD  _RobotCon                       
+     00006BFE  _CodeSet                        
+     00006BFF  _ScrnSet                        
+     00006C00  _Vb                             
+     00006C06  _Prm                            
+     00006C09  _TFlag                          
+     00006C0C  _Region                         
+     00006C0D  _AlienRm                        
+     00006C0E  _FriendRm                       
+     00006C0F  _SinkRm                         
+     00006C10  _Serum                          
+     00006C12  _Old                            
+     00006C13  _Old2                           
+     00006C14  _x                              
+     00006C15  _y                              
+     00006C16  _o                              
+     00006C19  _Tic                            
+     00006C1B  _StoreR                         
+     00006C1D  _StoreS                         
+     00006C1F  _StoreL                         
+     00006C21  _StoreC                         
+     00006C23  _RC                             
+     00006C25  _Sc                             
+     00006C29  _Floor                          
+     00006C2B  _i                              
+     00006C2F  _R                              
+     00006C4D  _T                              
+     00006C8B  _Mx                             
+     00006C8F  _Input                          
+     00006D13  _Again                          
+     00006D97  _Line                           
+     00006E1B  _Identity                       
+     00006E93  _LastNoun                       
+     00006ECF  _Drive                          
+     00006ED1  _CFlag                          
+     00006ED2  _Maze                           
+     00006ED4  _Color                          
+     00007312  _g_Loc                          
+     00007B42  s__DATA                         
+     00007B42  s__GSFINAL                      
+     00007B42  s__GSINIT                       
+     00007B42  s__HOME                         
+     00007B42  s__INITIALIZED                  
+     00007B42  s__INITIALIZER                  
+     00008000  s__CODE                         
+     0000F30F  _g_KANJTABLE                       ui2
+     0000F323  _g_DISKVE                          ui2
+     0000F325  _g_BREAKV                          ui2
+     0000F341  _g_RAMAD0                          ui2
+ASxxxx Linker V05.50.4-SDLD,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000F342  _g_RAMAD1                          ui2
+     0000F343  _g_RAMAD2                          ui2
+     0000F344  _g_RAMAD3                          ui2
+     0000F348  _g_MASTER                          ui2
+     0000F37D  _g_BDOS                            ui2
+     0000F380  _g_RDPRIM                          ui2
+     0000F385  _g_WRPRIM                          ui2
+     0000F38C  _g_CLPRIM                          ui2
+     0000F39A  _g_USRTAB                          ui2
+     0000F3AE  _g_LINL40                          ui2
+     0000F3AF  _g_LINL32                          ui2
+     0000F3B0  _g_LINLEN                          ui2
+     0000F3B1  _g_CRTCNT                          ui2
+     0000F3B2  _g_CLMLST                          ui2
+     0000F3B3  _g_TXTNAM                          ui2
+     0000F3B5  _g_TXTCOL                          ui2
+     0000F3B7  _g_TXTCGP                          ui2
+     0000F3B9  _g_TXTATR                          ui2
+     0000F3BB  _g_TXTPAT                          ui2
+     0000F3BD  _g_T32NAM                          ui2
+     0000F3BF  _g_T32COL                          ui2
+     0000F3C1  _g_T32CGP                          ui2
+     0000F3C3  _g_T32ATR                          ui2
+     0000F3C5  _g_T32PAT                          ui2
+     0000F3C7  _g_GRPNAM                          ui2
+     0000F3C9  _g_GRPCOL                          ui2
+     0000F3CB  _g_GRPCGP                          ui2
+     0000F3CD  _g_GRPATR                          ui2
+     0000F3CF  _g_GRPPAT                          ui2
+     0000F3D1  _g_MLTNAM                          ui2
+     0000F3D3  _g_MLTCOL                          ui2
+     0000F3D5  _g_MLTCGP                          ui2
+     0000F3D7  _g_MLTATR                          ui2
+     0000F3D9  _g_MLTPAT                          ui2
+     0000F3DB  _g_CLIKSW                          ui2
+     0000F3DC  _g_CSRY                            ui2
+     0000F3DD  _g_CSRX                            ui2
+     0000F3DE  _g_CNSDFG                          ui2
+     0000F3DF  _g_RG0SAV                          ui2
+     0000F3E0  _g_RG1SAV                          ui2
+     0000F3E1  _g_RG2SAV                          ui2
+     0000F3E2  _g_RG3SAV                          ui2
+     0000F3E3  _g_RG4SAV                          ui2
+     0000F3E4  _g_RG5SAV                          ui2
+     0000F3E5  _g_RG6SAV                          ui2
+     0000F3E6  _g_RG7SAV                          ui2
+     0000F3E7  _g_STATFL                          ui2
+     0000F3E8  _g_TRGFLG                          ui2
+     0000F3E9  _g_FORCLR                          ui2
+     0000F3EA  _g_BAKCLR                          ui2
+     0000F3EB  _g_BDRCLR                          ui2
+ASxxxx Linker V05.50.4-SDLD,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000F3EC  _g_MAXUPD                          ui2
+     0000F3EF  _g_MINUPD                          ui2
+     0000F3F2  _g_ATRBYT                          ui2
+     0000F3F3  _g_QUEUES                          ui2
+     0000F3F5  _g_FRCNEW                          ui2
+     0000F3F6  _g_SCNCNT                          ui2
+     0000F3F7  _g_REPCNT                          ui2
+     0000F3F8  _g_PUTPNT                          ui2
+     0000F3FA  _g_GETPNT                          ui2
+     0000F3FC  _g_CS120                           ui2
+     0000F401  _g_CS240                           ui2
+     0000F406  _g_LOW                             ui2
+     0000F408  _g_HIGH                            ui2
+     0000F40A  _g_HEADER                          ui2
+     0000F40B  _g_ASPCT1                          ui2
+     0000F40D  _g_ASPCT2                          ui2
+     0000F87F  _g_FNKSTR                          ui2
+     0000F92A  _g_CLOC                            ui2
+     0000F92C  _g_CMASK                           ui2
+     0000F959  _g_QUETAB                          ui2
+     0000F971  _g_QUEBAK                          ui2
+     0000F975  _g_VOICAQ                          ui2
+     0000F9F5  _g_VOICBQ                          ui2
+     0000FA75  _g_VOICCQ                          ui2
+     0000FAF5  _g_DPPAGE                          ui2
+     0000FAF5  _g_RS2IQ                           ui2
+     0000FAF6  _g_ACPAGE                          ui2
+     0000FAF7  _g_AVCSAV                          ui2
+     0000FAF8  _g_EXBRSA                          ui2
+     0000FAF9  _g_CHRCNT                          ui2
+     0000FAFA  _g_ROMA                            ui2
+     0000FAFC  _g_MODE                            ui2
+     0000FAFD  _g_NORUSE                          ui2
+     0000FAFE  _g_XSAVE                           ui2
+     0000FB00  _g_YSAVE                           ui2
+     0000FB02  _g_LOGOPR                          ui2
+     0000FB03  _g_RSTMP                           ui2
+     0000FB03  _g_TOCNT                           ui2
+     0000FB04  _g_RSFCB                           ui2
+     0000FB06  _g_RSIQLN                          ui2
+     0000FB07  _g_MEXBIh                          ui2
+     0000FB0C  _g_OLDINT                          ui2
+     0000FB0C  _g_OLDSTT                          ui2
+     0000FB16  _g_DEVNUM                          ui2
+     0000FB17  _g_DATCNT                          ui2
+     0000FB1A  _g_ERRORS                          ui2
+     0000FB1B  _g_FLAGS                           ui2
+     0000FB1C  _g_ESTBLS                          ui2
+     0000FB1D  _g_COMMSK                          ui2
+     0000FB1E  _g_LSTCOM                          ui2
+     0000FB1F  _g_LSTMOD                          ui2
+ASxxxx Linker V05.50.4-SDLD,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FB35  _g_PRSCNT                          ui2
+     0000FB36  _g_SAVSP                           ui2
+     0000FB38  _g_VOICEN                          ui2
+     0000FB39  _g_SAVVOL                          ui2
+     0000FB3B  _g_MCLLEN                          ui2
+     0000FB3C  _g_MCLPTR                          ui2
+     0000FB3E  _g_QUEUEN                          ui2
+     0000FB3F  _g_MUSICF                          ui2
+     0000FB40  _g_PLYCNT                          ui2
+     0000FB41  _g_VCBA                            ui2
+     0000FB66  _g_VCBB                            ui2
+     0000FB8B  _g_VCBC                            ui2
+     0000FBB0  _g_ENSTOP                          ui2
+     0000FBB1  _g_BASROM                          ui2
+     0000FBB2  _g_LINTTB                          ui2
+     0000FBCA  _g_FSTPOS                          ui2
+     0000FBCC  _g_CODSAV                          ui2
+     0000FBCD  _g_FNKSWI                          ui2
+     0000FBCE  _g_FNKFLG                          ui2
+     0000FBD8  _g_ONGSBF                          ui2
+     0000FBD9  _g_CLIKFL                          ui2
+     0000FBDA  _g_OLDKEY                          ui2
+     0000FBE5  _g_NEWKEY                          ui2
+     0000FBF0  _g_KEYBUF                          ui2
+     0000FC18  _g_LINWRK                          ui2
+     0000FC40  _g_PATWRK                          ui2
+     0000FC48  _g_BOTTOM                          ui2
+     0000FC4A  _g_HIMEM                           ui2
+     0000FC4C  _g_TRPTBL                          ui2
+     0000FC9A  _g_RTYCNT                          ui2
+     0000FC9B  _g_INTFLG                          ui2
+     0000FC9C  _g_PADY                            ui2
+     0000FC9D  _g_PADX                            ui2
+     0000FC9E  _g_JIFFY                           ui2
+     0000FCA0  _g_INTVAL                          ui2
+     0000FCA2  _g_INTCNT                          ui2
+     0000FCA4  _g_LOWLIM                          ui2
+     0000FCA5  _g_WINWID                          ui2
+     0000FCA6  _g_GRPHED                          ui2
+     0000FCA7  _g_ESCCNT                          ui2
+     0000FCA8  _g_INSFLG                          ui2
+     0000FCA9  _g_CSRSW                           ui2
+     0000FCAA  _g_CSTYLE                          ui2
+     0000FCAB  _g_CAPST                           ui2
+     0000FCAC  _g_KANAST                          ui2
+     0000FCAD  _g_KANAMD                          ui2
+     0000FCAE  _g_FLBMEM                          ui2
+     0000FCAF  _g_SCRMOD                          ui2
+     0000FCB0  _g_OLDSCR                          ui2
+     0000FCB1  _g_CASPRV                          ui2
+     0000FCB2  _g_BRDATR                          ui2
+ASxxxx Linker V05.50.4-SDLD,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FCB3  _g_GXPOS                           ui2
+     0000FCB5  _g_GYPOS                           ui2
+     0000FCB7  _g_GRPACX                          ui2
+     0000FCB9  _g_GRPACY                          ui2
+     0000FCBB  _g_DRWFLG                          ui2
+     0000FCBC  _g_DRWSCL                          ui2
+     0000FCBD  _g_DRWANG                          ui2
+     0000FCC1  _g_EXPTBL                          ui2
+     0000FCC1  _g_MNROM                           ui2
+     0000FCC5  _g_SLTTBL                          ui2
+     0000FCC9  _g_SLTATR                          ui2
+     0000FD09  _g_SLTWRK                          ui2
+     0000FD89  _g_PROCNM                          ui2
+     0000FFE7  _g_RG08SAV                         ui2
+     0000FFE8  _g_RG09SAV                         ui2
+     0000FFE9  _g_RG10SAV                         ui2
+     0000FFEA  _g_RG11SAV                         ui2
+     0000FFEB  _g_RG12SAV                         ui2
+     0000FFEC  _g_RG13SAV                         ui2
+     0000FFED  _g_RG14SAV                         ui2
+     0000FFEE  _g_RG15SAV                         ui2
+     0000FFEF  _g_RG16SAV                         ui2
+     0000FFF0  _g_RG17SAV                         ui2
+     0000FFF1  _g_RG18SAV                         ui2
+     0000FFF2  _g_RG19SAV                         ui2
+     0000FFF3  _g_RG20SAV                         ui2
+     0000FFF4  _g_RG21SAV                         ui2
+     0000FFF5  _g_RG22SAV                         ui2
+     0000FFF6  _g_RG23SAV                         ui2
+     0000FFF7  _g_MINROM                          ui2
+     0000FFF8  _g_SVFFF8                          ui2
+     0000FFFA  _g_RG25SAV                         ui2
+     0000FFFB  _g_RG26SAV                         ui2
+     0000FFFC  _g_RG27SAV                         ui2
+     0000FFFD  _g_SVFFFD                          ui2
+     0000FFFF  _g_SLTSL                           ui2
+
+ASxxxx Linker V05.50.4-SDLD,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008000    00003506 =       13574. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00008024  _Time1                             time
+     00008721  _Time2A                            time
+     00008B76  _Time2B                            time
+     00008E24  _Time2C                            time
+     00009055  _Time2D                            time
+     000096BE  _Won                               ui2
+     00009C60  _Title                             ui2
+     0000A18B  _Init1                             ui2
+     0000A389  _Init2                             ui2
+     0000A6B7  _Init3                             ui2
+     0000AC35  _Save                              ui2
+     0000B090  _Restore                           ui2
+     0000B4FC  ___sdcc_enter_ix                   
+
+ASxxxx Linker V05.50.4-SDLD,  page 9.
+
+Files Linked                              [ module(s) ]
+
+E:/supernova/msx/nova/out/ovl/ovl_head_TIME.rel
+                                          [ ovl_head_TIME ]
+E:/supernova/msx/nova/out/ovl/time.rel    [ time ]
+E:/supernova/msx/nova/out/ovl/ui2.rel     [ ui2 ]
+
+
+Libraries Linked                          [ object file ]
+
+E:\supernova\MSXgl\tools\sdcc/lib/z80/z80.lib
+                                          [ crtenter.rel ]
+
+ASxxxx Linker V05.50.4-SDLD,  page 10.
+
+User Base Address Definitions
+
+_CODE = 0x8000
+_DATA = 0x7b42
+ASxxxx Linker V05.50.4-SDLD,  page 11.
+
+User Global Definitions
+
+_Bor=0x51a
+_g_Loc=0x7312
+_Region=0x6c0c
+_Rnd=0x2689
+_Min=0x568
+_RS=0xc31
+_Van=0xe99
+_CodeSet=0x6bfe
+_Static=0x78b
+_i=0x6c2b
+_PStat=0x6bc4
+_Inv=0x6b79
+_Prm=0x6c06
+_Delay=0x2622
+_Wln=0x22ba
+_En=0x51d
+_Blast=0x812
+_x=0x6c14
+_DClose=0x8cb
+_SetEmpty=0x188
+_Score=0x58b
+_Pause=0x5c7
+_ScrnSet=0x6bff
+_Walls=0x74b
+_Here=0xb52
+_NoSound=0x2741
+_RB2=0xc8f
+_Wr=0x2149
+_Sound=0x26ea
+_Add=0x546
+_SetNoun=0x104f
+_Maze=0x6ed2
+_DEAD=0x5933
+_Wear=0x6b81
+_MC=0xdfd
+_Explode=0x71a
+_R=0x6c2f
+_SetClear=0x1f7
+_SinkRm=0x6c0f
+_T=0x6c4d
+_RB=0xc64
+_RC=0x6c23
+_Play=0x6ba
+_DOpen=0x85a
+_Tune=0x601
+_WrFN=0x96f
+_Col=0x514
+_RL=0xc19
+_Tic=0x6c19
+_TextColor=0x22bd
+_PodumCon=0x6bfc
+_StrCpy=0x4a4
+_RobotCon=0x6bfd
+_FoodCon=0x6bf6
+_Brief=0x6b85
+_AlienRm=0x6c0d
+_Socket=0x6b7d
+_Randomize=0x265f
+_HolstCon=0x6bf8
+_Cur=0x511
+_RegionSoundOn=0x6a1
+_FileRead2=0x27eb
+_o=0x6c16
+_OneNounMaybe=0x6bd1
+_Cn=0x5a3
+_Mov=0x6b75
+_Pos=0x21d
+_InsLine=0x236a
+_LastNoun=0x6e93
+_Events=0x6ba4
+_Sc=0x6c25
+_ReadLn=0x25a3
+_Vb=0x6c00
+_Window=0x2310
+_y=0x6c15
+_Drive=0x6ecf
+_PyraCon=0x6bfa
+_CFlag=0x6ed1
+_FileWrite2=0x2751
+_NoNounOnly=0x6bc5
+_Color=0x6ed4
+_KeyPressed=0x24ea
+_UpCase=0x4fe
+_Floor=0x6c29
+_ToNounOnly=0x6bdd
+_Mx=0x6c8b
+_Up=0x9c2
+_LowerCase=0xb10
+_NicheCon=0x6bf9
+_Line=0x6d97
+_MugCon=0x6bf5
+_ClrScr=0x2340
+_GetKey=0x24fa
+_Identity=0x6e1b
+_Gotoxy=0x22d5
+_HingeCon=0x6bfb
+_ChopSeven=0x5845
+_Serum=0x6c10
+_WrC=0x21f4
+_TFlag=0x6c09
+_Bak=0x517
+_Input=0x6c8f
+_StoreC=0x6c21
+_ToNounMaybe=0x6be9
+_Old2=0x6c13
+_StrCat=0x4ac
+_SatchCon=0x6bf7
+_Delete=0x2a3
+_FriendRm=0x6c0e
+_StoreL=0x6c1f
+_SF=0x507
+_ListSaveFiles=0x286b
+_StoreR=0x6c1b
+_Old=0x6c12
+_Len=0x20d
+_StoreS=0x6c1d
+_Again=0x6d13
+_Call13=0x592c
+
+

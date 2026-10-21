@@ -1,0 +1,12 @@
+-mjwx
+-i E:\sanquentin\MSXgl\projects\template/out/template.ihx
+-b _CODE = 0x4000
+-b _DATA = 0xc000
+-k E:\sanquentin\MSXgl\tools/sdcc/lib/z80
+-k E:\sanquentin\MSXgl\tools/sdcc/bin\..\lib\z80
+-l E:\sanquentin\MSXgl\projects\template/out/msxgl.lib
+-l z80
+E:\sanquentin\MSXgl\projects\template/out/crt0_rom32.rel
+E:\sanquentin\MSXgl\projects\template/out/template.rel
+
+-e

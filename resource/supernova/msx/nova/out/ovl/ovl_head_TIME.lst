@@ -1,0 +1,27 @@
+                                      1 ; generated - jump table of overlay TIME
+                                      2 	.module ovl_head_TIME
+                                      3 	.globl	_Init1
+                                      4 	.globl	_Init2
+                                      5 	.globl	_Init3
+                                      6 	.globl	_Restore
+                                      7 	.globl	_Save
+                                      8 	.globl	_Time1
+                                      9 	.globl	_Time2A
+                                     10 	.globl	_Time2B
+                                     11 	.globl	_Time2C
+                                     12 	.globl	_Time2D
+                                     13 	.globl	_Title
+                                     14 	.globl	_Won
+                                     15 	.area	_CODE
+    00000000 C3r00r00         [10]   16 	jp	_Init1
+    00000003 C3r00r00         [10]   17 	jp	_Init2
+    00000006 C3r00r00         [10]   18 	jp	_Init3
+    00000009 C3r00r00         [10]   19 	jp	_Restore
+    0000000C C3r00r00         [10]   20 	jp	_Save
+    0000000F C3r00r00         [10]   21 	jp	_Time1
+    00000012 C3r00r00         [10]   22 	jp	_Time2A
+    00000015 C3r00r00         [10]   23 	jp	_Time2B
+    00000018 C3r00r00         [10]   24 	jp	_Time2C
+    0000001B C3r00r00         [10]   25 	jp	_Time2D
+    0000001E C3r00r00         [10]   26 	jp	_Title
+    00000021 C3r00r00         [10]   27 	jp	_Won

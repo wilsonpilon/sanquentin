@@ -1,0 +1,480 @@
+ASxxxx Linker V05.50.4-SDLD,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  _g_SUBRID                          rooms3
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000002  _g_STRSRC                          rooms3
+     00000004  _g_CGTABL                          rooms3
+     00000006  _DOS_TPAUpperAddr                  rooms3
+     00000006  _g_VDP_DR                          rooms3
+     00000007  _g_VDP_DW                          rooms3
+     0000002B  _g_BASRVN                          rooms3
+     0000002B  _g_ROMVersion                      rooms3
+     0000002D  _g_MSXVER                          rooms3
+     0000002E  _g_MSXMID                          rooms3
+     00000034  _g_CHAR_16                         rooms3
+     00000188  _SetEmpty                       
+     000001F7  _SetClear                       
+     000004ED  _StrEq                          
+     00000507  _SF                             
+     00000514  _Col                            
+     0000051A  _Bor                            
+     0000051D  _En                             
+     00000546  _Add                            
+     00000568  _Min                            
+     0000058B  _Score                          
+     000005C7  _Pause                          
+     000006BA  _Play                           
+     0000071A  _Explode                        
+     0000074B  _Walls                          
+     0000078B  _Static                         
+     0000085A  _DOpen                          
+     0000093E  _Door                           
+     0000096F  _WrFN                           
+     00000B52  _Here                           
+     00000C19  _RL                             
+     00000C31  _RS                             
+     00000C64  _RB                             
+     00000C8F  _RB2                            
+     00000E99  _Van                            
+     00000FCE  _Crazy                          
+     00000FE4  _Say                            
+     0000101D  _TransportNoise                 
+     0000104F  _SetNoun                        
+ASxxxx Linker V05.50.4-SDLD,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00001658  _MoveTo                         
+     00001A9D  _SetR                           
+     00002149  _Wr                             
+     000022BA  _Wln                            
+     000022D5  _Gotoxy                         
+     0000230C  _Wherey                         
+     00002622  _Delay                          
+     00002689  _Rnd                            
+     000026EA  _Sound                          
+     00002741  _NoSound                        
+     0000367F  l__CODE                         
+     00005933  _DEAD                           
+     00006B75  _Mov                            
+     00006B79  _Inv                            
+     00006B85  _Brief                          
+     00006B93  _NounSet                        
+     00006BC4  _PStat                          
+     00006BF5  _MugCon                         
+     00006BF9  _NicheCon                       
+     00006BFA  _PyraCon                        
+     00006BFB  _HingeCon                       
+     00006BFC  _PodumCon                       
+     00006BFD  _RobotCon                       
+     00006BFE  _CodeSet                        
+     00006C00  _Vb                             
+     00006C01  _N1                             
+     00006C02  _N2                             
+     00006C03  _Pr                             
+     00006C04  _Md                             
+     00006C06  _Prm                            
+     00006C09  _TFlag                          
+     00006C0C  _Region                         
+     00006C10  _Serum                          
+     00006C14  _x                              
+     00006C15  _y                              
+     00006C23  _RC                             
+     00006C2B  _i                              
+     00006C2D  _j                              
+     00006C2F  _R                              
+     00006C4D  _T                              
+     00006C8F  _Input                          
+     00006E1B  _Identity                       
+     00006E39  _VStr                           
+     00006E57  _NStr                           
+     00006ED2  _Maze                           
+     00006ED3  _Crawl                          
+     00006ED6  _SFlag                          
+     00007312  _g_Loc                          
+     00007B42  s__DATA                         
+     00007B42  s__GSFINAL                      
+     00007B42  s__GSINIT                       
+ASxxxx Linker V05.50.4-SDLD,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00007B42  s__HOME                         
+     00007B42  s__INITIALIZED                  
+     00007B42  s__INITIALIZER                  
+     00008000  s__CODE                         
+     0000F30F  _g_KANJTABLE                       rooms3
+     0000F323  _g_DISKVE                          rooms3
+     0000F325  _g_BREAKV                          rooms3
+     0000F341  _g_RAMAD0                          rooms3
+     0000F342  _g_RAMAD1                          rooms3
+     0000F343  _g_RAMAD2                          rooms3
+     0000F344  _g_RAMAD3                          rooms3
+     0000F348  _g_MASTER                          rooms3
+     0000F37D  _g_BDOS                            rooms3
+     0000F380  _g_RDPRIM                          rooms3
+     0000F385  _g_WRPRIM                          rooms3
+     0000F38C  _g_CLPRIM                          rooms3
+     0000F39A  _g_USRTAB                          rooms3
+     0000F3AE  _g_LINL40                          rooms3
+     0000F3AF  _g_LINL32                          rooms3
+     0000F3B0  _g_LINLEN                          rooms3
+     0000F3B1  _g_CRTCNT                          rooms3
+     0000F3B2  _g_CLMLST                          rooms3
+     0000F3B3  _g_TXTNAM                          rooms3
+     0000F3B5  _g_TXTCOL                          rooms3
+     0000F3B7  _g_TXTCGP                          rooms3
+     0000F3B9  _g_TXTATR                          rooms3
+     0000F3BB  _g_TXTPAT                          rooms3
+     0000F3BD  _g_T32NAM                          rooms3
+     0000F3BF  _g_T32COL                          rooms3
+     0000F3C1  _g_T32CGP                          rooms3
+     0000F3C3  _g_T32ATR                          rooms3
+     0000F3C5  _g_T32PAT                          rooms3
+     0000F3C7  _g_GRPNAM                          rooms3
+     0000F3C9  _g_GRPCOL                          rooms3
+     0000F3CB  _g_GRPCGP                          rooms3
+     0000F3CD  _g_GRPATR                          rooms3
+     0000F3CF  _g_GRPPAT                          rooms3
+     0000F3D1  _g_MLTNAM                          rooms3
+     0000F3D3  _g_MLTCOL                          rooms3
+     0000F3D5  _g_MLTCGP                          rooms3
+     0000F3D7  _g_MLTATR                          rooms3
+     0000F3D9  _g_MLTPAT                          rooms3
+     0000F3DB  _g_CLIKSW                          rooms3
+     0000F3DC  _g_CSRY                            rooms3
+     0000F3DD  _g_CSRX                            rooms3
+     0000F3DE  _g_CNSDFG                          rooms3
+     0000F3DF  _g_RG0SAV                          rooms3
+     0000F3E0  _g_RG1SAV                          rooms3
+     0000F3E1  _g_RG2SAV                          rooms3
+     0000F3E2  _g_RG3SAV                          rooms3
+     0000F3E3  _g_RG4SAV                          rooms3
+ASxxxx Linker V05.50.4-SDLD,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000F3E4  _g_RG5SAV                          rooms3
+     0000F3E5  _g_RG6SAV                          rooms3
+     0000F3E6  _g_RG7SAV                          rooms3
+     0000F3E7  _g_STATFL                          rooms3
+     0000F3E8  _g_TRGFLG                          rooms3
+     0000F3E9  _g_FORCLR                          rooms3
+     0000F3EA  _g_BAKCLR                          rooms3
+     0000F3EB  _g_BDRCLR                          rooms3
+     0000F3EC  _g_MAXUPD                          rooms3
+     0000F3EF  _g_MINUPD                          rooms3
+     0000F3F2  _g_ATRBYT                          rooms3
+     0000F3F3  _g_QUEUES                          rooms3
+     0000F3F5  _g_FRCNEW                          rooms3
+     0000F3F6  _g_SCNCNT                          rooms3
+     0000F3F7  _g_REPCNT                          rooms3
+     0000F3F8  _g_PUTPNT                          rooms3
+     0000F3FA  _g_GETPNT                          rooms3
+     0000F3FC  _g_CS120                           rooms3
+     0000F401  _g_CS240                           rooms3
+     0000F406  _g_LOW                             rooms3
+     0000F408  _g_HIGH                            rooms3
+     0000F40A  _g_HEADER                          rooms3
+     0000F40B  _g_ASPCT1                          rooms3
+     0000F40D  _g_ASPCT2                          rooms3
+     0000F87F  _g_FNKSTR                          rooms3
+     0000F92A  _g_CLOC                            rooms3
+     0000F92C  _g_CMASK                           rooms3
+     0000F959  _g_QUETAB                          rooms3
+     0000F971  _g_QUEBAK                          rooms3
+     0000F975  _g_VOICAQ                          rooms3
+     0000F9F5  _g_VOICBQ                          rooms3
+     0000FA75  _g_VOICCQ                          rooms3
+     0000FAF5  _g_DPPAGE                          rooms3
+     0000FAF5  _g_RS2IQ                           rooms3
+     0000FAF6  _g_ACPAGE                          rooms3
+     0000FAF7  _g_AVCSAV                          rooms3
+     0000FAF8  _g_EXBRSA                          rooms3
+     0000FAF9  _g_CHRCNT                          rooms3
+     0000FAFA  _g_ROMA                            rooms3
+     0000FAFC  _g_MODE                            rooms3
+     0000FAFD  _g_NORUSE                          rooms3
+     0000FAFE  _g_XSAVE                           rooms3
+     0000FB00  _g_YSAVE                           rooms3
+     0000FB02  _g_LOGOPR                          rooms3
+     0000FB03  _g_RSTMP                           rooms3
+     0000FB03  _g_TOCNT                           rooms3
+     0000FB04  _g_RSFCB                           rooms3
+     0000FB06  _g_RSIQLN                          rooms3
+     0000FB07  _g_MEXBIh                          rooms3
+     0000FB0C  _g_OLDINT                          rooms3
+     0000FB0C  _g_OLDSTT                          rooms3
+ASxxxx Linker V05.50.4-SDLD,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FB16  _g_DEVNUM                          rooms3
+     0000FB17  _g_DATCNT                          rooms3
+     0000FB1A  _g_ERRORS                          rooms3
+     0000FB1B  _g_FLAGS                           rooms3
+     0000FB1C  _g_ESTBLS                          rooms3
+     0000FB1D  _g_COMMSK                          rooms3
+     0000FB1E  _g_LSTCOM                          rooms3
+     0000FB1F  _g_LSTMOD                          rooms3
+     0000FB35  _g_PRSCNT                          rooms3
+     0000FB36  _g_SAVSP                           rooms3
+     0000FB38  _g_VOICEN                          rooms3
+     0000FB39  _g_SAVVOL                          rooms3
+     0000FB3B  _g_MCLLEN                          rooms3
+     0000FB3C  _g_MCLPTR                          rooms3
+     0000FB3E  _g_QUEUEN                          rooms3
+     0000FB3F  _g_MUSICF                          rooms3
+     0000FB40  _g_PLYCNT                          rooms3
+     0000FB41  _g_VCBA                            rooms3
+     0000FB66  _g_VCBB                            rooms3
+     0000FB8B  _g_VCBC                            rooms3
+     0000FBB0  _g_ENSTOP                          rooms3
+     0000FBB1  _g_BASROM                          rooms3
+     0000FBB2  _g_LINTTB                          rooms3
+     0000FBCA  _g_FSTPOS                          rooms3
+     0000FBCC  _g_CODSAV                          rooms3
+     0000FBCD  _g_FNKSWI                          rooms3
+     0000FBCE  _g_FNKFLG                          rooms3
+     0000FBD8  _g_ONGSBF                          rooms3
+     0000FBD9  _g_CLIKFL                          rooms3
+     0000FBDA  _g_OLDKEY                          rooms3
+     0000FBE5  _g_NEWKEY                          rooms3
+     0000FBF0  _g_KEYBUF                          rooms3
+     0000FC18  _g_LINWRK                          rooms3
+     0000FC40  _g_PATWRK                          rooms3
+     0000FC48  _g_BOTTOM                          rooms3
+     0000FC4A  _g_HIMEM                           rooms3
+     0000FC4C  _g_TRPTBL                          rooms3
+     0000FC9A  _g_RTYCNT                          rooms3
+     0000FC9B  _g_INTFLG                          rooms3
+     0000FC9C  _g_PADY                            rooms3
+     0000FC9D  _g_PADX                            rooms3
+     0000FC9E  _g_JIFFY                           rooms3
+     0000FCA0  _g_INTVAL                          rooms3
+     0000FCA2  _g_INTCNT                          rooms3
+     0000FCA4  _g_LOWLIM                          rooms3
+     0000FCA5  _g_WINWID                          rooms3
+     0000FCA6  _g_GRPHED                          rooms3
+     0000FCA7  _g_ESCCNT                          rooms3
+     0000FCA8  _g_INSFLG                          rooms3
+     0000FCA9  _g_CSRSW                           rooms3
+     0000FCAA  _g_CSTYLE                          rooms3
+ASxxxx Linker V05.50.4-SDLD,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FCAB  _g_CAPST                           rooms3
+     0000FCAC  _g_KANAST                          rooms3
+     0000FCAD  _g_KANAMD                          rooms3
+     0000FCAE  _g_FLBMEM                          rooms3
+     0000FCAF  _g_SCRMOD                          rooms3
+     0000FCB0  _g_OLDSCR                          rooms3
+     0000FCB1  _g_CASPRV                          rooms3
+     0000FCB2  _g_BRDATR                          rooms3
+     0000FCB3  _g_GXPOS                           rooms3
+     0000FCB5  _g_GYPOS                           rooms3
+     0000FCB7  _g_GRPACX                          rooms3
+     0000FCB9  _g_GRPACY                          rooms3
+     0000FCBB  _g_DRWFLG                          rooms3
+     0000FCBC  _g_DRWSCL                          rooms3
+     0000FCBD  _g_DRWANG                          rooms3
+     0000FCC1  _g_EXPTBL                          rooms3
+     0000FCC1  _g_MNROM                           rooms3
+     0000FCC5  _g_SLTTBL                          rooms3
+     0000FCC9  _g_SLTATR                          rooms3
+     0000FD09  _g_SLTWRK                          rooms3
+     0000FD89  _g_PROCNM                          rooms3
+     0000FFE7  _g_RG08SAV                         rooms3
+     0000FFE8  _g_RG09SAV                         rooms3
+     0000FFE9  _g_RG10SAV                         rooms3
+     0000FFEA  _g_RG11SAV                         rooms3
+     0000FFEB  _g_RG12SAV                         rooms3
+     0000FFEC  _g_RG13SAV                         rooms3
+     0000FFED  _g_RG14SAV                         rooms3
+     0000FFEE  _g_RG15SAV                         rooms3
+     0000FFEF  _g_RG16SAV                         rooms3
+     0000FFF0  _g_RG17SAV                         rooms3
+     0000FFF1  _g_RG18SAV                         rooms3
+     0000FFF2  _g_RG19SAV                         rooms3
+     0000FFF3  _g_RG20SAV                         rooms3
+     0000FFF4  _g_RG21SAV                         rooms3
+     0000FFF5  _g_RG22SAV                         rooms3
+     0000FFF6  _g_RG23SAV                         rooms3
+     0000FFF7  _g_MINROM                          rooms3
+     0000FFF8  _g_SVFFF8                          rooms3
+     0000FFFA  _g_RG25SAV                         rooms3
+     0000FFFB  _g_RG26SAV                         rooms3
+     0000FFFC  _g_RG27SAV                         rooms3
+     0000FFFD  _g_SVFFFD                          rooms3
+     0000FFFF  _g_SLTSL                           rooms3
+
+ASxxxx Linker V05.50.4-SDLD,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008000    0000367F =       13951. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000802A  _Room1                             rooms1
+     00008451  _Room2                             rooms1
+     000086C9  _Room3                             rooms1
+     00008A51  _Room4                             rooms1
+     00008F83  _Room5                             rooms2
+     0000949D  _Room6                             rooms2
+     000099F3  _Room7                             rooms2
+     00009EE3  _Room8                             rooms2
+     0000A0DE  _Room9                             rooms2
+     0000A580  _Room10                            rooms3
+     0000A835  _Room11                            rooms3
+     0000AB32  _Room12                            rooms3
+     0000AEBB  _Room13                            rooms3
+     0000B1DB  _Room14                            rooms3
+     0000B675  ___sdcc_enter_ix                   
+ASxxxx Linker V05.50.4-SDLD,  page 8.
+
+Files Linked                              [ module(s) ]
+
+E:/supernova/msx/nova/out/ovl/ovl_head_ROOMA.rel
+                                          [ ovl_head_ROOMA ]
+E:/supernova/msx/nova/out/ovl/rooms1.rel  [ rooms1 ]
+E:/supernova/msx/nova/out/ovl/rooms2.rel  [ rooms2 ]
+E:/supernova/msx/nova/out/ovl/rooms3.rel  [ rooms3 ]
+
+
+Libraries Linked                          [ object file ]
+
+E:\supernova\MSXgl\tools\sdcc/lib/z80/z80.lib
+                                          [ crtenter.rel ]
+
+ASxxxx Linker V05.50.4-SDLD,  page 9.
+
+User Base Address Definitions
+
+_CODE = 0x8000
+_DATA = 0x7b42
+ASxxxx Linker V05.50.4-SDLD,  page 10.
+
+User Global Definitions
+
+_g_Loc=0x7312
+_Region=0x6c0c
+_Rnd=0x2689
+_Min=0x568
+_RS=0xc31
+_Van=0xe99
+_i=0x6c2b
+_Say=0xfe4
+_Prm=0x6c06
+_StrEq=0x4ed
+_Delay=0x2622
+_Md=0x6c04
+_Wln=0x22ba
+_En=0x51d
+_x=0x6c14
+_Vb=0x6c00
+_y=0x6c15
+_Score=0x58b
+_Pause=0x5c7
+_SetR=0x1a9d
+_N1=0x6c01
+_N2=0x6c02
+_Pr=0x6c03
+_Here=0xb52
+_NoSound=0x2741
+_RB2=0xc8f
+_NicheCon=0x6bf9
+_NStr=0x6e57
+_MugCon=0x6bf5
+_Wr=0x2149
+_Sound=0x26ea
+_Add=0x546
+_Crazy=0xfce
+_Identity=0x6e1b
+_Serum=0x6c10
+_NounSet=0x6b93
+_SetNoun=0x104f
+_SFlag=0x6ed6
+_TFlag=0x6c09
+_DEAD=0x5933
+_Input=0x6c8f
+_Explode=0x71a
+_R=0x6c2f
+_T=0x6c4d
+_Door=0x93e
+_RB=0xc64
+_Play=0x6ba
+_MoveTo=0x1658
+_WrFN=0x96f
+_Col=0x514
+_RL=0xc19
+_Bor=0x51a
+_PodumCon=0x6bfc
+_Brief=0x6b85
+_j=0x6c2d
+_PStat=0x6bc4
+_Inv=0x6b79
+_Mov=0x6b75
+_SetEmpty=0x188
+_PyraCon=0x6bfa
+_Walls=0x74b
+_HingeCon=0x6bfb
+_VStr=0x6e39
+_SetClear=0x1f7
+_RC=0x6c23
+_SF=0x507
+_RobotCon=0x6bfd
+_CodeSet=0x6bfe
+_Static=0x78b
+_Wherey=0x230c
+_Crawl=0x6ed3
+_Gotoxy=0x22d5
+_TransportNoise=0x101d
+_Maze=0x6ed2
+_DOpen=0x85a
+
+

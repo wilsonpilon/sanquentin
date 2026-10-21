@@ -1,0 +1,1070 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module string
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _String_FromUInt8ZT
+                                     12 	.globl _String_FromUInt8
+                                     13 	.globl _String_FromUInt16ZT
+                                     14 	.globl _String_FromUInt16
+                                     15 	.globl _String_FormatVA
+                                     16 	.globl _String_Format
+                                     17 ;--------------------------------------------------------
+                                     18 ; special function registers
+                                     19 ;--------------------------------------------------------
+                                     20 ;--------------------------------------------------------
+                                     21 ; ram data
+                                     22 ;--------------------------------------------------------
+                                     23 	.area _DATA
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area _INITIALIZED
+                                     28 ;--------------------------------------------------------
+                                     29 ; absolute ram data
+                                     30 ;--------------------------------------------------------
+                                     31 	.area _DABS (ABS)
+                                     32 	.area _DABS (ABS)
+                                     33 ;--------------------------------------------------------
+                                     34 ; global & static initialisations
+                                     35 ;--------------------------------------------------------
+                                     36 	.area _HOME
+                                     37 	.area _GSINIT
+                                     38 	.area _GSFINAL
+                                     39 	.area _GSINIT
+                                     40 ;--------------------------------------------------------
+                                     41 ; Home
+                                     42 ;--------------------------------------------------------
+                                     43 	.area _HOME
+                                     44 	.area _HOME
+                                     45 ;--------------------------------------------------------
+                                     46 ; code
+                                     47 ;--------------------------------------------------------
+                                     48 	.area _CODE
+                                     49 ;E:\supernova\MSXgl\engine/src/string.c:29: void String_FromUInt8ZT(u8 value, c8* string) __NAKED
+                                     50 ;	---------------------------------
+                                     51 ; Function String_FromUInt8ZT
+                                     52 ; ---------------------------------
+    00000000                         53 _String_FromUInt8ZT::
+                                     54 ;E:\supernova\MSXgl\engine/src/string.c:39: __endasm;
+    00000000 CDr06r00         [17]   55 	call _String_FromUInt8
+    00000003 AF               [ 4]   56 	xor a
+    00000004 12               [ 7]   57 	ld (de), a
+    00000005 C9               [10]   58 	ret
+                                     59 ;E:\supernova\MSXgl\engine/src/string.c:40: }
+                                     60 ;E:\supernova\MSXgl\engine/src/string.c:44: void String_FromUInt8(u8 value, c8* string) __NAKED
+                                     61 ;	---------------------------------
+                                     62 ; Function String_FromUInt8
+                                     63 ; ---------------------------------
+    00000006                         64 _String_FromUInt8::
+                                     65 ;E:\supernova\MSXgl\engine/src/string.c:70: __endasm;
+    00000006                         66 DispA:
+    00000006 0E 9C            [ 7]   67 	ld c, #-100
+    00000008 CDr12r00         [17]   68 	call Na1
+    0000000B 0E F6            [ 7]   69 	ld c, #-10
+    0000000D CDr12r00         [17]   70 	call Na1
+    00000010 0E FF            [ 7]   71 	ld c, #-1
+    00000012                         72 Na1:
+    00000012 06 2F            [ 7]   73 	ld b, #'0'-1
+    00000014                         74 Na2:
+    00000014 04               [ 4]   75 	inc b
+    00000015 81               [ 4]   76 	add a, c
+    00000016 38 FC            [12]   77 	jr c, Na2
+    00000018 91               [ 4]   78 	sub c
+    00000019 08               [ 4]   79 	ex af, af'		; '
+    0000001A 78               [ 4]   80 	ld a, b
+    0000001B 12               [ 7]   81 	ld (de), a
+    0000001C 13               [ 6]   82 	inc de
+    0000001D 08               [ 4]   83 	ex af, af'		; '
+    0000001E C9               [10]   84 	ret
+                                     85 ;E:\supernova\MSXgl\engine/src/string.c:72: }
+                                     86 ;E:\supernova\MSXgl\engine/src/string.c:79: void String_FromUInt16ZT(u16 value, c8* string) __NAKED
+                                     87 ;	---------------------------------
+                                     88 ; Function String_FromUInt16ZT
+                                     89 ; ---------------------------------
+    0000001F                         90 _String_FromUInt16ZT::
+                                     91 ;E:\supernova\MSXgl\engine/src/string.c:89: __endasm;
+    0000001F CDr25r00         [17]   92 	call _String_FromUInt16
+    00000022 AF               [ 4]   93 	xor a
+    00000023 12               [ 7]   94 	ld (de), a
+    00000024 C9               [10]   95 	ret
+                                     96 ;E:\supernova\MSXgl\engine/src/string.c:90: }
+                                     97 ;E:\supernova\MSXgl\engine/src/string.c:94: void String_FromUInt16(u16 value, c8* string) __NAKED
+                                     98 ;	---------------------------------
+                                     99 ; Function String_FromUInt16
+                                    100 ; ---------------------------------
+    00000025                        101 _String_FromUInt16::
+                                    102 ;E:\supernova\MSXgl\engine/src/string.c:122: __endasm;
+    00000025                        103 Num2Dec:
+    00000025 01 F0 D8         [10]  104 	ld bc, #-10000
+    00000028 CDr3Dr00         [17]  105 	call Num1
+    0000002B 01 18 FC         [10]  106 	ld bc, #-1000
+    0000002E CDr3Dr00         [17]  107 	call Num1
+    00000031 01 9C FF         [10]  108 	ld bc, #-100
+    00000034 CDr3Dr00         [17]  109 	call Num1
+    00000037 0E F6            [ 7]  110 	ld c, #-10
+    00000039 CDr3Dr00         [17]  111 	call Num1
+    0000003C 48               [ 4]  112 	ld c, b
+    0000003D                        113 Num1:
+    0000003D 3E 2F            [ 7]  114 	ld a, #'0'-1
+    0000003F                        115 Num2:
+    0000003F 3C               [ 4]  116 	inc a
+    00000040 09               [11]  117 	add hl, bc
+    00000041 38 FC            [12]  118 	jr c, Num2
+    00000043 ED 42            [15]  119 	sbc hl, bc
+    00000045 12               [ 7]  120 	ld (de), a
+    00000046 13               [ 6]  121 	inc de
+    00000047 C9               [10]  122 	ret
+                                    123 ;E:\supernova\MSXgl\engine/src/string.c:123: }
+                                    124 ;E:\supernova\MSXgl\engine/src/string.c:131: void String_FormatVA(c8* dest, const c8* format, va_list args)
+                                    125 ;	---------------------------------
+                                    126 ; Function String_FormatVA
+                                    127 ; ---------------------------------
+    00000048                        128 _String_FormatVA::
+    00000048 DD E5            [15]  129 	push	ix
+    0000004A DD 21 00 00      [14]  130 	ld	ix,	#0
+    0000004E DD 39            [15]  131 	add	ix, sp
+    00000050 FD 21 DD FF      [14]  132 	ld	iy, #-35
+    00000054 FD 39            [15]  133 	add	iy, sp
+    00000056 FD F9            [10]  134 	ld	sp, iy
+    00000058 DD 75 FC         [19]  135 	ld	-4 (ix), l
+    0000005B DD 74 FD         [19]  136 	ld	-3 (ix), h
+    0000005E DD 73 FE         [19]  137 	ld	-2 (ix), e
+    00000061 DD 72 FF         [19]  138 	ld	-1 (ix), d
+                                    139 ;E:\supernova\MSXgl\engine/src/string.c:135: while (*ptr != 0)
+    00000064                        140 00166$:
+    00000064 DD 6E FE         [19]  141 	ld	l, -2 (ix)
+    00000067 DD 66 FF         [19]  142 	ld	h, -1 (ix)
+    0000006A 7E               [ 7]  143 	ld	a, (hl)
+    0000006B DD 77 FB         [19]  144 	ld	-5 (ix), a
+    0000006E B7               [ 4]  145 	or	a, a
+    0000006F CAr40r07         [10]  146 	jp	z, 00168$
+                                    147 ;E:\supernova\MSXgl\engine/src/string.c:166: *dest++ = '%';
+    00000072 DD 6E FC         [19]  148 	ld	l, -4 (ix)
+    00000075 DD 66 FD         [19]  149 	ld	h, -3 (ix)
+    00000078 23               [ 6]  150 	inc	hl
+    00000079 DD 75 ED         [19]  151 	ld	-19 (ix), l
+    0000007C DD 74 EE         [19]  152 	ld	-18 (ix), h
+                                    153 ;E:\supernova\MSXgl\engine/src/string.c:137: if (*ptr == '%')
+    0000007F DD 7E FB         [19]  154 	ld	a, -5 (ix)
+    00000082 D6 25            [ 7]  155 	sub	a, #0x25
+    00000084 C2r08r07         [10]  156 	jp	nz, 00164$
+                                    157 ;E:\supernova\MSXgl\engine/src/string.c:139: ptr++;
+    00000087 DD 6E FE         [19]  158 	ld	l, -2 (ix)
+    0000008A DD 66 FF         [19]  159 	ld	h, -1 (ix)
+    0000008D 23               [ 6]  160 	inc	hl
+    0000008E DD 75 FA         [19]  161 	ld	-6 (ix), l
+    00000091 DD 74 FB         [19]  162 	ld	-5 (ix), h
+                                    163 ;E:\supernova\MSXgl\engine/src/string.c:142: u8 pad = STRINT_PAD_NONE;
+    00000094 DD 36 EF 00      [19]  164 	ld	-17 (ix), #0x00
+                                    165 ;E:\supernova\MSXgl\engine/src/string.c:143: u8 len = 0;
+    00000098 DD 36 F0 00      [19]  166 	ld	-16 (ix), #0x00
+                                    167 ;E:\supernova\MSXgl\engine/src/string.c:144: if (*ptr == '0')
+    0000009C DD 6E FA         [19]  168 	ld	l, -6 (ix)
+    0000009F DD 66 FB         [19]  169 	ld	h, -5 (ix)
+    000000A2 7E               [ 7]  170 	ld	a, (hl)
+    000000A3 DD 77 F9         [19]  171 	ld	-7 (ix), a
+                                    172 ;E:\supernova\MSXgl\engine/src/string.c:139: ptr++;
+    000000A6 DD 6E FA         [19]  173 	ld	l, -6 (ix)
+    000000A9 DD 66 FB         [19]  174 	ld	h, -5 (ix)
+    000000AC 23               [ 6]  175 	inc	hl
+    000000AD DD 75 FE         [19]  176 	ld	-2 (ix), l
+    000000B0 DD 74 FF         [19]  177 	ld	-1 (ix), h
+                                    178 ;E:\supernova\MSXgl\engine/src/string.c:144: if (*ptr == '0')
+    000000B3 DD 7E F9         [19]  179 	ld	a, -7 (ix)
+    000000B6 D6 30            [ 7]  180 	sub	a, #0x30
+    000000B8 20 12            [12]  181 	jr	nz, 00105$
+                                    182 ;E:\supernova\MSXgl\engine/src/string.c:146: pad = STRINT_PAD_ZERO;
+    000000BA DD 36 EF 01      [19]  183 	ld	-17 (ix), #0x01
+                                    184 ;E:\supernova\MSXgl\engine/src/string.c:147: ptr++;
+    000000BE DD 7E FE         [19]  185 	ld	a, -2 (ix)
+    000000C1 DD 77 FA         [19]  186 	ld	-6 (ix), a
+    000000C4 DD 7E FF         [19]  187 	ld	a, -1 (ix)
+    000000C7 DD 77 FB         [19]  188 	ld	-5 (ix), a
+    000000CA 18 26            [12]  189 	jr	00236$
+    000000CC                        190 00105$:
+                                    191 ;E:\supernova\MSXgl\engine/src/string.c:149: else if ((*ptr >= '1') && (*ptr <= '9'))
+    000000CC DD 7E F9         [19]  192 	ld	a, -7 (ix)
+    000000CF D6 31            [ 7]  193 	sub	a, #0x31
+    000000D1 38 1F            [12]  194 	jr	c, 00236$
+    000000D3 3E 39            [ 7]  195 	ld	a, #0x39
+    000000D5 DD 96 F9         [19]  196 	sub	a, -7 (ix)
+    000000D8 38 18            [12]  197 	jr	c, 00236$
+                                    198 ;E:\supernova\MSXgl\engine/src/string.c:151: pad = STRINT_PAD_SPACE;
+    000000DA DD 36 EF 02      [19]  199 	ld	-17 (ix), #0x02
+                                    200 ;E:\supernova\MSXgl\engine/src/string.c:152: len = *ptr - '0';
+    000000DE DD 7E F9         [19]  201 	ld	a, -7 (ix)
+    000000E1 C6 D0            [ 7]  202 	add	a, #0xd0
+    000000E3 DD 77 F0         [19]  203 	ld	-16 (ix), a
+                                    204 ;E:\supernova\MSXgl\engine/src/string.c:153: ptr++;
+    000000E6 DD 7E FE         [19]  205 	ld	a, -2 (ix)
+    000000E9 DD 77 FA         [19]  206 	ld	-6 (ix), a
+    000000EC DD 7E FF         [19]  207 	ld	a, -1 (ix)
+    000000EF DD 77 FB         [19]  208 	ld	-5 (ix), a
+                                    209 ;E:\supernova\MSXgl\engine/src/string.c:155: while ((*ptr >= '0') && (*ptr <= '9'))
+    000000F2                        210 00236$:
+    000000F2 DD 7E FA         [19]  211 	ld	a, -6 (ix)
+    000000F5 DD 77 FE         [19]  212 	ld	-2 (ix), a
+    000000F8 DD 7E FB         [19]  213 	ld	a, -5 (ix)
+    000000FB DD 77 FF         [19]  214 	ld	-1 (ix), a
+    000000FE                        215 00108$:
+    000000FE DD 6E FE         [19]  216 	ld	l, -2 (ix)
+    00000101 DD 66 FF         [19]  217 	ld	h, -1 (ix)
+    00000104 7E               [ 7]  218 	ld	a, (hl)
+    00000105 DD 77 F1         [19]  219 	ld	-15 (ix), a
+    00000108 D6 30            [ 7]  220 	sub	a, #0x30
+    0000010A 38 30            [12]  221 	jr	c, 00275$
+    0000010C 3E 39            [ 7]  222 	ld	a, #0x39
+    0000010E DD 96 F1         [19]  223 	sub	a, -15 (ix)
+    00000111 38 29            [12]  224 	jr	c, 00275$
+                                    225 ;E:\supernova\MSXgl\engine/src/string.c:157: len *= 10;
+    00000113 DD 7E F0         [19]  226 	ld	a, -16 (ix)
+    00000116 4F               [ 4]  227 	ld	c, a
+    00000117 87               [ 4]  228 	add	a, a
+    00000118 87               [ 4]  229 	add	a, a
+    00000119 81               [ 4]  230 	add	a, c
+    0000011A 87               [ 4]  231 	add	a, a
+    0000011B DD 77 FB         [19]  232 	ld	-5 (ix), a
+                                    233 ;E:\supernova\MSXgl\engine/src/string.c:158: len += *ptr - '0';
+    0000011E DD 7E F1         [19]  234 	ld	a, -15 (ix)
+    00000121 DD 77 FA         [19]  235 	ld	-6 (ix), a
+    00000124 C6 D0            [ 7]  236 	add	a, #0xd0
+    00000126 DD 77 FA         [19]  237 	ld	-6 (ix), a
+    00000129 DD 7E FB         [19]  238 	ld	a, -5 (ix)
+    0000012C DD 86 FA         [19]  239 	add	a, -6 (ix)
+    0000012F DD 77 F0         [19]  240 	ld	-16 (ix), a
+                                    241 ;E:\supernova\MSXgl\engine/src/string.c:159: ptr++;
+    00000132 DD 34 FE         [23]  242 	inc	-2 (ix)
+    00000135 20 C7            [12]  243 	jr	nz, 00108$
+    00000137 DD 34 FF         [23]  244 	inc	-1 (ix)
+    0000013A 18 C2            [12]  245 	jr	00108$
+    0000013C                        246 00275$:
+                                    247 ;E:\supernova\MSXgl\engine/src/string.c:163: switch (*ptr)
+    0000013C DD 7E F1         [19]  248 	ld	a, -15 (ix)
+    0000013F D6 25            [ 7]  249 	sub	a, #0x25
+    00000141 CArDBr01         [10]  250 	jp	z, 00111$
+                                    251 ;E:\supernova\MSXgl\engine/src/string.c:180: val = (i32)va_arg(args, i32);
+    00000144 11 04 00         [10]  252 	ld	de, #0x0004
+    00000147 DD 6E 04         [19]  253 	ld	l, 4 (ix)
+    0000014A DD 66 05         [19]  254 	ld	h, 5 (ix)
+    0000014D 19               [11]  255 	add	hl, de
+    0000014E DD 75 F2         [19]  256 	ld	-14 (ix), l
+    00000151 DD 74 F3         [19]  257 	ld	-13 (ix), h
+                                    258 ;E:\supernova\MSXgl\engine/src/string.c:182: val = (i32)va_arg(args, i16);
+    00000154 DD 6E 04         [19]  259 	ld	l, 4 (ix)
+    00000157 DD 66 05         [19]  260 	ld	h, 5 (ix)
+    0000015A 23               [ 6]  261 	inc	hl
+    0000015B 23               [ 6]  262 	inc	hl
+    0000015C DD 75 F4         [19]  263 	ld	-12 (ix), l
+    0000015F DD 74 F5         [19]  264 	ld	-11 (ix), h
+                                    265 ;E:\supernova\MSXgl\engine/src/string.c:180: val = (i32)va_arg(args, i32);
+    00000162 DD 7E F2         [19]  266 	ld	a, -14 (ix)
+    00000165 C6 FC            [ 7]  267 	add	a, #0xfc
+    00000167 DD 77 F6         [19]  268 	ld	-10 (ix), a
+    0000016A DD 7E F3         [19]  269 	ld	a, -13 (ix)
+    0000016D CE FF            [ 7]  270 	adc	a, #0xff
+    0000016F DD 77 F7         [19]  271 	ld	-9 (ix), a
+                                    272 ;E:\supernova\MSXgl\engine/src/string.c:182: val = (i32)va_arg(args, i16);
+    00000172 DD 4E F4         [19]  273 	ld	c, -12 (ix)
+    00000175 DD 46 F5         [19]  274 	ld	b, -11 (ix)
+    00000178 0B               [ 6]  275 	dec	bc
+    00000179 0B               [ 6]  276 	dec	bc
+    0000017A DD 71 F8         [19]  277 	ld	-8 (ix), c
+    0000017D DD 70 F9         [19]  278 	ld	-7 (ix), b
+                                    279 ;E:\supernova\MSXgl\engine/src/string.c:163: switch (*ptr)
+    00000180 DD 7E F1         [19]  280 	ld	a, -15 (ix)
+    00000183 D6 44            [ 7]  281 	sub	a, #0x44
+    00000185 28 6B            [12]  282 	jr	z, 00115$
+    00000187 DD 7E F1         [19]  283 	ld	a, -15 (ix)
+    0000018A D6 49            [ 7]  284 	sub	a, #0x49
+    0000018C 28 64            [12]  285 	jr	z, 00115$
+    0000018E DD 7E F1         [19]  286 	ld	a, -15 (ix)
+    00000191 D6 55            [ 7]  287 	sub	a, #0x55
+    00000193 CAr34r07         [10]  288 	jp	z, 00165$
+    00000196 DD 7E F1         [19]  289 	ld	a, -15 (ix)
+    00000199 D6 58            [ 7]  290 	sub	a, #0x58
+    0000019B CArEEr03         [10]  291 	jp	z, 00133$
+                                    292 ;E:\supernova\MSXgl\engine/src/string.c:255: u16 val = (u16)va_arg(args, u16);
+    0000019E DD 7E F8         [19]  293 	ld	a, -8 (ix)
+    000001A1 DD 77 FA         [19]  294 	ld	-6 (ix), a
+    000001A4 DD 7E F9         [19]  295 	ld	a, -7 (ix)
+    000001A7 DD 77 FB         [19]  296 	ld	-5 (ix), a
+                                    297 ;E:\supernova\MSXgl\engine/src/string.c:163: switch (*ptr)
+    000001AA DD 7E F1         [19]  298 	ld	a, -15 (ix)
+    000001AD D6 63            [ 7]  299 	sub	a, #0x63
+    000001AF CArAAr06         [10]  300 	jp	z, 00159$
+    000001B2 DD 7E F1         [19]  301 	ld	a, -15 (ix)
+    000001B5 D6 64            [ 7]  302 	sub	a, #0x64
+    000001B7 28 39            [12]  303 	jr	z, 00115$
+    000001B9 DD 7E F1         [19]  304 	ld	a, -15 (ix)
+    000001BC D6 69            [ 7]  305 	sub	a, #0x69
+    000001BE 28 32            [12]  306 	jr	z, 00115$
+    000001C0 DD 7E F1         [19]  307 	ld	a, -15 (ix)
+    000001C3 D6 73            [ 7]  308 	sub	a, #0x73
+    000001C5 CArD2r06         [10]  309 	jp	z, 00160$
+    000001C8 DD 7E F1         [19]  310 	ld	a, -15 (ix)
+    000001CB D6 75            [ 7]  311 	sub	a, #0x75
+    000001CD CAr34r07         [10]  312 	jp	z, 00165$
+    000001D0 DD 7E F1         [19]  313 	ld	a, -15 (ix)
+    000001D3 D6 78            [ 7]  314 	sub	a, #0x78
+    000001D5 CAr89r05         [10]  315 	jp	z, 00150$
+    000001D8 C3r34r07         [10]  316 	jp	00165$
+                                    317 ;E:\supernova\MSXgl\engine/src/string.c:165: case '%':
+    000001DB                        318 00111$:
+                                    319 ;E:\supernova\MSXgl\engine/src/string.c:166: *dest++ = '%';
+    000001DB DD 6E FC         [19]  320 	ld	l, -4 (ix)
+    000001DE DD 66 FD         [19]  321 	ld	h, -3 (ix)
+    000001E1 36 25            [10]  322 	ld	(hl), #0x25
+    000001E3 DD 7E ED         [19]  323 	ld	a, -19 (ix)
+    000001E6 DD 77 FC         [19]  324 	ld	-4 (ix), a
+    000001E9 DD 7E EE         [19]  325 	ld	a, -18 (ix)
+    000001EC DD 77 FD         [19]  326 	ld	-3 (ix), a
+                                    327 ;E:\supernova\MSXgl\engine/src/string.c:167: break;
+    000001EF C3r34r07         [10]  328 	jp	00165$
+                                    329 ;E:\supernova\MSXgl\engine/src/string.c:175: case 'd':
+    000001F2                        330 00115$:
+                                    331 ;E:\supernova\MSXgl\engine/src/string.c:179: if ((*ptr == 'I') || (*ptr == 'D'))
+    000001F2 DD 6E FE         [19]  332 	ld	l, -2 (ix)
+    000001F5 DD 66 FF         [19]  333 	ld	h, -1 (ix)
+    000001F8 7E               [ 7]  334 	ld	a, (hl)
+    000001F9 DD 77 FB         [19]  335 	ld	-5 (ix), a
+    000001FC D6 49            [ 7]  336 	sub	a, #0x49
+    000001FE 28 07            [12]  337 	jr	z, 00116$
+    00000200 DD 7E FB         [19]  338 	ld	a, -5 (ix)
+    00000203 D6 44            [ 7]  339 	sub	a, #0x44
+    00000205 20 1E            [12]  340 	jr	nz, 00117$
+    00000207                        341 00116$:
+                                    342 ;E:\supernova\MSXgl\engine/src/string.c:180: val = (i32)va_arg(args, i32);
+    00000207 DD 7E F2         [19]  343 	ld	a, -14 (ix)
+    0000020A DD 77 04         [19]  344 	ld	4 (ix), a
+    0000020D DD 7E F3         [19]  345 	ld	a, -13 (ix)
+    00000210 DD 77 05         [19]  346 	ld	5 (ix), a
+    00000213 DD 5E F6         [19]  347 	ld	e, -10 (ix)
+    00000216 DD 56 F7         [19]  348 	ld	d, -9 (ix)
+    00000219 21 1B 00         [10]  349 	ld	hl, #27
+    0000021C 39               [11]  350 	add	hl, sp
+    0000021D EB               [ 4]  351 	ex	de, hl
+    0000021E 01 04 00         [10]  352 	ld	bc, #0x0004
+    00000221 ED B0            [21]  353 	ldir
+    00000223 18 2F            [12]  354 	jr	00118$
+    00000225                        355 00117$:
+                                    356 ;E:\supernova\MSXgl\engine/src/string.c:182: val = (i32)va_arg(args, i16);
+    00000225 DD 7E F4         [19]  357 	ld	a, -12 (ix)
+    00000228 DD 77 04         [19]  358 	ld	4 (ix), a
+    0000022B DD 7E F5         [19]  359 	ld	a, -11 (ix)
+    0000022E DD 77 05         [19]  360 	ld	5 (ix), a
+    00000231 DD 6E F8         [19]  361 	ld	l, -8 (ix)
+    00000234 DD 66 F9         [19]  362 	ld	h, -7 (ix)
+    00000237 7E               [ 7]  363 	ld	a, (hl)
+    00000238 DD 77 FA         [19]  364 	ld	-6 (ix), a
+    0000023B 23               [ 6]  365 	inc	hl
+    0000023C 7E               [ 7]  366 	ld	a, (hl)
+    0000023D DD 77 FB         [19]  367 	ld	-5 (ix), a
+    00000240 DD 7E FA         [19]  368 	ld	a, -6 (ix)
+    00000243 DD 77 F8         [19]  369 	ld	-8 (ix), a
+    00000246 DD 7E FB         [19]  370 	ld	a, -5 (ix)
+    00000249 DD 77 F9         [19]  371 	ld	-7 (ix), a
+    0000024C 07               [ 4]  372 	rlca
+    0000024D 9F               [ 4]  373 	sbc	a, a
+    0000024E DD 77 FA         [19]  374 	ld	-6 (ix), a
+    00000251 DD 77 FB         [19]  375 	ld	-5 (ix), a
+    00000254                        376 00118$:
+                                    377 ;E:\supernova\MSXgl\engine/src/string.c:187: if (val < 0)
+    00000254 DD CB FB 7E      [20]  378 	bit	7, -5 (ix)
+    00000258 28 32            [12]  379 	jr	z, 00121$
+                                    380 ;E:\supernova\MSXgl\engine/src/string.c:189: *dest++ = '-';
+    0000025A DD 6E FC         [19]  381 	ld	l, -4 (ix)
+    0000025D DD 66 FD         [19]  382 	ld	h, -3 (ix)
+    00000260 36 2D            [10]  383 	ld	(hl), #0x2d
+    00000262 DD 7E ED         [19]  384 	ld	a, -19 (ix)
+    00000265 DD 77 FC         [19]  385 	ld	-4 (ix), a
+    00000268 DD 7E EE         [19]  386 	ld	a, -18 (ix)
+    0000026B DD 77 FD         [19]  387 	ld	-3 (ix), a
+                                    388 ;E:\supernova\MSXgl\engine/src/string.c:190: val = -val;
+    0000026E AF               [ 4]  389 	xor	a, a
+    0000026F DD 96 F8         [19]  390 	sub	a, -8 (ix)
+    00000272 DD 77 F8         [19]  391 	ld	-8 (ix), a
+    00000275 3E 00            [ 7]  392 	ld	a, #0x00
+    00000277 DD 9E F9         [19]  393 	sbc	a, -7 (ix)
+    0000027A DD 77 F9         [19]  394 	ld	-7 (ix), a
+    0000027D 3E 00            [ 7]  395 	ld	a, #0x00
+    0000027F DD 9E FA         [19]  396 	sbc	a, -6 (ix)
+    00000282 DD 77 FA         [19]  397 	ld	-6 (ix), a
+    00000285 9F               [ 4]  398 	sbc	a, a
+    00000286 DD 96 FB         [19]  399 	sub	a, -5 (ix)
+    00000289 DD 77 FB         [19]  400 	ld	-5 (ix), a
+    0000028C                        401 00121$:
+                                    402 ;E:\supernova\MSXgl\engine/src/string.c:193: c8* ptr = str;
+                                    403 ;E:\supernova\MSXgl\engine/src/string.c:194: *ptr = 0;
+    0000028C DD 36 DD 00      [19]  404 	ld	-35 (ix), #0x00
+                                    405 ;E:\supernova\MSXgl\engine/src/string.c:196: while (val >= 10)
+    00000290 E5               [11]  406 	push	hl
+    00000291 F5               [11]  407 	push	af
+    00000292 21 04 00         [10]  408 	ld	hl, #4
+    00000295 39               [11]  409 	add	hl, sp
+    00000296 DD 75 ED         [19]  410 	ld	-19 (ix), l
+    00000299 21 04 00         [10]  411 	ld	hl, #4
+    0000029C 39               [11]  412 	add	hl, sp
+    0000029D F1               [10]  413 	pop	af
+    0000029E DD 74 EE         [19]  414 	ld	-18 (ix), h
+    000002A1 E1               [10]  415 	pop	hl
+    000002A2 DD 36 F7 01      [19]  416 	ld	-9 (ix), #0x01
+    000002A6                        417 00122$:
+                                    418 ;E:\supernova\MSXgl\engine/src/string.c:198: *++ptr = '0' + (val % 10);
+    000002A6 DD 6E ED         [19]  419 	ld	l, -19 (ix)
+    000002A9 DD 66 EE         [19]  420 	ld	h, -18 (ix)
+    000002AC 23               [ 6]  421 	inc	hl
+    000002AD DD 75 F5         [19]  422 	ld	-11 (ix), l
+    000002B0 DD 74 F6         [19]  423 	ld	-10 (ix), h
+                                    424 ;E:\supernova\MSXgl\engine/src/string.c:196: while (val >= 10)
+    000002B3 DD 7E F8         [19]  425 	ld	a, -8 (ix)
+    000002B6 D6 0A            [ 7]  426 	sub	a, #0x0a
+    000002B8 DD 7E F9         [19]  427 	ld	a, -7 (ix)
+    000002BB DE 00            [ 7]  428 	sbc	a, #0x00
+    000002BD DD 7E FA         [19]  429 	ld	a, -6 (ix)
+    000002C0 DE 00            [ 7]  430 	sbc	a, #0x00
+    000002C2 DD 7E FB         [19]  431 	ld	a, -5 (ix)
+    000002C5 17               [ 4]  432 	rla
+    000002C6 3F               [ 4]  433 	ccf
+    000002C7 1F               [ 4]  434 	rra
+    000002C8 DE 80            [ 7]  435 	sbc	a, #0x80
+    000002CA 38 66            [12]  436 	jr	c, 00276$
+                                    437 ;E:\supernova\MSXgl\engine/src/string.c:198: *++ptr = '0' + (val % 10);
+    000002CC DD 7E F5         [19]  438 	ld	a, -11 (ix)
+    000002CF DD 77 ED         [19]  439 	ld	-19 (ix), a
+    000002D2 DD 7E F6         [19]  440 	ld	a, -10 (ix)
+    000002D5 DD 77 EE         [19]  441 	ld	-18 (ix), a
+    000002D8 21 00 00         [10]  442 	ld	hl, #0x0000
+    000002DB E5               [11]  443 	push	hl
+    000002DC 2E 0A            [ 7]  444 	ld	l, #0x0a
+    000002DE E5               [11]  445 	push	hl
+    000002DF DD 5E F8         [19]  446 	ld	e, -8 (ix)
+    000002E2 DD 56 F9         [19]  447 	ld	d, -7 (ix)
+    000002E5 DD 6E FA         [19]  448 	ld	l, -6 (ix)
+    000002E8 DD 66 FB         [19]  449 	ld	h, -5 (ix)
+    000002EB CDr00r00         [17]  450 	call	__modslong
+    000002EE F1               [10]  451 	pop	af
+    000002EF F1               [10]  452 	pop	af
+    000002F0 DD 73 F1         [19]  453 	ld	-15 (ix), e
+    000002F3 DD 72 F2         [19]  454 	ld	-14 (ix), d
+    000002F6 DD 75 F3         [19]  455 	ld	-13 (ix), l
+    000002F9 DD 74 F4         [19]  456 	ld	-12 (ix), h
+    000002FC DD 7E F1         [19]  457 	ld	a, -15 (ix)
+    000002FF C6 30            [ 7]  458 	add	a, #0x30
+    00000301 DD 6E F5         [19]  459 	ld	l, -11 (ix)
+    00000304 DD 66 F6         [19]  460 	ld	h, -10 (ix)
+    00000307 77               [ 7]  461 	ld	(hl), a
+                                    462 ;E:\supernova\MSXgl\engine/src/string.c:199: val /= 10;
+    00000308 21 00 00         [10]  463 	ld	hl, #0x0000
+    0000030B E5               [11]  464 	push	hl
+    0000030C 2E 0A            [ 7]  465 	ld	l, #0x0a
+    0000030E E5               [11]  466 	push	hl
+    0000030F DD 5E F8         [19]  467 	ld	e, -8 (ix)
+    00000312 DD 56 F9         [19]  468 	ld	d, -7 (ix)
+    00000315 DD 6E FA         [19]  469 	ld	l, -6 (ix)
+    00000318 DD 66 FB         [19]  470 	ld	h, -5 (ix)
+                                    471 ;E:\supernova\MSXgl\engine/src/string.c:200: digit++;
+    0000031B CDr00r00         [17]  472 	call	__divslong
+    0000031E F1               [10]  473 	pop	af
+    0000031F F1               [10]  474 	pop	af
+    00000320 DD 73 F8         [19]  475 	ld	-8 (ix), e
+    00000323 DD 72 F9         [19]  476 	ld	-7 (ix), d
+    00000326 DD 75 FA         [19]  477 	ld	-6 (ix), l
+    00000329 DD 74 FB         [19]  478 	ld	-5 (ix), h
+    0000032C DD 34 F7         [23]  479 	inc	-9 (ix)
+    0000032F C3rA6r02         [10]  480 	jp	00122$
+    00000332                        481 00276$:
+    00000332 DD 7E F7         [19]  482 	ld	a, -9 (ix)
+    00000335 DD 77 F4         [19]  483 	ld	-12 (ix), a
+                                    484 ;E:\supernova\MSXgl\engine/src/string.c:202: *++ptr = '0' + val;
+    00000338 DD 7E F8         [19]  485 	ld	a, -8 (ix)
+    0000033B DD 77 FB         [19]  486 	ld	-5 (ix), a
+    0000033E C6 30            [ 7]  487 	add	a, #0x30
+    00000340 DD 6E F5         [19]  488 	ld	l, -11 (ix)
+    00000343 DD 66 F6         [19]  489 	ld	h, -10 (ix)
+    00000346 77               [ 7]  490 	ld	(hl), a
+                                    491 ;E:\supernova\MSXgl\engine/src/string.c:204: if (len > digit)
+    00000347 DD 7E F7         [19]  492 	ld	a, -9 (ix)
+    0000034A DD 96 F0         [19]  493 	sub	a, -16 (ix)
+    0000034D 30 58            [12]  494 	jr	nc, 00257$
+                                    495 ;E:\supernova\MSXgl\engine/src/string.c:206: c8 padChr = (pad == STRINT_PAD_ZERO) ? '0' : ' ';
+    0000034F DD 7E EF         [19]  496 	ld	a, -17 (ix)
+    00000352 3D               [ 4]  497 	dec	a
+    00000353 3E 30            [ 7]  498 	ld	a, #0x30
+    00000355 28 02            [12]  499 	jr	z, 00182$
+    00000357 3E 20            [ 7]  500 	ld	a, #0x20
+    00000359                        501 00182$:
+    00000359 DD 77 F9         [19]  502 	ld	-7 (ix), a
+                                    503 ;E:\supernova\MSXgl\engine/src/string.c:207: for (u8 i = 0; i < len - digit; ++i)
+    0000035C DD 7E FC         [19]  504 	ld	a, -4 (ix)
+    0000035F DD 77 FA         [19]  505 	ld	-6 (ix), a
+    00000362 DD 7E FD         [19]  506 	ld	a, -3 (ix)
+    00000365 DD 77 FB         [19]  507 	ld	-5 (ix), a
+    00000368 0E 00            [ 7]  508 	ld	c, #0x00
+    0000036A                        509 00174$:
+    0000036A DD 6E F0         [19]  510 	ld	l, -16 (ix)
+    0000036D 26 00            [ 7]  511 	ld	h, #0x00
+    0000036F DD 5E F4         [19]  512 	ld	e, -12 (ix)
+    00000372 16 00            [ 7]  513 	ld	d, #0x00
+    00000374 BF               [ 4]  514 	cp	a, a
+    00000375 ED 52            [15]  515 	sbc	hl, de
+    00000377 41               [ 4]  516 	ld	b, c
+    00000378 1E 00            [ 7]  517 	ld	e, #0x00
+    0000037A 78               [ 4]  518 	ld	a, b
+    0000037B 95               [ 4]  519 	sub	a, l
+    0000037C 7B               [ 4]  520 	ld	a, e
+    0000037D 9C               [ 4]  521 	sbc	a, h
+    0000037E E2r83r03         [10]  522 	jp	po, 00578$
+    00000381 EE 80            [ 7]  523 	xor	a, #0x80
+    00000383                        524 00578$:
+    00000383 F2r9Br03         [10]  525 	jp	p, 00277$
+                                    526 ;E:\supernova\MSXgl\engine/src/string.c:208: *dest++ = padChr;
+    00000386 DD 6E FA         [19]  527 	ld	l, -6 (ix)
+    00000389 DD 66 FB         [19]  528 	ld	h, -5 (ix)
+    0000038C DD 7E F9         [19]  529 	ld	a, -7 (ix)
+    0000038F 77               [ 7]  530 	ld	(hl), a
+    00000390 DD 34 FA         [23]  531 	inc	-6 (ix)
+    00000393 20 03            [12]  532 	jr	nz, 00579$
+    00000395 DD 34 FB         [23]  533 	inc	-5 (ix)
+    00000398                        534 00579$:
+                                    535 ;E:\supernova\MSXgl\engine/src/string.c:207: for (u8 i = 0; i < len - digit; ++i)
+    00000398 0C               [ 4]  536 	inc	c
+    00000399 18 CF            [12]  537 	jr	00174$
+                                    538 ;E:\supernova\MSXgl\engine/src/string.c:211: while (*ptr != 0)
+    0000039B                        539 00277$:
+    0000039B DD 7E FA         [19]  540 	ld	a, -6 (ix)
+    0000039E DD 77 FC         [19]  541 	ld	-4 (ix), a
+    000003A1 DD 7E FB         [19]  542 	ld	a, -5 (ix)
+    000003A4 DD 77 FD         [19]  543 	ld	-3 (ix), a
+    000003A7                        544 00257$:
+    000003A7 DD 7E F5         [19]  545 	ld	a, -11 (ix)
+    000003AA DD 77 FA         [19]  546 	ld	-6 (ix), a
+    000003AD DD 7E F6         [19]  547 	ld	a, -10 (ix)
+    000003B0 DD 77 FB         [19]  548 	ld	-5 (ix), a
+    000003B3 DD 7E FC         [19]  549 	ld	a, -4 (ix)
+    000003B6 DD 77 F8         [19]  550 	ld	-8 (ix), a
+    000003B9 DD 7E FD         [19]  551 	ld	a, -3 (ix)
+    000003BC DD 77 F9         [19]  552 	ld	-7 (ix), a
+    000003BF                        553 00128$:
+    000003BF DD 6E FA         [19]  554 	ld	l, -6 (ix)
+    000003C2 DD 66 FB         [19]  555 	ld	h, -5 (ix)
+    000003C5 7E               [ 7]  556 	ld	a, (hl)
+    000003C6 DD 77 F7         [19]  557 	ld	-9 (ix), a
+    000003C9 B7               [ 4]  558 	or	a, a
+    000003CA CAr20r07         [10]  559 	jp	z, 00278$
+                                    560 ;E:\supernova\MSXgl\engine/src/string.c:212: *dest++ = *ptr--;
+    000003CD DD 7E F7         [19]  561 	ld	a, -9 (ix)
+    000003D0 DD 6E FA         [19]  562 	ld	l, -6 (ix)
+    000003D3 DD 66 FB         [19]  563 	ld	h, -5 (ix)
+    000003D6 2B               [ 6]  564 	dec	hl
+    000003D7 DD 75 FA         [19]  565 	ld	-6 (ix), l
+    000003DA DD 74 FB         [19]  566 	ld	-5 (ix), h
+    000003DD DD 6E F8         [19]  567 	ld	l, -8 (ix)
+    000003E0 DD 66 F9         [19]  568 	ld	h, -7 (ix)
+    000003E3 77               [ 7]  569 	ld	(hl), a
+    000003E4 DD 34 F8         [23]  570 	inc	-8 (ix)
+    000003E7 20 D6            [12]  571 	jr	nz, 00128$
+    000003E9 DD 34 F9         [23]  572 	inc	-7 (ix)
+    000003EC 18 D1            [12]  573 	jr	00128$
+                                    574 ;E:\supernova\MSXgl\engine/src/string.c:225: case 'X':
+    000003EE                        575 00133$:
+                                    576 ;E:\supernova\MSXgl\engine/src/string.c:227: if (len == 0)
+    000003EE DD 7E F0         [19]  577 	ld	a, -16 (ix)
+    000003F1 B7               [ 4]  578 	or	a, a
+    000003F2 20 04            [12]  579 	jr	nz, 00135$
+                                    580 ;E:\supernova\MSXgl\engine/src/string.c:228: len = 8;
+    000003F4 DD 36 F0 08      [19]  581 	ld	-16 (ix), #0x08
+    000003F8                        582 00135$:
+                                    583 ;E:\supernova\MSXgl\engine/src/string.c:229: u32 val = (u32)va_arg(args, u32);
+    000003F8 DD 7E F2         [19]  584 	ld	a, -14 (ix)
+    000003FB DD 77 04         [19]  585 	ld	4 (ix), a
+    000003FE DD 7E F3         [19]  586 	ld	a, -13 (ix)
+    00000401 DD 77 05         [19]  587 	ld	5 (ix), a
+    00000404 DD 5E F6         [19]  588 	ld	e, -10 (ix)
+    00000407 DD 56 F7         [19]  589 	ld	d, -9 (ix)
+    0000040A 21 1B 00         [10]  590 	ld	hl, #27
+    0000040D 39               [11]  591 	add	hl, sp
+    0000040E EB               [ 4]  592 	ex	de, hl
+    0000040F 01 04 00         [10]  593 	ld	bc, #0x0004
+    00000412 ED B0            [21]  594 	ldir
+                                    595 ;E:\supernova\MSXgl\engine/src/string.c:231: if (len > 7)
+    00000414 3E 07            [ 7]  596 	ld	a, #0x07
+    00000416 DD 96 F0         [19]  597 	sub	a, -16 (ix)
+    00000419 30 28            [12]  598 	jr	nc, 00137$
+                                    599 ;E:\supernova\MSXgl\engine/src/string.c:232: *dest++ = g_HexChar[(val >> 28) & 0xF];
+    0000041B DD 5E FB         [19]  600 	ld	e, -5 (ix)
+    0000041E 01 00 04         [10]  601 	ld	bc, #0x400
+    00000421                        602 00581$:
+    00000421 CB 3B            [ 8]  603 	srl	e
+    00000423 10 FC            [13]  604 	djnz	00581$
+    00000425 7B               [ 4]  605 	ld	a, e
+    00000426 E6 0F            [ 7]  606 	and	a, #0x0f
+    00000428 6F               [ 4]  607 	ld	l, a
+    00000429 26 00            [ 7]  608 	ld	h, #0x00
+    0000042B 11r4Fr07         [10]  609 	ld	de, #_g_HexChar
+    0000042E 19               [11]  610 	add	hl, de
+    0000042F 7E               [ 7]  611 	ld	a, (hl)
+    00000430 DD 6E FC         [19]  612 	ld	l, -4 (ix)
+    00000433 DD 66 FD         [19]  613 	ld	h, -3 (ix)
+    00000436 77               [ 7]  614 	ld	(hl), a
+    00000437 DD 7E ED         [19]  615 	ld	a, -19 (ix)
+    0000043A DD 77 FC         [19]  616 	ld	-4 (ix), a
+    0000043D DD 7E EE         [19]  617 	ld	a, -18 (ix)
+    00000440 DD 77 FD         [19]  618 	ld	-3 (ix), a
+    00000443                        619 00137$:
+                                    620 ;E:\supernova\MSXgl\engine/src/string.c:233: if (len > 6)
+    00000443 3E 06            [ 7]  621 	ld	a, #0x06
+    00000445 DD 96 F0         [19]  622 	sub	a, -16 (ix)
+    00000448 30 1C            [12]  623 	jr	nc, 00139$
+                                    624 ;E:\supernova\MSXgl\engine/src/string.c:234: *dest++ = g_HexChar[(val >> 24) & 0xF];
+    0000044A DD 7E FB         [19]  625 	ld	a, -5 (ix)
+    0000044D E6 0F            [ 7]  626 	and	a, #0x0f
+    0000044F 6F               [ 4]  627 	ld	l, a
+    00000450 26 00            [ 7]  628 	ld	h, #0x00
+    00000452 11r4Fr07         [10]  629 	ld	de, #_g_HexChar
+    00000455 19               [11]  630 	add	hl, de
+    00000456 7E               [ 7]  631 	ld	a, (hl)
+    00000457 DD 6E FC         [19]  632 	ld	l, -4 (ix)
+    0000045A DD 66 FD         [19]  633 	ld	h, -3 (ix)
+    0000045D 77               [ 7]  634 	ld	(hl), a
+    0000045E DD 34 FC         [23]  635 	inc	-4 (ix)
+    00000461 20 03            [12]  636 	jr	nz, 00583$
+    00000463 DD 34 FD         [23]  637 	inc	-3 (ix)
+    00000466                        638 00583$:
+    00000466                        639 00139$:
+                                    640 ;E:\supernova\MSXgl\engine/src/string.c:235: if (len > 5)
+    00000466 3E 05            [ 7]  641 	ld	a, #0x05
+    00000468 DD 96 F0         [19]  642 	sub	a, -16 (ix)
+    0000046B 30 28            [12]  643 	jr	nc, 00141$
+                                    644 ;E:\supernova\MSXgl\engine/src/string.c:236: *dest++ = g_HexChar[(val >> 20) & 0xF];
+    0000046D DD 5E FA         [19]  645 	ld	e, -6 (ix)
+    00000470 DD 56 FB         [19]  646 	ld	d, -5 (ix)
+    00000473 06 04            [ 7]  647 	ld	b, #0x04
+    00000475                        648 00584$:
+    00000475 CB 3A            [ 8]  649 	srl	d
+    00000477 CB 1B            [ 8]  650 	rr	e
+    00000479 10 FA            [13]  651 	djnz	00584$
+    0000047B 7B               [ 4]  652 	ld	a, e
+    0000047C E6 0F            [ 7]  653 	and	a, #0x0f
+    0000047E 26 00            [ 7]  654 	ld	h, #0x00
+    00000480 6F               [ 4]  655 	ld	l, a
+    00000481 11r4Fr07         [10]  656 	ld	de, #_g_HexChar
+    00000484 19               [11]  657 	add	hl, de
+    00000485 7E               [ 7]  658 	ld	a, (hl)
+    00000486 DD 6E FC         [19]  659 	ld	l, -4 (ix)
+    00000489 DD 66 FD         [19]  660 	ld	h, -3 (ix)
+    0000048C 77               [ 7]  661 	ld	(hl), a
+    0000048D DD 34 FC         [23]  662 	inc	-4 (ix)
+    00000490 20 03            [12]  663 	jr	nz, 00586$
+    00000492 DD 34 FD         [23]  664 	inc	-3 (ix)
+    00000495                        665 00586$:
+    00000495                        666 00141$:
+                                    667 ;E:\supernova\MSXgl\engine/src/string.c:237: if (len > 4)
+    00000495 3E 04            [ 7]  668 	ld	a, #0x04
+    00000497 DD 96 F0         [19]  669 	sub	a, -16 (ix)
+    0000049A 30 1C            [12]  670 	jr	nc, 00143$
+                                    671 ;E:\supernova\MSXgl\engine/src/string.c:238: *dest++ = g_HexChar[(val >> 16) & 0xF];
+    0000049C DD 7E FA         [19]  672 	ld	a, -6 (ix)
+    0000049F E6 0F            [ 7]  673 	and	a, #0x0f
+    000004A1 6F               [ 4]  674 	ld	l, a
+    000004A2 26 00            [ 7]  675 	ld	h, #0x00
+    000004A4 11r4Fr07         [10]  676 	ld	de, #_g_HexChar
+    000004A7 19               [11]  677 	add	hl, de
+    000004A8 7E               [ 7]  678 	ld	a, (hl)
+    000004A9 DD 6E FC         [19]  679 	ld	l, -4 (ix)
+    000004AC DD 66 FD         [19]  680 	ld	h, -3 (ix)
+    000004AF 77               [ 7]  681 	ld	(hl), a
+    000004B0 DD 34 FC         [23]  682 	inc	-4 (ix)
+    000004B3 20 03            [12]  683 	jr	nz, 00587$
+    000004B5 DD 34 FD         [23]  684 	inc	-3 (ix)
+    000004B8                        685 00587$:
+    000004B8                        686 00143$:
+                                    687 ;E:\supernova\MSXgl\engine/src/string.c:239: if (len > 3)
+    000004B8 3E 03            [ 7]  688 	ld	a, #0x03
+    000004BA DD 96 F0         [19]  689 	sub	a, -16 (ix)
+    000004BD 30 2D            [12]  690 	jr	nc, 00145$
+                                    691 ;E:\supernova\MSXgl\engine/src/string.c:240: *dest++ = g_HexChar[(val >> 12) & 0xF];
+    000004BF DD 5E F9         [19]  692 	ld	e, -7 (ix)
+    000004C2 DD 56 FA         [19]  693 	ld	d, -6 (ix)
+    000004C5 DD 6E FB         [19]  694 	ld	l, -5 (ix)
+    000004C8 06 04            [ 7]  695 	ld	b, #0x04
+    000004CA                        696 00588$:
+    000004CA CB 3D            [ 8]  697 	srl	l
+    000004CC CB 1A            [ 8]  698 	rr	d
+    000004CE CB 1B            [ 8]  699 	rr	e
+    000004D0 10 F8            [13]  700 	djnz	00588$
+    000004D2 7B               [ 4]  701 	ld	a, e
+    000004D3 E6 0F            [ 7]  702 	and	a, #0x0f
+    000004D5 26 00            [ 7]  703 	ld	h, #0x00
+    000004D7 6F               [ 4]  704 	ld	l, a
+    000004D8 11r4Fr07         [10]  705 	ld	de, #_g_HexChar
+    000004DB 19               [11]  706 	add	hl, de
+    000004DC 7E               [ 7]  707 	ld	a, (hl)
+    000004DD DD 6E FC         [19]  708 	ld	l, -4 (ix)
+    000004E0 DD 66 FD         [19]  709 	ld	h, -3 (ix)
+    000004E3 77               [ 7]  710 	ld	(hl), a
+    000004E4 DD 34 FC         [23]  711 	inc	-4 (ix)
+    000004E7 20 03            [12]  712 	jr	nz, 00590$
+    000004E9 DD 34 FD         [23]  713 	inc	-3 (ix)
+    000004EC                        714 00590$:
+    000004EC                        715 00145$:
+                                    716 ;E:\supernova\MSXgl\engine/src/string.c:241: if (len > 2)
+    000004EC 3E 02            [ 7]  717 	ld	a, #0x02
+    000004EE DD 96 F0         [19]  718 	sub	a, -16 (ix)
+    000004F1 30 1C            [12]  719 	jr	nc, 00147$
+                                    720 ;E:\supernova\MSXgl\engine/src/string.c:242: *dest++ = g_HexChar[(val >> 8) & 0xF];
+    000004F3 DD 7E F9         [19]  721 	ld	a, -7 (ix)
+    000004F6 E6 0F            [ 7]  722 	and	a, #0x0f
+    000004F8 6F               [ 4]  723 	ld	l, a
+    000004F9 26 00            [ 7]  724 	ld	h, #0x00
+    000004FB 11r4Fr07         [10]  725 	ld	de, #_g_HexChar
+    000004FE 19               [11]  726 	add	hl, de
+    000004FF 7E               [ 7]  727 	ld	a, (hl)
+    00000500 DD 6E FC         [19]  728 	ld	l, -4 (ix)
+    00000503 DD 66 FD         [19]  729 	ld	h, -3 (ix)
+    00000506 77               [ 7]  730 	ld	(hl), a
+    00000507 DD 34 FC         [23]  731 	inc	-4 (ix)
+    0000050A 20 03            [12]  732 	jr	nz, 00591$
+    0000050C DD 34 FD         [23]  733 	inc	-3 (ix)
+    0000050F                        734 00591$:
+    0000050F                        735 00147$:
+                                    736 ;E:\supernova\MSXgl\engine/src/string.c:243: if (len > 1)
+    0000050F 3E 01            [ 7]  737 	ld	a, #0x01
+    00000511 DD 96 F0         [19]  738 	sub	a, -16 (ix)
+    00000514 30 32            [12]  739 	jr	nc, 00149$
+                                    740 ;E:\supernova\MSXgl\engine/src/string.c:244: *dest++ = g_HexChar[(val >> 4) & 0xF];
+    00000516 DD 5E F8         [19]  741 	ld	e, -8 (ix)
+    00000519 DD 56 F9         [19]  742 	ld	d, -7 (ix)
+    0000051C DD 6E FA         [19]  743 	ld	l, -6 (ix)
+    0000051F DD 66 FB         [19]  744 	ld	h, -5 (ix)
+    00000522 06 04            [ 7]  745 	ld	b, #0x04
+    00000524                        746 00592$:
+    00000524 CB 3C            [ 8]  747 	srl	h
+    00000526 CB 1D            [ 8]  748 	rr	l
+    00000528 CB 1A            [ 8]  749 	rr	d
+    0000052A CB 1B            [ 8]  750 	rr	e
+    0000052C 10 F6            [13]  751 	djnz	00592$
+    0000052E 7B               [ 4]  752 	ld	a, e
+    0000052F E6 0F            [ 7]  753 	and	a, #0x0f
+    00000531 26 00            [ 7]  754 	ld	h, #0x00
+    00000533 6F               [ 4]  755 	ld	l, a
+    00000534 11r4Fr07         [10]  756 	ld	de, #_g_HexChar
+    00000537 19               [11]  757 	add	hl, de
+    00000538 7E               [ 7]  758 	ld	a, (hl)
+    00000539 DD 6E FC         [19]  759 	ld	l, -4 (ix)
+    0000053C DD 66 FD         [19]  760 	ld	h, -3 (ix)
+    0000053F 77               [ 7]  761 	ld	(hl), a
+    00000540 DD 34 FC         [23]  762 	inc	-4 (ix)
+    00000543 20 03            [12]  763 	jr	nz, 00594$
+    00000545 DD 34 FD         [23]  764 	inc	-3 (ix)
+    00000548                        765 00594$:
+    00000548                        766 00149$:
+                                    767 ;E:\supernova\MSXgl\engine/src/string.c:245: *dest++ = g_HexChar[val & 0xF];
+    00000548 DD 7E F8         [19]  768 	ld	a, -8 (ix)
+    0000054B DD 77 FA         [19]  769 	ld	-6 (ix), a
+    0000054E DD 7E F9         [19]  770 	ld	a, -7 (ix)
+    00000551 DD 77 FB         [19]  771 	ld	-5 (ix), a
+    00000554 DD 7E FA         [19]  772 	ld	a, -6 (ix)
+    00000557 E6 0F            [ 7]  773 	and	a, #0x0f
+    00000559 DD 77 F8         [19]  774 	ld	-8 (ix), a
+    0000055C DD 36 F9 00      [19]  775 	ld	-7 (ix), #0x00
+    00000560 11r4Fr07         [10]  776 	ld	de, #_g_HexChar
+    00000563 DD 6E F8         [19]  777 	ld	l, -8 (ix)
+    00000566 26 00            [ 7]  778 	ld	h, #0x00
+    00000568 19               [11]  779 	add	hl, de
+    00000569 DD 75 FA         [19]  780 	ld	-6 (ix), l
+    0000056C DD 74 FB         [19]  781 	ld	-5 (ix), h
+    0000056F 7E               [ 7]  782 	ld	a, (hl)
+    00000570 DD 77 FB         [19]  783 	ld	-5 (ix), a
+    00000573 DD 6E FC         [19]  784 	ld	l, -4 (ix)
+    00000576 DD 66 FD         [19]  785 	ld	h, -3 (ix)
+    00000579 DD 7E FB         [19]  786 	ld	a, -5 (ix)
+    0000057C 77               [ 7]  787 	ld	(hl), a
+    0000057D DD 34 FC         [23]  788 	inc	-4 (ix)
+    00000580 C2r34r07         [10]  789 	jp	nz, 00165$
+    00000583 DD 34 FD         [23]  790 	inc	-3 (ix)
+                                    791 ;E:\supernova\MSXgl\engine/src/string.c:246: break;
+    00000586 C3r34r07         [10]  792 	jp	00165$
+                                    793 ;E:\supernova\MSXgl\engine/src/string.c:251: case 'x':
+    00000589                        794 00150$:
+                                    795 ;E:\supernova\MSXgl\engine/src/string.c:253: if (len == 0)
+    00000589 DD 7E F0         [19]  796 	ld	a, -16 (ix)
+    0000058C B7               [ 4]  797 	or	a, a
+    0000058D 20 04            [12]  798 	jr	nz, 00152$
+                                    799 ;E:\supernova\MSXgl\engine/src/string.c:254: len = 4;
+    0000058F DD 36 F0 04      [19]  800 	ld	-16 (ix), #0x04
+    00000593                        801 00152$:
+                                    802 ;E:\supernova\MSXgl\engine/src/string.c:255: u16 val = (u16)va_arg(args, u16);
+    00000593 DD 7E F4         [19]  803 	ld	a, -12 (ix)
+    00000596 DD 77 04         [19]  804 	ld	4 (ix), a
+    00000599 DD 7E F5         [19]  805 	ld	a, -11 (ix)
+    0000059C DD 77 05         [19]  806 	ld	5 (ix), a
+    0000059F DD 6E FA         [19]  807 	ld	l, -6 (ix)
+    000005A2 DD 66 FB         [19]  808 	ld	h, -5 (ix)
+    000005A5 7E               [ 7]  809 	ld	a, (hl)
+    000005A6 DD 77 FA         [19]  810 	ld	-6 (ix), a
+    000005A9 23               [ 6]  811 	inc	hl
+    000005AA 7E               [ 7]  812 	ld	a, (hl)
+    000005AB DD 77 FB         [19]  813 	ld	-5 (ix), a
+                                    814 ;E:\supernova\MSXgl\engine/src/string.c:256: if (len > 3)
+    000005AE 3E 03            [ 7]  815 	ld	a, #0x03
+    000005B0 DD 96 F0         [19]  816 	sub	a, -16 (ix)
+    000005B3 30 3E            [12]  817 	jr	nc, 00154$
+                                    818 ;E:\supernova\MSXgl\engine/src/string.c:257: *dest++ = g_HexChar[(val >> 12) & 0xF];
+    000005B5 DD 7E FB         [19]  819 	ld	a, -5 (ix)
+    000005B8 07               [ 4]  820 	rlca
+    000005B9 07               [ 4]  821 	rlca
+    000005BA 07               [ 4]  822 	rlca
+    000005BB 07               [ 4]  823 	rlca
+    000005BC E6 0F            [ 7]  824 	and	a, #0x0f
+    000005BE DD 77 F8         [19]  825 	ld	-8 (ix), a
+    000005C1 DD 36 F9 00      [19]  826 	ld	-7 (ix), #0x00
+    000005C5 DD 7E F8         [19]  827 	ld	a, -8 (ix)
+    000005C8 DD 77 F9         [19]  828 	ld	-7 (ix), a
+    000005CB E6 0F            [ 7]  829 	and	a, #0x0f
+    000005CD DD 77 F9         [19]  830 	ld	-7 (ix), a
+    000005D0 11r4Fr07         [10]  831 	ld	de, #_g_HexChar
+    000005D3 DD 6E F9         [19]  832 	ld	l, -7 (ix)
+    000005D6 26 00            [ 7]  833 	ld	h, #0x00
+    000005D8 19               [11]  834 	add	hl, de
+    000005D9 DD 75 F8         [19]  835 	ld	-8 (ix), l
+    000005DC DD 74 F9         [19]  836 	ld	-7 (ix), h
+    000005DF 7E               [ 7]  837 	ld	a, (hl)
+    000005E0 DD 6E FC         [19]  838 	ld	l, -4 (ix)
+    000005E3 DD 66 FD         [19]  839 	ld	h, -3 (ix)
+    000005E6 77               [ 7]  840 	ld	(hl), a
+    000005E7 DD 7E ED         [19]  841 	ld	a, -19 (ix)
+    000005EA DD 77 FC         [19]  842 	ld	-4 (ix), a
+    000005ED DD 7E EE         [19]  843 	ld	a, -18 (ix)
+    000005F0 DD 77 FD         [19]  844 	ld	-3 (ix), a
+    000005F3                        845 00154$:
+                                    846 ;E:\supernova\MSXgl\engine/src/string.c:258: if (len > 2)
+    000005F3 3E 02            [ 7]  847 	ld	a, #0x02
+    000005F5 DD 96 F0         [19]  848 	sub	a, -16 (ix)
+    000005F8 30 2A            [12]  849 	jr	nc, 00156$
+                                    850 ;E:\supernova\MSXgl\engine/src/string.c:259: *dest++ = g_HexChar[(val >> 8) & 0xF];
+    000005FA DD 7E FB         [19]  851 	ld	a, -5 (ix)
+    000005FD DD 77 F9         [19]  852 	ld	-7 (ix), a
+    00000600 E6 0F            [ 7]  853 	and	a, #0x0f
+    00000602 DD 77 F9         [19]  854 	ld	-7 (ix), a
+    00000605 11r4Fr07         [10]  855 	ld	de, #_g_HexChar
+    00000608 DD 6E F9         [19]  856 	ld	l, -7 (ix)
+    0000060B 26 00            [ 7]  857 	ld	h, #0x00
+    0000060D 19               [11]  858 	add	hl, de
+    0000060E DD 75 F8         [19]  859 	ld	-8 (ix), l
+    00000611 DD 74 F9         [19]  860 	ld	-7 (ix), h
+    00000614 7E               [ 7]  861 	ld	a, (hl)
+    00000615 DD 6E FC         [19]  862 	ld	l, -4 (ix)
+    00000618 DD 66 FD         [19]  863 	ld	h, -3 (ix)
+    0000061B 77               [ 7]  864 	ld	(hl), a
+    0000061C DD 34 FC         [23]  865 	inc	-4 (ix)
+    0000061F 20 03            [12]  866 	jr	nz, 00596$
+    00000621 DD 34 FD         [23]  867 	inc	-3 (ix)
+    00000624                        868 00596$:
+    00000624                        869 00156$:
+                                    870 ;E:\supernova\MSXgl\engine/src/string.c:260: if (len > 1)
+    00000624 3E 01            [ 7]  871 	ld	a, #0x01
+    00000626 DD 96 F0         [19]  872 	sub	a, -16 (ix)
+    00000629 30 4A            [12]  873 	jr	nc, 00158$
+                                    874 ;E:\supernova\MSXgl\engine/src/string.c:261: *dest++ = g_HexChar[(val >> 4) & 0xF];
+    0000062B DD 7E FA         [19]  875 	ld	a, -6 (ix)
+    0000062E DD 77 F8         [19]  876 	ld	-8 (ix), a
+    00000631 DD 7E FB         [19]  877 	ld	a, -5 (ix)
+    00000634 DD 77 F9         [19]  878 	ld	-7 (ix), a
+    00000637 06 04            [ 7]  879 	ld	b, #0x04
+    00000639                        880 00597$:
+    00000639 DD CB F9 3E      [23]  881 	srl	-7 (ix)
+    0000063D DD CB F8 1E      [23]  882 	rr	-8 (ix)
+    00000641 10 F6            [13]  883 	djnz	00597$
+    00000643 DD 7E F8         [19]  884 	ld	a, -8 (ix)
+    00000646 E6 0F            [ 7]  885 	and	a, #0x0f
+    00000648 DD 77 F6         [19]  886 	ld	-10 (ix), a
+    0000064B DD 36 F7 00      [19]  887 	ld	-9 (ix), #0x00
+    0000064F 3Er4F            [ 7]  888 	ld	a, #<(_g_HexChar)
+    00000651 DD 86 F6         [19]  889 	add	a, -10 (ix)
+    00000654 DD 77 F8         [19]  890 	ld	-8 (ix), a
+    00000657 3Es07            [ 7]  891 	ld	a, #>(_g_HexChar)
+    00000659 DD 8E F7         [19]  892 	adc	a, -9 (ix)
+    0000065C DD 77 F9         [19]  893 	ld	-7 (ix), a
+    0000065F DD 6E F8         [19]  894 	ld	l, -8 (ix)
+    00000662 DD 66 F9         [19]  895 	ld	h, -7 (ix)
+    00000665 7E               [ 7]  896 	ld	a, (hl)
+    00000666 DD 6E FC         [19]  897 	ld	l, -4 (ix)
+    00000669 DD 66 FD         [19]  898 	ld	h, -3 (ix)
+    0000066C 77               [ 7]  899 	ld	(hl), a
+    0000066D DD 34 FC         [23]  900 	inc	-4 (ix)
+    00000670 20 03            [12]  901 	jr	nz, 00598$
+    00000672 DD 34 FD         [23]  902 	inc	-3 (ix)
+    00000675                        903 00598$:
+    00000675                        904 00158$:
+                                    905 ;E:\supernova\MSXgl\engine/src/string.c:262: *dest++ = g_HexChar[val & 0xF];
+    00000675 DD 7E FA         [19]  906 	ld	a, -6 (ix)
+    00000678 E6 0F            [ 7]  907 	and	a, #0x0f
+    0000067A DD 77 F8         [19]  908 	ld	-8 (ix), a
+    0000067D DD 36 F9 00      [19]  909 	ld	-7 (ix), #0x00
+    00000681 11r4Fr07         [10]  910 	ld	de, #_g_HexChar
+    00000684 DD 6E F8         [19]  911 	ld	l, -8 (ix)
+    00000687 26 00            [ 7]  912 	ld	h, #0x00
+    00000689 19               [11]  913 	add	hl, de
+    0000068A DD 75 FA         [19]  914 	ld	-6 (ix), l
+    0000068D DD 74 FB         [19]  915 	ld	-5 (ix), h
+    00000690 7E               [ 7]  916 	ld	a, (hl)
+    00000691 DD 77 FB         [19]  917 	ld	-5 (ix), a
+    00000694 DD 6E FC         [19]  918 	ld	l, -4 (ix)
+    00000697 DD 66 FD         [19]  919 	ld	h, -3 (ix)
+    0000069A DD 7E FB         [19]  920 	ld	a, -5 (ix)
+    0000069D 77               [ 7]  921 	ld	(hl), a
+    0000069E DD 34 FC         [23]  922 	inc	-4 (ix)
+    000006A1 C2r34r07         [10]  923 	jp	nz, 00165$
+    000006A4 DD 34 FD         [23]  924 	inc	-3 (ix)
+                                    925 ;E:\supernova\MSXgl\engine/src/string.c:263: break;
+    000006A7 C3r34r07         [10]  926 	jp	00165$
+                                    927 ;E:\supernova\MSXgl\engine/src/string.c:267: case 'c':
+    000006AA                        928 00159$:
+                                    929 ;E:\supernova\MSXgl\engine/src/string.c:269: c8 val = (c8)va_arg(args, u16);
+    000006AA DD 7E F4         [19]  930 	ld	a, -12 (ix)
+    000006AD DD 77 04         [19]  931 	ld	4 (ix), a
+    000006B0 DD 7E F5         [19]  932 	ld	a, -11 (ix)
+    000006B3 DD 77 05         [19]  933 	ld	5 (ix), a
+    000006B6 DD 6E FA         [19]  934 	ld	l, -6 (ix)
+    000006B9 DD 66 FB         [19]  935 	ld	h, -5 (ix)
+    000006BC 7E               [ 7]  936 	ld	a, (hl)
+                                    937 ;E:\supernova\MSXgl\engine/src/string.c:270: *dest++ = val;
+    000006BD DD 6E FC         [19]  938 	ld	l, -4 (ix)
+    000006C0 DD 66 FD         [19]  939 	ld	h, -3 (ix)
+    000006C3 77               [ 7]  940 	ld	(hl), a
+    000006C4 DD 7E ED         [19]  941 	ld	a, -19 (ix)
+    000006C7 DD 77 FC         [19]  942 	ld	-4 (ix), a
+    000006CA DD 7E EE         [19]  943 	ld	a, -18 (ix)
+    000006CD DD 77 FD         [19]  944 	ld	-3 (ix), a
+                                    945 ;E:\supernova\MSXgl\engine/src/string.c:271: break;
+    000006D0 18 62            [12]  946 	jr	00165$
+                                    947 ;E:\supernova\MSXgl\engine/src/string.c:275: case 's':
+    000006D2                        948 00160$:
+                                    949 ;E:\supernova\MSXgl\engine/src/string.c:277: const c8* val = (const c8*)va_arg(args, const c8*);
+    000006D2 DD 7E F4         [19]  950 	ld	a, -12 (ix)
+    000006D5 DD 77 04         [19]  951 	ld	4 (ix), a
+    000006D8 DD 7E F5         [19]  952 	ld	a, -11 (ix)
+    000006DB DD 77 05         [19]  953 	ld	5 (ix), a
+    000006DE DD 6E F8         [19]  954 	ld	l, -8 (ix)
+    000006E1 DD 66 F9         [19]  955 	ld	h, -7 (ix)
+    000006E4 4E               [ 7]  956 	ld	c, (hl)
+    000006E5 23               [ 6]  957 	inc	hl
+    000006E6 46               [ 7]  958 	ld	b, (hl)
+                                    959 ;E:\supernova\MSXgl\engine/src/string.c:278: u8 len = String_Length(val);
+    000006E7 1E 00            [ 7]  960 	ld	e, #0x00
+    000006E9 69               [ 4]  961 	ld	l, c
+    000006EA 60               [ 4]  962 	ld	h, b
+    000006EB                        963 00169$:
+    000006EB 7E               [ 7]  964 	ld	a, (hl)
+    000006EC 23               [ 6]  965 	inc	hl
+    000006ED B7               [ 4]  966 	or	a, a
+    000006EE 28 03            [12]  967 	jr	z, 00171$
+    000006F0 1C               [ 4]  968 	inc	e
+    000006F1 18 F8            [12]  969 	jr	00169$
+    000006F3                        970 00171$:
+                                    971 ;E:\supernova\MSXgl\engine/src/string.c:279: for (u8 i = 0; i < len; i++)
+    000006F3 69               [ 4]  972 	ld	l, c
+    000006F4 60               [ 4]  973 	ld	h, b
+    000006F5 DD 4E FC         [19]  974 	ld	c, -4 (ix)
+    000006F8 DD 46 FD         [19]  975 	ld	b, -3 (ix)
+    000006FB 16 00            [ 7]  976 	ld	d, #0x00
+    000006FD                        977 00177$:
+    000006FD 7A               [ 4]  978 	ld	a, d
+    000006FE 93               [ 4]  979 	sub	a, e
+    000006FF 30 2D            [12]  980 	jr	nc, 00280$
+                                    981 ;E:\supernova\MSXgl\engine/src/string.c:280: *dest++ = *val++;
+    00000701 7E               [ 7]  982 	ld	a, (hl)
+    00000702 23               [ 6]  983 	inc	hl
+    00000703 02               [ 7]  984 	ld	(bc), a
+    00000704 03               [ 6]  985 	inc	bc
+                                    986 ;E:\supernova\MSXgl\engine/src/string.c:279: for (u8 i = 0; i < len; i++)
+    00000705 14               [ 4]  987 	inc	d
+    00000706 18 F5            [12]  988 	jr	00177$
+                                    989 ;E:\supernova\MSXgl\engine/src/string.c:283: }
+    00000708                        990 00164$:
+                                    991 ;E:\supernova\MSXgl\engine/src/string.c:286: *dest++ = *ptr;
+    00000708 DD 6E FC         [19]  992 	ld	l, -4 (ix)
+    0000070B DD 66 FD         [19]  993 	ld	h, -3 (ix)
+    0000070E DD 7E FB         [19]  994 	ld	a, -5 (ix)
+    00000711 77               [ 7]  995 	ld	(hl), a
+    00000712 DD 7E ED         [19]  996 	ld	a, -19 (ix)
+    00000715 DD 77 FC         [19]  997 	ld	-4 (ix), a
+    00000718 DD 7E EE         [19]  998 	ld	a, -18 (ix)
+    0000071B DD 77 FD         [19]  999 	ld	-3 (ix), a
+                                   1000 ;E:\supernova\MSXgl\engine/src/string.c:290: *dest = 0;
+    0000071E 18 14            [12] 1001 	jr	00165$
+                                   1002 ;E:\supernova\MSXgl\engine/src/string.c:286: *dest++ = *ptr;
+    00000720                       1003 00278$:
+    00000720 DD 7E F8         [19] 1004 	ld	a, -8 (ix)
+    00000723 DD 77 FC         [19] 1005 	ld	-4 (ix), a
+    00000726 DD 7E F9         [19] 1006 	ld	a, -7 (ix)
+    00000729 DD 77 FD         [19] 1007 	ld	-3 (ix), a
+                                   1008 ;E:\supernova\MSXgl\engine/src/string.c:290: *dest = 0;
+    0000072C 18 06            [12] 1009 	jr	00165$
+                                   1010 ;E:\supernova\MSXgl\engine/src/string.c:286: *dest++ = *ptr;
+    0000072E                       1011 00280$:
+    0000072E DD 71 FC         [19] 1012 	ld	-4 (ix), c
+    00000731 DD 70 FD         [19] 1013 	ld	-3 (ix), b
+    00000734                       1014 00165$:
+                                   1015 ;E:\supernova\MSXgl\engine/src/string.c:288: ptr++;
+    00000734 DD 34 FE         [23] 1016 	inc	-2 (ix)
+    00000737 C2r64r00         [10] 1017 	jp	nz, 00166$
+    0000073A DD 34 FF         [23] 1018 	inc	-1 (ix)
+    0000073D C3r64r00         [10] 1019 	jp	00166$
+    00000740                       1020 00168$:
+                                   1021 ;E:\supernova\MSXgl\engine/src/string.c:290: *dest = 0;
+    00000740 DD 6E FC         [19] 1022 	ld	l, -4 (ix)
+    00000743 DD 66 FD         [19] 1023 	ld	h, -3 (ix)
+    00000746 36 00            [10] 1024 	ld	(hl), #0x00
+                                   1025 ;E:\supernova\MSXgl\engine/src/string.c:291: }
+    00000748 DD F9            [10] 1026 	ld	sp, ix
+    0000074A DD E1            [14] 1027 	pop	ix
+    0000074C E1               [10] 1028 	pop	hl
+    0000074D F1               [10] 1029 	pop	af
+    0000074E E9               [ 4] 1030 	jp	(hl)
+    0000074F                       1031 _g_HexChar:
+    0000074F 30                    1032 	.db #0x30	; 48	'0'
+    00000750 31                    1033 	.db #0x31	; 49	'1'
+    00000751 32                    1034 	.db #0x32	; 50	'2'
+    00000752 33                    1035 	.db #0x33	; 51	'3'
+    00000753 34                    1036 	.db #0x34	; 52	'4'
+    00000754 35                    1037 	.db #0x35	; 53	'5'
+    00000755 36                    1038 	.db #0x36	; 54	'6'
+    00000756 37                    1039 	.db #0x37	; 55	'7'
+    00000757 38                    1040 	.db #0x38	; 56	'8'
+    00000758 39                    1041 	.db #0x39	; 57	'9'
+    00000759 41                    1042 	.db #0x41	; 65	'A'
+    0000075A 42                    1043 	.db #0x42	; 66	'B'
+    0000075B 43                    1044 	.db #0x43	; 67	'C'
+    0000075C 44                    1045 	.db #0x44	; 68	'D'
+    0000075D 45                    1046 	.db #0x45	; 69	'E'
+    0000075E 46                    1047 	.db #0x46	; 70	'F'
+                                   1048 ;E:\supernova\MSXgl\engine/src/string.c:295: void String_Format(c8* dest, const c8* format, ...)
+                                   1049 ;	---------------------------------
+                                   1050 ; Function String_Format
+                                   1051 ; ---------------------------------
+    0000075F                       1052 _String_Format::
+                                   1053 ;E:\supernova\MSXgl\engine/src/string.c:298: va_start(args, format);
+                                   1054 ;E:\supernova\MSXgl\engine/src/string.c:299: String_FormatVA(dest, format, args);
+    0000075F 21 06 00         [10] 1055 	ld	hl, #6
+    00000762 39               [11] 1056 	add	hl, sp
+    00000763 E5               [11] 1057 	push	hl
+    00000764 FD 21 06 00      [14] 1058 	ld	iy, #6
+    00000768 FD 39            [15] 1059 	add	iy, sp
+    0000076A FD 5E 00         [19] 1060 	ld	e, 0 (iy)
+    0000076D FD 56 01         [19] 1061 	ld	d, 1 (iy)
+    00000770 FD 6E FE         [19] 1062 	ld	l, -2 (iy)
+    00000773 FD 66 FF         [19] 1063 	ld	h, -1 (iy)
+    00000776 CDr48r00         [17] 1064 	call	_String_FormatVA
+                                   1065 ;E:\supernova\MSXgl\engine/src/string.c:300: va_end(args);
+                                   1066 ;E:\supernova\MSXgl\engine/src/string.c:301: }
+    00000779 C9               [10] 1067 	ret
+                                   1068 	.area _CODE
+                                   1069 	.area _INITIALIZER
+                                   1070 	.area _CABS (ABS)

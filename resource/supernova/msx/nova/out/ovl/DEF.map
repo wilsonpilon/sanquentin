@@ -1,0 +1,510 @@
+ASxxxx Linker V05.50.4-SDLD,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  _g_SUBRID                          default3
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000002  _g_STRSRC                          default3
+     00000004  _g_CGTABL                          default3
+     00000006  _DOS_TPAUpperAddr                  default3
+     00000006  _g_VDP_DR                          default3
+     00000007  _g_VDP_DW                          default3
+     0000002B  _g_BASRVN                          default3
+     0000002B  _g_ROMVersion                      default3
+     0000002D  _g_MSXVER                          default3
+     0000002E  _g_MSXMID                          default3
+     00000034  _g_CHAR_16                         default3
+     0000021D  _Pos                            
+     000004A4  _StrCpy                         
+     000004AC  _StrCat                         
+     000004ED  _StrEq                          
+     000004FE  _UpCase                         
+     00000511  _Cur                            
+     00000514  _Col                            
+     00000517  _Bak                            
+     0000051A  _Bor                            
+     0000051D  _En                             
+     00000546  _Add                            
+     00000568  _Min                            
+     0000058B  _Score                          
+     000005A3  _Cn                             
+     000005C7  _Pause                          
+     00000601  _Tune                           
+     000006BA  _Play                           
+     0000074B  _Walls                          
+     00000812  _Blast                          
+     0000096F  _WrFN                           
+     000009C2  _Up                             
+     00000AC1  _Spaces                         
+     00000B52  _Here                           
+     00000C19  _RL                             
+     00000C31  _RS                             
+     00000C5D  _RC1                            
+     00000C64  _RB                             
+     00000C8F  _RB2                            
+ASxxxx Linker V05.50.4-SDLD,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000E99  _Van                            
+     00000FCE  _Crazy                          
+     00000FDE  _NoSense                        
+     00000FE4  _Say                            
+     0000104F  _SetNoun                        
+     00001A9D  _SetR                           
+     00001B69  _RestartGame                    
+     00002149  _Wr                             
+     000021F4  _WrC                            
+     0000220C  _WrNum                          
+     000022BA  _Wln                            
+     000022D5  _Gotoxy                         
+     00002310  _Window                         
+     00002340  _ClrScr                         
+     000024FA  _GetKey                         
+     00002622  _Delay                          
+     00002689  _Rnd                            
+     000026EA  _Sound                          
+     00002741  _NoSound                        
+     0000329E  l__CODE                         
+     00005995  _Restore                        
+     00006B75  _Mov                            
+     00006B79  _Inv                            
+     00006B7D  _Socket                         
+     00006B81  _Wear                           
+     00006BC4  _PStat                          
+     00006BF5  _MugCon                         
+     00006BF7  _SatchCon                       
+     00006BF8  _HolstCon                       
+     00006BFA  _PyraCon                        
+     00006BFB  _HingeCon                       
+     00006C00  _Vb                             
+     00006C01  _N1                             
+     00006C02  _N2                             
+     00006C03  _Pr                             
+     00006C04  _Md                             
+     00006C06  _Prm                            
+     00006C0C  _Region                         
+     00006C0D  _AlienRm                        
+     00006C0E  _FriendRm                       
+     00006C0F  _SinkRm                         
+     00006C14  _x                              
+     00006C15  _y                              
+     00006C19  _Tic                            
+     00006C21  _StoreC                         
+     00006C25  _Sc                             
+     00006C2B  _i                              
+     00006C2D  _j                              
+     00006C2F  _R                              
+     00006C4D  _T                              
+     00006C8F  _Input                          
+ASxxxx Linker V05.50.4-SDLD,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00006E39  _VStr                           
+     00006E57  _NStr                           
+     00006EB1  _Word                           
+     00006ED1  _CFlag                          
+     00006ED6  _SFlag                          
+     00006ED7  _Text5                          
+     00007312  _g_Loc                          
+     00007B42  s__DATA                         
+     00007B42  s__GSFINAL                      
+     00007B42  s__GSINIT                       
+     00007B42  s__HOME                         
+     00007B42  s__INITIALIZED                  
+     00007B42  s__INITIALIZER                  
+     00008000  s__CODE                         
+     0000F30F  _g_KANJTABLE                       default3
+     0000F323  _g_DISKVE                          default3
+     0000F325  _g_BREAKV                          default3
+     0000F341  _g_RAMAD0                          default3
+     0000F342  _g_RAMAD1                          default3
+     0000F343  _g_RAMAD2                          default3
+     0000F344  _g_RAMAD3                          default3
+     0000F348  _g_MASTER                          default3
+     0000F37D  _g_BDOS                            default3
+     0000F380  _g_RDPRIM                          default3
+     0000F385  _g_WRPRIM                          default3
+     0000F38C  _g_CLPRIM                          default3
+     0000F39A  _g_USRTAB                          default3
+     0000F3AE  _g_LINL40                          default3
+     0000F3AF  _g_LINL32                          default3
+     0000F3B0  _g_LINLEN                          default3
+     0000F3B1  _g_CRTCNT                          default3
+     0000F3B2  _g_CLMLST                          default3
+     0000F3B3  _g_TXTNAM                          default3
+     0000F3B5  _g_TXTCOL                          default3
+     0000F3B7  _g_TXTCGP                          default3
+     0000F3B9  _g_TXTATR                          default3
+     0000F3BB  _g_TXTPAT                          default3
+     0000F3BD  _g_T32NAM                          default3
+     0000F3BF  _g_T32COL                          default3
+     0000F3C1  _g_T32CGP                          default3
+     0000F3C3  _g_T32ATR                          default3
+     0000F3C5  _g_T32PAT                          default3
+     0000F3C7  _g_GRPNAM                          default3
+     0000F3C9  _g_GRPCOL                          default3
+     0000F3CB  _g_GRPCGP                          default3
+     0000F3CD  _g_GRPATR                          default3
+     0000F3CF  _g_GRPPAT                          default3
+     0000F3D1  _g_MLTNAM                          default3
+     0000F3D3  _g_MLTCOL                          default3
+     0000F3D5  _g_MLTCGP                          default3
+     0000F3D7  _g_MLTATR                          default3
+ASxxxx Linker V05.50.4-SDLD,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000F3D9  _g_MLTPAT                          default3
+     0000F3DB  _g_CLIKSW                          default3
+     0000F3DC  _g_CSRY                            default3
+     0000F3DD  _g_CSRX                            default3
+     0000F3DE  _g_CNSDFG                          default3
+     0000F3DF  _g_RG0SAV                          default3
+     0000F3E0  _g_RG1SAV                          default3
+     0000F3E1  _g_RG2SAV                          default3
+     0000F3E2  _g_RG3SAV                          default3
+     0000F3E3  _g_RG4SAV                          default3
+     0000F3E4  _g_RG5SAV                          default3
+     0000F3E5  _g_RG6SAV                          default3
+     0000F3E6  _g_RG7SAV                          default3
+     0000F3E7  _g_STATFL                          default3
+     0000F3E8  _g_TRGFLG                          default3
+     0000F3E9  _g_FORCLR                          default3
+     0000F3EA  _g_BAKCLR                          default3
+     0000F3EB  _g_BDRCLR                          default3
+     0000F3EC  _g_MAXUPD                          default3
+     0000F3EF  _g_MINUPD                          default3
+     0000F3F2  _g_ATRBYT                          default3
+     0000F3F3  _g_QUEUES                          default3
+     0000F3F5  _g_FRCNEW                          default3
+     0000F3F6  _g_SCNCNT                          default3
+     0000F3F7  _g_REPCNT                          default3
+     0000F3F8  _g_PUTPNT                          default3
+     0000F3FA  _g_GETPNT                          default3
+     0000F3FC  _g_CS120                           default3
+     0000F401  _g_CS240                           default3
+     0000F406  _g_LOW                             default3
+     0000F408  _g_HIGH                            default3
+     0000F40A  _g_HEADER                          default3
+     0000F40B  _g_ASPCT1                          default3
+     0000F40D  _g_ASPCT2                          default3
+     0000F87F  _g_FNKSTR                          default3
+     0000F92A  _g_CLOC                            default3
+     0000F92C  _g_CMASK                           default3
+     0000F959  _g_QUETAB                          default3
+     0000F971  _g_QUEBAK                          default3
+     0000F975  _g_VOICAQ                          default3
+     0000F9F5  _g_VOICBQ                          default3
+     0000FA75  _g_VOICCQ                          default3
+     0000FAF5  _g_DPPAGE                          default3
+     0000FAF5  _g_RS2IQ                           default3
+     0000FAF6  _g_ACPAGE                          default3
+     0000FAF7  _g_AVCSAV                          default3
+     0000FAF8  _g_EXBRSA                          default3
+     0000FAF9  _g_CHRCNT                          default3
+     0000FAFA  _g_ROMA                            default3
+     0000FAFC  _g_MODE                            default3
+     0000FAFD  _g_NORUSE                          default3
+ASxxxx Linker V05.50.4-SDLD,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FAFE  _g_XSAVE                           default3
+     0000FB00  _g_YSAVE                           default3
+     0000FB02  _g_LOGOPR                          default3
+     0000FB03  _g_RSTMP                           default3
+     0000FB03  _g_TOCNT                           default3
+     0000FB04  _g_RSFCB                           default3
+     0000FB06  _g_RSIQLN                          default3
+     0000FB07  _g_MEXBIh                          default3
+     0000FB0C  _g_OLDINT                          default3
+     0000FB0C  _g_OLDSTT                          default3
+     0000FB16  _g_DEVNUM                          default3
+     0000FB17  _g_DATCNT                          default3
+     0000FB1A  _g_ERRORS                          default3
+     0000FB1B  _g_FLAGS                           default3
+     0000FB1C  _g_ESTBLS                          default3
+     0000FB1D  _g_COMMSK                          default3
+     0000FB1E  _g_LSTCOM                          default3
+     0000FB1F  _g_LSTMOD                          default3
+     0000FB35  _g_PRSCNT                          default3
+     0000FB36  _g_SAVSP                           default3
+     0000FB38  _g_VOICEN                          default3
+     0000FB39  _g_SAVVOL                          default3
+     0000FB3B  _g_MCLLEN                          default3
+     0000FB3C  _g_MCLPTR                          default3
+     0000FB3E  _g_QUEUEN                          default3
+     0000FB3F  _g_MUSICF                          default3
+     0000FB40  _g_PLYCNT                          default3
+     0000FB41  _g_VCBA                            default3
+     0000FB66  _g_VCBB                            default3
+     0000FB8B  _g_VCBC                            default3
+     0000FBB0  _g_ENSTOP                          default3
+     0000FBB1  _g_BASROM                          default3
+     0000FBB2  _g_LINTTB                          default3
+     0000FBCA  _g_FSTPOS                          default3
+     0000FBCC  _g_CODSAV                          default3
+     0000FBCD  _g_FNKSWI                          default3
+     0000FBCE  _g_FNKFLG                          default3
+     0000FBD8  _g_ONGSBF                          default3
+     0000FBD9  _g_CLIKFL                          default3
+     0000FBDA  _g_OLDKEY                          default3
+     0000FBE5  _g_NEWKEY                          default3
+     0000FBF0  _g_KEYBUF                          default3
+     0000FC18  _g_LINWRK                          default3
+     0000FC40  _g_PATWRK                          default3
+     0000FC48  _g_BOTTOM                          default3
+     0000FC4A  _g_HIMEM                           default3
+     0000FC4C  _g_TRPTBL                          default3
+     0000FC9A  _g_RTYCNT                          default3
+     0000FC9B  _g_INTFLG                          default3
+     0000FC9C  _g_PADY                            default3
+     0000FC9D  _g_PADX                            default3
+ASxxxx Linker V05.50.4-SDLD,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FC9E  _g_JIFFY                           default3
+     0000FCA0  _g_INTVAL                          default3
+     0000FCA2  _g_INTCNT                          default3
+     0000FCA4  _g_LOWLIM                          default3
+     0000FCA5  _g_WINWID                          default3
+     0000FCA6  _g_GRPHED                          default3
+     0000FCA7  _g_ESCCNT                          default3
+     0000FCA8  _g_INSFLG                          default3
+     0000FCA9  _g_CSRSW                           default3
+     0000FCAA  _g_CSTYLE                          default3
+     0000FCAB  _g_CAPST                           default3
+     0000FCAC  _g_KANAST                          default3
+     0000FCAD  _g_KANAMD                          default3
+     0000FCAE  _g_FLBMEM                          default3
+     0000FCAF  _g_SCRMOD                          default3
+     0000FCB0  _g_OLDSCR                          default3
+     0000FCB1  _g_CASPRV                          default3
+     0000FCB2  _g_BRDATR                          default3
+     0000FCB3  _g_GXPOS                           default3
+     0000FCB5  _g_GYPOS                           default3
+     0000FCB7  _g_GRPACX                          default3
+     0000FCB9  _g_GRPACY                          default3
+     0000FCBB  _g_DRWFLG                          default3
+     0000FCBC  _g_DRWSCL                          default3
+     0000FCBD  _g_DRWANG                          default3
+     0000FCC1  _g_EXPTBL                          default3
+     0000FCC1  _g_MNROM                           default3
+     0000FCC5  _g_SLTTBL                          default3
+     0000FCC9  _g_SLTATR                          default3
+     0000FD09  _g_SLTWRK                          default3
+     0000FD89  _g_PROCNM                          default3
+     0000FFE7  _g_RG08SAV                         default3
+     0000FFE8  _g_RG09SAV                         default3
+     0000FFE9  _g_RG10SAV                         default3
+     0000FFEA  _g_RG11SAV                         default3
+     0000FFEB  _g_RG12SAV                         default3
+     0000FFEC  _g_RG13SAV                         default3
+     0000FFED  _g_RG14SAV                         default3
+     0000FFEE  _g_RG15SAV                         default3
+     0000FFEF  _g_RG16SAV                         default3
+     0000FFF0  _g_RG17SAV                         default3
+     0000FFF1  _g_RG18SAV                         default3
+     0000FFF2  _g_RG19SAV                         default3
+     0000FFF3  _g_RG20SAV                         default3
+     0000FFF4  _g_RG21SAV                         default3
+     0000FFF5  _g_RG22SAV                         default3
+     0000FFF6  _g_RG23SAV                         default3
+     0000FFF7  _g_MINROM                          default3
+     0000FFF8  _g_SVFFF8                          default3
+     0000FFFA  _g_RG25SAV                         default3
+     0000FFFB  _g_RG26SAV                         default3
+ASxxxx Linker V05.50.4-SDLD,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FFFC  _g_RG27SAV                         default3
+     0000FFFD  _g_SVFFFD                          default3
+     0000FFFF  _g_SLTSL                           default3
+
+ASxxxx Linker V05.50.4-SDLD,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008000    0000329E =       12958. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00008039  _Default5                          default2
+     000083D5  _Default6                          default2
+     00008A72  _Default7                          default2
+     00008EF6  _Default8                          default2
+     000091F9  _Default9                          default2
+     00009760  _Default10                         default3
+     00009B67  _Default11                         default3
+     0000A07B  _Default12                         default3
+     0000A515  _Default13                         default3
+     0000AB02  _Default14                         default3
+     0000AE4A  _DeadMain                          default3
+     0000B28E  _DEAD                              default3
+     0000B291  _Call13                            default3
+     0000B294  ___sdcc_enter_ix                   
+
+ASxxxx Linker V05.50.4-SDLD,  page 9.
+
+Files Linked                              [ module(s) ]
+
+E:/supernova/msx/nova/out/ovl/ovl_head_DEF.rel
+                                          [ ovl_head_DEF ]
+E:/supernova/msx/nova/out/ovl/default2.rel
+                                          [ default2 ]
+E:/supernova/msx/nova/out/ovl/default3.rel
+                                          [ default3 ]
+
+
+Libraries Linked                          [ object file ]
+
+E:\supernova\MSXgl\tools\sdcc/lib/z80/z80.lib
+                                          [ crtenter.rel ]
+
+ASxxxx Linker V05.50.4-SDLD,  page 10.
+
+User Base Address Definitions
+
+_CODE = 0x8000
+_DATA = 0x7b42
+ASxxxx Linker V05.50.4-SDLD,  page 11.
+
+User Global Definitions
+
+_Bor=0x51a
+_g_Loc=0x7312
+_Region=0x6c0c
+_Rnd=0x2689
+_StrCpy=0x4a4
+_RS=0xc31
+_Van=0xe99
+_AlienRm=0x6c0d
+_i=0x6c2b
+_Socket=0x6b7d
+_HolstCon=0x6bf8
+_j=0x6c2d
+_Cur=0x511
+_PStat=0x6bc4
+_Inv=0x6b79
+_Prm=0x6c06
+_StrEq=0x4ed
+_Delay=0x2622
+_Wln=0x22ba
+_Cn=0x5a3
+_Mov=0x6b75
+_Pos=0x21d
+_En=0x51d
+_Sc=0x6c25
+_x=0x6c14
+_Vb=0x6c00
+_NoSense=0xfde
+_Score=0x58b
+_CFlag=0x6ed1
+_Pause=0x5c7
+_SetR=0x1a9d
+_N1=0x6c01
+_N2=0x6c02
+_UpCase=0x4fe
+_Pr=0x6c03
+_Here=0xb52
+_NoSound=0x2741
+_RC1=0xc5d
+_RB2=0xc8f
+_NStr=0x6e57
+_MugCon=0x6bf5
+_Wr=0x2149
+_Sound=0x26ea
+_GetKey=0x24fa
+_Add=0x546
+_Crazy=0xfce
+_Wear=0x6b81
+_StoreC=0x6c21
+_Input=0x6c8f
+_StrCat=0x4ac
+_SatchCon=0x6bf7
+_SinkRm=0x6c0f
+_T=0x6c4d
+_RB=0xc64
+_Play=0x6ba
+_FriendRm=0x6c0e
+_Text5=0x6ed7
+_Word=0x6eb1
+_WrFN=0x96f
+_Col=0x514
+_RL=0xc19
+_Spaces=0xac1
+_Min=0x568
+_Restore=0x5995
+_Say=0xfe4
+_Md=0x6c04
+_Blast=0x812
+_Window=0x2310
+_y=0x6c15
+_WrNum=0x220c
+_PyraCon=0x6bfa
+_Walls=0x74b
+_Up=0x9c2
+_ClrScr=0x2340
+_Gotoxy=0x22d5
+_HingeCon=0x6bfb
+_WrC=0x21f4
+_SetNoun=0x104f
+_SFlag=0x6ed6
+_Bak=0x517
+_VStr=0x6e39
+_R=0x6c2f
+_Tune=0x601
+_RestartGame=0x1b69
+_Tic=0x6c19
+
+

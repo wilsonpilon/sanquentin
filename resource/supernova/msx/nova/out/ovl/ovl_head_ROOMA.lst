@@ -1,0 +1,31 @@
+                                      1 ; generated - jump table of overlay ROOMA
+                                      2 	.module ovl_head_ROOMA
+                                      3 	.globl	_Room1
+                                      4 	.globl	_Room10
+                                      5 	.globl	_Room11
+                                      6 	.globl	_Room12
+                                      7 	.globl	_Room13
+                                      8 	.globl	_Room14
+                                      9 	.globl	_Room2
+                                     10 	.globl	_Room3
+                                     11 	.globl	_Room4
+                                     12 	.globl	_Room5
+                                     13 	.globl	_Room6
+                                     14 	.globl	_Room7
+                                     15 	.globl	_Room8
+                                     16 	.globl	_Room9
+                                     17 	.area	_CODE
+    00000000 C3r00r00         [10]   18 	jp	_Room1
+    00000003 C3r00r00         [10]   19 	jp	_Room10
+    00000006 C3r00r00         [10]   20 	jp	_Room11
+    00000009 C3r00r00         [10]   21 	jp	_Room12
+    0000000C C3r00r00         [10]   22 	jp	_Room13
+    0000000F C3r00r00         [10]   23 	jp	_Room14
+    00000012 C3r00r00         [10]   24 	jp	_Room2
+    00000015 C3r00r00         [10]   25 	jp	_Room3
+    00000018 C3r00r00         [10]   26 	jp	_Room4
+    0000001B C3r00r00         [10]   27 	jp	_Room5
+    0000001E C3r00r00         [10]   28 	jp	_Room6
+    00000021 C3r00r00         [10]   29 	jp	_Room7
+    00000024 C3r00r00         [10]   30 	jp	_Room8
+    00000027 C3r00r00         [10]   31 	jp	_Room9

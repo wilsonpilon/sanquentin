@@ -1,0 +1,486 @@
+ASxxxx Linker V05.50.4-SDLD,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           parser
+     00000000  _g_SUBRID                          parser
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000002  _g_STRSRC                          parser
+     00000002  l__DATA                         
+     00000004  _g_CGTABL                          parser
+     00000006  _DOS_TPAUpperAddr                  parser
+     00000006  _g_VDP_DR                          parser
+     00000007  _g_VDP_DW                          parser
+     0000002B  _g_BASRVN                          parser
+     0000002B  _g_ROMVersion                      parser
+     0000002D  _g_MSXVER                          parser
+     0000002E  _g_MSXMID                          parser
+     00000034  _g_CHAR_16                         parser
+     00000188  _SetEmpty                       
+     000001F7  _SetClear                       
+     0000020D  _Len                            
+     0000021D  _Pos                            
+     000002A3  _Delete                         
+     00000324  _Insert                         
+     0000042C  _Copy                           
+     000004A4  _StrCpy                         
+     000004AC  _StrCat                         
+     000004ED  _StrEq                          
+     000004FE  _UpCase                         
+     00000511  _Cur                            
+     00000514  _Col                            
+     00000517  _Bak                            
+     0000051D  _En                             
+     000006A1  _RegionSoundOn                  
+     000006BA  _Play                           
+     0000096F  _WrFN                           
+     00000988  _FN                             
+     000009C2  _Up                             
+     00000AC1  _Spaces                         
+     00000ADB  _QFormat                        
+     00000B10  _LowerCase                      
+     00000B52  _Here                           
+     00000C19  _RL                             
+     00000C49  _RR                             
+     00000CBA  _Val                            
+     0000200A  l__CODE                         
+ASxxxx Linker V05.50.4-SDLD,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00002149  _Wr                             
+     000021F4  _WrC                            
+     0000220C  _WrNum                          
+     000022BA  _Wln                            
+     000022D5  _Gotoxy                         
+     00002308  _Wherex                         
+     0000230C  _Wherey                         
+     00002310  _Window                         
+     000024FA  _GetKey                         
+     00002622  _Delay                          
+     000026EA  _Sound                          
+     00002741  _NoSound                        
+     00006B93  _NounSet                        
+     00006BC4  _PStat                          
+     00006BC5  _NoNounOnly                     
+     00006BD1  _OneNounMaybe                   
+     00006BDD  _ToNounOnly                     
+     00006BE9  _ToNounMaybe                    
+     00006C00  _Vb                             
+     00006C01  _N1                             
+     00006C02  _N2                             
+     00006C03  _Pr                             
+     00006C04  _Md                             
+     00006C05  _VNP                            
+     00006C06  _Prm                            
+     00006C07  _EFlag                          
+     00006C08  _FFlag                          
+     00006C0A  _list                           
+     00006C0B  _Num                            
+     00006C0F  _SinkRm                         
+     00006C14  _x                              
+     00006C15  _y                              
+     00006C17  _Code                           
+     00006C19  _Tic                            
+     00006C25  _Sc                             
+     00006C27  _TestC                          
+     00006C8B  _Mx                             
+     00006C8F  _Input                          
+     00006D13  _Again                          
+     00006D97  _Line                           
+     00006E39  _VStr                           
+     00006E57  _NStr                           
+     00006E75  _PStr                           
+     00006E93  _LastNoun                       
+     00006EB1  _Word                           
+     00006ED1  _CFlag                          
+     00006ED3  _Crawl                          
+     00006ED5  _QFlag                          
+     00007048  _g_V                            
+     00007108  _g_N                            
+     00007214  _g_P                            
+ASxxxx Linker V05.50.4-SDLD,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000722C  _g_A                            
+     00007236  _g_RN                           
+     00007B40  s__DATA                         
+     00007B42  s__GSFINAL                      
+     00007B42  s__GSINIT                       
+     00007B42  s__HOME                         
+     00007B42  s__INITIALIZED                  
+     00007B42  s__INITIALIZER                  
+     00008000  s__CODE                         
+     0000F30F  _g_KANJTABLE                       parser
+     0000F323  _g_DISKVE                          parser
+     0000F325  _g_BREAKV                          parser
+     0000F341  _g_RAMAD0                          parser
+     0000F342  _g_RAMAD1                          parser
+     0000F343  _g_RAMAD2                          parser
+     0000F344  _g_RAMAD3                          parser
+     0000F348  _g_MASTER                          parser
+     0000F37D  _g_BDOS                            parser
+     0000F380  _g_RDPRIM                          parser
+     0000F385  _g_WRPRIM                          parser
+     0000F38C  _g_CLPRIM                          parser
+     0000F39A  _g_USRTAB                          parser
+     0000F3AE  _g_LINL40                          parser
+     0000F3AF  _g_LINL32                          parser
+     0000F3B0  _g_LINLEN                          parser
+     0000F3B1  _g_CRTCNT                          parser
+     0000F3B2  _g_CLMLST                          parser
+     0000F3B3  _g_TXTNAM                          parser
+     0000F3B5  _g_TXTCOL                          parser
+     0000F3B7  _g_TXTCGP                          parser
+     0000F3B9  _g_TXTATR                          parser
+     0000F3BB  _g_TXTPAT                          parser
+     0000F3BD  _g_T32NAM                          parser
+     0000F3BF  _g_T32COL                          parser
+     0000F3C1  _g_T32CGP                          parser
+     0000F3C3  _g_T32ATR                          parser
+     0000F3C5  _g_T32PAT                          parser
+     0000F3C7  _g_GRPNAM                          parser
+     0000F3C9  _g_GRPCOL                          parser
+     0000F3CB  _g_GRPCGP                          parser
+     0000F3CD  _g_GRPATR                          parser
+     0000F3CF  _g_GRPPAT                          parser
+     0000F3D1  _g_MLTNAM                          parser
+     0000F3D3  _g_MLTCOL                          parser
+     0000F3D5  _g_MLTCGP                          parser
+     0000F3D7  _g_MLTATR                          parser
+     0000F3D9  _g_MLTPAT                          parser
+     0000F3DB  _g_CLIKSW                          parser
+     0000F3DC  _g_CSRY                            parser
+     0000F3DD  _g_CSRX                            parser
+     0000F3DE  _g_CNSDFG                          parser
+ASxxxx Linker V05.50.4-SDLD,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000F3DF  _g_RG0SAV                          parser
+     0000F3E0  _g_RG1SAV                          parser
+     0000F3E1  _g_RG2SAV                          parser
+     0000F3E2  _g_RG3SAV                          parser
+     0000F3E3  _g_RG4SAV                          parser
+     0000F3E4  _g_RG5SAV                          parser
+     0000F3E5  _g_RG6SAV                          parser
+     0000F3E6  _g_RG7SAV                          parser
+     0000F3E7  _g_STATFL                          parser
+     0000F3E8  _g_TRGFLG                          parser
+     0000F3E9  _g_FORCLR                          parser
+     0000F3EA  _g_BAKCLR                          parser
+     0000F3EB  _g_BDRCLR                          parser
+     0000F3EC  _g_MAXUPD                          parser
+     0000F3EF  _g_MINUPD                          parser
+     0000F3F2  _g_ATRBYT                          parser
+     0000F3F3  _g_QUEUES                          parser
+     0000F3F5  _g_FRCNEW                          parser
+     0000F3F6  _g_SCNCNT                          parser
+     0000F3F7  _g_REPCNT                          parser
+     0000F3F8  _g_PUTPNT                          parser
+     0000F3FA  _g_GETPNT                          parser
+     0000F3FC  _g_CS120                           parser
+     0000F401  _g_CS240                           parser
+     0000F406  _g_LOW                             parser
+     0000F408  _g_HIGH                            parser
+     0000F40A  _g_HEADER                          parser
+     0000F40B  _g_ASPCT1                          parser
+     0000F40D  _g_ASPCT2                          parser
+     0000F87F  _g_FNKSTR                          parser
+     0000F92A  _g_CLOC                            parser
+     0000F92C  _g_CMASK                           parser
+     0000F959  _g_QUETAB                          parser
+     0000F971  _g_QUEBAK                          parser
+     0000F975  _g_VOICAQ                          parser
+     0000F9F5  _g_VOICBQ                          parser
+     0000FA75  _g_VOICCQ                          parser
+     0000FAF5  _g_DPPAGE                          parser
+     0000FAF5  _g_RS2IQ                           parser
+     0000FAF6  _g_ACPAGE                          parser
+     0000FAF7  _g_AVCSAV                          parser
+     0000FAF8  _g_EXBRSA                          parser
+     0000FAF9  _g_CHRCNT                          parser
+     0000FAFA  _g_ROMA                            parser
+     0000FAFC  _g_MODE                            parser
+     0000FAFD  _g_NORUSE                          parser
+     0000FAFE  _g_XSAVE                           parser
+     0000FB00  _g_YSAVE                           parser
+     0000FB02  _g_LOGOPR                          parser
+     0000FB03  _g_RSTMP                           parser
+     0000FB03  _g_TOCNT                           parser
+ASxxxx Linker V05.50.4-SDLD,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FB04  _g_RSFCB                           parser
+     0000FB06  _g_RSIQLN                          parser
+     0000FB07  _g_MEXBIh                          parser
+     0000FB0C  _g_OLDINT                          parser
+     0000FB0C  _g_OLDSTT                          parser
+     0000FB16  _g_DEVNUM                          parser
+     0000FB17  _g_DATCNT                          parser
+     0000FB1A  _g_ERRORS                          parser
+     0000FB1B  _g_FLAGS                           parser
+     0000FB1C  _g_ESTBLS                          parser
+     0000FB1D  _g_COMMSK                          parser
+     0000FB1E  _g_LSTCOM                          parser
+     0000FB1F  _g_LSTMOD                          parser
+     0000FB35  _g_PRSCNT                          parser
+     0000FB36  _g_SAVSP                           parser
+     0000FB38  _g_VOICEN                          parser
+     0000FB39  _g_SAVVOL                          parser
+     0000FB3B  _g_MCLLEN                          parser
+     0000FB3C  _g_MCLPTR                          parser
+     0000FB3E  _g_QUEUEN                          parser
+     0000FB3F  _g_MUSICF                          parser
+     0000FB40  _g_PLYCNT                          parser
+     0000FB41  _g_VCBA                            parser
+     0000FB66  _g_VCBB                            parser
+     0000FB8B  _g_VCBC                            parser
+     0000FBB0  _g_ENSTOP                          parser
+     0000FBB1  _g_BASROM                          parser
+     0000FBB2  _g_LINTTB                          parser
+     0000FBCA  _g_FSTPOS                          parser
+     0000FBCC  _g_CODSAV                          parser
+     0000FBCD  _g_FNKSWI                          parser
+     0000FBCE  _g_FNKFLG                          parser
+     0000FBD8  _g_ONGSBF                          parser
+     0000FBD9  _g_CLIKFL                          parser
+     0000FBDA  _g_OLDKEY                          parser
+     0000FBE5  _g_NEWKEY                          parser
+     0000FBF0  _g_KEYBUF                          parser
+     0000FC18  _g_LINWRK                          parser
+     0000FC40  _g_PATWRK                          parser
+     0000FC48  _g_BOTTOM                          parser
+     0000FC4A  _g_HIMEM                           parser
+     0000FC4C  _g_TRPTBL                          parser
+     0000FC9A  _g_RTYCNT                          parser
+     0000FC9B  _g_INTFLG                          parser
+     0000FC9C  _g_PADY                            parser
+     0000FC9D  _g_PADX                            parser
+     0000FC9E  _g_JIFFY                           parser
+     0000FCA0  _g_INTVAL                          parser
+     0000FCA2  _g_INTCNT                          parser
+     0000FCA4  _g_LOWLIM                          parser
+     0000FCA5  _g_WINWID                          parser
+ASxxxx Linker V05.50.4-SDLD,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     0000FCA6  _g_GRPHED                          parser
+     0000FCA7  _g_ESCCNT                          parser
+     0000FCA8  _g_INSFLG                          parser
+     0000FCA9  _g_CSRSW                           parser
+     0000FCAA  _g_CSTYLE                          parser
+     0000FCAB  _g_CAPST                           parser
+     0000FCAC  _g_KANAST                          parser
+     0000FCAD  _g_KANAMD                          parser
+     0000FCAE  _g_FLBMEM                          parser
+     0000FCAF  _g_SCRMOD                          parser
+     0000FCB0  _g_OLDSCR                          parser
+     0000FCB1  _g_CASPRV                          parser
+     0000FCB2  _g_BRDATR                          parser
+     0000FCB3  _g_GXPOS                           parser
+     0000FCB5  _g_GYPOS                           parser
+     0000FCB7  _g_GRPACX                          parser
+     0000FCB9  _g_GRPACY                          parser
+     0000FCBB  _g_DRWFLG                          parser
+     0000FCBC  _g_DRWSCL                          parser
+     0000FCBD  _g_DRWANG                          parser
+     0000FCC1  _g_EXPTBL                          parser
+     0000FCC1  _g_MNROM                           parser
+     0000FCC5  _g_SLTTBL                          parser
+     0000FCC9  _g_SLTATR                          parser
+     0000FD09  _g_SLTWRK                          parser
+     0000FD89  _g_PROCNM                          parser
+     0000FFE7  _g_RG08SAV                         parser
+     0000FFE8  _g_RG09SAV                         parser
+     0000FFE9  _g_RG10SAV                         parser
+     0000FFEA  _g_RG11SAV                         parser
+     0000FFEB  _g_RG12SAV                         parser
+     0000FFEC  _g_RG13SAV                         parser
+     0000FFED  _g_RG14SAV                         parser
+     0000FFEE  _g_RG15SAV                         parser
+     0000FFEF  _g_RG16SAV                         parser
+     0000FFF0  _g_RG17SAV                         parser
+     0000FFF1  _g_RG18SAV                         parser
+     0000FFF2  _g_RG19SAV                         parser
+     0000FFF3  _g_RG20SAV                         parser
+     0000FFF4  _g_RG21SAV                         parser
+     0000FFF5  _g_RG22SAV                         parser
+     0000FFF6  _g_RG23SAV                         parser
+     0000FFF7  _g_MINROM                          parser
+     0000FFF8  _g_SVFFF8                          parser
+     0000FFFA  _g_RG25SAV                         parser
+     0000FFFB  _g_RG26SAV                         parser
+     0000FFFC  _g_RG27SAV                         parser
+     0000FFFD  _g_SVFFFD                          parser
+     0000FFFF  _g_SLTSL                           parser
+ASxxxx Linker V05.50.4-SDLD,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00008000    0000200A =        8202. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+     00008067  _PreFormat                         parser
+     0000835B  _ChopSeven                         parser
+     0000844D  _FindMood                          parser
+     00008607  _Present                           parser
+     000088E7  _FindWord                          parser
+     00008AB3  _Dictionary                        parser
+     00008C43  _MoreThanOne                       parser
+     00008F48  _PrintWord                         parser
+     00008FA3  _Parser_Syntax                     parser
+     00009AD3  _PlayerInput                       parser
+
+ASxxxx Linker V05.50.4-SDLD,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00007B40    00000002 =           2. bytes (REL,CON)
+
+         Value  Global                             Global Defined In Module
+         -----  --------------------------------   ------------------------
+ASxxxx Linker V05.50.4-SDLD,  page 9.
+
+Files Linked                              [ module(s) ]
+
+E:/supernova/msx/nova/out/ovl/ovl_head_PARSE.rel
+                                          [ ovl_head_PARSE ]
+E:/supernova/msx/nova/out/ovl/parser.rel  [ parser ]
+
+ASxxxx Linker V05.50.4-SDLD,  page 10.
+
+User Base Address Definitions
+
+_CODE = 0x8000
+_DATA = 0x7b40
+ASxxxx Linker V05.50.4-SDLD,  page 11.
+
+User Global Definitions
+
+_TestC=0x6c27
+_Val=0xcba
+_RR=0xc49
+_StrCpy=0x4a4
+_g_RN=0x7236
+_Cur=0x511
+_RegionSoundOn=0x6a1
+_PStat=0x6bc4
+_Prm=0x6c06
+_StrEq=0x4ed
+_Delay=0x2622
+_OneNounMaybe=0x6bd1
+_Num=0x6c0b
+_Md=0x6c04
+_Wln=0x22ba
+_Pos=0x21d
+_Wherex=0x2308
+_En=0x51d
+_LastNoun=0x6e93
+_VNP=0x6c05
+_Wherey=0x230c
+_Insert=0x324
+_Sc=0x6c25
+_Vb=0x6c00
+_x=0x6c14
+_Window=0x2310
+_y=0x6c15
+_Crawl=0x6ed3
+_WrNum=0x220c
+_QFormat=0xadb
+_Code=0x6c17
+_SetEmpty=0x188
+_list=0x6c0a
+_CFlag=0x6ed1
+_NoNounOnly=0x6bc5
+_N1=0x6c01
+_EFlag=0x6c07
+_N2=0x6c02
+_FFlag=0x6c08
+_UpCase=0x4fe
+_Pr=0x6c03
+_Here=0xb52
+_ToNounOnly=0x6bdd
+_Mx=0x6c8b
+_Up=0x9c2
+_LowerCase=0xb10
+_NoSound=0x2741
+_NStr=0x6e57
+_g_A=0x722c
+_Line=0x6d97
+_PStr=0x6e75
+_Wr=0x2149
+_Sound=0x26ea
+_GetKey=0x24fa
+_Gotoxy=0x22d5
+_QFlag=0x6ed5
+_NounSet=0x6b93
+_WrC=0x21f4
+_Bak=0x517
+_VStr=0x6e39
+_Input=0x6c8f
+_ToNounMaybe=0x6be9
+_StrCat=0x4ac
+_SetClear=0x1f7
+_Delete=0x2a3
+_SinkRm=0x6c0f
+_g_N=0x7108
+_FN=0x988
+_g_P=0x7214
+_Play=0x6ba
+_Copy=0x42c
+_Word=0x6eb1
+_g_V=0x7048
+_WrFN=0x96f
+_Col=0x514
+_RL=0xc19
+_Len=0x20d
+_Spaces=0xac1
+_Again=0x6d13
+_Tic=0x6c19
+
+

@@ -1,0 +1,21 @@
+-mjwx
+-i E:\supernova\msx\nova/out/nova.ihx
+-b _CODE = 0x0100
+-b _DATA = 0x0000
+-k E:\supernova\MSXgl\tools/sdcc/lib/z80
+-k E:\supernova\MSXgl\tools/sdcc/bin\..\lib\z80
+-l E:\supernova\msx\nova/out/msxgl.lib
+-l z80
+E:\supernova\msx\nova/out/crt0_dos.rel
+E:\supernova\msx\nova/out/main.rel
+E:\supernova\msx\nova/out/globals.rel
+E:\supernova\msx\nova/out/util.rel
+E:\supernova\msx\nova/out/game.rel
+E:\supernova\msx\nova/out/rt_msx.rel
+E:\supernova\msx\nova/out/vocab_data.rel
+E:\supernova\msx\nova/out/txt.rel
+E:\supernova\msx\nova/out/textpool.rel
+E:\supernova\msx\nova/out/ovl_gen.rel
+E:\supernova\msx\nova/out/ovl_stubs.rel
+
+-e

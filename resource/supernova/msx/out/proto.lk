@@ -1,0 +1,13 @@
+-mjwx
+-i E:\supernova\msx/out/proto.ihx
+-b _CODE = 0x0100
+-b _DATA = 0x0000
+-k E:\supernova\MSXgl\tools/sdcc/lib/z80
+-k E:\supernova\MSXgl\tools/sdcc/bin\..\lib\z80
+-l E:\supernova\msx/out/msxgl.lib
+-l z80
+E:\supernova\msx/out/crt0_dos.rel
+E:\supernova\msx/out/proto.rel
+E:\supernova\msx/out/txt.rel
+
+-e

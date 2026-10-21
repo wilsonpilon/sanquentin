@@ -1,0 +1,727 @@
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _DOSMapper_Alloc                                                ******** GX
+    _DOSMapper_GetPage2                                             ******** GX
+    _DOSMapper_Init                                                 ******** GX
+    _DOSMapper_SetPage2                                             ******** GX
+    _DOS_CharOutput                                                 ******** GX
+    _DOS_CloseHandle                                                ******** GX
+    _DOS_Exit                                                       ******** GX
+    _DOS_OpenHandle                                                 ******** GX
+    _DOS_ReadHandle                                                 ******** GX
+    _DOS_TPAUpperAddr                                           =   00000006 G
+  0 _Decode                                                         00000000 R
+  0 _LoadOverlay                                                    000028AB R
+  0 _Print                                                          000027ED R
+  0 _PrintHex                                                       0000286D R
+  0 _PrintNum                                                       00002804 R
+  0 _ReadFile                                                       00000021 R
+  0 _Show                                                           000028EC R
+  1 _Show_tbuf_10000_1114                                           00000A3D R
+  0 _TextPool_Load                                                  0000005A GR
+  0 _TextPool_Read                                                  00000271 GR
+  0 _Vocab_Init                                                     0000031F GR
+  0 ___str_0                                                        00000056 R
+  0 ___str_2                                                        00000261 R
+  0 ___str_3                                                        00000269 R
+  0 ___str_333                                                      00002BF3 R
+  0 ___str_334                                                      00002BFC R
+  0 ___str_335                                                      00002C05 R
+  0 ___str_336                                                      00002C25 R
+  0 ___str_337                                                      00002C3E R
+  0 ___str_338                                                      00002C5A R
+  0 ___str_339                                                      00002C69 R
+  0 ___str_340                                                      00002C78 R
+  0 ___str_341                                                      00002C88 R
+  0 ___str_342                                                      00002C9C R
+  0 ___str_343                                                      00002CB7 R
+  0 ___str_344                                                      00002CC8 R
+  0 ___str_345                                                      00002CDB R
+  0 ___str_346                                                      00002CEB R
+  0 ___str_347                                                      00002CF3 R
+  0 ___str_348                                                      00002CFE R
+  0 ___str_349                                                      00002D06 R
+  0 ___str_350                                                      00002D11 R
+  0 ___str_351                                                      00002D1E R
+  0 ___str_352                                                      00002D3E R
+  0 ___str_353                                                      00002D5F R
+  0 ___str_354                                                      00002D79 R
+  0 ___str_355                                                      00002D9C R
+  0 ___str_356                                                      00002DB1 R
+  0 ___str_357                                                      00002DB9 R
+  0 ___str_358                                                      00002DC2 R
+  0 ___str_359                                                      00002DDA R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 2
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 ___str_360                                                      00002DE5 R
+  0 ___str_361                                                      00002DF1 R
+  0 ___str_362                                                      00002E03 R
+  0 ___str_363                                                      00002E15 R
+    __divuint                                                       ******** GX
+    __moduint                                                       ******** GX
+  1 _g_A                                                            00000209 GR
+    _g_ACPAGE                                                   =   0000FAF6 G
+  0 _g_AInit                                                        00001FB9 GR
+    _g_ASPCT1                                                   =   0000F40B G
+    _g_ASPCT2                                                   =   0000F40D G
+    _g_ATRBYT                                                   =   0000F3F2 G
+    _g_AVCSAV                                                   =   0000FAF7 G
+  0 _g_Api                                                          000028E6 R
+    _g_BAKCLR                                                   =   0000F3EA G
+    _g_BASROM                                                   =   0000FBB1 G
+    _g_BASRVN                                                   =   0000002B G
+    _g_BDOS                                                     =   0000F37D G
+    _g_BDRCLR                                                   =   0000F3EB G
+    _g_BOTTOM                                                   =   0000FC48 G
+    _g_BRDATR                                                   =   0000FCB2 G
+    _g_BREAKV                                                   =   0000F325 G
+    _g_CAPST                                                    =   0000FCAB G
+    _g_CASPRV                                                   =   0000FCB1 G
+    _g_CGTABL                                                   =   00000004 G
+    _g_CHAR_16                                                  =   00000034 G
+    _g_CHRCNT                                                   =   0000FAF9 G
+    _g_CLIKFL                                                   =   0000FBD9 G
+    _g_CLIKSW                                                   =   0000F3DB G
+    _g_CLMLST                                                   =   0000F3B2 G
+    _g_CLOC                                                     =   0000F92A G
+    _g_CLPRIM                                                   =   0000F38C G
+    _g_CMASK                                                    =   0000F92C G
+    _g_CNSDFG                                                   =   0000F3DE G
+    _g_CODSAV                                                   =   0000FBCC G
+    _g_COMMSK                                                   =   0000FB1D G
+    _g_CRTCNT                                                   =   0000F3B1 G
+    _g_CS120                                                    =   0000F3FC G
+    _g_CS240                                                    =   0000F401 G
+    _g_CSRSW                                                    =   0000FCA9 G
+    _g_CSRX                                                     =   0000F3DD G
+    _g_CSRY                                                     =   0000F3DC G
+    _g_CSTYLE                                                   =   0000FCAA G
+    _g_DATCNT                                                   =   0000FB17 G
+    _g_DEVNUM                                                   =   0000FB16 G
+    _g_DISKVE                                                   =   0000F323 G
+    _g_DOS_LastError                                                ******** GX
+    _g_DOS_VarTable                                                 ******** GX
+    _g_DPPAGE                                                   =   0000FAF5 G
+    _g_DRWANG                                                   =   0000FCBD G
+    _g_DRWFLG                                                   =   0000FCBB G
+    _g_DRWSCL                                                   =   0000FCBC G
+    _g_ENSTOP                                                   =   0000FBB0 G
+    _g_ERRORS                                                   =   0000FB1A G
+    _g_ESCCNT                                                   =   0000FCA7 G
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 3
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    _g_ESTBLS                                                   =   0000FB1C G
+    _g_EXBRSA                                                   =   0000FAF8 G
+    _g_EXPTBL                                                   =   0000FCC1 G
+    _g_FLAGS                                                    =   0000FB1B G
+    _g_FLBMEM                                                   =   0000FCAE G
+    _g_FNKFLG                                                   =   0000FBCE G
+    _g_FNKSTR                                                   =   0000F87F G
+    _g_FNKSWI                                                   =   0000FBCD G
+    _g_FORCLR                                                   =   0000F3E9 G
+    _g_FRCNEW                                                   =   0000F3F5 G
+    _g_FSTPOS                                                   =   0000FBCA G
+    _g_GETPNT                                                   =   0000F3FA G
+    _g_GRPACX                                                   =   0000FCB7 G
+    _g_GRPACY                                                   =   0000FCB9 G
+    _g_GRPATR                                                   =   0000F3CD G
+    _g_GRPCGP                                                   =   0000F3CB G
+    _g_GRPCOL                                                   =   0000F3C9 G
+    _g_GRPHED                                                   =   0000FCA6 G
+    _g_GRPNAM                                                   =   0000F3C7 G
+    _g_GRPPAT                                                   =   0000F3CF G
+    _g_GXPOS                                                    =   0000FCB3 G
+    _g_GYPOS                                                    =   0000FCB5 G
+    _g_HEADER                                                   =   0000F40A G
+    _g_HIGH                                                     =   0000F408 G
+    _g_HIMEM                                                    =   0000FC4A G
+    _g_INSFLG                                                   =   0000FCA8 G
+    _g_INTCNT                                                   =   0000FCA2 G
+    _g_INTFLG                                                   =   0000FC9B G
+    _g_INTVAL                                                   =   0000FCA0 G
+    _g_JIFFY                                                    =   0000FC9E G
+    _g_KANAMD                                                   =   0000FCAD G
+    _g_KANAST                                                   =   0000FCAC G
+    _g_KANJTABLE                                                =   0000F30F G
+    _g_KEYBUF                                                   =   0000FBF0 G
+    _g_Kanji_Level1HighPort                                     =   000000D9 
+    _g_Kanji_Level1LowPort                                      =   000000D8 
+    _g_Kanji_Level2HighPort                                     =   000000DB 
+    _g_Kanji_Level2LowPort                                      =   000000DA 
+    _g_LINL32                                                   =   0000F3AF G
+    _g_LINL40                                                   =   0000F3AE G
+    _g_LINLEN                                                   =   0000F3B0 G
+    _g_LINTTB                                                   =   0000FBB2 G
+    _g_LINWRK                                                   =   0000FC18 G
+    _g_LOGOPR                                                   =   0000FB02 G
+    _g_LOW                                                      =   0000F406 G
+    _g_LOWLIM                                                   =   0000FCA4 G
+    _g_LSTCOM                                                   =   0000FB1E G
+    _g_LSTMOD                                                   =   0000FB1F G
+  1 _g_Loc                                                          000002EF GR
+  0 _g_LocInit                                                      0000209F GR
+    _g_MASTER                                                   =   0000F348 G
+    _g_MAXUPD                                                   =   0000F3EC G
+    _g_MCLLEN                                                   =   0000FB3B G
+    _g_MCLPTR                                                   =   0000FB3C G
+    _g_MEXBIh                                                   =   0000FB07 G
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 4
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    _g_MINROM                                                   =   0000FFF7 G
+    _g_MINUPD                                                   =   0000F3EF G
+    _g_MLTATR                                                   =   0000F3D7 G
+    _g_MLTCGP                                                   =   0000F3D5 G
+    _g_MLTCOL                                                   =   0000F3D3 G
+    _g_MLTNAM                                                   =   0000F3D1 G
+    _g_MLTPAT                                                   =   0000F3D9 G
+    _g_MNROM                                                    =   0000FCC1 G
+    _g_MODE                                                     =   0000FAFC G
+    _g_MSXAudio_DataPort                                        =   000000C1 
+    _g_MSXAudio_DataPort2                                       =   000000C3 
+    _g_MSXAudio_IndexPort                                       =   000000C0 
+    _g_MSXAudio_IndexPort2                                      =   000000C2 
+    _g_MSXMID                                                   =   0000002E G
+    _g_MSXMusic_DataPort                                        =   0000007D 
+    _g_MSXMusic_IndexPort                                       =   0000007C 
+    _g_MSXVER                                                   =   0000002D G
+    _g_MUSICF                                                   =   0000FB3F G
+  1 _g_N                                                            000000E5 GR
+    _g_NEWKEY                                                   =   0000FBE5 G
+  0 _g_NInit                                                        00001E95 GR
+    _g_NORUSE                                                   =   0000FAFD G
+    _g_OLDINT                                                   =   0000FB0C G
+    _g_OLDKEY                                                   =   0000FBDA G
+    _g_OLDSCR                                                   =   0000FCB0 G
+    _g_OLDSTT                                                   =   0000FB0C G
+    _g_ONGSBF                                                   =   0000FBD8 G
+  1 _g_P                                                            000001F1 GR
+    _g_PADX                                                     =   0000FC9D G
+    _g_PADY                                                     =   0000FC9C G
+    _g_PATWRK                                                   =   0000FC40 G
+  0 _g_PInit                                                        00001FA1 GR
+    _g_PLYCNT                                                   =   0000FB40 G
+    _g_PROCNM                                                   =   0000FD89 G
+    _g_PRSCNT                                                   =   0000FB35 G
+    _g_PSG_DataPort                                             =   000000A1 
+    _g_PSG_Ext_DataPort                                         =   00000011 
+    _g_PSG_Ext_RegPort                                          =   00000010 
+    _g_PSG_Ext_StatPort                                         =   00000012 
+    _g_PSG_RegPort                                              =   000000A0 
+    _g_PSG_StatPort                                             =   000000A2 
+    _g_PUTPNT                                                   =   0000F3F8 G
+  1 _g_PoolCount                                                    00000000 R
+  1 _g_PoolFirst                                                    00000001 R
+  1 _g_PoolSeg                                                      00000019 R
+    _g_PortAccessKeyboard                                       =   000000AA 
+    _g_PortControl                                              =   000000AB 
+    _g_PortPrimarySlot                                          =   000000A8 
+    _g_PortReadKeyboard                                         =   000000A9 
+    _g_Printer_ControlPort                                      =   00000090 
+    _g_Printer_DataPort                                         =   00000091 
+    _g_QUEBAK                                                   =   0000F971 G
+    _g_QUETAB                                                   =   0000F959 G
+    _g_QUEUEN                                                   =   0000FB3E G
+    _g_QUEUES                                                   =   0000F3F3 G
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 5
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    _g_RAMAD0                                                   =   0000F341 G
+    _g_RAMAD1                                                   =   0000F342 G
+    _g_RAMAD2                                                   =   0000F343 G
+    _g_RAMAD3                                                   =   0000F344 G
+    _g_RDPRIM                                                   =   0000F380 G
+    _g_REPCNT                                                   =   0000F3F7 G
+    _g_RG08SAV                                                  =   0000FFE7 G
+    _g_RG09SAV                                                  =   0000FFE8 G
+    _g_RG0SAV                                                   =   0000F3DF G
+    _g_RG10SAV                                                  =   0000FFE9 G
+    _g_RG11SAV                                                  =   0000FFEA G
+    _g_RG12SAV                                                  =   0000FFEB G
+    _g_RG13SAV                                                  =   0000FFEC G
+    _g_RG14SAV                                                  =   0000FFED G
+    _g_RG15SAV                                                  =   0000FFEE G
+    _g_RG16SAV                                                  =   0000FFEF G
+    _g_RG17SAV                                                  =   0000FFF0 G
+    _g_RG18SAV                                                  =   0000FFF1 G
+    _g_RG19SAV                                                  =   0000FFF2 G
+    _g_RG1SAV                                                   =   0000F3E0 G
+    _g_RG20SAV                                                  =   0000FFF3 G
+    _g_RG21SAV                                                  =   0000FFF4 G
+    _g_RG22SAV                                                  =   0000FFF5 G
+    _g_RG23SAV                                                  =   0000FFF6 G
+    _g_RG25SAV                                                  =   0000FFFA G
+    _g_RG26SAV                                                  =   0000FFFB G
+    _g_RG27SAV                                                  =   0000FFFC G
+    _g_RG2SAV                                                   =   0000F3E1 G
+    _g_RG3SAV                                                   =   0000F3E2 G
+    _g_RG4SAV                                                   =   0000F3E3 G
+    _g_RG5SAV                                                   =   0000F3E4 G
+    _g_RG6SAV                                                   =   0000F3E5 G
+    _g_RG7SAV                                                   =   0000F3E6 G
+  1 _g_RN                                                           00000213 GR
+  0 _g_RNInit                                                       00001FC3 GR
+    _g_ROMA                                                     =   0000FAFA G
+    _g_ROMVersion                                               =   0000002B G
+    _g_RS2IQ                                                    =   0000FAF5 G
+    _g_RSFCB                                                    =   0000FB04 G
+    _g_RSIQLN                                                   =   0000FB06 G
+    _g_RSTMP                                                    =   0000FB03 G
+    _g_RTC_AddrPort                                             =   000000B4 
+    _g_RTC_DataPort                                             =   000000B5 
+    _g_RTYCNT                                                   =   0000FC9A G
+    _g_SAVSP                                                    =   0000FB36 G
+    _g_SAVVOL                                                   =   0000FB39 G
+    _g_SCNCNT                                                   =   0000F3F6 G
+    _g_SCRMOD                                                   =   0000FCAF G
+    _g_SLTATR                                                   =   0000FCC9 G
+    _g_SLTSL                                                    =   0000FFFF G
+    _g_SLTTBL                                                   =   0000FCC5 G
+    _g_SLTWRK                                                   =   0000FD09 G
+    _g_STATFL                                                   =   0000F3E7 G
+    _g_STRSRC                                                   =   00000002 G
+    _g_SUBRID                                                   =   00000000 G
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 6
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    _g_SVFFF8                                                   =   0000FFF8 G
+    _g_SVFFFD                                                   =   0000FFFD G
+    _g_T32ATR                                                   =   0000F3C3 G
+    _g_T32CGP                                                   =   0000F3C1 G
+    _g_T32COL                                                   =   0000F3BF G
+    _g_T32NAM                                                   =   0000F3BD G
+    _g_T32PAT                                                   =   0000F3C5 G
+    _g_TOCNT                                                    =   0000FB03 G
+    _g_TRGFLG                                                   =   0000F3E8 G
+    _g_TRPTBL                                                   =   0000FC4C G
+    _g_TXTATR                                                   =   0000F3B9 G
+    _g_TXTCGP                                                   =   0000F3B7 G
+    _g_TXTCOL                                                   =   0000F3B5 G
+    _g_TXTNAM                                                   =   0000F3B3 G
+    _g_TXTPAT                                                   =   0000F3BB G
+    _g_TimerHighPort                                            =   000000E7 
+    _g_TimerLowPort                                             =   000000E6 
+    _g_TokBuf                                                   =   0000CD00 
+    _g_TokHi                                                    =   0000CB00 
+    _g_TokLo                                                    =   0000CC00 
+    _g_USRTAB                                                   =   0000F39A G
+  1 _g_V                                                            00000025 GR
+    _g_VCBA                                                     =   0000FB41 G
+    _g_VCBB                                                     =   0000FB66 G
+    _g_VCBC                                                     =   0000FB8B G
+    _g_VDP_AddrPort                                             =   00000099 
+    _g_VDP_DR                                                   =   00000006 G
+    _g_VDP_DW                                                   =   00000007 G
+    _g_VDP_DataPort                                             =   00000098 
+    _g_VDP_IRegPort                                             =   0000009B 
+    _g_VDP_PalPort                                              =   0000009A 
+    _g_VDP_RegPort                                              =   00000099 
+    _g_VDP_StatPort                                             =   00000099 
+  0 _g_VInit                                                        00001DD5 GR
+    _g_VOICAQ                                                   =   0000F975 G
+    _g_VOICBQ                                                   =   0000F9F5 G
+    _g_VOICCQ                                                   =   0000FA75 G
+    _g_VOICEN                                                   =   0000FB38 G
+    _g_WINWID                                                   =   0000FCA5 G
+    _g_WRPRIM                                                   =   0000F385 G
+    _g_XSAVE                                                    =   0000FAFE G
+    _g_YSAVE                                                    =   0000FB00 G
+  0 _main                                                           00002918 GR
+  1 _main_tbuf_10003_1125                                           00000FB5 R
+  0 _s0                                                             000003DF R
+  0 _s1                                                             000003EF R
+  0 _s10                                                            00000482 R
+  0 _s100                                                           00000BF2 R
+  0 _s101                                                           00000C0E R
+  0 _s102                                                           00000C27 R
+  0 _s103                                                           00000C3A R
+  0 _s104                                                           00000C4F R
+  0 _s105                                                           00000C68 R
+  0 _s106                                                           00000C7C R
+  0 _s107                                                           00000C91 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 7
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s108                                                           00000CA6 R
+  0 _s109                                                           00000CC0 R
+  0 _s11                                                            0000049C R
+  0 _s110                                                           00000CD0 R
+  0 _s111                                                           00000CEB R
+  0 _s112                                                           00000D00 R
+  0 _s113                                                           00000D17 R
+  0 _s114                                                           00000D30 R
+  0 _s115                                                           00000D4C R
+  0 _s116                                                           00000D66 R
+  0 _s117                                                           00000D7D R
+  0 _s118                                                           00000D92 R
+  0 _s119                                                           00000DA9 R
+  0 _s12                                                            000004AF R
+  0 _s120                                                           00000DBC R
+  0 _s121                                                           00000DD8 R
+  0 _s122                                                           00000DEB R
+  0 _s123                                                           00000E05 R
+  0 _s124                                                           00000E14 R
+  0 _s125                                                           00000E30 R
+  0 _s126                                                           00000E46 R
+  0 _s127                                                           00000E5F R
+  0 _s128                                                           00000E76 R
+  0 _s129                                                           00000E87 R
+  0 _s13                                                            000004C7 R
+  0 _s130                                                           00000EA1 R
+  0 _s131                                                           00000EB6 R
+  0 _s132                                                           00000ED0 R
+  0 _s133                                                           00000EE2 R
+  0 _s134                                                           00000EF9 R
+  0 _s135                                                           00000F0B R
+  0 _s136                                                           00000F1B R
+  0 _s137                                                           00000F34 R
+  0 _s138                                                           00000F51 R
+  0 _s139                                                           00000F6C R
+  0 _s14                                                            000004CF R
+  0 _s140                                                           00000F75 R
+  0 _s141                                                           00000F92 R
+  0 _s142                                                           00000FAD R
+  0 _s143                                                           00000FC8 R
+  0 _s144                                                           00000FE5 R
+  0 _s145                                                           00000FFD R
+  0 _s146                                                           00001010 R
+  0 _s147                                                           00001027 R
+  0 _s148                                                           00001040 R
+  0 _s149                                                           00001055 R
+  0 _s15                                                            000004E2 R
+  0 _s150                                                           00001064 R
+  0 _s151                                                           0000107D R
+  0 _s152                                                           0000109A R
+  0 _s153                                                           000010B1 R
+  0 _s154                                                           000010CE R
+  0 _s155                                                           000010EB R
+  0 _s156                                                           00001105 R
+  0 _s157                                                           00001123 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 8
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s158                                                           00001141 R
+  0 _s159                                                           0000115A R
+  0 _s16                                                            000004FC R
+  0 _s160                                                           0000116E R
+  0 _s161                                                           0000118C R
+  0 _s162                                                           000011A8 R
+  0 _s163                                                           000011C2 R
+  0 _s164                                                           000011DA R
+  0 _s165                                                           000011F3 R
+  0 _s166                                                           0000120D R
+  0 _s167                                                           00001224 R
+  0 _s168                                                           00001240 R
+  0 _s169                                                           0000125D R
+  0 _s17                                                            0000051A R
+  0 _s170                                                           0000127B R
+  0 _s171                                                           00001293 R
+  0 _s172                                                           0000129B R
+  0 _s173                                                           000012A9 R
+  0 _s174                                                           000012B0 R
+  0 _s175                                                           000012C5 R
+  0 _s176                                                           000012E2 R
+  0 _s177                                                           000012FF R
+  0 _s178                                                           00001316 R
+  0 _s179                                                           0000132B R
+  0 _s18                                                            00000538 R
+  0 _s180                                                           00001342 R
+  0 _s181                                                           00001350 R
+  0 _s182                                                           0000135F R
+  0 _s183                                                           00001374 R
+  0 _s184                                                           0000138B R
+  0 _s185                                                           000013A4 R
+  0 _s186                                                           000013B3 R
+  0 _s187                                                           000013CE R
+  0 _s188                                                           000013E0 R
+  0 _s189                                                           000013EF R
+  0 _s19                                                            00000549 R
+  0 _s190                                                           0000140A R
+  0 _s191                                                           00001424 R
+  0 _s192                                                           0000143A R
+  0 _s193                                                           00001457 R
+  0 _s194                                                           00001473 R
+  0 _s195                                                           00001482 R
+  0 _s196                                                           0000149D R
+  0 _s197                                                           000014BA R
+  0 _s198                                                           000014D3 R
+  0 _s199                                                           000014EE R
+  0 _s2                                                             000003FE R
+  0 _s20                                                            00000566 R
+  0 _s200                                                           00001509 R
+  0 _s201                                                           00001523 R
+  0 _s202                                                           00001539 R
+  0 _s203                                                           00001551 R
+  0 _s204                                                           00001566 R
+  0 _s205                                                           0000156F R
+  0 _s206                                                           00001589 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 9
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s207                                                           000015A3 R
+  0 _s208                                                           000015BD R
+  0 _s209                                                           000015D8 R
+  0 _s21                                                            00000583 R
+  0 _s210                                                           000015ED R
+  0 _s211                                                           00001609 R
+  0 _s212                                                           00001624 R
+  0 _s213                                                           0000162E R
+  0 _s214                                                           00001642 R
+  0 _s215                                                           00001651 R
+  0 _s216                                                           00001660 R
+  0 _s217                                                           0000167D R
+  0 _s218                                                           00001698 R
+  0 _s219                                                           000016B1 R
+  0 _s22                                                            0000059B R
+  0 _s220                                                           000016C8 R
+  0 _s221                                                           000016CD R
+  0 _s222                                                           000016E9 R
+  0 _s223                                                           000016FA R
+  0 _s224                                                           00001717 R
+  0 _s225                                                           00001725 R
+  0 _s226                                                           00001740 R
+  0 _s227                                                           0000175D R
+  0 _s228                                                           00001771 R
+  0 _s229                                                           0000178B R
+  0 _s23                                                            000005B1 R
+  0 _s230                                                           0000179E R
+  0 _s231                                                           000017B9 R
+  0 _s232                                                           000017C5 R
+  0 _s233                                                           000017D6 R
+  0 _s234                                                           000017F0 R
+  0 _s235                                                           0000180E R
+  0 _s236                                                           0000181F R
+  0 _s237                                                           00001829 R
+  0 _s238                                                           00001846 R
+  0 _s239                                                           0000184D R
+  0 _s24                                                            000005CD R
+  0 _s240                                                           00001882 R
+  0 _s241                                                           000018B1 R
+  0 _s242                                                           000018E1 R
+  0 _s243                                                           00001909 R
+  0 _s244                                                           00001910 R
+  0 _s245                                                           00001921 R
+  0 _s246                                                           0000192F R
+  0 _s247                                                           0000193A R
+  0 _s248                                                           0000194E R
+  0 _s249                                                           0000195C R
+  0 _s25                                                            000005D8 R
+  0 _s250                                                           00001967 R
+  0 _s251                                                           0000196E R
+  0 _s252                                                           0000197B R
+  0 _s253                                                           0000198B R
+  0 _s254                                                           00001998 R
+  0 _s255                                                           000019A1 R
+  0 _s256                                                           000019AC R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                                Page 10
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s257                                                           000019B7 R
+  0 _s258                                                           000019C3 R
+  0 _s259                                                           000019CE R
+  0 _s26                                                            000005F5 R
+  0 _s260                                                           000019DC R
+  0 _s261                                                           000019E7 R
+  0 _s262                                                           000019F3 R
+  0 _s263                                                           000019FC R
+  0 _s264                                                           00001A0B R
+  0 _s265                                                           00001A18 R
+  0 _s266                                                           00001A24 R
+  0 _s267                                                           00001A32 R
+  0 _s268                                                           00001A43 R
+  0 _s269                                                           00001A4D R
+  0 _s27                                                            00000609 R
+  0 _s270                                                           00001A5F R
+  0 _s271                                                           00001A6C R
+  0 _s272                                                           00001A7B R
+  0 _s273                                                           00001A86 R
+  0 _s274                                                           00001A94 R
+  0 _s275                                                           00001AA6 R
+  0 _s276                                                           00001AB2 R
+  0 _s277                                                           00001AC0 R
+  0 _s278                                                           00001ACE R
+  0 _s279                                                           00001ADD R
+  0 _s28                                                            00000621 R
+  0 _s280                                                           00001AEB R
+  0 _s281                                                           00001AF8 R
+  0 _s282                                                           00001B05 R
+  0 _s283                                                           00001B16 R
+  0 _s284                                                           00001B23 R
+  0 _s285                                                           00001B31 R
+  0 _s286                                                           00001B3E R
+  0 _s287                                                           00001B4D R
+  0 _s288                                                           00001B5E R
+  0 _s289                                                           00001B6E R
+  0 _s29                                                            00000636 R
+  0 _s290                                                           00001B74 R
+  0 _s291                                                           00001B7A R
+  0 _s292                                                           00001B89 R
+  0 _s293                                                           00001B9A R
+  0 _s294                                                           00001BA9 R
+  0 _s295                                                           00001BB9 R
+  0 _s296                                                           00001BC6 R
+  0 _s297                                                           00001BD8 R
+  0 _s298                                                           00001BE8 R
+  0 _s299                                                           00001BF8 R
+  0 _s3                                                             00000411 R
+  0 _s30                                                            00000642 R
+  0 _s300                                                           00001C07 R
+  0 _s301                                                           00001C18 R
+  0 _s302                                                           00001C2C R
+  0 _s303                                                           00001C40 R
+  0 _s304                                                           00001C4C R
+  0 _s305                                                           00001C59 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                                Page 11
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s306                                                           00001C6B R
+  0 _s307                                                           00001C7C R
+  0 _s308                                                           00001C8E R
+  0 _s309                                                           00001C9C R
+  0 _s31                                                            00000648 R
+  0 _s310                                                           00001CAA R
+  0 _s311                                                           00001CBD R
+  0 _s312                                                           00001CCD R
+  0 _s313                                                           00001CD6 R
+  0 _s314                                                           00001CE2 R
+  0 _s315                                                           00001CF4 R
+  0 _s316                                                           00001D04 R
+  0 _s317                                                           00001D16 R
+  0 _s318                                                           00001D26 R
+  0 _s319                                                           00001D39 R
+  0 _s32                                                            0000065F R
+  0 _s320                                                           00001D4C R
+  0 _s321                                                           00001D5F R
+  0 _s322                                                           00001D6D R
+  0 _s323                                                           00001D7A R
+  0 _s324                                                           00001D88 R
+  0 _s325                                                           00001D95 R
+  0 _s326                                                           00001D9E R
+  0 _s327                                                           00001DAE R
+  0 _s328                                                           00001DC1 R
+  0 _s33                                                            00000679 R
+  0 _s34                                                            0000068C R
+  0 _s35                                                            000006A7 R
+  0 _s36                                                            000006C3 R
+  0 _s37                                                            000006DF R
+  0 _s38                                                            000006FD R
+  0 _s39                                                            0000071A R
+  0 _s4                                                             00000420 R
+  0 _s40                                                            0000072E R
+  0 _s41                                                            0000073C R
+  0 _s42                                                            00000759 R
+  0 _s43                                                            00000770 R
+  0 _s44                                                            00000789 R
+  0 _s45                                                            000007A2 R
+  0 _s46                                                            000007BF R
+  0 _s47                                                            000007DB R
+  0 _s48                                                            000007E7 R
+  0 _s49                                                            000007FD R
+  0 _s5                                                             0000042C R
+  0 _s50                                                            00000813 R
+  0 _s51                                                            00000828 R
+  0 _s52                                                            00000838 R
+  0 _s53                                                            00000853 R
+  0 _s54                                                            00000871 R
+  0 _s55                                                            00000889 R
+  0 _s56                                                            000008A7 R
+  0 _s57                                                            000008C0 R
+  0 _s58                                                            000008DE R
+  0 _s59                                                            000008F9 R
+  0 _s6                                                             00000438 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                                Page 12
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 _s60                                                            00000911 R
+  0 _s61                                                            0000092C R
+  0 _s62                                                            00000948 R
+  0 _s63                                                            0000094F R
+  0 _s64                                                            0000096A R
+  0 _s65                                                            00000981 R
+  0 _s66                                                            00000991 R
+  0 _s67                                                            000009AA R
+  0 _s68                                                            000009BB R
+  0 _s69                                                            000009C8 R
+  0 _s7                                                             00000444 R
+  0 _s70                                                            000009E0 R
+  0 _s71                                                            000009E9 R
+  0 _s72                                                            000009F3 R
+  0 _s73                                                            00000A08 R
+  0 _s74                                                            00000A14 R
+  0 _s75                                                            00000A2D R
+  0 _s76                                                            00000A49 R
+  0 _s77                                                            00000A59 R
+  0 _s78                                                            00000A65 R
+  0 _s79                                                            00000A72 R
+  0 _s8                                                             00000450 R
+  0 _s80                                                            00000A89 R
+  0 _s81                                                            00000A97 R
+  0 _s82                                                            00000A9D R
+  0 _s83                                                            00000AAA R
+  0 _s84                                                            00000AB6 R
+  0 _s85                                                            00000ACB R
+  0 _s86                                                            00000AD4 R
+  0 _s87                                                            00000AE4 R
+  0 _s88                                                            00000AEC R
+  0 _s89                                                            00000B02 R
+  0 _s9                                                             00000467 R
+  0 _s90                                                            00000B1C R
+  0 _s91                                                            00000B37 R
+  0 _s92                                                            00000B4A R
+  0 _s93                                                            00000B5D R
+  0 _s94                                                            00000B72 R
+  0 _s95                                                            00000B8C R
+  0 _s96                                                            00000BA9 R
+  0 _s97                                                            00000BB1 R
+  0 _s98                                                            00000BC2 R
+  0 _s99                                                            00000BD5 R
+  0 dec_done                                                        0000001F R
+  0 dec_lit                                                         0000001A R
+  0 dec_loop                                                        00000000 R
+
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                                Page 13
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size     2E1A   flags    0
+   1 _DATA                                      size     152D   flags    0
+   2 _INITIALIZED                               size        0   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        0   flags    0
+   8 _CABS                                      size        0   flags    8
+

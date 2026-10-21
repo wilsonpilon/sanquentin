@@ -1,0 +1,1236 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module proto
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _DOSMapper_GetPage
+                                     13 	.globl _DOSMapper_SetPage2
+                                     14 	.globl _DOSMapper_Alloc
+                                     15 	.globl _DOSMapper_Init
+                                     16 	.globl _Txt_ClearRow
+                                     17 	.globl _Txt_Scroll
+                                     18 	.globl _Txt_Draw
+                                     19 	.globl _Txt_SetColor
+                                     20 	.globl _Txt_Init
+                                     21 	.globl _VDP_CommandSetupR36
+                                     22 	.globl _VDP_CommandWait
+                                     23 	.globl _VDP_SetPaletteEntry
+                                     24 	.globl _VDP_RegWriteBakMask
+                                     25 	.globl _VDP_RegWrite
+                                     26 	.globl _VDP_SetMode
+                                     27 	.globl _BIOS_Exit
+                                     28 	.globl _Keyboard_Read
+                                     29 	.globl _DOS_TPAUpperAddr
+                                     30 	.globl _g_SLTSL
+                                     31 	.globl _g_GRPACY
+                                     32 	.globl _g_GRPACX
+                                     33 	.globl _g_LOGOPR
+                                     34 	.globl _g_CMASK
+                                     35 	.globl _g_CLOC
+                                     36 	.globl _g_FNKSTR
+                                     37 	.globl _g_GETPNT
+                                     38 	.globl _g_PUTPNT
+                                     39 	.globl _g_ATRBYT
+                                     40 	.globl _g_BDRCLR
+                                     41 	.globl _g_BAKCLR
+                                     42 	.globl _g_FORCLR
+                                     43 	.globl _g_CSRX
+                                     44 	.globl _g_CSRY
+                                     45 	.globl _g_CLIKSW
+                                     46 	.globl _g_MLTPAT
+                                     47 	.globl _g_MLTATR
+                                     48 	.globl _g_MLTCGP
+                                     49 	.globl _g_MLTCOL
+                                     50 	.globl _g_MLTNAM
+                                     51 	.globl _g_GRPPAT
+                                     52 	.globl _g_GRPATR
+                                     53 	.globl _g_GRPCGP
+                                     54 	.globl _g_GRPCOL
+                                     55 	.globl _g_GRPNAM
+                                     56 	.globl _g_T32PAT
+                                     57 	.globl _g_T32ATR
+                                     58 	.globl _g_T32CGP
+                                     59 	.globl _g_T32COL
+                                     60 	.globl _g_T32NAM
+                                     61 	.globl _g_TXTPAT
+                                     62 	.globl _g_TXTATR
+                                     63 	.globl _g_TXTCGP
+                                     64 	.globl _g_TXTCOL
+                                     65 	.globl _g_TXTNAM
+                                     66 	.globl _g_CLMLST
+                                     67 	.globl _g_CRTCNT
+                                     68 	.globl _g_LINLEN
+                                     69 	.globl _g_LINL32
+                                     70 	.globl _g_LINL40
+                                     71 	.globl _g_BDOS
+                                     72 	.globl _g_MASTER
+                                     73 	.globl _g_RAMAD3
+                                     74 	.globl _g_RAMAD2
+                                     75 	.globl _g_RAMAD1
+                                     76 	.globl _g_RAMAD0
+                                     77 	.globl _g_BREAKV
+                                     78 	.globl _g_DISKVE
+                                     79 	.globl _g_KANJTABLE
+                                     80 	.globl _g_STRSRC
+                                     81 	.globl _g_SUBRID
+                                     82 	.globl _g_CHAR_16
+                                     83 	.globl _g_MSXMID
+                                     84 	.globl _g_MSXVER
+                                     85 	.globl _g_ROMVersion
+                                     86 	.globl _g_BASRVN
+                                     87 	.globl _g_VDP_DW
+                                     88 	.globl _g_VDP_DR
+                                     89 	.globl _g_CGTABL
+                                     90 	.globl _g_SVFFFD
+                                     91 	.globl _g_RG27SAV
+                                     92 	.globl _g_RG26SAV
+                                     93 	.globl _g_RG25SAV
+                                     94 	.globl _g_SVFFF8
+                                     95 	.globl _g_MINROM
+                                     96 	.globl _g_RG23SAV
+                                     97 	.globl _g_RG22SAV
+                                     98 	.globl _g_RG21SAV
+                                     99 	.globl _g_RG20SAV
+                                    100 	.globl _g_RG19SAV
+                                    101 	.globl _g_RG18SAV
+                                    102 	.globl _g_RG17SAV
+                                    103 	.globl _g_RG16SAV
+                                    104 	.globl _g_RG15SAV
+                                    105 	.globl _g_RG14SAV
+                                    106 	.globl _g_RG13SAV
+                                    107 	.globl _g_RG12SAV
+                                    108 	.globl _g_RG11SAV
+                                    109 	.globl _g_RG10SAV
+                                    110 	.globl _g_RG09SAV
+                                    111 	.globl _g_RG08SAV
+                                    112 	.globl _g_PROCNM
+                                    113 	.globl _g_SLTWRK
+                                    114 	.globl _g_SLTATR
+                                    115 	.globl _g_SLTTBL
+                                    116 	.globl _g_EXPTBL
+                                    117 	.globl _g_MNROM
+                                    118 	.globl _g_DRWANG
+                                    119 	.globl _g_DRWSCL
+                                    120 	.globl _g_DRWFLG
+                                    121 	.globl _g_GYPOS
+                                    122 	.globl _g_GXPOS
+                                    123 	.globl _g_BRDATR
+                                    124 	.globl _g_CASPRV
+                                    125 	.globl _g_OLDSCR
+                                    126 	.globl _g_SCRMOD
+                                    127 	.globl _g_FLBMEM
+                                    128 	.globl _g_KANAMD
+                                    129 	.globl _g_KANAST
+                                    130 	.globl _g_CAPST
+                                    131 	.globl _g_CSTYLE
+                                    132 	.globl _g_CSRSW
+                                    133 	.globl _g_INSFLG
+                                    134 	.globl _g_ESCCNT
+                                    135 	.globl _g_GRPHED
+                                    136 	.globl _g_WINWID
+                                    137 	.globl _g_LOWLIM
+                                    138 	.globl _g_INTCNT
+                                    139 	.globl _g_INTVAL
+                                    140 	.globl _g_JIFFY
+                                    141 	.globl _g_PADX
+                                    142 	.globl _g_PADY
+                                    143 	.globl _g_INTFLG
+                                    144 	.globl _g_RTYCNT
+                                    145 	.globl _g_TRPTBL
+                                    146 	.globl _g_HIMEM
+                                    147 	.globl _g_BOTTOM
+                                    148 	.globl _g_PATWRK
+                                    149 	.globl _g_LINWRK
+                                    150 	.globl _g_KEYBUF
+                                    151 	.globl _g_NEWKEY
+                                    152 	.globl _g_OLDKEY
+                                    153 	.globl _g_CLIKFL
+                                    154 	.globl _g_ONGSBF
+                                    155 	.globl _g_FNKFLG
+                                    156 	.globl _g_FNKSWI
+                                    157 	.globl _g_CODSAV
+                                    158 	.globl _g_FSTPOS
+                                    159 	.globl _g_LINTTB
+                                    160 	.globl _g_BASROM
+                                    161 	.globl _g_ENSTOP
+                                    162 	.globl _g_VCBC
+                                    163 	.globl _g_VCBB
+                                    164 	.globl _g_VCBA
+                                    165 	.globl _g_PLYCNT
+                                    166 	.globl _g_MUSICF
+                                    167 	.globl _g_QUEUEN
+                                    168 	.globl _g_MCLPTR
+                                    169 	.globl _g_MCLLEN
+                                    170 	.globl _g_SAVVOL
+                                    171 	.globl _g_VOICEN
+                                    172 	.globl _g_SAVSP
+                                    173 	.globl _g_PRSCNT
+                                    174 	.globl _g_LSTMOD
+                                    175 	.globl _g_LSTCOM
+                                    176 	.globl _g_COMMSK
+                                    177 	.globl _g_ESTBLS
+                                    178 	.globl _g_FLAGS
+                                    179 	.globl _g_ERRORS
+                                    180 	.globl _g_DATCNT
+                                    181 	.globl _g_DEVNUM
+                                    182 	.globl _g_OLDINT
+                                    183 	.globl _g_OLDSTT
+                                    184 	.globl _g_MEXBIh
+                                    185 	.globl _g_RSIQLN
+                                    186 	.globl _g_RSFCB
+                                    187 	.globl _g_TOCNT
+                                    188 	.globl _g_RSTMP
+                                    189 	.globl _g_YSAVE
+                                    190 	.globl _g_XSAVE
+                                    191 	.globl _g_NORUSE
+                                    192 	.globl _g_MODE
+                                    193 	.globl _g_ROMA
+                                    194 	.globl _g_CHRCNT
+                                    195 	.globl _g_EXBRSA
+                                    196 	.globl _g_AVCSAV
+                                    197 	.globl _g_ACPAGE
+                                    198 	.globl _g_DPPAGE
+                                    199 	.globl _g_RS2IQ
+                                    200 	.globl _g_VOICCQ
+                                    201 	.globl _g_VOICBQ
+                                    202 	.globl _g_VOICAQ
+                                    203 	.globl _g_QUEBAK
+                                    204 	.globl _g_QUETAB
+                                    205 	.globl _g_ASPCT2
+                                    206 	.globl _g_ASPCT1
+                                    207 	.globl _g_HEADER
+                                    208 	.globl _g_HIGH
+                                    209 	.globl _g_LOW
+                                    210 	.globl _g_CS240
+                                    211 	.globl _g_CS120
+                                    212 	.globl _g_REPCNT
+                                    213 	.globl _g_SCNCNT
+                                    214 	.globl _g_FRCNEW
+                                    215 	.globl _g_QUEUES
+                                    216 	.globl _g_MINUPD
+                                    217 	.globl _g_MAXUPD
+                                    218 	.globl _g_TRGFLG
+                                    219 	.globl _g_STATFL
+                                    220 	.globl _g_RG7SAV
+                                    221 	.globl _g_RG6SAV
+                                    222 	.globl _g_RG5SAV
+                                    223 	.globl _g_RG4SAV
+                                    224 	.globl _g_RG3SAV
+                                    225 	.globl _g_RG2SAV
+                                    226 	.globl _g_RG1SAV
+                                    227 	.globl _g_RG0SAV
+                                    228 	.globl _g_CNSDFG
+                                    229 	.globl _g_USRTAB
+                                    230 	.globl _g_CLPRIM
+                                    231 	.globl _g_WRPRIM
+                                    232 	.globl _g_RDPRIM
+                                    233 ;--------------------------------------------------------
+                                    234 ; special function registers
+                                    235 ;--------------------------------------------------------
+                         000000A0   236 _g_PSG_RegPort	=	0x00a0
+                         000000A1   237 _g_PSG_DataPort	=	0x00a1
+                         000000A2   238 _g_PSG_StatPort	=	0x00a2
+                         00000010   239 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   240 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   241 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   242 _g_Printer_ControlPort	=	0x0090
+                         00000091   243 _g_Printer_DataPort	=	0x0091
+                         0000007C   244 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   245 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   246 _g_VDP_DataPort	=	0x0098
+                         00000099   247 _g_VDP_RegPort	=	0x0099
+                         00000099   248 _g_VDP_AddrPort	=	0x0099
+                         00000099   249 _g_VDP_StatPort	=	0x0099
+                         0000009A   250 _g_VDP_PalPort	=	0x009a
+                         0000009B   251 _g_VDP_IRegPort	=	0x009b
+                         000000A8   252 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   253 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   254 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   255 _g_PortControl	=	0x00ab
+                         000000B4   256 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   257 _g_RTC_DataPort	=	0x00b5
+                         000000C0   258 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   259 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   260 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   261 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   262 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   263 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   264 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   265 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   266 _g_TimerLowPort	=	0x00e6
+                         000000E7   267 _g_TimerHighPort	=	0x00e7
+                                    268 ;--------------------------------------------------------
+                                    269 ; ram data
+                                    270 ;--------------------------------------------------------
+                                    271 	.area _DATA
+                         0000F3AE   272 _g_LINL40	=	0xf3ae
+                         0000F3AF   273 _g_LINL32	=	0xf3af
+                         0000F3B0   274 _g_LINLEN	=	0xf3b0
+                         0000F3B1   275 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   276 _g_CLMLST	=	0xf3b2
+                         0000F3B3   277 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   278 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   279 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   280 _g_TXTATR	=	0xf3b9
+                         0000F3BB   281 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   282 _g_T32NAM	=	0xf3bd
+                         0000F3BF   283 _g_T32COL	=	0xf3bf
+                         0000F3C1   284 _g_T32CGP	=	0xf3c1
+                         0000F3C3   285 _g_T32ATR	=	0xf3c3
+                         0000F3C5   286 _g_T32PAT	=	0xf3c5
+                         0000F3C7   287 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   288 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   289 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   290 _g_GRPATR	=	0xf3cd
+                         0000F3CF   291 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   292 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   293 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   294 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   295 _g_MLTATR	=	0xf3d7
+                         0000F3D9   296 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   297 _g_CLIKSW	=	0xf3db
+                         0000F3DC   298 _g_CSRY	=	0xf3dc
+                         0000F3DD   299 _g_CSRX	=	0xf3dd
+                         0000F3E9   300 _g_FORCLR	=	0xf3e9
+                         0000F3EA   301 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   302 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   303 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   304 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   305 _g_GETPNT	=	0xf3fa
+                         0000F87F   306 _g_FNKSTR	=	0xf87f
+                         0000F92A   307 _g_CLOC	=	0xf92a
+                         0000F92C   308 _g_CMASK	=	0xf92c
+                         0000FB02   309 _g_LOGOPR	=	0xfb02
+                         0000FCB7   310 _g_GRPACX	=	0xfcb7
+                         0000FCB9   311 _g_GRPACY	=	0xfcb9
+                         0000FFFF   312 _g_SLTSL	=	0xffff
+                         00000006   313 _DOS_TPAUpperAddr	=	0x0006
+                                    314 ;--------------------------------------------------------
+                                    315 ; ram data
+                                    316 ;--------------------------------------------------------
+                                    317 	.area _INITIALIZED
+                                    318 ;--------------------------------------------------------
+                                    319 ; absolute ram data
+                                    320 ;--------------------------------------------------------
+                                    321 	.area _DABS (ABS)
+                                    322 	.area _DABS (ABS)
+                                    323 ;--------------------------------------------------------
+                                    324 ; global & static initialisations
+                                    325 ;--------------------------------------------------------
+                                    326 	.area _HOME
+                                    327 	.area _GSINIT
+                                    328 	.area _GSFINAL
+                                    329 	.area _GSINIT
+                                    330 ;--------------------------------------------------------
+                                    331 ; Home
+                                    332 ;--------------------------------------------------------
+                                    333 	.area _HOME
+                                    334 	.area _HOME
+                                    335 ;--------------------------------------------------------
+                                    336 ; code
+                                    337 ;--------------------------------------------------------
+                                    338 	.area _CODE
+                                    339 ;./proto.c:17: static void U16ToStr(u16 v, c8* out)
+                                    340 ;	---------------------------------
+                                    341 ; Function U16ToStr
+                                    342 ; ---------------------------------
+    00000000                        343 _U16ToStr:
+    00000000 DD E5            [15]  344 	push	ix
+    00000002 DD 21 00 00      [14]  345 	ld	ix,	#0
+    00000006 DD 39            [15]  346 	add	ix, sp
+    00000008 FD 21 F7 FF      [14]  347 	ld	iy, #-9
+    0000000C FD 39            [15]  348 	add	iy, sp
+    0000000E FD F9            [10]  349 	ld	sp, iy
+    00000010 4D               [ 4]  350 	ld	c, l
+    00000011 44               [ 4]  351 	ld	b, h
+    00000012 DD 73 FD         [19]  352 	ld	-3 (ix), e
+    00000015 DD 72 FE         [19]  353 	ld	-2 (ix), d
+                                    354 ;./proto.c:20: do { t[n++] = '0' + v % 10; v /= 10; } while (v);
+    00000018 DD 36 FF 00      [19]  355 	ld	-1 (ix), #0x00
+    0000001C                        356 00101$:
+    0000001C DD 5E FF         [19]  357 	ld	e, -1 (ix)
+    0000001F 16 00            [ 7]  358 	ld	d, #0x00
+    00000021 21 00 00         [10]  359 	ld	hl, #0
+    00000024 39               [11]  360 	add	hl, sp
+    00000025 19               [11]  361 	add	hl, de
+    00000026 DD 34 FF         [23]  362 	inc	-1 (ix)
+    00000029 E5               [11]  363 	push	hl
+    0000002A C5               [11]  364 	push	bc
+    0000002B 11 0A 00         [10]  365 	ld	de, #0x000a
+    0000002E 69               [ 4]  366 	ld	l, c
+    0000002F 60               [ 4]  367 	ld	h, b
+    00000030 CDr00r00         [17]  368 	call	__moduint
+    00000033 C1               [10]  369 	pop	bc
+    00000034 E1               [10]  370 	pop	hl
+    00000035 7B               [ 4]  371 	ld	a, e
+    00000036 C6 30            [ 7]  372 	add	a, #0x30
+    00000038 77               [ 7]  373 	ld	(hl), a
+    00000039 11 0A 00         [10]  374 	ld	de, #0x000a
+    0000003C 69               [ 4]  375 	ld	l, c
+    0000003D 60               [ 4]  376 	ld	h, b
+    0000003E CDr00r00         [17]  377 	call	__divuint
+    00000041 7B               [ 4]  378 	ld	a, e
+    00000042 4F               [ 4]  379 	ld	c, a
+    00000043 42               [ 4]  380 	ld	b, d
+                                    381 ;./proto.c:22: while (n) out[i++] = t[--n];
+    00000044 B2               [ 4]  382 	or	a, d
+    00000045 20 D5            [12]  383 	jr	nz, 00101$
+    00000047 4F               [ 4]  384 	ld	c, a
+    00000048 DD 46 FF         [19]  385 	ld	b, -1 (ix)
+    0000004B                        386 00104$:
+    0000004B 79               [ 4]  387 	ld	a, c
+    0000004C DD 86 FD         [19]  388 	add	a, -3 (ix)
+    0000004F 5F               [ 4]  389 	ld	e, a
+    00000050 3E 00            [ 7]  390 	ld	a, #0x00
+    00000052 DD 8E FE         [19]  391 	adc	a, -2 (ix)
+    00000055 57               [ 4]  392 	ld	d, a
+    00000056 78               [ 4]  393 	ld	a, b
+    00000057 B7               [ 4]  394 	or	a, a
+    00000058 28 11            [12]  395 	jr	z, 00106$
+    0000005A 0C               [ 4]  396 	inc	c
+    0000005B 05               [ 4]  397 	dec	b
+    0000005C D5               [11]  398 	push	de
+    0000005D 58               [ 4]  399 	ld	e, b
+    0000005E 16 00            [ 7]  400 	ld	d, #0x00
+    00000060 21 02 00         [10]  401 	ld	hl, #2
+    00000063 39               [11]  402 	add	hl, sp
+    00000064 19               [11]  403 	add	hl, de
+    00000065 D1               [10]  404 	pop	de
+    00000066 7E               [ 7]  405 	ld	a, (hl)
+    00000067 12               [ 7]  406 	ld	(de), a
+    00000068 C3r4Br00         [10]  407 	jp	00104$
+    0000006B                        408 00106$:
+                                    409 ;./proto.c:23: out[i] = 0;
+    0000006B AF               [ 4]  410 	xor	a, a
+    0000006C 12               [ 7]  411 	ld	(de), a
+                                    412 ;./proto.c:24: }
+    0000006D DD F9            [10]  413 	ld	sp, ix
+    0000006F DD E1            [14]  414 	pop	ix
+    00000071 C9               [10]  415 	ret
+                         0000F380   416 _g_RDPRIM	=	0xf380
+                         0000F385   417 _g_WRPRIM	=	0xf385
+                         0000F38C   418 _g_CLPRIM	=	0xf38c
+                         0000F39A   419 _g_USRTAB	=	0xf39a
+                         0000F3DE   420 _g_CNSDFG	=	0xf3de
+                         0000F3DF   421 _g_RG0SAV	=	0xf3df
+                         0000F3E0   422 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   423 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   424 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   425 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   426 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   427 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   428 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   429 _g_STATFL	=	0xf3e7
+                         0000F3E8   430 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   431 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   432 _g_MINUPD	=	0xf3ef
+                         0000F3F3   433 _g_QUEUES	=	0xf3f3
+                         0000F3F5   434 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   435 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   436 _g_REPCNT	=	0xf3f7
+                         0000F3FC   437 _g_CS120	=	0xf3fc
+                         0000F401   438 _g_CS240	=	0xf401
+                         0000F406   439 _g_LOW	=	0xf406
+                         0000F408   440 _g_HIGH	=	0xf408
+                         0000F40A   441 _g_HEADER	=	0xf40a
+                         0000F40B   442 _g_ASPCT1	=	0xf40b
+                         0000F40D   443 _g_ASPCT2	=	0xf40d
+                         0000F959   444 _g_QUETAB	=	0xf959
+                         0000F971   445 _g_QUEBAK	=	0xf971
+                         0000F975   446 _g_VOICAQ	=	0xf975
+                         0000F9F5   447 _g_VOICBQ	=	0xf9f5
+                         0000FA75   448 _g_VOICCQ	=	0xfa75
+                         0000FAF5   449 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   450 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   451 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   452 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   453 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   454 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   455 _g_ROMA	=	0xfafa
+                         0000FAFC   456 _g_MODE	=	0xfafc
+                         0000FAFD   457 _g_NORUSE	=	0xfafd
+                         0000FAFE   458 _g_XSAVE	=	0xfafe
+                         0000FB00   459 _g_YSAVE	=	0xfb00
+                         0000FB03   460 _g_RSTMP	=	0xfb03
+                         0000FB03   461 _g_TOCNT	=	0xfb03
+                         0000FB04   462 _g_RSFCB	=	0xfb04
+                         0000FB06   463 _g_RSIQLN	=	0xfb06
+                         0000FB07   464 _g_MEXBIh	=	0xfb07
+                         0000FB0C   465 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   466 _g_OLDINT	=	0xfb0c
+                         0000FB16   467 _g_DEVNUM	=	0xfb16
+                         0000FB17   468 _g_DATCNT	=	0xfb17
+                         0000FB1A   469 _g_ERRORS	=	0xfb1a
+                         0000FB1B   470 _g_FLAGS	=	0xfb1b
+                         0000FB1C   471 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   472 _g_COMMSK	=	0xfb1d
+                         0000FB1E   473 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   474 _g_LSTMOD	=	0xfb1f
+                         0000FB35   475 _g_PRSCNT	=	0xfb35
+                         0000FB36   476 _g_SAVSP	=	0xfb36
+                         0000FB38   477 _g_VOICEN	=	0xfb38
+                         0000FB39   478 _g_SAVVOL	=	0xfb39
+                         0000FB3B   479 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   480 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   481 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   482 _g_MUSICF	=	0xfb3f
+                         0000FB40   483 _g_PLYCNT	=	0xfb40
+                         0000FB41   484 _g_VCBA	=	0xfb41
+                         0000FB66   485 _g_VCBB	=	0xfb66
+                         0000FB8B   486 _g_VCBC	=	0xfb8b
+                         0000FBB0   487 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   488 _g_BASROM	=	0xfbb1
+                         0000FBB2   489 _g_LINTTB	=	0xfbb2
+                         0000FBCA   490 _g_FSTPOS	=	0xfbca
+                         0000FBCC   491 _g_CODSAV	=	0xfbcc
+                         0000FBCD   492 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   493 _g_FNKFLG	=	0xfbce
+                         0000FBD8   494 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   495 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   496 _g_OLDKEY	=	0xfbda
+                         0000FBE5   497 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   498 _g_KEYBUF	=	0xfbf0
+                         0000FC18   499 _g_LINWRK	=	0xfc18
+                         0000FC40   500 _g_PATWRK	=	0xfc40
+                         0000FC48   501 _g_BOTTOM	=	0xfc48
+                         0000FC4A   502 _g_HIMEM	=	0xfc4a
+                         0000FC4C   503 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   504 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   505 _g_INTFLG	=	0xfc9b
+                         0000FC9C   506 _g_PADY	=	0xfc9c
+                         0000FC9D   507 _g_PADX	=	0xfc9d
+                         0000FC9E   508 _g_JIFFY	=	0xfc9e
+                         0000FCA0   509 _g_INTVAL	=	0xfca0
+                         0000FCA2   510 _g_INTCNT	=	0xfca2
+                         0000FCA4   511 _g_LOWLIM	=	0xfca4
+                         0000FCA5   512 _g_WINWID	=	0xfca5
+                         0000FCA6   513 _g_GRPHED	=	0xfca6
+                         0000FCA7   514 _g_ESCCNT	=	0xfca7
+                         0000FCA8   515 _g_INSFLG	=	0xfca8
+                         0000FCA9   516 _g_CSRSW	=	0xfca9
+                         0000FCAA   517 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   518 _g_CAPST	=	0xfcab
+                         0000FCAC   519 _g_KANAST	=	0xfcac
+                         0000FCAD   520 _g_KANAMD	=	0xfcad
+                         0000FCAE   521 _g_FLBMEM	=	0xfcae
+                         0000FCAF   522 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   523 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   524 _g_CASPRV	=	0xfcb1
+                         0000FCB2   525 _g_BRDATR	=	0xfcb2
+                         0000FCB3   526 _g_GXPOS	=	0xfcb3
+                         0000FCB5   527 _g_GYPOS	=	0xfcb5
+                         0000FCBB   528 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   529 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   530 _g_DRWANG	=	0xfcbd
+                         0000FCC1   531 _g_MNROM	=	0xfcc1
+                         0000FCC1   532 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   533 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   534 _g_SLTATR	=	0xfcc9
+                         0000FD09   535 _g_SLTWRK	=	0xfd09
+                         0000FD89   536 _g_PROCNM	=	0xfd89
+                         0000FFE7   537 _g_RG08SAV	=	0xffe7
+                         0000FFE8   538 _g_RG09SAV	=	0xffe8
+                         0000FFE9   539 _g_RG10SAV	=	0xffe9
+                         0000FFEA   540 _g_RG11SAV	=	0xffea
+                         0000FFEB   541 _g_RG12SAV	=	0xffeb
+                         0000FFEC   542 _g_RG13SAV	=	0xffec
+                         0000FFED   543 _g_RG14SAV	=	0xffed
+                         0000FFEE   544 _g_RG15SAV	=	0xffee
+                         0000FFEF   545 _g_RG16SAV	=	0xffef
+                         0000FFF0   546 _g_RG17SAV	=	0xfff0
+                         0000FFF1   547 _g_RG18SAV	=	0xfff1
+                         0000FFF2   548 _g_RG19SAV	=	0xfff2
+                         0000FFF3   549 _g_RG20SAV	=	0xfff3
+                         0000FFF4   550 _g_RG21SAV	=	0xfff4
+                         0000FFF5   551 _g_RG22SAV	=	0xfff5
+                         0000FFF6   552 _g_RG23SAV	=	0xfff6
+                         0000FFF7   553 _g_MINROM	=	0xfff7
+                         0000FFF8   554 _g_SVFFF8	=	0xfff8
+                         0000FFFA   555 _g_RG25SAV	=	0xfffa
+                         0000FFFB   556 _g_RG26SAV	=	0xfffb
+                         0000FFFC   557 _g_RG27SAV	=	0xfffc
+                         0000FFFD   558 _g_SVFFFD	=	0xfffd
+                         00000004   559 _g_CGTABL	=	0x0004
+                         00000006   560 _g_VDP_DR	=	0x0006
+                         00000007   561 _g_VDP_DW	=	0x0007
+                         0000002B   562 _g_BASRVN	=	0x002b
+                         0000002B   563 _g_ROMVersion	=	0x002b
+                         0000002D   564 _g_MSXVER	=	0x002d
+                         0000002E   565 _g_MSXMID	=	0x002e
+                         00000034   566 _g_CHAR_16	=	0x0034
+    00000072                        567 ___str_0:
+    00000072 0A                     568 	.db 0x0a
+    00000073 0D                     569 	.db 0x0d
+    00000074 24                     570 	.ascii "$"
+    00000075 00                     571 	.db 0x00
+                         00000000   572 _g_SUBRID	=	0x0000
+                         00000002   573 _g_STRSRC	=	0x0002
+                         0000F30F   574 _g_KANJTABLE	=	0xf30f
+                         0000F323   575 _g_DISKVE	=	0xf323
+                         0000F325   576 _g_BREAKV	=	0xf325
+                         0000F341   577 _g_RAMAD0	=	0xf341
+                         0000F342   578 _g_RAMAD1	=	0xf342
+                         0000F343   579 _g_RAMAD2	=	0xf343
+                         0000F344   580 _g_RAMAD3	=	0xf344
+                         0000F348   581 _g_MASTER	=	0xf348
+                         0000F37D   582 _g_BDOS	=	0xf37d
+    00000076                        583 _g_Pal:
+    00000076 00 00                  584 	.dw #0x0000
+    00000078 05 00                  585 	.dw #0x0005
+    0000007A 00 05                  586 	.dw #0x0500
+    0000007C 05 05                  587 	.dw #0x0505
+    0000007E 50 00                  588 	.dw #0x0050
+    00000080 55 00                  589 	.dw #0x0055
+    00000082 50 02                  590 	.dw #0x0250
+    00000084 55 05                  591 	.dw #0x0555
+    00000086 22 02                  592 	.dw #0x0222
+    00000088 27 02                  593 	.dw #0x0227
+    0000008A 22 07                  594 	.dw #0x0722
+    0000008C 27 07                  595 	.dw #0x0727
+    0000008E 72 02                  596 	.dw #0x0272
+    00000090 77 02                  597 	.dw #0x0277
+    00000092 72 07                  598 	.dw #0x0772
+    00000094 77 07                  599 	.dw #0x0777
+    00000096                        600 _g_Line:
+    00000096 54 68 65 20 71 75 69   601 	.ascii "The quick brown fox jumps over the lazy dog. SUPERNOVA text "
+             63 6B 20 62 72 6F 77
+             6E 20 66 6F 78 20 6A
+             75 6D 70 73 20 6F 76
+             65 72 20 74 68 65 20
+             6C 61 7A 79 20 64 6F
+             67 2E 20 53 55 50 45
+             52 4E 4F 56 41 20 74
+             65 78 74 20
+    000000D2 65 6E 67 69 6E 65 20   602 	.ascii "engine on SCREEN 7!"
+             6F 6E 20 53 43 52 45
+             45 4E 20 37 21
+    000000E5 00                     603 	.db 0x00
+    000000E6                        604 _g_Cols:
+    000000E6 0B                     605 	.db #0x0b	; 11
+    000000E7 0A                     606 	.db #0x0a	; 10
+    000000E8 0E                     607 	.db #0x0e	; 14
+    000000E9 0C                     608 	.db #0x0c	; 12
+    000000EA 0F                     609 	.db #0x0f	; 15
+    000000EB 09                     610 	.db #0x09	; 9
+    000000EC 03                     611 	.db #0x03	; 3
+    000000ED 07                     612 	.db #0x07	; 7
+                                    613 ;./proto.c:26: static void Report(u8 row, const c8* label, u16 v)
+                                    614 ;	---------------------------------
+                                    615 ; Function Report
+                                    616 ; ---------------------------------
+    000000EE                        617 _Report:
+    000000EE 21 F8 FF         [10]  618 	ld	hl, #-8
+    000000F1 39               [11]  619 	add	hl, sp
+    000000F2 F9               [ 6]  620 	ld	sp, hl
+    000000F3 4F               [ 4]  621 	ld	c, a
+                                    622 ;./proto.c:29: Txt_ClearRow(row, 1);
+    000000F4 C5               [11]  623 	push	bc
+    000000F5 D5               [11]  624 	push	de
+    000000F6 2E 01            [ 7]  625 	ld	l, #0x01
+    000000F8 79               [ 4]  626 	ld	a, c
+    000000F9 CDr00r00         [17]  627 	call	_Txt_ClearRow
+    000000FC D1               [10]  628 	pop	de
+    000000FD C1               [10]  629 	pop	bc
+                                    630 ;./proto.c:30: Txt_Draw(1, row, label);
+    000000FE C5               [11]  631 	push	bc
+    000000FF D5               [11]  632 	push	de
+    00000100 69               [ 4]  633 	ld	l, c
+    00000101 3E 01            [ 7]  634 	ld	a, #0x01
+    00000103 CDr00r00         [17]  635 	call	_Txt_Draw
+    00000106 C1               [10]  636 	pop	bc
+                                    637 ;./proto.c:31: U16ToStr(v, num);
+    00000107 21 00 00         [10]  638 	ld	hl, #0
+    0000010A 39               [11]  639 	add	hl, sp
+    0000010B C5               [11]  640 	push	bc
+    0000010C EB               [ 4]  641 	ex	de, hl
+    0000010D D5               [11]  642 	push	de
+    0000010E 21 0E 00         [10]  643 	ld	hl, #14
+    00000111 39               [11]  644 	add	hl, sp
+    00000112 7E               [ 7]  645 	ld	a, (hl)
+    00000113 23               [ 6]  646 	inc	hl
+    00000114 66               [ 7]  647 	ld	h, (hl)
+    00000115 6F               [ 4]  648 	ld	l, a
+    00000116 CDr00r00         [17]  649 	call	_U16ToStr
+    00000119 D1               [10]  650 	pop	de
+    0000011A C1               [10]  651 	pop	bc
+                                    652 ;./proto.c:32: Txt_Draw(60, row, num);
+    0000011B D5               [11]  653 	push	de
+    0000011C 69               [ 4]  654 	ld	l, c
+    0000011D 3E 3C            [ 7]  655 	ld	a, #0x3c
+    0000011F CDr00r00         [17]  656 	call	_Txt_Draw
+                                    657 ;./proto.c:33: }
+    00000122 21 08 00         [10]  658 	ld	hl, #8
+    00000125 39               [11]  659 	add	hl, sp
+    00000126 F9               [ 6]  660 	ld	sp, hl
+    00000127 E1               [10]  661 	pop	hl
+    00000128 F1               [10]  662 	pop	af
+    00000129 E9               [ 4]  663 	jp	(hl)
+                                    664 ;./proto.c:35: void main()
+                                    665 ;	---------------------------------
+                                    666 ; Function main
+                                    667 ; ---------------------------------
+    0000012A                        668 _main::
+    0000012A DD E5            [15]  669 	push	ix
+    0000012C DD 21 00 00      [14]  670 	ld	ix,	#0
+    00000130 DD 39            [15]  671 	add	ix, sp
+    00000132 21 EE FF         [10]  672 	ld	hl, #-18
+    00000135 39               [11]  673 	add	hl, sp
+    00000136 F9               [ 6]  674 	ld	sp, hl
+                                    675 ;./proto.c:37: VDP_SetMode(VDP_MODE_SCREEN7);
+    00000137 3E 08            [ 7]  676 	ld	a, #0x08
+    00000139 CDr00r00         [17]  677 	call	_VDP_SetMode
+                                    678 ;E:\supernova\MSXgl\engine/src/vdp.h:839: inline void VDP_SetLineCount(u8 lines) { VDP_RegWriteBakMask(9, (u8)~R09_LN, lines); }
+    0000013C 3E 80            [ 7]  679 	ld	a, #0x80
+    0000013E F5               [11]  680 	push	af
+    0000013F 33               [ 6]  681 	inc	sp
+    00000140 2E 7F            [ 7]  682 	ld	l, #0x7f
+    00000142 3E 09            [ 7]  683 	ld	a, #0x09
+    00000144 CDr00r00         [17]  684 	call	_VDP_RegWriteBakMask
+                                    685 ;E:\supernova\MSXgl\engine/src/vdp.h:724: inline void VDP_SetColor(u8 color) { VDP_RegWrite(7, color); }
+    00000147 2E 00            [ 7]  686 	ld	l, #0x00
+    00000149 3E 07            [ 7]  687 	ld	a, #0x07
+    0000014B CDr00r00         [17]  688 	call	_VDP_RegWrite
+                                    689 ;E:\supernova\MSXgl\engine/src/vdp.h:750: inline void VDP_EnableSprite(u8 enable) { VDP_RegWriteBakMask(8, (u8)~R08_SPD, !enable ? R08_SPD : 0); }
+    0000014E 3E 02            [ 7]  690 	ld	a, #0x02
+    00000150 F5               [11]  691 	push	af
+    00000151 33               [ 6]  692 	inc	sp
+    00000152 2E FD            [ 7]  693 	ld	l, #0xfd
+    00000154 3E 08            [ 7]  694 	ld	a, #0x08
+    00000156 CDr00r00         [17]  695 	call	_VDP_RegWriteBakMask
+                                    696 ;./proto.c:41: for (u8 i = 0; i < 16; i++)
+    00000159 01r76r00         [10]  697 	ld	bc, #_g_Pal+0
+    0000015C DD 36 FF 00      [19]  698 	ld	-1 (ix), #0x00
+    00000160                        699 00129$:
+    00000160 DD 7E FF         [19]  700 	ld	a, -1 (ix)
+    00000163 D6 10            [ 7]  701 	sub	a, #0x10
+    00000165 30 18            [12]  702 	jr	nc, 00101$
+                                    703 ;./proto.c:42: VDP_SetPaletteEntry(i, g_Pal[i]);
+    00000167 DD 6E FF         [19]  704 	ld	l, -1 (ix)
+    0000016A 26 00            [ 7]  705 	ld	h, #0x00
+    0000016C 29               [11]  706 	add	hl, hl
+    0000016D 09               [11]  707 	add	hl, bc
+    0000016E 5E               [ 7]  708 	ld	e, (hl)
+    0000016F 23               [ 6]  709 	inc	hl
+    00000170 56               [ 7]  710 	ld	d, (hl)
+    00000171 C5               [11]  711 	push	bc
+    00000172 DD 7E FF         [19]  712 	ld	a, -1 (ix)
+    00000175 CDr00r00         [17]  713 	call	_VDP_SetPaletteEntry
+    00000178 C1               [10]  714 	pop	bc
+                                    715 ;./proto.c:41: for (u8 i = 0; i < 16; i++)
+    00000179 DD 34 FF         [23]  716 	inc	-1 (ix)
+    0000017C C3r60r01         [10]  717 	jp	00129$
+    0000017F                        718 00101$:
+                                    719 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:167: g_VDP_Command.DX = dx; 
+    0000017F 21 00 00         [10]  720 	ld	hl, #0x0000
+    00000182 22r04r00         [16]  721 	ld	((_g_VDP_Command + 4)), hl
+                                    722 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:168: g_VDP_Command.DY = dy; 
+    00000185 22r06r00         [16]  723 	ld	((_g_VDP_Command + 6)), hl
+                                    724 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:169: g_VDP_Command.NX = nx; 
+    00000188 26 02            [ 7]  725 	ld	h, #0x02
+    0000018A 22r08r00         [16]  726 	ld	((_g_VDP_Command + 8)), hl
+                                    727 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:170: g_VDP_Command.NY = ny; 
+    0000018D 21 D4 00         [10]  728 	ld	hl, #0x00d4
+    00000190 22r0Ar00         [16]  729 	ld	((_g_VDP_Command + 10)), hl
+                                    730 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:171: g_VDP_Command.CLR = col; 
+    00000193 21r0Cr00         [10]  731 	ld	hl, #_g_VDP_Command + 12
+    00000196 36 00            [10]  732 	ld	(hl), #0x00
+                                    733 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:172: g_VDP_Command.ARG = arg; 
+    00000198 21r0Dr00         [10]  734 	ld	hl, #_g_VDP_Command + 13
+    0000019B 36 00            [10]  735 	ld	(hl), #0x00
+                                    736 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:173: g_VDP_Command.CMD = VDP_CMD_HMMV;
+    0000019D 21r0Er00         [10]  737 	ld	hl, #_g_VDP_Command + 14
+    000001A0 36 C0            [10]  738 	ld	(hl), #0xc0
+                                    739 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:174: VDP_CommandSetupR36();
+    000001A2 CDr00r00         [17]  740 	call	_VDP_CommandSetupR36
+                                    741 ;./proto.c:44: VDP_CommandWait();
+    000001A5 CDr00r00         [17]  742 	call	_VDP_CommandWait
+                                    743 ;./proto.c:45: Txt_Init();
+    000001A8 CDr00r00         [17]  744 	call	_Txt_Init
+                                    745 ;./proto.c:49: u8 savedP2 = 0;
+    000001AB DD 36 F2 00      [19]  746 	ld	-14 (ix), #0x00
+                                    747 ;./proto.c:50: if (DOSMapper_Init())
+    000001AF CDr00r00         [17]  748 	call	_DOSMapper_Init
+    000001B2 B7               [ 4]  749 	or	a, a
+    000001B3 28 28            [12]  750 	jr	z, 00105$
+                                    751 ;./proto.c:53: savedP2 = DOSMapper_GetPage(2);
+    000001B5 3E 02            [ 7]  752 	ld	a, #0x02
+    000001B7 CDr00r00         [17]  753 	call	_DOSMapper_GetPage
+    000001BA DD 77 F2         [19]  754 	ld	-14 (ix), a
+                                    755 ;./proto.c:54: if (DOSMapper_Alloc(DOS_ALLOC_USER, DOS_SEGSLOT_PRIM, &seg))
+    000001BD 21 02 00         [10]  756 	ld	hl, #2
+    000001C0 39               [11]  757 	add	hl, sp
+    000001C1 E5               [11]  758 	push	hl
+    000001C2 AF               [ 4]  759 	xor	a, a
+    000001C3 6F               [ 4]  760 	ld	l, a
+    000001C4 CDr00r00         [17]  761 	call	_DOSMapper_Alloc
+    000001C7 B7               [ 4]  762 	or	a, a
+    000001C8 28 13            [12]  763 	jr	z, 00105$
+                                    764 ;./proto.c:56: DOSMapper_SetPage2(seg.Number);
+    000001CA DD 7E F0         [19]  765 	ld	a, -16 (ix)
+    000001CD CDr00r00         [17]  766 	call	_DOSMapper_SetPage2
+                                    767 ;./proto.c:57: Mem_Set(0xAA, (void*)0x8000, 0x4000);
+    000001D0 21 00 80         [10]  768 	ld	hl, #0x8000
+    000001D3 36 AA            [10]  769 	ld	(hl), #0xaa
+    000001D5 5D               [ 4]  770 	ld	e, l
+    000001D6 54               [ 4]  771 	ld	d, h
+    000001D7 13               [ 6]  772 	inc	de
+    000001D8 01 FF 3F         [10]  773 	ld	bc, #0x3fff
+    000001DB ED B0            [21]  774 	ldir
+    000001DD                        775 00105$:
+                                    776 ;./proto.c:62: u16 t0 = g_JIFFY;
+    000001DD 2A 9E FC         [16]  777 	ld	hl, (_g_JIFFY)
+    000001E0 DD 75 FE         [19]  778 	ld	-2 (ix), l
+    000001E3 DD 74 FF         [19]  779 	ld	-1 (ix), h
+                                    780 ;./proto.c:63: for (u8 y = 0; y < TXT_ROWS; y++)
+    000001E6 0E 00            [ 7]  781 	ld	c, #0x00
+    000001E8                        782 00132$:
+                                    783 ;./proto.c:65: Txt_SetColor(g_Cols[y & 7], (y == 1 || y == 2) ? 4 : 0);
+    000001E8 79               [ 4]  784 	ld	a, c
+    000001E9 FE 19            [ 7]  785 	cp	a, #0x19
+    000001EB 30 2F            [12]  786 	jr	nc, 00106$
+    000001ED 3D               [ 4]  787 	dec	a
+    000001EE 28 05            [12]  788 	jr	z, 00162$
+    000001F0 79               [ 4]  789 	ld	a, c
+    000001F1 D6 02            [ 7]  790 	sub	a, #0x02
+    000001F3 20 05            [12]  791 	jr	nz, 00159$
+    000001F5                        792 00162$:
+    000001F5 2E 04            [ 7]  793 	ld	l, #0x04
+    000001F7 C3rFCr01         [10]  794 	jp	00160$
+    000001FA                        795 00159$:
+    000001FA 2E 00            [ 7]  796 	ld	l, #0x00
+    000001FC                        797 00160$:
+    000001FC 79               [ 4]  798 	ld	a, c
+    000001FD E6 07            [ 7]  799 	and	a, #0x07
+    000001FF C6rE6            [ 7]  800 	add	a, #<(_g_Cols)
+    00000201 5F               [ 4]  801 	ld	e, a
+    00000202 3E 00            [ 7]  802 	ld	a, #0x00
+    00000204 CEs00            [ 7]  803 	adc	a, #>(_g_Cols)
+    00000206 57               [ 4]  804 	ld	d, a
+    00000207 1A               [ 7]  805 	ld	a, (de)
+    00000208 C5               [11]  806 	push	bc
+    00000209 CDr00r00         [17]  807 	call	_Txt_SetColor
+    0000020C C1               [10]  808 	pop	bc
+                                    809 ;./proto.c:66: Txt_Draw(0, y, g_Line);
+    0000020D C5               [11]  810 	push	bc
+    0000020E 21r96r00         [10]  811 	ld	hl, #_g_Line
+    00000211 E5               [11]  812 	push	hl
+    00000212 69               [ 4]  813 	ld	l, c
+    00000213 AF               [ 4]  814 	xor	a, a
+    00000214 CDr00r00         [17]  815 	call	_Txt_Draw
+    00000217 C1               [10]  816 	pop	bc
+                                    817 ;./proto.c:63: for (u8 y = 0; y < TXT_ROWS; y++)
+    00000218 0C               [ 4]  818 	inc	c
+    00000219 C3rE8r01         [10]  819 	jp	00132$
+    0000021C                        820 00106$:
+                                    821 ;./proto.c:68: u16 tA = g_JIFFY - t0;
+    0000021C 3A 9E FC         [13]  822 	ld	a, (_g_JIFFY+0)
+    0000021F DD 96 FE         [19]  823 	sub	a, -2 (ix)
+    00000222 DD 77 F3         [19]  824 	ld	-13 (ix), a
+    00000225 3A 9F FC         [13]  825 	ld	a, (_g_JIFFY+1)
+    00000228 DD 9E FF         [19]  826 	sbc	a, -1 (ix)
+    0000022B DD 77 F4         [19]  827 	ld	-12 (ix), a
+                                    828 ;./proto.c:71: t0 = g_JIFFY;
+    0000022E ED 4B 9E FC      [20]  829 	ld	bc, (_g_JIFFY)
+                                    830 ;./proto.c:72: for (u8 n = 0; n < 20; n++)
+    00000232 1E 00            [ 7]  831 	ld	e, #0x00
+    00000234                        832 00135$:
+    00000234 7B               [ 4]  833 	ld	a, e
+    00000235 D6 14            [ 7]  834 	sub	a, #0x14
+    00000237 30 13            [12]  835 	jr	nc, 00107$
+                                    836 ;./proto.c:73: Txt_Scroll(4, 23, 1);
+    00000239 C5               [11]  837 	push	bc
+    0000023A D5               [11]  838 	push	de
+    0000023B 3E 01            [ 7]  839 	ld	a, #0x01
+    0000023D F5               [11]  840 	push	af
+    0000023E 33               [ 6]  841 	inc	sp
+    0000023F 2E 17            [ 7]  842 	ld	l, #0x17
+    00000241 3E 04            [ 7]  843 	ld	a, #0x04
+    00000243 CDr00r00         [17]  844 	call	_Txt_Scroll
+    00000246 D1               [10]  845 	pop	de
+    00000247 C1               [10]  846 	pop	bc
+                                    847 ;./proto.c:72: for (u8 n = 0; n < 20; n++)
+    00000248 1C               [ 4]  848 	inc	e
+    00000249 C3r34r02         [10]  849 	jp	00135$
+    0000024C                        850 00107$:
+                                    851 ;./proto.c:74: u16 tB = g_JIFFY - t0;
+    0000024C 3A 9E FC         [13]  852 	ld	a, (_g_JIFFY+0)
+    0000024F 91               [ 4]  853 	sub	a, c
+    00000250 DD 77 F5         [19]  854 	ld	-11 (ix), a
+    00000253 3A 9F FC         [13]  855 	ld	a, (_g_JIFFY+1)
+    00000256 98               [ 4]  856 	sbc	a, b
+    00000257 DD 77 F6         [19]  857 	ld	-10 (ix), a
+                                    858 ;./proto.c:77: t0 = g_JIFFY;
+    0000025A 2A 9E FC         [16]  859 	ld	hl, (_g_JIFFY)
+    0000025D DD 75 FE         [19]  860 	ld	-2 (ix), l
+    00000260 DD 74 FF         [19]  861 	ld	-1 (ix), h
+                                    862 ;./proto.c:78: for (u8 n = 0; n < 20; n++)
+    00000263 0E 00            [ 7]  863 	ld	c, #0x00
+    00000265                        864 00138$:
+    00000265 79               [ 4]  865 	ld	a, c
+    00000266 D6 14            [ 7]  866 	sub	a, #0x14
+    00000268 30 11            [12]  867 	jr	nc, 00108$
+                                    868 ;./proto.c:79: Txt_Scroll(4, 23, 6);
+    0000026A C5               [11]  869 	push	bc
+    0000026B 3E 06            [ 7]  870 	ld	a, #0x06
+    0000026D F5               [11]  871 	push	af
+    0000026E 33               [ 6]  872 	inc	sp
+    0000026F 2E 17            [ 7]  873 	ld	l, #0x17
+    00000271 3E 04            [ 7]  874 	ld	a, #0x04
+    00000273 CDr00r00         [17]  875 	call	_Txt_Scroll
+    00000276 C1               [10]  876 	pop	bc
+                                    877 ;./proto.c:78: for (u8 n = 0; n < 20; n++)
+    00000277 0C               [ 4]  878 	inc	c
+    00000278 C3r65r02         [10]  879 	jp	00138$
+    0000027B                        880 00108$:
+                                    881 ;./proto.c:80: u16 tC = g_JIFFY - t0;
+    0000027B 3A 9E FC         [13]  882 	ld	a, (_g_JIFFY+0)
+    0000027E DD 96 FE         [19]  883 	sub	a, -2 (ix)
+    00000281 DD 77 F7         [19]  884 	ld	-9 (ix), a
+    00000284 3A 9F FC         [13]  885 	ld	a, (_g_JIFFY+1)
+    00000287 DD 9E FF         [19]  886 	sbc	a, -1 (ix)
+    0000028A DD 77 F8         [19]  887 	ld	-8 (ix), a
+                                    888 ;./proto.c:83: t0 = g_JIFFY;
+    0000028D 2A 9E FC         [16]  889 	ld	hl, (_g_JIFFY)
+    00000290 DD 75 FE         [19]  890 	ld	-2 (ix), l
+    00000293 DD 74 FF         [19]  891 	ld	-1 (ix), h
+                                    892 ;./proto.c:84: for (u8 n = 0; n < 10; n++)
+    00000296 1E 00            [ 7]  893 	ld	e, #0x00
+    00000298                        894 00144$:
+    00000298 7B               [ 4]  895 	ld	a, e
+    00000299 D6 0A            [ 7]  896 	sub	a, #0x0a
+    0000029B 30 3C            [12]  897 	jr	nc, 00110$
+                                    898 ;./proto.c:86: Txt_Scroll(4, 23, 6);
+    0000029D D5               [11]  899 	push	de
+    0000029E 3E 06            [ 7]  900 	ld	a, #0x06
+    000002A0 F5               [11]  901 	push	af
+    000002A1 33               [ 6]  902 	inc	sp
+    000002A2 2E 17            [ 7]  903 	ld	l, #0x17
+    000002A4 3E 04            [ 7]  904 	ld	a, #0x04
+    000002A6 CDr00r00         [17]  905 	call	_Txt_Scroll
+    000002A9 D1               [10]  906 	pop	de
+                                    907 ;./proto.c:87: for (u8 l = 0; l < 6; l++)
+    000002AA 16 00            [ 7]  908 	ld	d, #0x00
+    000002AC                        909 00141$:
+    000002AC 7A               [ 4]  910 	ld	a, d
+    000002AD D6 06            [ 7]  911 	sub	a, #0x06
+    000002AF 30 24            [12]  912 	jr	nc, 00145$
+                                    913 ;./proto.c:89: Txt_SetColor(g_Cols[l], 0);
+    000002B1 3ErE6            [ 7]  914 	ld	a, #<(_g_Cols)
+    000002B3 82               [ 4]  915 	add	a, d
+    000002B4 6F               [ 4]  916 	ld	l, a
+    000002B5 3Es00            [ 7]  917 	ld	a, #>(_g_Cols)
+    000002B7 CE 00            [ 7]  918 	adc	a, #0x00
+    000002B9 67               [ 4]  919 	ld	h, a
+    000002BA 7E               [ 7]  920 	ld	a, (hl)
+    000002BB D5               [11]  921 	push	de
+    000002BC 2E 00            [ 7]  922 	ld	l, #0x00
+    000002BE CDr00r00         [17]  923 	call	_Txt_SetColor
+    000002C1 D1               [10]  924 	pop	de
+                                    925 ;./proto.c:90: Txt_Draw(1, 18 + l, g_Line);
+    000002C2 7A               [ 4]  926 	ld	a, d
+    000002C3 C6 12            [ 7]  927 	add	a, #0x12
+    000002C5 D5               [11]  928 	push	de
+    000002C6 21r96r00         [10]  929 	ld	hl, #_g_Line
+    000002C9 E5               [11]  930 	push	hl
+    000002CA 6F               [ 4]  931 	ld	l, a
+    000002CB 3E 01            [ 7]  932 	ld	a, #0x01
+    000002CD CDr00r00         [17]  933 	call	_Txt_Draw
+    000002D0 D1               [10]  934 	pop	de
+                                    935 ;./proto.c:87: for (u8 l = 0; l < 6; l++)
+    000002D1 14               [ 4]  936 	inc	d
+    000002D2 C3rACr02         [10]  937 	jp	00141$
+    000002D5                        938 00145$:
+                                    939 ;./proto.c:84: for (u8 n = 0; n < 10; n++)
+    000002D5 1C               [ 4]  940 	inc	e
+    000002D6 C3r98r02         [10]  941 	jp	00144$
+    000002D9                        942 00110$:
+                                    943 ;./proto.c:93: u16 tD = g_JIFFY - t0;
+    000002D9 3A 9E FC         [13]  944 	ld	a, (_g_JIFFY+0)
+    000002DC DD 96 FE         [19]  945 	sub	a, -2 (ix)
+    000002DF DD 77 F9         [19]  946 	ld	-7 (ix), a
+    000002E2 3A 9F FC         [13]  947 	ld	a, (_g_JIFFY+1)
+    000002E5 DD 9E FF         [19]  948 	sbc	a, -1 (ix)
+    000002E8 DD 77 FA         [19]  949 	ld	-6 (ix), a
+                                    950 ;./proto.c:96: t0 = g_JIFFY;
+    000002EB ED 4B 9E FC      [20]  951 	ld	bc, (_g_JIFFY)
+                                    952 ;./proto.c:97: for (u8 n = 0; n < 20; n++)
+    000002EF 1E 00            [ 7]  953 	ld	e, #0x00
+    000002F1                        954 00147$:
+    000002F1 7B               [ 4]  955 	ld	a, e
+    000002F2 D6 14            [ 7]  956 	sub	a, #0x14
+    000002F4 30 0F            [12]  957 	jr	nc, 00111$
+                                    958 ;./proto.c:98: Txt_ClearRow(10, 0);
+    000002F6 C5               [11]  959 	push	bc
+    000002F7 D5               [11]  960 	push	de
+    000002F8 2E 00            [ 7]  961 	ld	l, #0x00
+    000002FA 3E 0A            [ 7]  962 	ld	a, #0x0a
+    000002FC CDr00r00         [17]  963 	call	_Txt_ClearRow
+    000002FF D1               [10]  964 	pop	de
+    00000300 C1               [10]  965 	pop	bc
+                                    966 ;./proto.c:97: for (u8 n = 0; n < 20; n++)
+    00000301 1C               [ 4]  967 	inc	e
+    00000302 C3rF1r02         [10]  968 	jp	00147$
+    00000305                        969 00111$:
+                                    970 ;./proto.c:99: u16 tE = g_JIFFY - t0;
+    00000305 3A 9E FC         [13]  971 	ld	a, (_g_JIFFY+0)
+    00000308 91               [ 4]  972 	sub	a, c
+    00000309 DD 77 FB         [19]  973 	ld	-5 (ix), a
+    0000030C 3A 9F FC         [13]  974 	ld	a, (_g_JIFFY+1)
+    0000030F 98               [ 4]  975 	sbc	a, b
+    00000310 DD 77 FC         [19]  976 	ld	-4 (ix), a
+                                    977 ;./proto.c:102: t0 = g_JIFFY;
+    00000313 ED 4B 9E FC      [20]  978 	ld	bc, (_g_JIFFY)
+                                    979 ;./proto.c:103: Txt_SetColor(11, 0);
+    00000317 C5               [11]  980 	push	bc
+    00000318 2E 00            [ 7]  981 	ld	l, #0x00
+    0000031A 3E 0B            [ 7]  982 	ld	a, #0x0b
+    0000031C CDr00r00         [17]  983 	call	_Txt_SetColor
+    0000031F C1               [10]  984 	pop	bc
+                                    985 ;./proto.c:104: for (u8 y = 0; y < TXT_ROWS; y++)
+    00000320 2E 00            [ 7]  986 	ld	l, #0x00
+    00000322                        987 00150$:
+    00000322 7D               [ 4]  988 	ld	a, l
+    00000323 D6 19            [ 7]  989 	sub	a, #0x19
+    00000325 30 10            [12]  990 	jr	nc, 00112$
+                                    991 ;./proto.c:105: Txt_Draw(0, y, g_Line);
+    00000327 E5               [11]  992 	push	hl
+    00000328 C5               [11]  993 	push	bc
+    00000329 11r96r00         [10]  994 	ld	de, #_g_Line
+    0000032C D5               [11]  995 	push	de
+    0000032D AF               [ 4]  996 	xor	a, a
+    0000032E CDr00r00         [17]  997 	call	_Txt_Draw
+    00000331 C1               [10]  998 	pop	bc
+    00000332 E1               [10]  999 	pop	hl
+                                   1000 ;./proto.c:104: for (u8 y = 0; y < TXT_ROWS; y++)
+    00000333 2C               [ 4] 1001 	inc	l
+    00000334 C3r22r03         [10] 1002 	jp	00150$
+    00000337                       1003 00112$:
+                                   1004 ;./proto.c:106: u16 tF = g_JIFFY - t0;
+    00000337 3A 9E FC         [13] 1005 	ld	a, (_g_JIFFY+0)
+    0000033A 91               [ 4] 1006 	sub	a, c
+    0000033B DD 77 FD         [19] 1007 	ld	-3 (ix), a
+    0000033E 3A 9F FC         [13] 1008 	ld	a, (_g_JIFFY+1)
+    00000341 98               [ 4] 1009 	sbc	a, b
+    00000342 DD 77 FE         [19] 1010 	ld	-2 (ix), a
+                                   1011 ;./proto.c:109: t0 = g_JIFFY;
+    00000345 ED 4B 9E FC      [20] 1012 	ld	bc, (_g_JIFFY)
+                                   1013 ;./proto.c:110: for (u8 n = 0; n < 100; n++)
+    00000349 DD 36 FF 00      [19] 1014 	ld	-1 (ix), #0x00
+    0000034D                       1015 00153$:
+    0000034D DD 7E FF         [19] 1016 	ld	a, -1 (ix)
+    00000350 D6 64            [ 7] 1017 	sub	a, #0x64
+    00000352 30 1B            [12] 1018 	jr	nc, 00113$
+                                   1019 ;./proto.c:111: Txt_SetColor(g_Cols[n & 7], 0);
+    00000354 DD 7E FF         [19] 1020 	ld	a, -1 (ix)
+    00000357 E6 07            [ 7] 1021 	and	a, #0x07
+    00000359 C6rE6            [ 7] 1022 	add	a, #<(_g_Cols)
+    0000035B 6F               [ 4] 1023 	ld	l, a
+    0000035C 3E 00            [ 7] 1024 	ld	a, #0x00
+    0000035E CEs00            [ 7] 1025 	adc	a, #>(_g_Cols)
+    00000360 67               [ 4] 1026 	ld	h, a
+    00000361 7E               [ 7] 1027 	ld	a, (hl)
+    00000362 C5               [11] 1028 	push	bc
+    00000363 2E 00            [ 7] 1029 	ld	l, #0x00
+    00000365 CDr00r00         [17] 1030 	call	_Txt_SetColor
+    00000368 C1               [10] 1031 	pop	bc
+                                   1032 ;./proto.c:110: for (u8 n = 0; n < 100; n++)
+    00000369 DD 34 FF         [23] 1033 	inc	-1 (ix)
+    0000036C C3r4Dr03         [10] 1034 	jp	00153$
+    0000036F                       1035 00113$:
+                                   1036 ;./proto.c:112: u16 tG = g_JIFFY - t0;
+    0000036F 3A 9E FC         [13] 1037 	ld	a, (_g_JIFFY+0)
+    00000372 91               [ 4] 1038 	sub	a, c
+    00000373 DD 77 EE         [19] 1039 	ld	-18 (ix), a
+    00000376 3A 9F FC         [13] 1040 	ld	a, (_g_JIFFY+1)
+    00000379 98               [ 4] 1041 	sbc	a, b
+    0000037A DD 77 EF         [19] 1042 	ld	-17 (ix), a
+                                   1043 ;./proto.c:114: Txt_SetColor(15, 1);
+    0000037D 2E 01            [ 7] 1044 	ld	l, #0x01
+    0000037F 3E 0F            [ 7] 1045 	ld	a, #0x0f
+    00000381 CDr00r00         [17] 1046 	call	_Txt_SetColor
+                                   1047 ;./proto.c:115: Report(0, "A: redraw 25x78 (25 lines, color/line)   frames", tA);
+    00000384 DD 6E F3         [19] 1048 	ld	l, -13 (ix)
+    00000387 DD 66 F4         [19] 1049 	ld	h, -12 (ix)
+    0000038A E5               [11] 1050 	push	hl
+    0000038B 11r39r04         [10] 1051 	ld	de, #___str_2
+    0000038E AF               [ 4] 1052 	xor	a, a
+    0000038F CDrEEr00         [17] 1053 	call	_Report
+                                   1054 ;./proto.c:116: Report(1, "B: 20 x scroll window 20 rows by 1       frames", tB);
+    00000392 DD 6E F5         [19] 1055 	ld	l, -11 (ix)
+    00000395 DD 66 F6         [19] 1056 	ld	h, -10 (ix)
+    00000398 E5               [11] 1057 	push	hl
+    00000399 11r69r04         [10] 1058 	ld	de, #___str_3
+    0000039C 3E 01            [ 7] 1059 	ld	a, #0x01
+    0000039E CDrEEr00         [17] 1060 	call	_Report
+                                   1061 ;./proto.c:117: Report(2, "C: 20 x scroll window by 6 rows          frames", tC);
+    000003A1 DD 6E F7         [19] 1062 	ld	l, -9 (ix)
+    000003A4 DD 66 F8         [19] 1063 	ld	h, -8 (ix)
+    000003A7 E5               [11] 1064 	push	hl
+    000003A8 11r99r04         [10] 1065 	ld	de, #___str_4
+    000003AB 3E 02            [ 7] 1066 	ld	a, #0x02
+    000003AD CDrEEr00         [17] 1067 	call	_Report
+                                   1068 ;./proto.c:118: Report(3, "D: 10 x (scroll 6 + draw 6 lines)        frames", tD);
+    000003B0 DD 6E F9         [19] 1069 	ld	l, -7 (ix)
+    000003B3 DD 66 FA         [19] 1070 	ld	h, -6 (ix)
+    000003B6 E5               [11] 1071 	push	hl
+    000003B7 11rC9r04         [10] 1072 	ld	de, #___str_5
+    000003BA 3E 03            [ 7] 1073 	ld	a, #0x03
+    000003BC CDrEEr00         [17] 1074 	call	_Report
+                                   1075 ;./proto.c:119: Report(4, "E: 20 x clear row                         frames", tE);
+    000003BF DD 6E FB         [19] 1076 	ld	l, -5 (ix)
+    000003C2 DD 66 FC         [19] 1077 	ld	h, -4 (ix)
+    000003C5 E5               [11] 1078 	push	hl
+    000003C6 11rF9r04         [10] 1079 	ld	de, #___str_6
+    000003C9 3E 04            [ 7] 1080 	ld	a, #0x04
+    000003CB CDrEEr00         [17] 1081 	call	_Report
+                                   1082 ;./proto.c:120: Report(5, "F: redraw 25x78 same color (no rebuild)   frames", tF);
+    000003CE DD 6E FD         [19] 1083 	ld	l, -3 (ix)
+    000003D1 DD 66 FE         [19] 1084 	ld	h, -2 (ix)
+    000003D4 E5               [11] 1085 	push	hl
+    000003D5 11r2Ar05         [10] 1086 	ld	de, #___str_7
+    000003D8 3E 05            [ 7] 1087 	ld	a, #0x05
+    000003DA CDrEEr00         [17] 1088 	call	_Report
+                                   1089 ;./proto.c:121: Report(6, "G: 100 x SetColor change, no drawing      frames", tG);
+    000003DD E1               [10] 1090 	pop	hl
+    000003DE E5               [11] 1091 	push	hl
+    000003DF E5               [11] 1092 	push	hl
+    000003E0 11r5Br05         [10] 1093 	ld	de, #___str_8
+    000003E3 3E 06            [ 7] 1094 	ld	a, #0x06
+    000003E5 CDrEEr00         [17] 1095 	call	_Report
+                                   1096 ;./proto.c:122: Txt_SetColor(13, 0);
+    000003E8 2E 00            [ 7] 1097 	ld	l, #0x00
+    000003EA 3E 0D            [ 7] 1098 	ld	a, #0x0d
+    000003EC CDr00r00         [17] 1099 	call	_Txt_SetColor
+                                   1100 ;./proto.c:123: Txt_Draw(1, 8, "Blink test (palette 13 toggles red/blue): BLINKING");
+    000003EF 21r8Cr05         [10] 1101 	ld	hl, #___str_9
+    000003F2 E5               [11] 1102 	push	hl
+    000003F3 2E 08            [ 7] 1103 	ld	l, #0x08
+    000003F5 3E 01            [ 7] 1104 	ld	a, #0x01
+    000003F7 CDr00r00         [17] 1105 	call	_Txt_Draw
+                                   1106 ;./proto.c:125: if (savedP2) DOSMapper_SetPage2(savedP2);
+    000003FA DD 7E F2         [19] 1107 	ld	a, -14 (ix)
+    000003FD B7               [ 4] 1108 	or	a, a
+    000003FE 28 06            [12] 1109 	jr	z, 00217$
+    00000400 DD 7E F2         [19] 1110 	ld	a, -14 (ix)
+    00000403 CDr00r00         [17] 1111 	call	_DOSMapper_SetPage2
+                                   1112 ;./proto.c:127: while (!Keyboard_IsKeyPressed(KEY_ESC))
+    00000406                       1113 00217$:
+    00000406 0E 00            [ 7] 1114 	ld	c, #0x00
+    00000408                       1115 00118$:
+                                   1116 ;E:\supernova\MSXgl\engine/src/keyboard.h:202: inline bool Keyboard_IsKeyPressed(u8 key) { return (Keyboard_Read(KEY_ROW(key)) & (u8)(1 << KEY_IDX(key))) == 0; }
+    00000408 2E 07            [ 7] 1117 	ld	l, #0x07
+    0000040A CDr00r00         [17] 1118 	call	_Keyboard_Read
+    0000040D 7D               [ 4] 1119 	ld	a, l
+    0000040E E6 04            [ 7] 1120 	and	a, #0x04
+    00000410 28 1E            [12] 1121 	jr	z, 00120$
+                                   1122 ;./proto.c:127: while (!Keyboard_IsKeyPressed(KEY_ESC))
+                                   1123 ;E:\supernova\MSXgl\engine/src/system.h:145: inline void Halt() { __asm__("halt"); }
+    00000412 76               [ 4] 1124 	halt
+                                   1125 ;./proto.c:130: if ((++f & 31) == 0)
+    00000413 0C               [ 4] 1126 	inc	c
+    00000414 79               [ 4] 1127 	ld	a, c
+    00000415 E6 1F            [ 7] 1128 	and	a, #0x1f
+    00000417 20 EF            [12] 1129 	jr	nz, 00118$
+                                   1130 ;./proto.c:131: VDP_SetPaletteEntry(13, (f & 32) ? RGB16(7,0,0) : RGB16(0,0,7));
+    00000419 CB 69            [ 8] 1131 	bit	5, c
+    0000041B 28 06            [12] 1132 	jr	z, 00164$
+    0000041D 11 70 00         [10] 1133 	ld	de, #0x0070
+    00000420 C3r26r04         [10] 1134 	jp	00165$
+    00000423                       1135 00164$:
+    00000423 11 07 00         [10] 1136 	ld	de, #0x0007
+    00000426                       1137 00165$:
+    00000426 C5               [11] 1138 	push	bc
+    00000427 3E 0D            [ 7] 1139 	ld	a, #0x0d
+    00000429 CDr00r00         [17] 1140 	call	_VDP_SetPaletteEntry
+    0000042C C1               [10] 1141 	pop	bc
+    0000042D C3r08r04         [10] 1142 	jp	00118$
+    00000430                       1143 00120$:
+                                   1144 ;./proto.c:133: BIOS_Exit(0);
+    00000430 AF               [ 4] 1145 	xor	a, a
+    00000431 CDr00r00         [17] 1146 	call	_BIOS_Exit
+                                   1147 ;./proto.c:134: }
+    00000434 DD F9            [10] 1148 	ld	sp, ix
+    00000436 DD E1            [14] 1149 	pop	ix
+    00000438 C9               [10] 1150 	ret
+    00000439                       1151 ___str_2:
+    00000439 41 3A 20 72 65 64 72  1152 	.ascii "A: redraw 25x78 (25 lines, color/line)   frames"
+             61 77 20 32 35 78 37
+             38 20 28 32 35 20 6C
+             69 6E 65 73 2C 20 63
+             6F 6C 6F 72 2F 6C 69
+             6E 65 29 20 20 20 66
+             72 61 6D 65 73
+    00000468 00                    1153 	.db 0x00
+    00000469                       1154 ___str_3:
+    00000469 42 3A 20 32 30 20 78  1155 	.ascii "B: 20 x scroll window 20 rows by 1       frames"
+             20 73 63 72 6F 6C 6C
+             20 77 69 6E 64 6F 77
+             20 32 30 20 72 6F 77
+             73 20 62 79 20 31 20
+             20 20 20 20 20 20 66
+             72 61 6D 65 73
+    00000498 00                    1156 	.db 0x00
+    00000499                       1157 ___str_4:
+    00000499 43 3A 20 32 30 20 78  1158 	.ascii "C: 20 x scroll window by 6 rows          frames"
+             20 73 63 72 6F 6C 6C
+             20 77 69 6E 64 6F 77
+             20 62 79 20 36 20 72
+             6F 77 73 20 20 20 20
+             20 20 20 20 20 20 66
+             72 61 6D 65 73
+    000004C8 00                    1159 	.db 0x00
+    000004C9                       1160 ___str_5:
+    000004C9 44 3A 20 31 30 20 78  1161 	.ascii "D: 10 x (scroll 6 + draw 6 lines)        frames"
+             20 28 73 63 72 6F 6C
+             6C 20 36 20 2B 20 64
+             72 61 77 20 36 20 6C
+             69 6E 65 73 29 20 20
+             20 20 20 20 20 20 66
+             72 61 6D 65 73
+    000004F8 00                    1162 	.db 0x00
+    000004F9                       1163 ___str_6:
+    000004F9 45 3A 20 32 30 20 78  1164 	.ascii "E: 20 x clear row                         frames"
+             20 63 6C 65 61 72 20
+             72 6F 77 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             66 72 61 6D 65 73
+    00000529 00                    1165 	.db 0x00
+    0000052A                       1166 ___str_7:
+    0000052A 46 3A 20 72 65 64 72  1167 	.ascii "F: redraw 25x78 same color (no rebuild)   frames"
+             61 77 20 32 35 78 37
+             38 20 73 61 6D 65 20
+             63 6F 6C 6F 72 20 28
+             6E 6F 20 72 65 62 75
+             69 6C 64 29 20 20 20
+             66 72 61 6D 65 73
+    0000055A 00                    1168 	.db 0x00
+    0000055B                       1169 ___str_8:
+    0000055B 47 3A 20 31 30 30 20  1170 	.ascii "G: 100 x SetColor change, no drawing      frames"
+             78 20 53 65 74 43 6F
+             6C 6F 72 20 63 68 61
+             6E 67 65 2C 20 6E 6F
+             20 64 72 61 77 69 6E
+             67 20 20 20 20 20 20
+             66 72 61 6D 65 73
+    0000058B 00                    1171 	.db 0x00
+    0000058C                       1172 ___str_9:
+    0000058C 42 6C 69 6E 6B 20 74  1173 	.ascii "Blink test (palette 13 toggles red/blue): BLINKING"
+             65 73 74 20 28 70 61
+             6C 65 74 74 65 20 31
+             33 20 74 6F 67 67 6C
+             65 73 20 72 65 64 2F
+             62 6C 75 65 29 3A 20
+             42 4C 49 4E 4B 49 4E
+             47
+    000005BE 00                    1174 	.db 0x00
+                                   1175 	.area _CODE
+                                   1176 	.area _INITIALIZER
+                                   1177 	.area _CABS (ABS)

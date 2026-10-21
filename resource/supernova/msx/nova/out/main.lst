@@ -1,0 +1,503 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _GameMain
+                                     13 	.globl _ClearData
+                                     14 	.globl _DOS_TPAUpperAddr
+                                     15 	.globl _g_SLTSL
+                                     16 	.globl _g_GRPACY
+                                     17 	.globl _g_GRPACX
+                                     18 	.globl _g_LOGOPR
+                                     19 	.globl _g_CMASK
+                                     20 	.globl _g_CLOC
+                                     21 	.globl _g_FNKSTR
+                                     22 	.globl _g_GETPNT
+                                     23 	.globl _g_PUTPNT
+                                     24 	.globl _g_ATRBYT
+                                     25 	.globl _g_BDRCLR
+                                     26 	.globl _g_BAKCLR
+                                     27 	.globl _g_FORCLR
+                                     28 	.globl _g_CSRX
+                                     29 	.globl _g_CSRY
+                                     30 	.globl _g_CLIKSW
+                                     31 	.globl _g_MLTPAT
+                                     32 	.globl _g_MLTATR
+                                     33 	.globl _g_MLTCGP
+                                     34 	.globl _g_MLTCOL
+                                     35 	.globl _g_MLTNAM
+                                     36 	.globl _g_GRPPAT
+                                     37 	.globl _g_GRPATR
+                                     38 	.globl _g_GRPCGP
+                                     39 	.globl _g_GRPCOL
+                                     40 	.globl _g_GRPNAM
+                                     41 	.globl _g_T32PAT
+                                     42 	.globl _g_T32ATR
+                                     43 	.globl _g_T32CGP
+                                     44 	.globl _g_T32COL
+                                     45 	.globl _g_T32NAM
+                                     46 	.globl _g_TXTPAT
+                                     47 	.globl _g_TXTATR
+                                     48 	.globl _g_TXTCGP
+                                     49 	.globl _g_TXTCOL
+                                     50 	.globl _g_TXTNAM
+                                     51 	.globl _g_CLMLST
+                                     52 	.globl _g_CRTCNT
+                                     53 	.globl _g_LINLEN
+                                     54 	.globl _g_LINL32
+                                     55 	.globl _g_LINL40
+                                     56 	.globl _g_BDOS
+                                     57 	.globl _g_MASTER
+                                     58 	.globl _g_RAMAD3
+                                     59 	.globl _g_RAMAD2
+                                     60 	.globl _g_RAMAD1
+                                     61 	.globl _g_RAMAD0
+                                     62 	.globl _g_BREAKV
+                                     63 	.globl _g_DISKVE
+                                     64 	.globl _g_KANJTABLE
+                                     65 	.globl _g_STRSRC
+                                     66 	.globl _g_SUBRID
+                                     67 	.globl _g_CHAR_16
+                                     68 	.globl _g_MSXMID
+                                     69 	.globl _g_MSXVER
+                                     70 	.globl _g_ROMVersion
+                                     71 	.globl _g_BASRVN
+                                     72 	.globl _g_VDP_DW
+                                     73 	.globl _g_VDP_DR
+                                     74 	.globl _g_CGTABL
+                                     75 	.globl _g_SVFFFD
+                                     76 	.globl _g_RG27SAV
+                                     77 	.globl _g_RG26SAV
+                                     78 	.globl _g_RG25SAV
+                                     79 	.globl _g_SVFFF8
+                                     80 	.globl _g_MINROM
+                                     81 	.globl _g_RG23SAV
+                                     82 	.globl _g_RG22SAV
+                                     83 	.globl _g_RG21SAV
+                                     84 	.globl _g_RG20SAV
+                                     85 	.globl _g_RG19SAV
+                                     86 	.globl _g_RG18SAV
+                                     87 	.globl _g_RG17SAV
+                                     88 	.globl _g_RG16SAV
+                                     89 	.globl _g_RG15SAV
+                                     90 	.globl _g_RG14SAV
+                                     91 	.globl _g_RG13SAV
+                                     92 	.globl _g_RG12SAV
+                                     93 	.globl _g_RG11SAV
+                                     94 	.globl _g_RG10SAV
+                                     95 	.globl _g_RG09SAV
+                                     96 	.globl _g_RG08SAV
+                                     97 	.globl _g_PROCNM
+                                     98 	.globl _g_SLTWRK
+                                     99 	.globl _g_SLTATR
+                                    100 	.globl _g_SLTTBL
+                                    101 	.globl _g_EXPTBL
+                                    102 	.globl _g_MNROM
+                                    103 	.globl _g_DRWANG
+                                    104 	.globl _g_DRWSCL
+                                    105 	.globl _g_DRWFLG
+                                    106 	.globl _g_GYPOS
+                                    107 	.globl _g_GXPOS
+                                    108 	.globl _g_BRDATR
+                                    109 	.globl _g_CASPRV
+                                    110 	.globl _g_OLDSCR
+                                    111 	.globl _g_SCRMOD
+                                    112 	.globl _g_FLBMEM
+                                    113 	.globl _g_KANAMD
+                                    114 	.globl _g_KANAST
+                                    115 	.globl _g_CAPST
+                                    116 	.globl _g_CSTYLE
+                                    117 	.globl _g_CSRSW
+                                    118 	.globl _g_INSFLG
+                                    119 	.globl _g_ESCCNT
+                                    120 	.globl _g_GRPHED
+                                    121 	.globl _g_WINWID
+                                    122 	.globl _g_LOWLIM
+                                    123 	.globl _g_INTCNT
+                                    124 	.globl _g_INTVAL
+                                    125 	.globl _g_JIFFY
+                                    126 	.globl _g_PADX
+                                    127 	.globl _g_PADY
+                                    128 	.globl _g_INTFLG
+                                    129 	.globl _g_RTYCNT
+                                    130 	.globl _g_TRPTBL
+                                    131 	.globl _g_HIMEM
+                                    132 	.globl _g_BOTTOM
+                                    133 	.globl _g_PATWRK
+                                    134 	.globl _g_LINWRK
+                                    135 	.globl _g_KEYBUF
+                                    136 	.globl _g_NEWKEY
+                                    137 	.globl _g_OLDKEY
+                                    138 	.globl _g_CLIKFL
+                                    139 	.globl _g_ONGSBF
+                                    140 	.globl _g_FNKFLG
+                                    141 	.globl _g_FNKSWI
+                                    142 	.globl _g_CODSAV
+                                    143 	.globl _g_FSTPOS
+                                    144 	.globl _g_LINTTB
+                                    145 	.globl _g_BASROM
+                                    146 	.globl _g_ENSTOP
+                                    147 	.globl _g_VCBC
+                                    148 	.globl _g_VCBB
+                                    149 	.globl _g_VCBA
+                                    150 	.globl _g_PLYCNT
+                                    151 	.globl _g_MUSICF
+                                    152 	.globl _g_QUEUEN
+                                    153 	.globl _g_MCLPTR
+                                    154 	.globl _g_MCLLEN
+                                    155 	.globl _g_SAVVOL
+                                    156 	.globl _g_VOICEN
+                                    157 	.globl _g_SAVSP
+                                    158 	.globl _g_PRSCNT
+                                    159 	.globl _g_LSTMOD
+                                    160 	.globl _g_LSTCOM
+                                    161 	.globl _g_COMMSK
+                                    162 	.globl _g_ESTBLS
+                                    163 	.globl _g_FLAGS
+                                    164 	.globl _g_ERRORS
+                                    165 	.globl _g_DATCNT
+                                    166 	.globl _g_DEVNUM
+                                    167 	.globl _g_OLDINT
+                                    168 	.globl _g_OLDSTT
+                                    169 	.globl _g_MEXBIh
+                                    170 	.globl _g_RSIQLN
+                                    171 	.globl _g_RSFCB
+                                    172 	.globl _g_TOCNT
+                                    173 	.globl _g_RSTMP
+                                    174 	.globl _g_YSAVE
+                                    175 	.globl _g_XSAVE
+                                    176 	.globl _g_NORUSE
+                                    177 	.globl _g_MODE
+                                    178 	.globl _g_ROMA
+                                    179 	.globl _g_CHRCNT
+                                    180 	.globl _g_EXBRSA
+                                    181 	.globl _g_AVCSAV
+                                    182 	.globl _g_ACPAGE
+                                    183 	.globl _g_DPPAGE
+                                    184 	.globl _g_RS2IQ
+                                    185 	.globl _g_VOICCQ
+                                    186 	.globl _g_VOICBQ
+                                    187 	.globl _g_VOICAQ
+                                    188 	.globl _g_QUEBAK
+                                    189 	.globl _g_QUETAB
+                                    190 	.globl _g_ASPCT2
+                                    191 	.globl _g_ASPCT1
+                                    192 	.globl _g_HEADER
+                                    193 	.globl _g_HIGH
+                                    194 	.globl _g_LOW
+                                    195 	.globl _g_CS240
+                                    196 	.globl _g_CS120
+                                    197 	.globl _g_REPCNT
+                                    198 	.globl _g_SCNCNT
+                                    199 	.globl _g_FRCNEW
+                                    200 	.globl _g_QUEUES
+                                    201 	.globl _g_MINUPD
+                                    202 	.globl _g_MAXUPD
+                                    203 	.globl _g_TRGFLG
+                                    204 	.globl _g_STATFL
+                                    205 	.globl _g_RG7SAV
+                                    206 	.globl _g_RG6SAV
+                                    207 	.globl _g_RG5SAV
+                                    208 	.globl _g_RG4SAV
+                                    209 	.globl _g_RG3SAV
+                                    210 	.globl _g_RG2SAV
+                                    211 	.globl _g_RG1SAV
+                                    212 	.globl _g_RG0SAV
+                                    213 	.globl _g_CNSDFG
+                                    214 	.globl _g_USRTAB
+                                    215 	.globl _g_CLPRIM
+                                    216 	.globl _g_WRPRIM
+                                    217 	.globl _g_RDPRIM
+                                    218 ;--------------------------------------------------------
+                                    219 ; special function registers
+                                    220 ;--------------------------------------------------------
+                         000000A0   221 _g_PSG_RegPort	=	0x00a0
+                         000000A1   222 _g_PSG_DataPort	=	0x00a1
+                         000000A2   223 _g_PSG_StatPort	=	0x00a2
+                         00000010   224 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   225 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   226 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   227 _g_Printer_ControlPort	=	0x0090
+                         00000091   228 _g_Printer_DataPort	=	0x0091
+                         0000007C   229 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   230 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   231 _g_VDP_DataPort	=	0x0098
+                         00000099   232 _g_VDP_RegPort	=	0x0099
+                         00000099   233 _g_VDP_AddrPort	=	0x0099
+                         00000099   234 _g_VDP_StatPort	=	0x0099
+                         0000009A   235 _g_VDP_PalPort	=	0x009a
+                         0000009B   236 _g_VDP_IRegPort	=	0x009b
+                         000000A8   237 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   238 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   239 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   240 _g_PortControl	=	0x00ab
+                         000000B4   241 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   242 _g_RTC_DataPort	=	0x00b5
+                         000000C0   243 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   244 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   245 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   246 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   247 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   248 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   249 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   250 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   251 _g_TimerLowPort	=	0x00e6
+                         000000E7   252 _g_TimerHighPort	=	0x00e7
+                                    253 ;--------------------------------------------------------
+                                    254 ; ram data
+                                    255 ;--------------------------------------------------------
+                                    256 	.area _DATA
+                         0000F3AE   257 _g_LINL40	=	0xf3ae
+                         0000F3AF   258 _g_LINL32	=	0xf3af
+                         0000F3B0   259 _g_LINLEN	=	0xf3b0
+                         0000F3B1   260 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   261 _g_CLMLST	=	0xf3b2
+                         0000F3B3   262 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   263 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   264 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   265 _g_TXTATR	=	0xf3b9
+                         0000F3BB   266 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   267 _g_T32NAM	=	0xf3bd
+                         0000F3BF   268 _g_T32COL	=	0xf3bf
+                         0000F3C1   269 _g_T32CGP	=	0xf3c1
+                         0000F3C3   270 _g_T32ATR	=	0xf3c3
+                         0000F3C5   271 _g_T32PAT	=	0xf3c5
+                         0000F3C7   272 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   273 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   274 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   275 _g_GRPATR	=	0xf3cd
+                         0000F3CF   276 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   277 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   278 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   279 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   280 _g_MLTATR	=	0xf3d7
+                         0000F3D9   281 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   282 _g_CLIKSW	=	0xf3db
+                         0000F3DC   283 _g_CSRY	=	0xf3dc
+                         0000F3DD   284 _g_CSRX	=	0xf3dd
+                         0000F3E9   285 _g_FORCLR	=	0xf3e9
+                         0000F3EA   286 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   287 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   288 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   289 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   290 _g_GETPNT	=	0xf3fa
+                         0000F87F   291 _g_FNKSTR	=	0xf87f
+                         0000F92A   292 _g_CLOC	=	0xf92a
+                         0000F92C   293 _g_CMASK	=	0xf92c
+                         0000FB02   294 _g_LOGOPR	=	0xfb02
+                         0000FCB7   295 _g_GRPACX	=	0xfcb7
+                         0000FCB9   296 _g_GRPACY	=	0xfcb9
+                         0000FFFF   297 _g_SLTSL	=	0xffff
+                         00000006   298 _DOS_TPAUpperAddr	=	0x0006
+                                    299 ;--------------------------------------------------------
+                                    300 ; ram data
+                                    301 ;--------------------------------------------------------
+                                    302 	.area _INITIALIZED
+                                    303 ;--------------------------------------------------------
+                                    304 ; absolute ram data
+                                    305 ;--------------------------------------------------------
+                                    306 	.area _DABS (ABS)
+                                    307 	.area _DABS (ABS)
+                                    308 ;--------------------------------------------------------
+                                    309 ; global & static initialisations
+                                    310 ;--------------------------------------------------------
+                                    311 	.area _HOME
+                                    312 	.area _GSINIT
+                                    313 	.area _GSFINAL
+                                    314 	.area _GSINIT
+                                    315 ;--------------------------------------------------------
+                                    316 ; Home
+                                    317 ;--------------------------------------------------------
+                                    318 	.area _HOME
+                                    319 	.area _HOME
+                                    320 ;--------------------------------------------------------
+                                    321 ; code
+                                    322 ;--------------------------------------------------------
+                                    323 	.area _CODE
+                                    324 ;./main.c:4: void main()
+                                    325 ;	---------------------------------
+                                    326 ; Function main
+                                    327 ; ---------------------------------
+    00000000                        328 _main::
+                                    329 ;./main.c:6: ClearData();
+    00000000 CDr00r00         [17]  330 	call	_ClearData
+                                    331 ;./main.c:7: GameMain();
+                                    332 ;./main.c:8: }
+    00000003 C3r00r00         [10]  333 	jp	_GameMain
+                         0000F380   334 _g_RDPRIM	=	0xf380
+                         0000F385   335 _g_WRPRIM	=	0xf385
+                         0000F38C   336 _g_CLPRIM	=	0xf38c
+                         0000F39A   337 _g_USRTAB	=	0xf39a
+                         0000F3DE   338 _g_CNSDFG	=	0xf3de
+                         0000F3DF   339 _g_RG0SAV	=	0xf3df
+                         0000F3E0   340 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   341 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   342 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   343 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   344 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   345 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   346 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   347 _g_STATFL	=	0xf3e7
+                         0000F3E8   348 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   349 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   350 _g_MINUPD	=	0xf3ef
+                         0000F3F3   351 _g_QUEUES	=	0xf3f3
+                         0000F3F5   352 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   353 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   354 _g_REPCNT	=	0xf3f7
+                         0000F3FC   355 _g_CS120	=	0xf3fc
+                         0000F401   356 _g_CS240	=	0xf401
+                         0000F406   357 _g_LOW	=	0xf406
+                         0000F408   358 _g_HIGH	=	0xf408
+                         0000F40A   359 _g_HEADER	=	0xf40a
+                         0000F40B   360 _g_ASPCT1	=	0xf40b
+                         0000F40D   361 _g_ASPCT2	=	0xf40d
+                         0000F959   362 _g_QUETAB	=	0xf959
+                         0000F971   363 _g_QUEBAK	=	0xf971
+                         0000F975   364 _g_VOICAQ	=	0xf975
+                         0000F9F5   365 _g_VOICBQ	=	0xf9f5
+                         0000FA75   366 _g_VOICCQ	=	0xfa75
+                         0000FAF5   367 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   368 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   369 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   370 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   371 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   372 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   373 _g_ROMA	=	0xfafa
+                         0000FAFC   374 _g_MODE	=	0xfafc
+                         0000FAFD   375 _g_NORUSE	=	0xfafd
+                         0000FAFE   376 _g_XSAVE	=	0xfafe
+                         0000FB00   377 _g_YSAVE	=	0xfb00
+                         0000FB03   378 _g_RSTMP	=	0xfb03
+                         0000FB03   379 _g_TOCNT	=	0xfb03
+                         0000FB04   380 _g_RSFCB	=	0xfb04
+                         0000FB06   381 _g_RSIQLN	=	0xfb06
+                         0000FB07   382 _g_MEXBIh	=	0xfb07
+                         0000FB0C   383 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   384 _g_OLDINT	=	0xfb0c
+                         0000FB16   385 _g_DEVNUM	=	0xfb16
+                         0000FB17   386 _g_DATCNT	=	0xfb17
+                         0000FB1A   387 _g_ERRORS	=	0xfb1a
+                         0000FB1B   388 _g_FLAGS	=	0xfb1b
+                         0000FB1C   389 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   390 _g_COMMSK	=	0xfb1d
+                         0000FB1E   391 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   392 _g_LSTMOD	=	0xfb1f
+                         0000FB35   393 _g_PRSCNT	=	0xfb35
+                         0000FB36   394 _g_SAVSP	=	0xfb36
+                         0000FB38   395 _g_VOICEN	=	0xfb38
+                         0000FB39   396 _g_SAVVOL	=	0xfb39
+                         0000FB3B   397 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   398 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   399 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   400 _g_MUSICF	=	0xfb3f
+                         0000FB40   401 _g_PLYCNT	=	0xfb40
+                         0000FB41   402 _g_VCBA	=	0xfb41
+                         0000FB66   403 _g_VCBB	=	0xfb66
+                         0000FB8B   404 _g_VCBC	=	0xfb8b
+                         0000FBB0   405 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   406 _g_BASROM	=	0xfbb1
+                         0000FBB2   407 _g_LINTTB	=	0xfbb2
+                         0000FBCA   408 _g_FSTPOS	=	0xfbca
+                         0000FBCC   409 _g_CODSAV	=	0xfbcc
+                         0000FBCD   410 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   411 _g_FNKFLG	=	0xfbce
+                         0000FBD8   412 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   413 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   414 _g_OLDKEY	=	0xfbda
+                         0000FBE5   415 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   416 _g_KEYBUF	=	0xfbf0
+                         0000FC18   417 _g_LINWRK	=	0xfc18
+                         0000FC40   418 _g_PATWRK	=	0xfc40
+                         0000FC48   419 _g_BOTTOM	=	0xfc48
+                         0000FC4A   420 _g_HIMEM	=	0xfc4a
+                         0000FC4C   421 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   422 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   423 _g_INTFLG	=	0xfc9b
+                         0000FC9C   424 _g_PADY	=	0xfc9c
+                         0000FC9D   425 _g_PADX	=	0xfc9d
+                         0000FC9E   426 _g_JIFFY	=	0xfc9e
+                         0000FCA0   427 _g_INTVAL	=	0xfca0
+                         0000FCA2   428 _g_INTCNT	=	0xfca2
+                         0000FCA4   429 _g_LOWLIM	=	0xfca4
+                         0000FCA5   430 _g_WINWID	=	0xfca5
+                         0000FCA6   431 _g_GRPHED	=	0xfca6
+                         0000FCA7   432 _g_ESCCNT	=	0xfca7
+                         0000FCA8   433 _g_INSFLG	=	0xfca8
+                         0000FCA9   434 _g_CSRSW	=	0xfca9
+                         0000FCAA   435 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   436 _g_CAPST	=	0xfcab
+                         0000FCAC   437 _g_KANAST	=	0xfcac
+                         0000FCAD   438 _g_KANAMD	=	0xfcad
+                         0000FCAE   439 _g_FLBMEM	=	0xfcae
+                         0000FCAF   440 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   441 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   442 _g_CASPRV	=	0xfcb1
+                         0000FCB2   443 _g_BRDATR	=	0xfcb2
+                         0000FCB3   444 _g_GXPOS	=	0xfcb3
+                         0000FCB5   445 _g_GYPOS	=	0xfcb5
+                         0000FCBB   446 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   447 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   448 _g_DRWANG	=	0xfcbd
+                         0000FCC1   449 _g_MNROM	=	0xfcc1
+                         0000FCC1   450 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   451 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   452 _g_SLTATR	=	0xfcc9
+                         0000FD09   453 _g_SLTWRK	=	0xfd09
+                         0000FD89   454 _g_PROCNM	=	0xfd89
+                         0000FFE7   455 _g_RG08SAV	=	0xffe7
+                         0000FFE8   456 _g_RG09SAV	=	0xffe8
+                         0000FFE9   457 _g_RG10SAV	=	0xffe9
+                         0000FFEA   458 _g_RG11SAV	=	0xffea
+                         0000FFEB   459 _g_RG12SAV	=	0xffeb
+                         0000FFEC   460 _g_RG13SAV	=	0xffec
+                         0000FFED   461 _g_RG14SAV	=	0xffed
+                         0000FFEE   462 _g_RG15SAV	=	0xffee
+                         0000FFEF   463 _g_RG16SAV	=	0xffef
+                         0000FFF0   464 _g_RG17SAV	=	0xfff0
+                         0000FFF1   465 _g_RG18SAV	=	0xfff1
+                         0000FFF2   466 _g_RG19SAV	=	0xfff2
+                         0000FFF3   467 _g_RG20SAV	=	0xfff3
+                         0000FFF4   468 _g_RG21SAV	=	0xfff4
+                         0000FFF5   469 _g_RG22SAV	=	0xfff5
+                         0000FFF6   470 _g_RG23SAV	=	0xfff6
+                         0000FFF7   471 _g_MINROM	=	0xfff7
+                         0000FFF8   472 _g_SVFFF8	=	0xfff8
+                         0000FFFA   473 _g_RG25SAV	=	0xfffa
+                         0000FFFB   474 _g_RG26SAV	=	0xfffb
+                         0000FFFC   475 _g_RG27SAV	=	0xfffc
+                         0000FFFD   476 _g_SVFFFD	=	0xfffd
+                         00000004   477 _g_CGTABL	=	0x0004
+                         00000006   478 _g_VDP_DR	=	0x0006
+                         00000007   479 _g_VDP_DW	=	0x0007
+                         0000002B   480 _g_BASRVN	=	0x002b
+                         0000002B   481 _g_ROMVersion	=	0x002b
+                         0000002D   482 _g_MSXVER	=	0x002d
+                         0000002E   483 _g_MSXMID	=	0x002e
+                         00000034   484 _g_CHAR_16	=	0x0034
+    00000006                        485 ___str_0:
+    00000006 0A                     486 	.db 0x0a
+    00000007 0D                     487 	.db 0x0d
+    00000008 24                     488 	.ascii "$"
+    00000009 00                     489 	.db 0x00
+                         00000000   490 _g_SUBRID	=	0x0000
+                         00000002   491 _g_STRSRC	=	0x0002
+                         0000F30F   492 _g_KANJTABLE	=	0xf30f
+                         0000F323   493 _g_DISKVE	=	0xf323
+                         0000F325   494 _g_BREAKV	=	0xf325
+                         0000F341   495 _g_RAMAD0	=	0xf341
+                         0000F342   496 _g_RAMAD1	=	0xf342
+                         0000F343   497 _g_RAMAD2	=	0xf343
+                         0000F344   498 _g_RAMAD3	=	0xf344
+                         0000F348   499 _g_MASTER	=	0xf348
+                         0000F37D   500 _g_BDOS	=	0xf37d
+                                    501 	.area _CODE
+                                    502 	.area _INITIALIZER
+                                    503 	.area _CABS (ABS)

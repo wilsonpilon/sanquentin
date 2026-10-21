@@ -1,0 +1,183 @@
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _Aa                                                             ******** GX
+    _Brief                                                          ******** GX
+  0 _ChopSeven                                                      000003D8 GR
+    _Col                                                            ******** GX
+  0 _Convert                                                        000007A0 R
+    _Copy                                                           ******** GX
+    _Crawl                                                          ******** GX
+  0 _D                                                              0000006E R
+  0 _Default1                                                       000012FC GR
+    _Delete                                                         ******** GX
+  0 _Describe                                                       00000D0A GR
+  0 _Dictionary                                                     00000BE3 GR
+    _EFlag                                                          ******** GX
+    _Events                                                         ******** GX
+    _FFlag                                                          ******** GX
+  0 _FN                                                             00000605 GR
+  1 _FN_Temp_10000_85                                               00000002 R
+  0 _FindMood                                                       000004C2 GR
+  0 _FindWord                                                       000009EC R
+  0 _Here                                                           00000634 GR
+    _HingeCon                                                       ******** GX
+    _HolstCon                                                       ******** GX
+    _Input                                                          ******** GX
+    _Insert                                                         ******** GX
+    _Inv                                                            ******** GX
+    _L                                                              ******** GX
+  0 _LowerCase                                                      000003B4 GR
+  0 _MoveTo                                                         000011E6 GR
+    _MugCon                                                         ******** GX
+    _Mx                                                             ******** GX
+    _N1                                                             ******** GX
+    _N2                                                             ******** GX
+    _NStr                                                           ******** GX
+    _NicheCon                                                       ******** GX
+    _Nn                                                             ******** GX
+    _NounSet                                                        ******** GX
+    _PodumCon                                                       ******** GX
+    _Pos                                                            ******** GX
+    _Pp                                                             ******** GX
+  0 _PreFormat                                                      000000C2 GR
+  0 _Present                                                        000006CA GR
+    _Prm                                                            ******** GX
+    _PyraCon                                                        ******** GX
+  0 _QFormat                                                        00000000 R
+    _R                                                              ******** GX
+    _RL                                                             ******** GX
+    _RN                                                             ******** GX
+    _RR                                                             ******** GX
+    _RS                                                             ******** GX
+    _RobotCon                                                       ******** GX
+    _SFlag                                                          ******** GX
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 2
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    _SatchCon                                                       ******** GX
+    _SetAdd                                                         ******** GX
+    _SetDel                                                         ******** GX
+    _SetEmpty                                                       ******** GX
+    _SetIn                                                          ******** GX
+    _Socket                                                         ******** GX
+  0 _Spaces                                                         00000040 R
+    _StrCat                                                         ******** GX
+    _StrCpy                                                         ******** GX
+    _StrEq                                                          ******** GX
+  0 _Strip                                                          00000091 R
+    _VNP                                                            ******** GX
+    _VStr                                                           ******** GX
+    _Vb                                                             ******** GX
+    _Vb_                                                            ******** GX
+    _Wear                                                           ******** GX
+    _Wln                                                            ******** GX
+    _Word                                                           ******** GX
+    _Wr                                                             ******** GX
+    ___sdcc_enter_ix                                                ******** GX
+  0 ___str_0                                                        0000006C R
+  0 ___str_1                                                        000002E1 R
+  0 ___str_10                                                       00000319 R
+  0 ___str_11                                                       00000320 R
+  0 ___str_12                                                       00000326 R
+  0 ___str_13                                                       0000032E R
+  0 ___str_14                                                       00000334 R
+  0 ___str_15                                                       0000033B R
+  0 ___str_16                                                       00000344 R
+  0 ___str_17                                                       0000034C R
+  0 ___str_18                                                       00000355 R
+  0 ___str_19                                                       0000035C R
+  0 ___str_2                                                        000002E4 R
+  0 ___str_20                                                       0000035E R
+  0 ___str_21                                                       00000360 R
+  0 ___str_22                                                       00000362 R
+  0 ___str_23                                                       00000364 R
+  0 ___str_24                                                       0000036D R
+  0 ___str_25                                                       00000376 R
+  0 ___str_26                                                       0000037D R
+  0 ___str_27                                                       00000384 R
+  0 ___str_28                                                       0000038D R
+  0 ___str_29                                                       00000396 R
+  0 ___str_3                                                        000002EC R
+  0 ___str_30                                                       0000039C R
+  0 ___str_31                                                       0000039F R
+  0 ___str_32                                                       000003A1 R
+  0 ___str_33                                                       000003A3 R
+  0 ___str_34                                                       000003A6 R
+  0 ___str_35                                                       000003A9 R
+  0 ___str_36                                                       00000603 R
+  0 ___str_37                                                       00000632 R
+  0 ___str_38                                                       00000786 R
+  0 ___str_39                                                       00000799 R
+  0 ___str_4                                                        000002F3 R
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 3
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  0 ___str_40                                                       00000BDD R
+  0 ___str_41                                                       00000BDF R
+  0 ___str_42                                                       00000BE1 R
+  0 ___str_43                                                       00000CC4 R
+  0 ___str_44                                                       00000CC6 R
+  0 ___str_45                                                       000010AE R
+  0 ___str_46                                                       000010BD R
+  0 ___str_47                                                       000010C4 R
+  0 ___str_48                                                       000010D1 R
+  0 ___str_49                                                       000010DD R
+  0 ___str_5                                                        000002F9 R
+  0 ___str_50                                                       000010F6 R
+  0 ___str_51                                                       0000110E R
+  0 ___str_52                                                       0000111F R
+  0 ___str_53                                                       00001130 R
+  0 ___str_54                                                       00001140 R
+  0 ___str_55                                                       0000115A R
+  0 ___str_56                                                       00001178 R
+  0 ___str_57                                                       00001191 R
+  0 ___str_58                                                       000011A7 R
+  0 ___str_59                                                       000011C0 R
+  0 ___str_6                                                        000002FE R
+  0 ___str_60                                                       000015BB R
+  0 ___str_61                                                       000015DA R
+  0 ___str_62                                                       000015E2 R
+  0 ___str_63                                                       000015E7 R
+  0 ___str_64                                                       000015F6 R
+  0 ___str_65                                                       0000160D R
+  0 ___str_66                                                       00001625 R
+  0 ___str_67                                                       00001629 R
+  0 ___str_68                                                       00001644 R
+  0 ___str_69                                                       00001646 R
+  0 ___str_7                                                        00000307 R
+  0 ___str_70                                                       0000164F R
+  0 ___str_8                                                        0000030C R
+  0 ___str_9                                                        00000312 R
+    _list                                                           ******** GX
+    _o                                                              ******** GX
+  1 _s_I                                                            00000000 R
+    _x                                                              ******** GX
+    _y                                                              ******** GX
+
+
+ASxxxx Assembler V05.50.4+NoICE+SDCCmods-WIP-R14  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                               Page 4
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size     1663   flags    0
+   1 _DATA                                      size       20   flags    0
+   2 _INITIALIZED                               size        0   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        0   flags    0
+   8 _CABS                                      size        0   flags    8
+

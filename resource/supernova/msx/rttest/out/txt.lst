@@ -1,0 +1,1045 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module txt
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _VDP_CommandSetupR36
+                                     12 	.globl _VDP_CommandSetupR32
+                                     13 	.globl _VDP_CommandWait
+                                     14 	.globl _g_TabC
+                                     15 	.globl _g_TabB
+                                     16 	.globl _g_TabA
+                                     17 	.globl _g_Plane
+                                     18 	.globl _DOS_TPAUpperAddr
+                                     19 	.globl _g_SLTSL
+                                     20 	.globl _g_GRPACY
+                                     21 	.globl _g_GRPACX
+                                     22 	.globl _g_LOGOPR
+                                     23 	.globl _g_CMASK
+                                     24 	.globl _g_CLOC
+                                     25 	.globl _g_FNKSTR
+                                     26 	.globl _g_GETPNT
+                                     27 	.globl _g_PUTPNT
+                                     28 	.globl _g_ATRBYT
+                                     29 	.globl _g_BDRCLR
+                                     30 	.globl _g_BAKCLR
+                                     31 	.globl _g_FORCLR
+                                     32 	.globl _g_CSRX
+                                     33 	.globl _g_CSRY
+                                     34 	.globl _g_CLIKSW
+                                     35 	.globl _g_MLTPAT
+                                     36 	.globl _g_MLTATR
+                                     37 	.globl _g_MLTCGP
+                                     38 	.globl _g_MLTCOL
+                                     39 	.globl _g_MLTNAM
+                                     40 	.globl _g_GRPPAT
+                                     41 	.globl _g_GRPATR
+                                     42 	.globl _g_GRPCGP
+                                     43 	.globl _g_GRPCOL
+                                     44 	.globl _g_GRPNAM
+                                     45 	.globl _g_T32PAT
+                                     46 	.globl _g_T32ATR
+                                     47 	.globl _g_T32CGP
+                                     48 	.globl _g_T32COL
+                                     49 	.globl _g_T32NAM
+                                     50 	.globl _g_TXTPAT
+                                     51 	.globl _g_TXTATR
+                                     52 	.globl _g_TXTCGP
+                                     53 	.globl _g_TXTCOL
+                                     54 	.globl _g_TXTNAM
+                                     55 	.globl _g_CLMLST
+                                     56 	.globl _g_CRTCNT
+                                     57 	.globl _g_LINLEN
+                                     58 	.globl _g_LINL32
+                                     59 	.globl _g_LINL40
+                                     60 	.globl _g_BDOS
+                                     61 	.globl _g_MASTER
+                                     62 	.globl _g_RAMAD3
+                                     63 	.globl _g_RAMAD2
+                                     64 	.globl _g_RAMAD1
+                                     65 	.globl _g_RAMAD0
+                                     66 	.globl _g_BREAKV
+                                     67 	.globl _g_DISKVE
+                                     68 	.globl _g_KANJTABLE
+                                     69 	.globl _g_STRSRC
+                                     70 	.globl _g_SUBRID
+                                     71 	.globl _g_CHAR_16
+                                     72 	.globl _g_MSXMID
+                                     73 	.globl _g_MSXVER
+                                     74 	.globl _g_ROMVersion
+                                     75 	.globl _g_BASRVN
+                                     76 	.globl _g_VDP_DW
+                                     77 	.globl _g_VDP_DR
+                                     78 	.globl _g_CGTABL
+                                     79 	.globl _g_SVFFFD
+                                     80 	.globl _g_RG27SAV
+                                     81 	.globl _g_RG26SAV
+                                     82 	.globl _g_RG25SAV
+                                     83 	.globl _g_SVFFF8
+                                     84 	.globl _g_MINROM
+                                     85 	.globl _g_RG23SAV
+                                     86 	.globl _g_RG22SAV
+                                     87 	.globl _g_RG21SAV
+                                     88 	.globl _g_RG20SAV
+                                     89 	.globl _g_RG19SAV
+                                     90 	.globl _g_RG18SAV
+                                     91 	.globl _g_RG17SAV
+                                     92 	.globl _g_RG16SAV
+                                     93 	.globl _g_RG15SAV
+                                     94 	.globl _g_RG14SAV
+                                     95 	.globl _g_RG13SAV
+                                     96 	.globl _g_RG12SAV
+                                     97 	.globl _g_RG11SAV
+                                     98 	.globl _g_RG10SAV
+                                     99 	.globl _g_RG09SAV
+                                    100 	.globl _g_RG08SAV
+                                    101 	.globl _g_PROCNM
+                                    102 	.globl _g_SLTWRK
+                                    103 	.globl _g_SLTATR
+                                    104 	.globl _g_SLTTBL
+                                    105 	.globl _g_EXPTBL
+                                    106 	.globl _g_MNROM
+                                    107 	.globl _g_DRWANG
+                                    108 	.globl _g_DRWSCL
+                                    109 	.globl _g_DRWFLG
+                                    110 	.globl _g_GYPOS
+                                    111 	.globl _g_GXPOS
+                                    112 	.globl _g_BRDATR
+                                    113 	.globl _g_CASPRV
+                                    114 	.globl _g_OLDSCR
+                                    115 	.globl _g_SCRMOD
+                                    116 	.globl _g_FLBMEM
+                                    117 	.globl _g_KANAMD
+                                    118 	.globl _g_KANAST
+                                    119 	.globl _g_CAPST
+                                    120 	.globl _g_CSTYLE
+                                    121 	.globl _g_CSRSW
+                                    122 	.globl _g_INSFLG
+                                    123 	.globl _g_ESCCNT
+                                    124 	.globl _g_GRPHED
+                                    125 	.globl _g_WINWID
+                                    126 	.globl _g_LOWLIM
+                                    127 	.globl _g_INTCNT
+                                    128 	.globl _g_INTVAL
+                                    129 	.globl _g_JIFFY
+                                    130 	.globl _g_PADX
+                                    131 	.globl _g_PADY
+                                    132 	.globl _g_INTFLG
+                                    133 	.globl _g_RTYCNT
+                                    134 	.globl _g_TRPTBL
+                                    135 	.globl _g_HIMEM
+                                    136 	.globl _g_BOTTOM
+                                    137 	.globl _g_PATWRK
+                                    138 	.globl _g_LINWRK
+                                    139 	.globl _g_KEYBUF
+                                    140 	.globl _g_NEWKEY
+                                    141 	.globl _g_OLDKEY
+                                    142 	.globl _g_CLIKFL
+                                    143 	.globl _g_ONGSBF
+                                    144 	.globl _g_FNKFLG
+                                    145 	.globl _g_FNKSWI
+                                    146 	.globl _g_CODSAV
+                                    147 	.globl _g_FSTPOS
+                                    148 	.globl _g_LINTTB
+                                    149 	.globl _g_BASROM
+                                    150 	.globl _g_ENSTOP
+                                    151 	.globl _g_VCBC
+                                    152 	.globl _g_VCBB
+                                    153 	.globl _g_VCBA
+                                    154 	.globl _g_PLYCNT
+                                    155 	.globl _g_MUSICF
+                                    156 	.globl _g_QUEUEN
+                                    157 	.globl _g_MCLPTR
+                                    158 	.globl _g_MCLLEN
+                                    159 	.globl _g_SAVVOL
+                                    160 	.globl _g_VOICEN
+                                    161 	.globl _g_SAVSP
+                                    162 	.globl _g_PRSCNT
+                                    163 	.globl _g_LSTMOD
+                                    164 	.globl _g_LSTCOM
+                                    165 	.globl _g_COMMSK
+                                    166 	.globl _g_ESTBLS
+                                    167 	.globl _g_FLAGS
+                                    168 	.globl _g_ERRORS
+                                    169 	.globl _g_DATCNT
+                                    170 	.globl _g_DEVNUM
+                                    171 	.globl _g_OLDINT
+                                    172 	.globl _g_OLDSTT
+                                    173 	.globl _g_MEXBIh
+                                    174 	.globl _g_RSIQLN
+                                    175 	.globl _g_RSFCB
+                                    176 	.globl _g_TOCNT
+                                    177 	.globl _g_RSTMP
+                                    178 	.globl _g_YSAVE
+                                    179 	.globl _g_XSAVE
+                                    180 	.globl _g_NORUSE
+                                    181 	.globl _g_MODE
+                                    182 	.globl _g_ROMA
+                                    183 	.globl _g_CHRCNT
+                                    184 	.globl _g_EXBRSA
+                                    185 	.globl _g_AVCSAV
+                                    186 	.globl _g_ACPAGE
+                                    187 	.globl _g_DPPAGE
+                                    188 	.globl _g_RS2IQ
+                                    189 	.globl _g_VOICCQ
+                                    190 	.globl _g_VOICBQ
+                                    191 	.globl _g_VOICAQ
+                                    192 	.globl _g_QUEBAK
+                                    193 	.globl _g_QUETAB
+                                    194 	.globl _g_ASPCT2
+                                    195 	.globl _g_ASPCT1
+                                    196 	.globl _g_HEADER
+                                    197 	.globl _g_HIGH
+                                    198 	.globl _g_LOW
+                                    199 	.globl _g_CS240
+                                    200 	.globl _g_CS120
+                                    201 	.globl _g_REPCNT
+                                    202 	.globl _g_SCNCNT
+                                    203 	.globl _g_FRCNEW
+                                    204 	.globl _g_QUEUES
+                                    205 	.globl _g_MINUPD
+                                    206 	.globl _g_MAXUPD
+                                    207 	.globl _g_TRGFLG
+                                    208 	.globl _g_STATFL
+                                    209 	.globl _g_RG7SAV
+                                    210 	.globl _g_RG6SAV
+                                    211 	.globl _g_RG5SAV
+                                    212 	.globl _g_RG4SAV
+                                    213 	.globl _g_RG3SAV
+                                    214 	.globl _g_RG2SAV
+                                    215 	.globl _g_RG1SAV
+                                    216 	.globl _g_RG0SAV
+                                    217 	.globl _g_CNSDFG
+                                    218 	.globl _g_USRTAB
+                                    219 	.globl _g_CLPRIM
+                                    220 	.globl _g_WRPRIM
+                                    221 	.globl _g_RDPRIM
+                                    222 	.globl _Txt_SetColor
+                                    223 	.globl _Txt_Init
+                                    224 	.globl _Txt_Draw
+                                    225 	.globl _Txt_ClearRow
+                                    226 	.globl _Txt_Scroll
+                                    227 ;--------------------------------------------------------
+                                    228 ; special function registers
+                                    229 ;--------------------------------------------------------
+                         000000A0   230 _g_PSG_RegPort	=	0x00a0
+                         000000A1   231 _g_PSG_DataPort	=	0x00a1
+                         000000A2   232 _g_PSG_StatPort	=	0x00a2
+                         00000010   233 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   234 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   235 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   236 _g_Printer_ControlPort	=	0x0090
+                         00000091   237 _g_Printer_DataPort	=	0x0091
+                         0000007C   238 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   239 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   240 _g_VDP_DataPort	=	0x0098
+                         00000099   241 _g_VDP_RegPort	=	0x0099
+                         00000099   242 _g_VDP_AddrPort	=	0x0099
+                         00000099   243 _g_VDP_StatPort	=	0x0099
+                         0000009A   244 _g_VDP_PalPort	=	0x009a
+                         0000009B   245 _g_VDP_IRegPort	=	0x009b
+                         000000A8   246 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   247 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   248 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   249 _g_PortControl	=	0x00ab
+                         000000B4   250 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   251 _g_RTC_DataPort	=	0x00b5
+                         000000C0   252 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   253 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   254 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   255 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   256 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   257 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   258 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   259 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   260 _g_TimerLowPort	=	0x00e6
+                         000000E7   261 _g_TimerHighPort	=	0x00e7
+                                    262 ;--------------------------------------------------------
+                                    263 ; ram data
+                                    264 ;--------------------------------------------------------
+                                    265 	.area _DATA
+                         0000F3AE   266 _g_LINL40	=	0xf3ae
+                         0000F3AF   267 _g_LINL32	=	0xf3af
+                         0000F3B0   268 _g_LINLEN	=	0xf3b0
+                         0000F3B1   269 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   270 _g_CLMLST	=	0xf3b2
+                         0000F3B3   271 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   272 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   273 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   274 _g_TXTATR	=	0xf3b9
+                         0000F3BB   275 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   276 _g_T32NAM	=	0xf3bd
+                         0000F3BF   277 _g_T32COL	=	0xf3bf
+                         0000F3C1   278 _g_T32CGP	=	0xf3c1
+                         0000F3C3   279 _g_T32ATR	=	0xf3c3
+                         0000F3C5   280 _g_T32PAT	=	0xf3c5
+                         0000F3C7   281 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   282 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   283 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   284 _g_GRPATR	=	0xf3cd
+                         0000F3CF   285 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   286 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   287 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   288 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   289 _g_MLTATR	=	0xf3d7
+                         0000F3D9   290 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   291 _g_CLIKSW	=	0xf3db
+                         0000F3DC   292 _g_CSRY	=	0xf3dc
+                         0000F3DD   293 _g_CSRX	=	0xf3dd
+                         0000F3E9   294 _g_FORCLR	=	0xf3e9
+                         0000F3EA   295 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   296 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   297 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   298 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   299 _g_GETPNT	=	0xf3fa
+                         0000F87F   300 _g_FNKSTR	=	0xf87f
+                         0000F92A   301 _g_CLOC	=	0xf92a
+                         0000F92C   302 _g_CMASK	=	0xf92c
+                         0000FB02   303 _g_LOGOPR	=	0xfb02
+                         0000FCB7   304 _g_GRPACX	=	0xfcb7
+                         0000FCB9   305 _g_GRPACY	=	0xfcb9
+                         0000FFFF   306 _g_SLTSL	=	0xffff
+                         00000006   307 _DOS_TPAUpperAddr	=	0x0006
+                         0000C000   308 _g_Plane	=	0xc000
+                         0000C800   309 _g_TabA	=	0xc800
+                         0000C900   310 _g_TabB	=	0xc900
+                         0000CA00   311 _g_TabC	=	0xca00
+    00000000                        312 _s_Str:
+    00000000                        313 	.ds 2
+    00000002                        314 _s_Vram:
+    00000002                        315 	.ds 2
+    00000004                        316 _s_Len:
+    00000004                        317 	.ds 1
+    00000005                        318 _s_Row:
+    00000005                        319 	.ds 1
+                                    320 ;--------------------------------------------------------
+                                    321 ; ram data
+                                    322 ;--------------------------------------------------------
+                                    323 	.area _INITIALIZED
+    00000000                        324 _s_Fg:
+    00000000                        325 	.ds 1
+    00000001                        326 _s_Bg:
+    00000001                        327 	.ds 1
+                                    328 ;--------------------------------------------------------
+                                    329 ; absolute ram data
+                                    330 ;--------------------------------------------------------
+                                    331 	.area _DABS (ABS)
+                                    332 	.area _DABS (ABS)
+                                    333 ;--------------------------------------------------------
+                                    334 ; global & static initialisations
+                                    335 ;--------------------------------------------------------
+                                    336 	.area _HOME
+                                    337 	.area _GSINIT
+                                    338 	.area _GSFINAL
+                                    339 	.area _GSINIT
+                                    340 ;--------------------------------------------------------
+                                    341 ; Home
+                                    342 ;--------------------------------------------------------
+                                    343 	.area _HOME
+                                    344 	.area _HOME
+                                    345 ;--------------------------------------------------------
+                                    346 ; code
+                                    347 ;--------------------------------------------------------
+                                    348 	.area _CODE
+                                    349 ;./../txt.c:20: void Txt_SetColor(u8 fg, u8 bg)
+                                    350 ;	---------------------------------
+                                    351 ; Function Txt_SetColor
+                                    352 ; ---------------------------------
+    00000000                        353 _Txt_SetColor::
+    00000000 DD E5            [15]  354 	push	ix
+    00000002 DD 21 00 00      [14]  355 	ld	ix,	#0
+    00000006 DD 39            [15]  356 	add	ix, sp
+    00000008 FD 21 F9 FF      [14]  357 	ld	iy, #-7
+    0000000C FD 39            [15]  358 	add	iy, sp
+    0000000E FD F9            [10]  359 	ld	sp, iy
+    00000010 DD 77 FE         [19]  360 	ld	-2 (ix), a
+    00000013 DD 75 FD         [19]  361 	ld	-3 (ix), l
+                                    362 ;./../txt.c:22: if (fg == s_Fg && bg == s_Bg)
+    00000016 3Ar00r00         [13]  363 	ld	a, (_s_Fg)
+    00000019 DD 96 FE         [19]  364 	sub	a, -2 (ix)
+    0000001C 20 09            [12]  365 	jr	nz, 00102$
+    0000001E 3Ar01r00         [13]  366 	ld	a, (_s_Bg)
+    00000021 DD 96 FD         [19]  367 	sub	a, -3 (ix)
+    00000024 CArF2r00         [10]  368 	jp	z, 00116$
+                                    369 ;./../txt.c:23: return;
+    00000027                        370 00102$:
+                                    371 ;./../txt.c:24: s_Fg = fg;
+    00000027 DD 7E FE         [19]  372 	ld	a, -2 (ix)
+    0000002A 32r00r00         [13]  373 	ld	(#_s_Fg), a
+                                    374 ;./../txt.c:25: s_Bg = bg;
+    0000002D DD 7E FD         [19]  375 	ld	a, -3 (ix)
+    00000030 32r01r00         [13]  376 	ld	(#_s_Bg), a
+                                    377 ;./../txt.c:27: t[0] = (bg << 4) | bg;
+    00000033 DD 7E FD         [19]  378 	ld	a, -3 (ix)
+    00000036 87               [ 4]  379 	add	a, a
+    00000037 87               [ 4]  380 	add	a, a
+    00000038 87               [ 4]  381 	add	a, a
+    00000039 87               [ 4]  382 	add	a, a
+    0000003A 4F               [ 4]  383 	ld	c, a
+    0000003B DD B6 FD         [19]  384 	or	a, -3 (ix)
+    0000003E DD 77 F9         [19]  385 	ld	-7 (ix), a
+                                    386 ;./../txt.c:28: t[1] = (bg << 4) | fg;
+    00000041 79               [ 4]  387 	ld	a, c
+    00000042 DD B6 FE         [19]  388 	or	a, -2 (ix)
+    00000045 DD 77 FA         [19]  389 	ld	-6 (ix), a
+                                    390 ;./../txt.c:29: t[2] = (fg << 4) | bg;
+    00000048 DD 7E FE         [19]  391 	ld	a, -2 (ix)
+    0000004B 87               [ 4]  392 	add	a, a
+    0000004C 87               [ 4]  393 	add	a, a
+    0000004D 87               [ 4]  394 	add	a, a
+    0000004E 87               [ 4]  395 	add	a, a
+    0000004F 4F               [ 4]  396 	ld	c, a
+    00000050 DD B6 FD         [19]  397 	or	a, -3 (ix)
+    00000053 DD 77 FB         [19]  398 	ld	-5 (ix), a
+                                    399 ;./../txt.c:30: t[3] = (fg << 4) | fg;
+    00000056 79               [ 4]  400 	ld	a, c
+    00000057 DD B6 FE         [19]  401 	or	a, -2 (ix)
+    0000005A DD 77 FC         [19]  402 	ld	-4 (ix), a
+                                    403 ;./../txt.c:31: for (u8 i = 0; i < 4; i++)
+    0000005D 0E 00            [ 7]  404 	ld	c, #0x00
+    0000005F                        405 00108$:
+    0000005F 79               [ 4]  406 	ld	a, c
+    00000060 D6 04            [ 7]  407 	sub	a, #0x04
+    00000062 30 28            [12]  408 	jr	nc, 00104$
+                                    409 ;./../txt.c:32: Mem_Set(t[i], &g_TabA[i * 64], 64);
+    00000064 11 00 C8         [10]  410 	ld	de, #_g_TabA+0
+    00000067 69               [ 4]  411 	ld	l, c
+    00000068 26 00            [ 7]  412 	ld	h, #0x00
+    0000006A 29               [11]  413 	add	hl, hl
+    0000006B 29               [11]  414 	add	hl, hl
+    0000006C 29               [11]  415 	add	hl, hl
+    0000006D 29               [11]  416 	add	hl, hl
+    0000006E 29               [11]  417 	add	hl, hl
+    0000006F 29               [11]  418 	add	hl, hl
+    00000070 19               [11]  419 	add	hl, de
+    00000071 FD 21 00 00      [14]  420 	ld	iy, #0
+    00000075 FD 39            [15]  421 	add	iy, sp
+    00000077 C5               [11]  422 	push	bc
+    00000078 06 00            [ 7]  423 	ld	b, #0x00
+    0000007A FD 09            [15]  424 	add	iy, bc
+    0000007C C1               [10]  425 	pop	bc
+    0000007D FD 5E 00         [19]  426 	ld	e, (iy)
+    00000080 06 20            [ 7]  427 	ld	b, #0x20
+    00000082                        428 00189$:
+    00000082 73               [ 7]  429 	ld	(hl), e
+    00000083 23               [ 6]  430 	inc	hl
+    00000084 73               [ 7]  431 	ld	(hl), e
+    00000085 23               [ 6]  432 	inc	hl
+    00000086 10 FA            [13]  433 	djnz	00189$
+                                    434 ;./../txt.c:31: for (u8 i = 0; i < 4; i++)
+    00000088 0C               [ 4]  435 	inc	c
+    00000089 C3r5Fr00         [10]  436 	jp	00108$
+    0000008C                        437 00104$:
+                                    438 ;./../txt.c:33: for (u8 i = 0; i < 16; i++)
+    0000008C 0E 00            [ 7]  439 	ld	c, #0x00
+    0000008E                        440 00111$:
+    0000008E 79               [ 4]  441 	ld	a, c
+    0000008F D6 10            [ 7]  442 	sub	a, #0x10
+    00000091 30 2C            [12]  443 	jr	nc, 00105$
+                                    444 ;./../txt.c:34: Mem_Set(t[i & 3], &g_TabB[i * 16], 16);
+    00000093 69               [ 4]  445 	ld	l, c
+    00000094 26 00            [ 7]  446 	ld	h, #0x00
+    00000096 5D               [ 4]  447 	ld	e, l
+    00000097 54               [ 4]  448 	ld	d, h
+    00000098 EB               [ 4]  449 	ex	de, hl
+    00000099 29               [11]  450 	add	hl, hl
+    0000009A 29               [11]  451 	add	hl, hl
+    0000009B 29               [11]  452 	add	hl, hl
+    0000009C 29               [11]  453 	add	hl, hl
+    0000009D EB               [ 4]  454 	ex	de, hl
+    0000009E FD 21 00 C9      [14]  455 	ld	iy, #_g_TabB
+    000000A2 FD 19            [15]  456 	add	iy, de
+    000000A4 7D               [ 4]  457 	ld	a, l
+    000000A5 E6 03            [ 7]  458 	and	a, #0x03
+    000000A7 5F               [ 4]  459 	ld	e, a
+    000000A8 16 00            [ 7]  460 	ld	d, #0x00
+    000000AA 21 00 00         [10]  461 	ld	hl, #0
+    000000AD 39               [11]  462 	add	hl, sp
+    000000AE 19               [11]  463 	add	hl, de
+    000000AF 5E               [ 7]  464 	ld	e, (hl)
+    000000B0 FD E5            [15]  465 	push	iy
+    000000B2 E1               [10]  466 	pop	hl
+    000000B3 06 08            [ 7]  467 	ld	b, #0x08
+    000000B5                        468 00191$:
+    000000B5 73               [ 7]  469 	ld	(hl), e
+    000000B6 23               [ 6]  470 	inc	hl
+    000000B7 73               [ 7]  471 	ld	(hl), e
+    000000B8 23               [ 6]  472 	inc	hl
+    000000B9 10 FA            [13]  473 	djnz	00191$
+                                    474 ;./../txt.c:33: for (u8 i = 0; i < 16; i++)
+    000000BB 0C               [ 4]  475 	inc	c
+    000000BC C3r8Er00         [10]  476 	jp	00111$
+    000000BF                        477 00105$:
+                                    478 ;./../txt.c:35: for (u8 i = 0; i < 64; i++)
+    000000BF DD 36 FF 00      [19]  479 	ld	-1 (ix), #0x00
+    000000C3                        480 00114$:
+    000000C3 DD 7E FF         [19]  481 	ld	a, -1 (ix)
+    000000C6 D6 40            [ 7]  482 	sub	a, #0x40
+    000000C8 30 28            [12]  483 	jr	nc, 00116$
+                                    484 ;./../txt.c:36: Mem_Set(t[i & 3], &g_TabC[i * 4], 4);
+    000000CA DD 4E FF         [19]  485 	ld	c, -1 (ix)
+    000000CD 06 00            [ 7]  486 	ld	b, #0x00
+    000000CF 69               [ 4]  487 	ld	l, c
+    000000D0 60               [ 4]  488 	ld	h, b
+    000000D1 29               [11]  489 	add	hl, hl
+    000000D2 29               [11]  490 	add	hl, hl
+    000000D3 11 00 CA         [10]  491 	ld	de, #_g_TabC
+    000000D6 19               [11]  492 	add	hl, de
+    000000D7 EB               [ 4]  493 	ex	de, hl
+    000000D8 79               [ 4]  494 	ld	a, c
+    000000D9 E6 03            [ 7]  495 	and	a, #0x03
+    000000DB 4F               [ 4]  496 	ld	c, a
+    000000DC 06 00            [ 7]  497 	ld	b, #0x00
+    000000DE 21 00 00         [10]  498 	ld	hl, #0
+    000000E1 39               [11]  499 	add	hl, sp
+    000000E2 09               [11]  500 	add	hl, bc
+    000000E3 4E               [ 7]  501 	ld	c, (hl)
+    000000E4 EB               [ 4]  502 	ex	de, hl
+    000000E5 71               [ 7]  503 	ld	(hl), c
+    000000E6 23               [ 6]  504 	inc	hl
+    000000E7 71               [ 7]  505 	ld	(hl), c
+    000000E8 23               [ 6]  506 	inc	hl
+    000000E9 71               [ 7]  507 	ld	(hl), c
+    000000EA 23               [ 6]  508 	inc	hl
+    000000EB 71               [ 7]  509 	ld	(hl), c
+                                    510 ;./../txt.c:35: for (u8 i = 0; i < 64; i++)
+    000000EC DD 34 FF         [23]  511 	inc	-1 (ix)
+    000000EF C3rC3r00         [10]  512 	jp	00114$
+    000000F2                        513 00116$:
+                                    514 ;./../txt.c:39: }
+    000000F2 DD F9            [10]  515 	ld	sp, ix
+    000000F4 DD E1            [14]  516 	pop	ix
+    000000F6 C9               [10]  517 	ret
+                         0000F380   518 _g_RDPRIM	=	0xf380
+                         0000F385   519 _g_WRPRIM	=	0xf385
+                         0000F38C   520 _g_CLPRIM	=	0xf38c
+                         0000F39A   521 _g_USRTAB	=	0xf39a
+                         0000F3DE   522 _g_CNSDFG	=	0xf3de
+                         0000F3DF   523 _g_RG0SAV	=	0xf3df
+                         0000F3E0   524 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   525 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   526 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   527 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   528 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   529 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   530 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   531 _g_STATFL	=	0xf3e7
+                         0000F3E8   532 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   533 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   534 _g_MINUPD	=	0xf3ef
+                         0000F3F3   535 _g_QUEUES	=	0xf3f3
+                         0000F3F5   536 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   537 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   538 _g_REPCNT	=	0xf3f7
+                         0000F3FC   539 _g_CS120	=	0xf3fc
+                         0000F401   540 _g_CS240	=	0xf401
+                         0000F406   541 _g_LOW	=	0xf406
+                         0000F408   542 _g_HIGH	=	0xf408
+                         0000F40A   543 _g_HEADER	=	0xf40a
+                         0000F40B   544 _g_ASPCT1	=	0xf40b
+                         0000F40D   545 _g_ASPCT2	=	0xf40d
+                         0000F959   546 _g_QUETAB	=	0xf959
+                         0000F971   547 _g_QUEBAK	=	0xf971
+                         0000F975   548 _g_VOICAQ	=	0xf975
+                         0000F9F5   549 _g_VOICBQ	=	0xf9f5
+                         0000FA75   550 _g_VOICCQ	=	0xfa75
+                         0000FAF5   551 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   552 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   553 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   554 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   555 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   556 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   557 _g_ROMA	=	0xfafa
+                         0000FAFC   558 _g_MODE	=	0xfafc
+                         0000FAFD   559 _g_NORUSE	=	0xfafd
+                         0000FAFE   560 _g_XSAVE	=	0xfafe
+                         0000FB00   561 _g_YSAVE	=	0xfb00
+                         0000FB03   562 _g_RSTMP	=	0xfb03
+                         0000FB03   563 _g_TOCNT	=	0xfb03
+                         0000FB04   564 _g_RSFCB	=	0xfb04
+                         0000FB06   565 _g_RSIQLN	=	0xfb06
+                         0000FB07   566 _g_MEXBIh	=	0xfb07
+                         0000FB0C   567 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   568 _g_OLDINT	=	0xfb0c
+                         0000FB16   569 _g_DEVNUM	=	0xfb16
+                         0000FB17   570 _g_DATCNT	=	0xfb17
+                         0000FB1A   571 _g_ERRORS	=	0xfb1a
+                         0000FB1B   572 _g_FLAGS	=	0xfb1b
+                         0000FB1C   573 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   574 _g_COMMSK	=	0xfb1d
+                         0000FB1E   575 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   576 _g_LSTMOD	=	0xfb1f
+                         0000FB35   577 _g_PRSCNT	=	0xfb35
+                         0000FB36   578 _g_SAVSP	=	0xfb36
+                         0000FB38   579 _g_VOICEN	=	0xfb38
+                         0000FB39   580 _g_SAVVOL	=	0xfb39
+                         0000FB3B   581 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   582 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   583 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   584 _g_MUSICF	=	0xfb3f
+                         0000FB40   585 _g_PLYCNT	=	0xfb40
+                         0000FB41   586 _g_VCBA	=	0xfb41
+                         0000FB66   587 _g_VCBB	=	0xfb66
+                         0000FB8B   588 _g_VCBC	=	0xfb8b
+                         0000FBB0   589 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   590 _g_BASROM	=	0xfbb1
+                         0000FBB2   591 _g_LINTTB	=	0xfbb2
+                         0000FBCA   592 _g_FSTPOS	=	0xfbca
+                         0000FBCC   593 _g_CODSAV	=	0xfbcc
+                         0000FBCD   594 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   595 _g_FNKFLG	=	0xfbce
+                         0000FBD8   596 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   597 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   598 _g_OLDKEY	=	0xfbda
+                         0000FBE5   599 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   600 _g_KEYBUF	=	0xfbf0
+                         0000FC18   601 _g_LINWRK	=	0xfc18
+                         0000FC40   602 _g_PATWRK	=	0xfc40
+                         0000FC48   603 _g_BOTTOM	=	0xfc48
+                         0000FC4A   604 _g_HIMEM	=	0xfc4a
+                         0000FC4C   605 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   606 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   607 _g_INTFLG	=	0xfc9b
+                         0000FC9C   608 _g_PADY	=	0xfc9c
+                         0000FC9D   609 _g_PADX	=	0xfc9d
+                         0000FC9E   610 _g_JIFFY	=	0xfc9e
+                         0000FCA0   611 _g_INTVAL	=	0xfca0
+                         0000FCA2   612 _g_INTCNT	=	0xfca2
+                         0000FCA4   613 _g_LOWLIM	=	0xfca4
+                         0000FCA5   614 _g_WINWID	=	0xfca5
+                         0000FCA6   615 _g_GRPHED	=	0xfca6
+                         0000FCA7   616 _g_ESCCNT	=	0xfca7
+                         0000FCA8   617 _g_INSFLG	=	0xfca8
+                         0000FCA9   618 _g_CSRSW	=	0xfca9
+                         0000FCAA   619 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   620 _g_CAPST	=	0xfcab
+                         0000FCAC   621 _g_KANAST	=	0xfcac
+                         0000FCAD   622 _g_KANAMD	=	0xfcad
+                         0000FCAE   623 _g_FLBMEM	=	0xfcae
+                         0000FCAF   624 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   625 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   626 _g_CASPRV	=	0xfcb1
+                         0000FCB2   627 _g_BRDATR	=	0xfcb2
+                         0000FCB3   628 _g_GXPOS	=	0xfcb3
+                         0000FCB5   629 _g_GYPOS	=	0xfcb5
+                         0000FCBB   630 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   631 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   632 _g_DRWANG	=	0xfcbd
+                         0000FCC1   633 _g_MNROM	=	0xfcc1
+                         0000FCC1   634 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   635 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   636 _g_SLTATR	=	0xfcc9
+                         0000FD09   637 _g_SLTWRK	=	0xfd09
+                         0000FD89   638 _g_PROCNM	=	0xfd89
+                         0000FFE7   639 _g_RG08SAV	=	0xffe7
+                         0000FFE8   640 _g_RG09SAV	=	0xffe8
+                         0000FFE9   641 _g_RG10SAV	=	0xffe9
+                         0000FFEA   642 _g_RG11SAV	=	0xffea
+                         0000FFEB   643 _g_RG12SAV	=	0xffeb
+                         0000FFEC   644 _g_RG13SAV	=	0xffec
+                         0000FFED   645 _g_RG14SAV	=	0xffed
+                         0000FFEE   646 _g_RG15SAV	=	0xffee
+                         0000FFEF   647 _g_RG16SAV	=	0xffef
+                         0000FFF0   648 _g_RG17SAV	=	0xfff0
+                         0000FFF1   649 _g_RG18SAV	=	0xfff1
+                         0000FFF2   650 _g_RG19SAV	=	0xfff2
+                         0000FFF3   651 _g_RG20SAV	=	0xfff3
+                         0000FFF4   652 _g_RG21SAV	=	0xfff4
+                         0000FFF5   653 _g_RG22SAV	=	0xfff5
+                         0000FFF6   654 _g_RG23SAV	=	0xfff6
+                         0000FFF7   655 _g_MINROM	=	0xfff7
+                         0000FFF8   656 _g_SVFFF8	=	0xfff8
+                         0000FFFA   657 _g_RG25SAV	=	0xfffa
+                         0000FFFB   658 _g_RG26SAV	=	0xfffb
+                         0000FFFC   659 _g_RG27SAV	=	0xfffc
+                         0000FFFD   660 _g_SVFFFD	=	0xfffd
+                         00000004   661 _g_CGTABL	=	0x0004
+                         00000006   662 _g_VDP_DR	=	0x0006
+                         00000007   663 _g_VDP_DW	=	0x0007
+                         0000002B   664 _g_BASRVN	=	0x002b
+                         0000002B   665 _g_ROMVersion	=	0x002b
+                         0000002D   666 _g_MSXVER	=	0x002d
+                         0000002E   667 _g_MSXMID	=	0x002e
+                         00000034   668 _g_CHAR_16	=	0x0034
+    000000F7                        669 ___str_0:
+    000000F7 0A                     670 	.db 0x0a
+    000000F8 0D                     671 	.db 0x0d
+    000000F9 24                     672 	.ascii "$"
+    000000FA 00                     673 	.db 0x00
+                         00000000   674 _g_SUBRID	=	0x0000
+                         00000002   675 _g_STRSRC	=	0x0002
+                         0000F30F   676 _g_KANJTABLE	=	0xf30f
+                         0000F323   677 _g_DISKVE	=	0xf323
+                         0000F325   678 _g_BREAKV	=	0xf325
+                         0000F341   679 _g_RAMAD0	=	0xf341
+                         0000F342   680 _g_RAMAD1	=	0xf342
+                         0000F343   681 _g_RAMAD2	=	0xf343
+                         0000F344   682 _g_RAMAD3	=	0xf344
+                         0000F348   683 _g_MASTER	=	0xf348
+                         0000F37D   684 _g_BDOS	=	0xf37d
+                                    685 ;./../txt.c:42: void Txt_Init(const u8* f)
+                                    686 ;	---------------------------------
+                                    687 ; Function Txt_Init
+                                    688 ; ---------------------------------
+    000000FB                        689 _Txt_Init::
+    000000FB DD E5            [15]  690 	push	ix
+    000000FD DD 21 00 00      [14]  691 	ld	ix,	#0
+    00000101 DD 39            [15]  692 	add	ix, sp
+    00000103 F5               [11]  693 	push	af
+    00000104 F5               [11]  694 	push	af
+    00000105 DD 75 FE         [19]  695 	ld	-2 (ix), l
+    00000108 DD 74 FF         [19]  696 	ld	-1 (ix), h
+                                    697 ;./../txt.c:44: for (u16 c = 0; c < 255; c++)
+    0000010B 01 00 00         [10]  698 	ld	bc, #0x0000
+    0000010E                        699 00107$:
+    0000010E 59               [ 4]  700 	ld	e, c
+    0000010F 50               [ 4]  701 	ld	d, b
+    00000110 7B               [ 4]  702 	ld	a, e
+    00000111 D6 FF            [ 7]  703 	sub	a, #0xff
+    00000113 7A               [ 4]  704 	ld	a, d
+    00000114 DE 00            [ 7]  705 	sbc	a, #0x00
+    00000116 30 31            [12]  706 	jr	nc, 00102$
+                                    707 ;./../txt.c:45: for (u8 r = 0; r < 8; r++)
+    00000118 1E 00            [ 7]  708 	ld	e, #0x00
+    0000011A                        709 00104$:
+                                    710 ;./../txt.c:46: g_Plane[r][c] = f[c * 8 + r];
+    0000011A 7B               [ 4]  711 	ld	a, e
+    0000011B FE 08            [ 7]  712 	cp	a, #0x08
+    0000011D 30 26            [12]  713 	jr	nc, 00108$
+    0000011F 2E 00            [ 7]  714 	ld	l, #<(_g_Plane)
+    00000121 C6 C0            [ 7]  715 	add	a, #>(_g_Plane)
+    00000123 67               [ 4]  716 	ld	h, a
+    00000124 09               [11]  717 	add	hl, bc
+    00000125 E3               [19]  718 	ex	(sp), hl
+    00000126 69               [ 4]  719 	ld	l, c
+    00000127 60               [ 4]  720 	ld	h, b
+    00000128 29               [11]  721 	add	hl, hl
+    00000129 29               [11]  722 	add	hl, hl
+    0000012A 29               [11]  723 	add	hl, hl
+    0000012B 7B               [ 4]  724 	ld	a, e
+    0000012C 16 00            [ 7]  725 	ld	d, #0x00
+    0000012E 85               [ 4]  726 	add	a, l
+    0000012F 6F               [ 4]  727 	ld	l, a
+    00000130 7A               [ 4]  728 	ld	a, d
+    00000131 8C               [ 4]  729 	adc	a, h
+    00000132 67               [ 4]  730 	ld	h, a
+    00000133 7D               [ 4]  731 	ld	a, l
+    00000134 DD 86 FE         [19]  732 	add	a, -2 (ix)
+    00000137 6F               [ 4]  733 	ld	l, a
+    00000138 7C               [ 4]  734 	ld	a, h
+    00000139 DD 8E FF         [19]  735 	adc	a, -1 (ix)
+    0000013C 67               [ 4]  736 	ld	h, a
+    0000013D 7E               [ 7]  737 	ld	a, (hl)
+    0000013E E1               [10]  738 	pop	hl
+    0000013F E5               [11]  739 	push	hl
+    00000140 77               [ 7]  740 	ld	(hl), a
+                                    741 ;./../txt.c:45: for (u8 r = 0; r < 8; r++)
+    00000141 1C               [ 4]  742 	inc	e
+    00000142 C3r1Ar01         [10]  743 	jp	00104$
+    00000145                        744 00108$:
+                                    745 ;./../txt.c:44: for (u16 c = 0; c < 255; c++)
+    00000145 03               [ 6]  746 	inc	bc
+    00000146 C3r0Er01         [10]  747 	jp	00107$
+    00000149                        748 00102$:
+                                    749 ;./../txt.c:47: s_Fg = 255;
+    00000149 21r00r00         [10]  750 	ld	hl, #_s_Fg
+    0000014C 36 FF            [10]  751 	ld	(hl), #0xff
+                                    752 ;./../txt.c:48: Txt_SetColor(7, 0);
+    0000014E 2E 00            [ 7]  753 	ld	l, #0x00
+    00000150 3E 07            [ 7]  754 	ld	a, #0x07
+    00000152 CDr00r00         [17]  755 	call	_Txt_SetColor
+                                    756 ;./../txt.c:49: }
+    00000155 DD F9            [10]  757 	ld	sp, ix
+    00000157 DD E1            [14]  758 	pop	ix
+    00000159 C9               [10]  759 	ret
+                                    760 ;./../txt.c:53: static void Blit() __naked
+                                    761 ;	---------------------------------
+                                    762 ; Function Blit
+                                    763 ; ---------------------------------
+    0000015A                        764 _Blit:
+                                    765 ;./../txt.c:115: __endasm;
+    0000015A 3Ar04r00         [13]  766 	ld a, (_s_Len)
+    0000015D B7               [ 4]  767 	or a
+    0000015E C8               [11]  768 	ret z
+    0000015F 0E C0            [ 7]  769 	ld c, #0xC0
+    00000161 AF               [ 4]  770 	xor a
+    00000162 32r05r00         [13]  771 	ld (_s_Row), a
+    00000165                        772 blit_row:
+    00000165 2Ar02r00         [16]  773 	ld hl, (_s_Vram)
+    00000168 3Ar05r00         [13]  774 	ld a, (_s_Row)
+    0000016B 84               [ 4]  775 	add a, h
+    0000016C 67               [ 4]  776 	ld h, a
+    0000016D F3               [ 4]  777 	di
+    0000016E 07               [ 4]  778 	rlca
+    0000016F 07               [ 4]  779 	rlca
+    00000170 E6 03            [ 7]  780 	and a, #3
+    00000172 D3 99            [11]  781 	out (#0x99), a
+    00000174 3E 8E            [ 7]  782 	ld a, #0x8E
+    00000176 D3 99            [11]  783 	out (#0x99), a
+    00000178 7D               [ 4]  784 	ld a, l
+    00000179 D3 99            [11]  785 	out (#0x99), a
+    0000017B 7C               [ 4]  786 	ld a, h
+    0000017C E6 3F            [ 7]  787 	and a, #0x3F
+    0000017E F6 40            [ 7]  788 	or a, #0x40
+    00000180 D3 99            [11]  789 	out (#0x99), a
+    00000182 FB               [ 4]  790 	ei
+    00000183 ED 5Br00r00      [20]  791 	ld de, (_s_Str)
+    00000187 3Ar04r00         [13]  792 	ld a, (_s_Len)
+    0000018A 47               [ 4]  793 	ld b, a
+    0000018B                        794 1$:
+    0000018B 1A               [ 7]  795 	ld a, (de)
+    0000018C 13               [ 6]  796 	inc de
+    0000018D 61               [ 4]  797 	ld h, c
+    0000018E 6F               [ 4]  798 	ld l, a
+    0000018F 7E               [ 7]  799 	ld a, (hl)
+    00000190 6F               [ 4]  800 	ld l, a
+    00000191 26 C8            [ 7]  801 	ld h, #0xC8
+    00000193 7E               [ 7]  802 	ld a, (hl)
+    00000194 D3 98            [11]  803 	out (#0x98), a
+    00000196 24               [ 4]  804 	inc h
+    00000197 7E               [ 7]  805 	ld a, (hl)
+    00000198 D3 98            [11]  806 	out (#0x98), a
+    0000019A 24               [ 4]  807 	inc h
+    0000019B 7E               [ 7]  808 	ld a, (hl)
+    0000019C D3 98            [11]  809 	out (#0x98), a
+    0000019E 10 EB            [13]  810 	djnz 1$
+    000001A0 0C               [ 4]  811 	inc c
+    000001A1 3Ar05r00         [13]  812 	ld a, (_s_Row)
+    000001A4 3C               [ 4]  813 	inc a
+    000001A5 32r05r00         [13]  814 	ld (_s_Row), a
+    000001A8 FE 08            [ 7]  815 	cp a, #8
+    000001AA 20 B9            [12]  816 	jr nz, blit_row
+    000001AC F3               [ 4]  817 	di
+    000001AD AF               [ 4]  818 	xor a
+    000001AE D3 99            [11]  819 	out (#0x99), a
+    000001B0 3E 8E            [ 7]  820 	ld a, #0x8E
+    000001B2 D3 99            [11]  821 	out (#0x99), a
+    000001B4 FB               [ 4]  822 	ei
+    000001B5 C9               [10]  823 	ret
+                                    824 ;./../txt.c:116: }
+                                    825 ;./../txt.c:118: void Txt_Draw(u8 col, u8 row, const c8* str)
+                                    826 ;	---------------------------------
+                                    827 ; Function Txt_Draw
+                                    828 ; ---------------------------------
+    000001B6                        829 _Txt_Draw::
+    000001B6 DD E5            [15]  830 	push	ix
+    000001B8 DD 21 00 00      [14]  831 	ld	ix,	#0
+    000001BC DD 39            [15]  832 	add	ix, sp
+    000001BE 3B               [ 6]  833 	dec	sp
+    000001BF 4F               [ 4]  834 	ld	c, a
+    000001C0 DD 75 FF         [19]  835 	ld	-1 (ix), l
+                                    836 ;./../txt.c:121: while (str[len]) len++;
+    000001C3 1E 00            [ 7]  837 	ld	e, #0x00
+    000001C5                        838 00101$:
+    000001C5 DD 6E 04         [19]  839 	ld	l, 4 (ix)
+    000001C8 DD 66 05         [19]  840 	ld	h, 5 (ix)
+    000001CB 16 00            [ 7]  841 	ld	d, #0x00
+    000001CD 19               [11]  842 	add	hl, de
+    000001CE 7E               [ 7]  843 	ld	a, (hl)
+    000001CF B7               [ 4]  844 	or	a, a
+    000001D0 28 04            [12]  845 	jr	z, 00114$
+    000001D2 1C               [ 4]  846 	inc	e
+    000001D3 C3rC5r01         [10]  847 	jp	00101$
+    000001D6                        848 00114$:
+    000001D6 43               [ 4]  849 	ld	b, e
+                                    850 ;./../txt.c:122: if (col + len > TXT_COLS) len = TXT_COLS - col;
+    000001D7 69               [ 4]  851 	ld	l, c
+    000001D8 26 00            [ 7]  852 	ld	h, #0x00
+    000001DA 7B               [ 4]  853 	ld	a, e
+    000001DB 16 00            [ 7]  854 	ld	d, #0x00
+    000001DD 85               [ 4]  855 	add	a, l
+    000001DE 5F               [ 4]  856 	ld	e, a
+    000001DF 30 01            [12]  857 	jr	nc, 00133$
+    000001E1 14               [ 4]  858 	inc	d
+    000001E2                        859 00133$:
+    000001E2 3E 50            [ 7]  860 	ld	a, #0x50
+    000001E4 BB               [ 4]  861 	cp	a, e
+    000001E5 3E 00            [ 7]  862 	ld	a, #0x00
+    000001E7 9A               [ 4]  863 	sbc	a, d
+    000001E8 30 04            [12]  864 	jr	nc, 00105$
+    000001EA 3E 50            [ 7]  865 	ld	a, #0x50
+    000001EC 91               [ 4]  866 	sub	a, c
+    000001ED 47               [ 4]  867 	ld	b, a
+    000001EE                        868 00105$:
+                                    869 ;./../txt.c:123: s_Len = len;
+    000001EE 78               [ 4]  870 	ld	a, b
+    000001EF 32r04r00         [13]  871 	ld	(_s_Len+0), a
+                                    872 ;./../txt.c:124: s_Str = (const u8*)str;
+    000001F2 DD 7E 04         [19]  873 	ld	a, 4 (ix)
+    000001F5 32r00r00         [13]  874 	ld	(_s_Str+0), a
+    000001F8 DD 7E 05         [19]  875 	ld	a, 5 (ix)
+    000001FB 32r01r00         [13]  876 	ld	(_s_Str+1), a
+                                    877 ;./../txt.c:125: s_Vram = (u16)(Y0 + row * 8) * 256 + X0B + col * 3;
+    000001FE DD 5E FF         [19]  878 	ld	e, -1 (ix)
+    00000201 16 00            [ 7]  879 	ld	d, #0x00
+    00000203 EB               [ 4]  880 	ex	de, hl
+    00000204 29               [11]  881 	add	hl, hl
+    00000205 29               [11]  882 	add	hl, hl
+    00000206 29               [11]  883 	add	hl, hl
+    00000207 EB               [ 4]  884 	ex	de, hl
+    00000208 7B               [ 4]  885 	ld	a, e
+    00000209 C6 06            [ 7]  886 	add	a, #0x06
+    0000020B 47               [ 4]  887 	ld	b, a
+    0000020C 0E 08            [ 7]  888 	ld	c, #0x08
+    0000020E 5D               [ 4]  889 	ld	e, l
+    0000020F 16 00            [ 7]  890 	ld	d, #0x00
+    00000211 6B               [ 4]  891 	ld	l, e
+    00000212 62               [ 4]  892 	ld	h, d
+    00000213 29               [11]  893 	add	hl, hl
+    00000214 19               [11]  894 	add	hl, de
+    00000215 09               [11]  895 	add	hl, bc
+    00000216 22r02r00         [16]  896 	ld	(_s_Vram), hl
+                                    897 ;./../txt.c:126: Blit();
+    00000219 CDr5Ar01         [17]  898 	call	_Blit
+                                    899 ;./../txt.c:127: }
+    0000021C 33               [ 6]  900 	inc	sp
+    0000021D DD E1            [14]  901 	pop	ix
+    0000021F E1               [10]  902 	pop	hl
+    00000220 F1               [10]  903 	pop	af
+    00000221 E9               [ 4]  904 	jp	(hl)
+                                    905 ;./../txt.c:129: void Txt_ClearRow(u8 row, u8 bg)
+                                    906 ;	---------------------------------
+                                    907 ; Function Txt_ClearRow
+                                    908 ; ---------------------------------
+    00000222                        909 _Txt_ClearRow::
+    00000222 5F               [ 4]  910 	ld	e, a
+                                    911 ;./../txt.c:131: VDP_CommandHMMV(X0B * 2, Y0 + row * 8, TXT_COLS * 6, 8, (bg << 4) | bg);
+    00000223 7D               [ 4]  912 	ld	a, l
+    00000224 87               [ 4]  913 	add	a, a
+    00000225 87               [ 4]  914 	add	a, a
+    00000226 87               [ 4]  915 	add	a, a
+    00000227 87               [ 4]  916 	add	a, a
+    00000228 B5               [ 4]  917 	or	a, l
+    00000229 4F               [ 4]  918 	ld	c, a
+    0000022A 16 00            [ 7]  919 	ld	d, #0x00
+    0000022C EB               [ 4]  920 	ex	de, hl
+    0000022D 29               [11]  921 	add	hl, hl
+    0000022E 29               [11]  922 	add	hl, hl
+    0000022F 29               [11]  923 	add	hl, hl
+    00000230 11 06 00         [10]  924 	ld	de, #0x0006
+    00000233 19               [11]  925 	add	hl, de
+                                    926 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:167: g_VDP_Command.DX = dx; 
+    00000234 11 10 00         [10]  927 	ld	de, #0x0010
+    00000237 ED 53r04r00      [20]  928 	ld	((_g_VDP_Command + 4)), de
+                                    929 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:168: g_VDP_Command.DY = dy; 
+    0000023B 22r06r00         [16]  930 	ld	((_g_VDP_Command + 6)), hl
+                                    931 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:169: g_VDP_Command.NX = nx; 
+    0000023E 21 E0 01         [10]  932 	ld	hl, #0x01e0
+    00000241 22r08r00         [16]  933 	ld	((_g_VDP_Command + 8)), hl
+                                    934 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:170: g_VDP_Command.NY = ny; 
+    00000244 21 08 00         [10]  935 	ld	hl, #0x0008
+    00000247 22r0Ar00         [16]  936 	ld	((_g_VDP_Command + 10)), hl
+                                    937 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:171: g_VDP_Command.CLR = col; 
+    0000024A 21r0Cr00         [10]  938 	ld	hl, #(_g_VDP_Command + 12)
+    0000024D 71               [ 7]  939 	ld	(hl), c
+                                    940 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:172: g_VDP_Command.ARG = arg; 
+    0000024E 21r0Dr00         [10]  941 	ld	hl, #_g_VDP_Command + 13
+    00000251 36 00            [10]  942 	ld	(hl), #0x00
+                                    943 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:173: g_VDP_Command.CMD = VDP_CMD_HMMV;
+    00000253 21r0Er00         [10]  944 	ld	hl, #_g_VDP_Command + 14
+    00000256 36 C0            [10]  945 	ld	(hl), #0xc0
+                                    946 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:174: VDP_CommandSetupR36();
+    00000258 CDr00r00         [17]  947 	call	_VDP_CommandSetupR36
+                                    948 ;./../txt.c:132: VDP_CommandWait();
+                                    949 ;./../txt.c:133: }
+    0000025B C3r00r00         [10]  950 	jp	_VDP_CommandWait
+                                    951 ;./../txt.c:135: void Txt_Scroll(u8 row0, u8 row1, u8 n)
+                                    952 ;	---------------------------------
+                                    953 ; Function Txt_Scroll
+                                    954 ; ---------------------------------
+    0000025E                        955 _Txt_Scroll::
+    0000025E DD E5            [15]  956 	push	ix
+    00000260 DD 21 00 00      [14]  957 	ld	ix,	#0
+    00000264 DD 39            [15]  958 	add	ix, sp
+    00000266 F5               [11]  959 	push	af
+                                    960 ;./../txt.c:137: VDP_CommandHMMM(X0B * 2, Y0 + (row0 + n) * 8, X0B * 2, Y0 + row0 * 8, TXT_COLS * 6, (row1 - row0 + 1 - n) * 8);
+    00000267 26 00            [ 7]  961 	ld	h, #0x00
+    00000269 4F               [ 4]  962 	ld	c, a
+    0000026A 06 00            [ 7]  963 	ld	b, #0x00
+    0000026C BF               [ 4]  964 	cp	a, a
+    0000026D ED 42            [15]  965 	sbc	hl, bc
+    0000026F EB               [ 4]  966 	ex	de, hl
+    00000270 13               [ 6]  967 	inc	de
+    00000271 DD 6E 04         [19]  968 	ld	l, 4 (ix)
+    00000274 26 00            [ 7]  969 	ld	h, #0x00
+    00000276 7B               [ 4]  970 	ld	a, e
+    00000277 95               [ 4]  971 	sub	a, l
+    00000278 5F               [ 4]  972 	ld	e, a
+    00000279 7A               [ 4]  973 	ld	a, d
+    0000027A 9C               [ 4]  974 	sbc	a, h
+    0000027B 57               [ 4]  975 	ld	d, a
+    0000027C EB               [ 4]  976 	ex	de, hl
+    0000027D 29               [11]  977 	add	hl, hl
+    0000027E 29               [11]  978 	add	hl, hl
+    0000027F 29               [11]  979 	add	hl, hl
+    00000280 EB               [ 4]  980 	ex	de, hl
+    00000281 33               [ 6]  981 	inc	sp
+    00000282 33               [ 6]  982 	inc	sp
+    00000283 D5               [11]  983 	push	de
+    00000284 59               [ 4]  984 	ld	e, c
+    00000285 50               [ 4]  985 	ld	d, b
+    00000286 EB               [ 4]  986 	ex	de, hl
+    00000287 29               [11]  987 	add	hl, hl
+    00000288 29               [11]  988 	add	hl, hl
+    00000289 29               [11]  989 	add	hl, hl
+    0000028A EB               [ 4]  990 	ex	de, hl
+    0000028B 7B               [ 4]  991 	ld	a, e
+    0000028C C6 06            [ 7]  992 	add	a, #0x06
+    0000028E 5F               [ 4]  993 	ld	e, a
+    0000028F 30 01            [12]  994 	jr	nc, 00105$
+    00000291 14               [ 4]  995 	inc	d
+    00000292                        996 00105$:
+    00000292 09               [11]  997 	add	hl, bc
+    00000293 29               [11]  998 	add	hl, hl
+    00000294 29               [11]  999 	add	hl, hl
+    00000295 29               [11] 1000 	add	hl, hl
+    00000296 01 06 00         [10] 1001 	ld	bc, #0x0006
+    00000299 09               [11] 1002 	add	hl, bc
+                                   1003 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:105: g_VDP_Command.SX = sx;
+    0000029A 01 10 00         [10] 1004 	ld	bc, #0x0010
+    0000029D ED 43r00r00      [20] 1005 	ld	(_g_VDP_Command), bc
+                                   1006 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:106: g_VDP_Command.SY = sy;
+    000002A1 22r02r00         [16] 1007 	ld	((_g_VDP_Command + 2)), hl
+                                   1008 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:107: g_VDP_Command.DX = dx;
+    000002A4 21 10 00         [10] 1009 	ld	hl, #0x0010
+    000002A7 22r04r00         [16] 1010 	ld	((_g_VDP_Command + 4)), hl
+                                   1011 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:108: g_VDP_Command.DY = dy;
+    000002AA ED 53r06r00      [20] 1012 	ld	((_g_VDP_Command + 6)), de
+                                   1013 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:109: g_VDP_Command.NX = nx;
+    000002AE 21 E0 01         [10] 1014 	ld	hl, #0x01e0
+    000002B1 22r08r00         [16] 1015 	ld	((_g_VDP_Command + 8)), hl
+                                   1016 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:110: g_VDP_Command.NY = ny;
+    000002B4 21r0Ar00         [10] 1017 	ld	hl, #(_g_VDP_Command + 10)
+    000002B7 DD 7E FE         [19] 1018 	ld	a, -2 (ix)
+    000002BA 77               [ 7] 1019 	ld	(hl), a
+    000002BB 23               [ 6] 1020 	inc	hl
+    000002BC DD 7E FF         [19] 1021 	ld	a, -1 (ix)
+    000002BF 77               [ 7] 1022 	ld	(hl), a
+                                   1023 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:111: g_VDP_Command.ARG = arg; 
+    000002C0 21r0Dr00         [10] 1024 	ld	hl, #_g_VDP_Command + 13
+    000002C3 36 00            [10] 1025 	ld	(hl), #0x00
+                                   1026 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:112: g_VDP_Command.CMD = VDP_CMD_HMMM;
+    000002C5 21r0Er00         [10] 1027 	ld	hl, #_g_VDP_Command + 14
+    000002C8 36 D0            [10] 1028 	ld	(hl), #0xd0
+                                   1029 ;E:\supernova\MSXgl\engine/src/vdp_inl.h:113: VDP_CommandSetupR32();
+    000002CA CDr00r00         [17] 1030 	call	_VDP_CommandSetupR32
+                                   1031 ;./../txt.c:138: VDP_CommandWait();
+    000002CD CDr00r00         [17] 1032 	call	_VDP_CommandWait
+                                   1033 ;./../txt.c:139: }
+    000002D0 DD F9            [10] 1034 	ld	sp, ix
+    000002D2 DD E1            [14] 1035 	pop	ix
+    000002D4 E1               [10] 1036 	pop	hl
+    000002D5 33               [ 6] 1037 	inc	sp
+    000002D6 E9               [ 4] 1038 	jp	(hl)
+                                   1039 	.area _CODE
+                                   1040 	.area _INITIALIZER
+    00000000                       1041 __xinit__s_Fg:
+    00000000 FF                    1042 	.db #0xff	; 255
+    00000001                       1043 __xinit__s_Bg:
+    00000001 FF                    1044 	.db #0xff	; 255
+                                   1045 	.area _CABS (ABS)

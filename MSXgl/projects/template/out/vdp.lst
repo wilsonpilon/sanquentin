@@ -1,0 +1,1677 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.6.0 #16555 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module vdp
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _g_VDPInitilized
+                                     12 	.globl _g_SpriteColorLow
+                                     13 	.globl _g_SpritePatternLow
+                                     14 	.globl _g_SpriteAttributeLow
+                                     15 	.globl _g_ScreenPatternLow
+                                     16 	.globl _g_ScreenColorLow
+                                     17 	.globl _g_ScreenLayoutLow
+                                     18 	.globl _g_VDP_Sprite
+                                     19 	.globl _g_VDP_Command
+                                     20 	.globl _g_VDP_Data
+                                     21 	.globl _g_VDP_REGSAV
+                                     22 	.globl _g_SLTSL
+                                     23 	.globl _g_GRPACY
+                                     24 	.globl _g_GRPACX
+                                     25 	.globl _g_LOGOPR
+                                     26 	.globl _g_CMASK
+                                     27 	.globl _g_CLOC
+                                     28 	.globl _g_FNKSTR
+                                     29 	.globl _g_GETPNT
+                                     30 	.globl _g_PUTPNT
+                                     31 	.globl _g_ATRBYT
+                                     32 	.globl _g_BDRCLR
+                                     33 	.globl _g_BAKCLR
+                                     34 	.globl _g_FORCLR
+                                     35 	.globl _g_CSRX
+                                     36 	.globl _g_CSRY
+                                     37 	.globl _g_CLIKSW
+                                     38 	.globl _g_MLTPAT
+                                     39 	.globl _g_MLTATR
+                                     40 	.globl _g_MLTCGP
+                                     41 	.globl _g_MLTCOL
+                                     42 	.globl _g_MLTNAM
+                                     43 	.globl _g_GRPPAT
+                                     44 	.globl _g_GRPATR
+                                     45 	.globl _g_GRPCGP
+                                     46 	.globl _g_GRPCOL
+                                     47 	.globl _g_GRPNAM
+                                     48 	.globl _g_T32PAT
+                                     49 	.globl _g_T32ATR
+                                     50 	.globl _g_T32CGP
+                                     51 	.globl _g_T32COL
+                                     52 	.globl _g_T32NAM
+                                     53 	.globl _g_TXTPAT
+                                     54 	.globl _g_TXTATR
+                                     55 	.globl _g_TXTCGP
+                                     56 	.globl _g_TXTCOL
+                                     57 	.globl _g_TXTNAM
+                                     58 	.globl _g_CLMLST
+                                     59 	.globl _g_CRTCNT
+                                     60 	.globl _g_LINLEN
+                                     61 	.globl _g_LINL32
+                                     62 	.globl _g_LINL40
+                                     63 	.globl _g_CHAR_16
+                                     64 	.globl _g_MSXMID
+                                     65 	.globl _g_MSXVER
+                                     66 	.globl _g_ROMVersion
+                                     67 	.globl _g_BASRVN
+                                     68 	.globl _g_VDP_DW
+                                     69 	.globl _g_VDP_DR
+                                     70 	.globl _g_CGTABL
+                                     71 	.globl _g_SVFFFD
+                                     72 	.globl _g_RG27SAV
+                                     73 	.globl _g_RG26SAV
+                                     74 	.globl _g_RG25SAV
+                                     75 	.globl _g_SVFFF8
+                                     76 	.globl _g_MINROM
+                                     77 	.globl _g_RG23SAV
+                                     78 	.globl _g_RG22SAV
+                                     79 	.globl _g_RG21SAV
+                                     80 	.globl _g_RG20SAV
+                                     81 	.globl _g_RG19SAV
+                                     82 	.globl _g_RG18SAV
+                                     83 	.globl _g_RG17SAV
+                                     84 	.globl _g_RG16SAV
+                                     85 	.globl _g_RG15SAV
+                                     86 	.globl _g_RG14SAV
+                                     87 	.globl _g_RG13SAV
+                                     88 	.globl _g_RG12SAV
+                                     89 	.globl _g_RG11SAV
+                                     90 	.globl _g_RG10SAV
+                                     91 	.globl _g_RG09SAV
+                                     92 	.globl _g_RG08SAV
+                                     93 	.globl _g_PROCNM
+                                     94 	.globl _g_SLTWRK
+                                     95 	.globl _g_SLTATR
+                                     96 	.globl _g_SLTTBL
+                                     97 	.globl _g_EXPTBL
+                                     98 	.globl _g_MNROM
+                                     99 	.globl _g_DRWANG
+                                    100 	.globl _g_DRWSCL
+                                    101 	.globl _g_DRWFLG
+                                    102 	.globl _g_GYPOS
+                                    103 	.globl _g_GXPOS
+                                    104 	.globl _g_BRDATR
+                                    105 	.globl _g_CASPRV
+                                    106 	.globl _g_OLDSCR
+                                    107 	.globl _g_SCRMOD
+                                    108 	.globl _g_FLBMEM
+                                    109 	.globl _g_KANAMD
+                                    110 	.globl _g_KANAST
+                                    111 	.globl _g_CAPST
+                                    112 	.globl _g_CSTYLE
+                                    113 	.globl _g_CSRSW
+                                    114 	.globl _g_INSFLG
+                                    115 	.globl _g_ESCCNT
+                                    116 	.globl _g_GRPHED
+                                    117 	.globl _g_WINWID
+                                    118 	.globl _g_LOWLIM
+                                    119 	.globl _g_INTCNT
+                                    120 	.globl _g_INTVAL
+                                    121 	.globl _g_JIFFY
+                                    122 	.globl _g_PADX
+                                    123 	.globl _g_PADY
+                                    124 	.globl _g_INTFLG
+                                    125 	.globl _g_RTYCNT
+                                    126 	.globl _g_TRPTBL
+                                    127 	.globl _g_HIMEM
+                                    128 	.globl _g_BOTTOM
+                                    129 	.globl _g_PATWRK
+                                    130 	.globl _g_LINWRK
+                                    131 	.globl _g_KEYBUF
+                                    132 	.globl _g_NEWKEY
+                                    133 	.globl _g_OLDKEY
+                                    134 	.globl _g_CLIKFL
+                                    135 	.globl _g_ONGSBF
+                                    136 	.globl _g_FNKFLG
+                                    137 	.globl _g_FNKSWI
+                                    138 	.globl _g_CODSAV
+                                    139 	.globl _g_FSTPOS
+                                    140 	.globl _g_LINTTB
+                                    141 	.globl _g_BASROM
+                                    142 	.globl _g_ENSTOP
+                                    143 	.globl _g_VCBC
+                                    144 	.globl _g_VCBB
+                                    145 	.globl _g_VCBA
+                                    146 	.globl _g_PLYCNT
+                                    147 	.globl _g_MUSICF
+                                    148 	.globl _g_QUEUEN
+                                    149 	.globl _g_MCLPTR
+                                    150 	.globl _g_MCLLEN
+                                    151 	.globl _g_SAVVOL
+                                    152 	.globl _g_VOICEN
+                                    153 	.globl _g_SAVSP
+                                    154 	.globl _g_PRSCNT
+                                    155 	.globl _g_LSTMOD
+                                    156 	.globl _g_LSTCOM
+                                    157 	.globl _g_COMMSK
+                                    158 	.globl _g_ESTBLS
+                                    159 	.globl _g_FLAGS
+                                    160 	.globl _g_ERRORS
+                                    161 	.globl _g_DATCNT
+                                    162 	.globl _g_DEVNUM
+                                    163 	.globl _g_OLDINT
+                                    164 	.globl _g_OLDSTT
+                                    165 	.globl _g_MEXBIh
+                                    166 	.globl _g_RSIQLN
+                                    167 	.globl _g_RSFCB
+                                    168 	.globl _g_TOCNT
+                                    169 	.globl _g_RSTMP
+                                    170 	.globl _g_YSAVE
+                                    171 	.globl _g_XSAVE
+                                    172 	.globl _g_NORUSE
+                                    173 	.globl _g_MODE
+                                    174 	.globl _g_ROMA
+                                    175 	.globl _g_CHRCNT
+                                    176 	.globl _g_EXBRSA
+                                    177 	.globl _g_AVCSAV
+                                    178 	.globl _g_ACPAGE
+                                    179 	.globl _g_DPPAGE
+                                    180 	.globl _g_RS2IQ
+                                    181 	.globl _g_VOICCQ
+                                    182 	.globl _g_VOICBQ
+                                    183 	.globl _g_VOICAQ
+                                    184 	.globl _g_QUEBAK
+                                    185 	.globl _g_QUETAB
+                                    186 	.globl _g_ASPCT2
+                                    187 	.globl _g_ASPCT1
+                                    188 	.globl _g_HEADER
+                                    189 	.globl _g_HIGH
+                                    190 	.globl _g_LOW
+                                    191 	.globl _g_CS240
+                                    192 	.globl _g_CS120
+                                    193 	.globl _g_REPCNT
+                                    194 	.globl _g_SCNCNT
+                                    195 	.globl _g_FRCNEW
+                                    196 	.globl _g_QUEUES
+                                    197 	.globl _g_MINUPD
+                                    198 	.globl _g_MAXUPD
+                                    199 	.globl _g_TRGFLG
+                                    200 	.globl _g_STATFL
+                                    201 	.globl _g_RG7SAV
+                                    202 	.globl _g_RG6SAV
+                                    203 	.globl _g_RG5SAV
+                                    204 	.globl _g_RG4SAV
+                                    205 	.globl _g_RG3SAV
+                                    206 	.globl _g_RG2SAV
+                                    207 	.globl _g_RG1SAV
+                                    208 	.globl _g_RG0SAV
+                                    209 	.globl _g_CNSDFG
+                                    210 	.globl _g_USRTAB
+                                    211 	.globl _g_CLPRIM
+                                    212 	.globl _g_WRPRIM
+                                    213 	.globl _g_RDPRIM
+                                    214 	.globl _VDP_SetModeFlag
+                                    215 	.globl _VDP_SetModeText1
+                                    216 	.globl _VDP_SetModeMultiColor
+                                    217 	.globl _VDP_SetModeGraphic1
+                                    218 	.globl _VDP_SetModeGraphic2
+                                    219 	.globl _VDP_ClearVRAM
+                                    220 	.globl _VDP_WriteVRAM_16K
+                                    221 	.globl _VDP_FillVRAM_16K
+                                    222 	.globl _VDP_ReadVRAM_16K
+                                    223 	.globl _VDP_Peek_16K
+                                    224 	.globl _VDP_Poke_16K
+                                    225 	.globl _VDP_Initialize
+                                    226 	.globl _VDP_SetMode
+                                    227 	.globl _VDP_GetVersion
+                                    228 	.globl _VDP_RegWrite
+                                    229 	.globl _VDP_RegWriteBak
+                                    230 	.globl _VDP_RegWriteBakMask
+                                    231 	.globl _VDP_ReadDefaultStatus
+                                    232 	.globl _VDP_SetLayoutTable
+                                    233 	.globl _VDP_SetColorTable
+                                    234 	.globl _VDP_SetPatternTable
+                                    235 	.globl _VDP_SetSpriteAttributeTable
+                                    236 	.globl _VDP_SetSpritePatternTable
+                                    237 	.globl _VDP_LoadSpritePattern
+                                    238 	.globl _VDP_SetSpriteSM1
+                                    239 	.globl _VDP_SetSprite
+                                    240 	.globl _VDP_SetSpritePosition
+                                    241 	.globl _VDP_SetSpritePositionX
+                                    242 	.globl _VDP_SetSpritePositionY
+                                    243 	.globl _VDP_SetSpritePattern
+                                    244 	.globl _VDP_SetSpriteColorSM1
+                                    245 	.globl _VDP_DisableSpritesFrom
+                                    246 	.globl _VDP_LoadPattern_GM2
+                                    247 	.globl _VDP_LoadColor_GM2
+                                    248 	.globl _VDP_WriteLayout_GM2
+                                    249 	.globl _VDP_FillLayout_GM2
+                                    250 ;--------------------------------------------------------
+                                    251 ; special function registers
+                                    252 ;--------------------------------------------------------
+                         000000A0   253 _g_PSG_RegPort	=	0x00a0
+                         000000A1   254 _g_PSG_DataPort	=	0x00a1
+                         000000A2   255 _g_PSG_StatPort	=	0x00a2
+                         00000010   256 _g_PSG_Ext_RegPort	=	0x0010
+                         00000011   257 _g_PSG_Ext_DataPort	=	0x0011
+                         00000012   258 _g_PSG_Ext_StatPort	=	0x0012
+                         00000090   259 _g_Printer_ControlPort	=	0x0090
+                         00000091   260 _g_Printer_DataPort	=	0x0091
+                         0000007C   261 _g_MSXMusic_IndexPort	=	0x007c
+                         0000007D   262 _g_MSXMusic_DataPort	=	0x007d
+                         00000098   263 _g_VDP_DataPort	=	0x0098
+                         00000099   264 _g_VDP_RegPort	=	0x0099
+                         00000099   265 _g_VDP_AddrPort	=	0x0099
+                         00000099   266 _g_VDP_StatPort	=	0x0099
+                         000000A8   267 _g_PortPrimarySlot	=	0x00a8
+                         000000A9   268 _g_PortReadKeyboard	=	0x00a9
+                         000000AA   269 _g_PortAccessKeyboard	=	0x00aa
+                         000000AB   270 _g_PortControl	=	0x00ab
+                         000000B4   271 _g_RTC_AddrPort	=	0x00b4
+                         000000B5   272 _g_RTC_DataPort	=	0x00b5
+                         000000C0   273 _g_MSXAudio_IndexPort	=	0x00c0
+                         000000C1   274 _g_MSXAudio_DataPort	=	0x00c1
+                         000000C2   275 _g_MSXAudio_IndexPort2	=	0x00c2
+                         000000C3   276 _g_MSXAudio_DataPort2	=	0x00c3
+                         000000D8   277 _g_Kanji_Level1LowPort	=	0x00d8
+                         000000D9   278 _g_Kanji_Level1HighPort	=	0x00d9
+                         000000DA   279 _g_Kanji_Level2LowPort	=	0x00da
+                         000000DB   280 _g_Kanji_Level2HighPort	=	0x00db
+                         000000E6   281 _g_TimerLowPort	=	0x00e6
+                         000000E7   282 _g_TimerHighPort	=	0x00e7
+                                    283 ;--------------------------------------------------------
+                                    284 ; ram data
+                                    285 ;--------------------------------------------------------
+                                    286 	.area _DATA
+                         0000F3AE   287 _g_LINL40	=	0xf3ae
+                         0000F3AF   288 _g_LINL32	=	0xf3af
+                         0000F3B0   289 _g_LINLEN	=	0xf3b0
+                         0000F3B1   290 _g_CRTCNT	=	0xf3b1
+                         0000F3B2   291 _g_CLMLST	=	0xf3b2
+                         0000F3B3   292 _g_TXTNAM	=	0xf3b3
+                         0000F3B5   293 _g_TXTCOL	=	0xf3b5
+                         0000F3B7   294 _g_TXTCGP	=	0xf3b7
+                         0000F3B9   295 _g_TXTATR	=	0xf3b9
+                         0000F3BB   296 _g_TXTPAT	=	0xf3bb
+                         0000F3BD   297 _g_T32NAM	=	0xf3bd
+                         0000F3BF   298 _g_T32COL	=	0xf3bf
+                         0000F3C1   299 _g_T32CGP	=	0xf3c1
+                         0000F3C3   300 _g_T32ATR	=	0xf3c3
+                         0000F3C5   301 _g_T32PAT	=	0xf3c5
+                         0000F3C7   302 _g_GRPNAM	=	0xf3c7
+                         0000F3C9   303 _g_GRPCOL	=	0xf3c9
+                         0000F3CB   304 _g_GRPCGP	=	0xf3cb
+                         0000F3CD   305 _g_GRPATR	=	0xf3cd
+                         0000F3CF   306 _g_GRPPAT	=	0xf3cf
+                         0000F3D1   307 _g_MLTNAM	=	0xf3d1
+                         0000F3D3   308 _g_MLTCOL	=	0xf3d3
+                         0000F3D5   309 _g_MLTCGP	=	0xf3d5
+                         0000F3D7   310 _g_MLTATR	=	0xf3d7
+                         0000F3D9   311 _g_MLTPAT	=	0xf3d9
+                         0000F3DB   312 _g_CLIKSW	=	0xf3db
+                         0000F3DC   313 _g_CSRY	=	0xf3dc
+                         0000F3DD   314 _g_CSRX	=	0xf3dd
+                         0000F3E9   315 _g_FORCLR	=	0xf3e9
+                         0000F3EA   316 _g_BAKCLR	=	0xf3ea
+                         0000F3EB   317 _g_BDRCLR	=	0xf3eb
+                         0000F3F2   318 _g_ATRBYT	=	0xf3f2
+                         0000F3F8   319 _g_PUTPNT	=	0xf3f8
+                         0000F3FA   320 _g_GETPNT	=	0xf3fa
+                         0000F87F   321 _g_FNKSTR	=	0xf87f
+                         0000F92A   322 _g_CLOC	=	0xf92a
+                         0000F92C   323 _g_CMASK	=	0xf92c
+                         0000FB02   324 _g_LOGOPR	=	0xfb02
+                         0000FCB7   325 _g_GRPACX	=	0xfcb7
+                         0000FCB9   326 _g_GRPACY	=	0xfcb9
+                         0000FFFF   327 _g_SLTSL	=	0xffff
+    00000000                        328 _g_VDP_REGSAV::
+    00000000                        329 	.ds 28
+    0000001C                        330 _g_VDP_Data::
+    0000001C                        331 	.ds 2
+    0000001E                        332 _g_VDP_Command::
+    0000001E                        333 	.ds 15
+    0000002D                        334 _g_VDP_Sprite::
+    0000002D                        335 	.ds 4
+    00000031                        336 _g_ScreenLayoutLow::
+    00000031                        337 	.ds 2
+    00000033                        338 _g_ScreenColorLow::
+    00000033                        339 	.ds 2
+    00000035                        340 _g_ScreenPatternLow::
+    00000035                        341 	.ds 2
+    00000037                        342 _g_SpriteAttributeLow::
+    00000037                        343 	.ds 2
+    00000039                        344 _g_SpritePatternLow::
+    00000039                        345 	.ds 2
+    0000003B                        346 _g_SpriteColorLow::
+    0000003B                        347 	.ds 2
+                                    348 ;--------------------------------------------------------
+                                    349 ; ram data
+                                    350 ;--------------------------------------------------------
+                                    351 	.area _INITIALIZED
+    00000000                        352 _g_VDPInitilized::
+    00000000                        353 	.ds 1
+                                    354 ;--------------------------------------------------------
+                                    355 ; absolute ram data
+                                    356 ;--------------------------------------------------------
+                                    357 	.area _DABS (ABS)
+                                    358 	.area _DABS (ABS)
+                                    359 ;--------------------------------------------------------
+                                    360 ; global & static initialisations
+                                    361 ;--------------------------------------------------------
+                                    362 	.area _HOME
+                                    363 	.area _GSINIT
+                                    364 	.area _GSFINAL
+                                    365 	.area _GSINIT
+                                    366 ;--------------------------------------------------------
+                                    367 ; Home
+                                    368 ;--------------------------------------------------------
+                                    369 	.area _HOME
+                                    370 	.area _HOME
+                                    371 ;--------------------------------------------------------
+                                    372 ; code
+                                    373 ;--------------------------------------------------------
+                                    374 	.area _CODE
+                                    375 ;E:\sanquentin\MSXgl\engine/src/vdp.c:166: void VDP_SetModeFlag(u8 flag)
+                                    376 ;	---------------------------------
+                                    377 ; Function VDP_SetModeFlag
+                                    378 ; ---------------------------------
+    00000000                        379 _VDP_SetModeFlag::
+    00000000 5F               [ 4]  380 	ld	e, a
+                                    381 ;E:\sanquentin\MSXgl\engine/src/vdp.c:169: u8 reg1 = g_VDP_REGSAV[1];
+    00000001 3Ar01r00         [13]  382 	ld	a, (#_g_VDP_REGSAV + 1)
+                                    383 ;E:\sanquentin\MSXgl\engine/src/vdp.c:170: reg1 &= 0b11100111;
+    00000004 E6 E7            [ 7]  384 	and	a, #0xe7
+                                    385 ;E:\sanquentin\MSXgl\engine/src/vdp.c:171: if (flag & 0b00001)
+    00000006 CB 43            [ 8]  386 	bit	0, e
+    00000008 28 02            [12]  387 	jr	z, 00102$
+                                    388 ;E:\sanquentin\MSXgl\engine/src/vdp.c:172: reg1 |= 0b00010000;
+    0000000A CB E7            [ 8]  389 	set	4, a
+    0000000C                        390 00102$:
+                                    391 ;E:\sanquentin\MSXgl\engine/src/vdp.c:173: if (flag & 0b00010)
+    0000000C CB 4B            [ 8]  392 	bit	1, e
+    0000000E 28 02            [12]  393 	jr	z, 00104$
+                                    394 ;E:\sanquentin\MSXgl\engine/src/vdp.c:174: reg1 |= 0b00001000;
+    00000010 CB DF            [ 8]  395 	set	3, a
+    00000012                        396 00104$:
+                                    397 ;E:\sanquentin\MSXgl\engine/src/vdp.c:175: VDP_RegWriteBak(1, reg1);
+    00000012 6F               [ 4]  398 	ld	l, a
+    00000013 3E 01            [ 7]  399 	ld	a, #0x01
+    00000015 CDrF4r01         [17]  400 	call	_VDP_RegWriteBak
+                                    401 ;E:\sanquentin\MSXgl\engine/src/vdp.c:178: u8 reg0 = g_VDP_REGSAV[0];
+    00000018 3Ar00r00         [13]  402 	ld	a, (#_g_VDP_REGSAV + 0)
+                                    403 ;E:\sanquentin\MSXgl\engine/src/vdp.c:179: reg0 &= 0b11110001;
+    0000001B E6 F1            [ 7]  404 	and	a, #0xf1
+    0000001D 4F               [ 4]  405 	ld	c, a
+                                    406 ;E:\sanquentin\MSXgl\engine/src/vdp.c:180: flag >>= 1;
+    0000001E 7B               [ 4]  407 	ld	a, e
+    0000001F CB 3F            [ 8]  408 	srl	a
+                                    409 ;E:\sanquentin\MSXgl\engine/src/vdp.c:181: flag &= 0b00001110;
+    00000021 E6 0E            [ 7]  410 	and	a, #0x0e
+                                    411 ;E:\sanquentin\MSXgl\engine/src/vdp.c:182: reg0 |= flag;
+    00000023 B1               [ 4]  412 	or	a, c
+                                    413 ;E:\sanquentin\MSXgl\engine/src/vdp.c:183: VDP_RegWriteBak(0, reg0);
+    00000024 6F               [ 4]  414 	ld	l, a
+    00000025 AF               [ 4]  415 	xor	a, a
+                                    416 ;E:\sanquentin\MSXgl\engine/src/vdp.c:184: }
+    00000026 C3rF4r01         [10]  417 	jp	_VDP_RegWriteBak
+                         0000F380   418 _g_RDPRIM	=	0xf380
+                         0000F385   419 _g_WRPRIM	=	0xf385
+                         0000F38C   420 _g_CLPRIM	=	0xf38c
+                         0000F39A   421 _g_USRTAB	=	0xf39a
+                         0000F3DE   422 _g_CNSDFG	=	0xf3de
+                         0000F3DF   423 _g_RG0SAV	=	0xf3df
+                         0000F3E0   424 _g_RG1SAV	=	0xf3e0
+                         0000F3E1   425 _g_RG2SAV	=	0xf3e1
+                         0000F3E2   426 _g_RG3SAV	=	0xf3e2
+                         0000F3E3   427 _g_RG4SAV	=	0xf3e3
+                         0000F3E4   428 _g_RG5SAV	=	0xf3e4
+                         0000F3E5   429 _g_RG6SAV	=	0xf3e5
+                         0000F3E6   430 _g_RG7SAV	=	0xf3e6
+                         0000F3E7   431 _g_STATFL	=	0xf3e7
+                         0000F3E8   432 _g_TRGFLG	=	0xf3e8
+                         0000F3EC   433 _g_MAXUPD	=	0xf3ec
+                         0000F3EF   434 _g_MINUPD	=	0xf3ef
+                         0000F3F3   435 _g_QUEUES	=	0xf3f3
+                         0000F3F5   436 _g_FRCNEW	=	0xf3f5
+                         0000F3F6   437 _g_SCNCNT	=	0xf3f6
+                         0000F3F7   438 _g_REPCNT	=	0xf3f7
+                         0000F3FC   439 _g_CS120	=	0xf3fc
+                         0000F401   440 _g_CS240	=	0xf401
+                         0000F406   441 _g_LOW	=	0xf406
+                         0000F408   442 _g_HIGH	=	0xf408
+                         0000F40A   443 _g_HEADER	=	0xf40a
+                         0000F40B   444 _g_ASPCT1	=	0xf40b
+                         0000F40D   445 _g_ASPCT2	=	0xf40d
+                         0000F959   446 _g_QUETAB	=	0xf959
+                         0000F971   447 _g_QUEBAK	=	0xf971
+                         0000F975   448 _g_VOICAQ	=	0xf975
+                         0000F9F5   449 _g_VOICBQ	=	0xf9f5
+                         0000FA75   450 _g_VOICCQ	=	0xfa75
+                         0000FAF5   451 _g_RS2IQ	=	0xfaf5
+                         0000FAF5   452 _g_DPPAGE	=	0xfaf5
+                         0000FAF6   453 _g_ACPAGE	=	0xfaf6
+                         0000FAF7   454 _g_AVCSAV	=	0xfaf7
+                         0000FAF8   455 _g_EXBRSA	=	0xfaf8
+                         0000FAF9   456 _g_CHRCNT	=	0xfaf9
+                         0000FAFA   457 _g_ROMA	=	0xfafa
+                         0000FAFC   458 _g_MODE	=	0xfafc
+                         0000FAFD   459 _g_NORUSE	=	0xfafd
+                         0000FAFE   460 _g_XSAVE	=	0xfafe
+                         0000FB00   461 _g_YSAVE	=	0xfb00
+                         0000FB03   462 _g_RSTMP	=	0xfb03
+                         0000FB03   463 _g_TOCNT	=	0xfb03
+                         0000FB04   464 _g_RSFCB	=	0xfb04
+                         0000FB06   465 _g_RSIQLN	=	0xfb06
+                         0000FB07   466 _g_MEXBIh	=	0xfb07
+                         0000FB0C   467 _g_OLDSTT	=	0xfb0c
+                         0000FB0C   468 _g_OLDINT	=	0xfb0c
+                         0000FB16   469 _g_DEVNUM	=	0xfb16
+                         0000FB17   470 _g_DATCNT	=	0xfb17
+                         0000FB1A   471 _g_ERRORS	=	0xfb1a
+                         0000FB1B   472 _g_FLAGS	=	0xfb1b
+                         0000FB1C   473 _g_ESTBLS	=	0xfb1c
+                         0000FB1D   474 _g_COMMSK	=	0xfb1d
+                         0000FB1E   475 _g_LSTCOM	=	0xfb1e
+                         0000FB1F   476 _g_LSTMOD	=	0xfb1f
+                         0000FB35   477 _g_PRSCNT	=	0xfb35
+                         0000FB36   478 _g_SAVSP	=	0xfb36
+                         0000FB38   479 _g_VOICEN	=	0xfb38
+                         0000FB39   480 _g_SAVVOL	=	0xfb39
+                         0000FB3B   481 _g_MCLLEN	=	0xfb3b
+                         0000FB3C   482 _g_MCLPTR	=	0xfb3c
+                         0000FB3E   483 _g_QUEUEN	=	0xfb3e
+                         0000FB3F   484 _g_MUSICF	=	0xfb3f
+                         0000FB40   485 _g_PLYCNT	=	0xfb40
+                         0000FB41   486 _g_VCBA	=	0xfb41
+                         0000FB66   487 _g_VCBB	=	0xfb66
+                         0000FB8B   488 _g_VCBC	=	0xfb8b
+                         0000FBB0   489 _g_ENSTOP	=	0xfbb0
+                         0000FBB1   490 _g_BASROM	=	0xfbb1
+                         0000FBB2   491 _g_LINTTB	=	0xfbb2
+                         0000FBCA   492 _g_FSTPOS	=	0xfbca
+                         0000FBCC   493 _g_CODSAV	=	0xfbcc
+                         0000FBCD   494 _g_FNKSWI	=	0xfbcd
+                         0000FBCE   495 _g_FNKFLG	=	0xfbce
+                         0000FBD8   496 _g_ONGSBF	=	0xfbd8
+                         0000FBD9   497 _g_CLIKFL	=	0xfbd9
+                         0000FBDA   498 _g_OLDKEY	=	0xfbda
+                         0000FBE5   499 _g_NEWKEY	=	0xfbe5
+                         0000FBF0   500 _g_KEYBUF	=	0xfbf0
+                         0000FC18   501 _g_LINWRK	=	0xfc18
+                         0000FC40   502 _g_PATWRK	=	0xfc40
+                         0000FC48   503 _g_BOTTOM	=	0xfc48
+                         0000FC4A   504 _g_HIMEM	=	0xfc4a
+                         0000FC4C   505 _g_TRPTBL	=	0xfc4c
+                         0000FC9A   506 _g_RTYCNT	=	0xfc9a
+                         0000FC9B   507 _g_INTFLG	=	0xfc9b
+                         0000FC9C   508 _g_PADY	=	0xfc9c
+                         0000FC9D   509 _g_PADX	=	0xfc9d
+                         0000FC9E   510 _g_JIFFY	=	0xfc9e
+                         0000FCA0   511 _g_INTVAL	=	0xfca0
+                         0000FCA2   512 _g_INTCNT	=	0xfca2
+                         0000FCA4   513 _g_LOWLIM	=	0xfca4
+                         0000FCA5   514 _g_WINWID	=	0xfca5
+                         0000FCA6   515 _g_GRPHED	=	0xfca6
+                         0000FCA7   516 _g_ESCCNT	=	0xfca7
+                         0000FCA8   517 _g_INSFLG	=	0xfca8
+                         0000FCA9   518 _g_CSRSW	=	0xfca9
+                         0000FCAA   519 _g_CSTYLE	=	0xfcaa
+                         0000FCAB   520 _g_CAPST	=	0xfcab
+                         0000FCAC   521 _g_KANAST	=	0xfcac
+                         0000FCAD   522 _g_KANAMD	=	0xfcad
+                         0000FCAE   523 _g_FLBMEM	=	0xfcae
+                         0000FCAF   524 _g_SCRMOD	=	0xfcaf
+                         0000FCB0   525 _g_OLDSCR	=	0xfcb0
+                         0000FCB1   526 _g_CASPRV	=	0xfcb1
+                         0000FCB2   527 _g_BRDATR	=	0xfcb2
+                         0000FCB3   528 _g_GXPOS	=	0xfcb3
+                         0000FCB5   529 _g_GYPOS	=	0xfcb5
+                         0000FCBB   530 _g_DRWFLG	=	0xfcbb
+                         0000FCBC   531 _g_DRWSCL	=	0xfcbc
+                         0000FCBD   532 _g_DRWANG	=	0xfcbd
+                         0000FCC1   533 _g_MNROM	=	0xfcc1
+                         0000FCC1   534 _g_EXPTBL	=	0xfcc1
+                         0000FCC5   535 _g_SLTTBL	=	0xfcc5
+                         0000FCC9   536 _g_SLTATR	=	0xfcc9
+                         0000FD09   537 _g_SLTWRK	=	0xfd09
+                         0000FD89   538 _g_PROCNM	=	0xfd89
+                         0000FFE7   539 _g_RG08SAV	=	0xffe7
+                         0000FFE8   540 _g_RG09SAV	=	0xffe8
+                         0000FFE9   541 _g_RG10SAV	=	0xffe9
+                         0000FFEA   542 _g_RG11SAV	=	0xffea
+                         0000FFEB   543 _g_RG12SAV	=	0xffeb
+                         0000FFEC   544 _g_RG13SAV	=	0xffec
+                         0000FFED   545 _g_RG14SAV	=	0xffed
+                         0000FFEE   546 _g_RG15SAV	=	0xffee
+                         0000FFEF   547 _g_RG16SAV	=	0xffef
+                         0000FFF0   548 _g_RG17SAV	=	0xfff0
+                         0000FFF1   549 _g_RG18SAV	=	0xfff1
+                         0000FFF2   550 _g_RG19SAV	=	0xfff2
+                         0000FFF3   551 _g_RG20SAV	=	0xfff3
+                         0000FFF4   552 _g_RG21SAV	=	0xfff4
+                         0000FFF5   553 _g_RG22SAV	=	0xfff5
+                         0000FFF6   554 _g_RG23SAV	=	0xfff6
+                         0000FFF7   555 _g_MINROM	=	0xfff7
+                         0000FFF8   556 _g_SVFFF8	=	0xfff8
+                         0000FFFA   557 _g_RG25SAV	=	0xfffa
+                         0000FFFB   558 _g_RG26SAV	=	0xfffb
+                         0000FFFC   559 _g_RG27SAV	=	0xfffc
+                         0000FFFD   560 _g_SVFFFD	=	0xfffd
+                         00000004   561 _g_CGTABL	=	0x0004
+                         00000006   562 _g_VDP_DR	=	0x0006
+                         00000007   563 _g_VDP_DW	=	0x0007
+                         0000002B   564 _g_BASRVN	=	0x002b
+                         0000002B   565 _g_ROMVersion	=	0x002b
+                         0000002D   566 _g_MSXVER	=	0x002d
+                         0000002E   567 _g_MSXMID	=	0x002e
+                         00000034   568 _g_CHAR_16	=	0x0034
+                                    569 ;E:\sanquentin\MSXgl\engine/src/vdp.c:189: void VDP_SetModeText1()
+                                    570 ;	---------------------------------
+                                    571 ; Function VDP_SetModeText1
+                                    572 ; ---------------------------------
+    00000029                        573 _VDP_SetModeText1::
+                                    574 ;E:\sanquentin\MSXgl\engine/src/vdp.c:191: VDP_SetModeFlag(VDP_T1_MODE);
+    00000029 3E 01            [ 7]  575 	ld	a, #0x01
+    0000002B CDr00r00         [17]  576 	call	_VDP_SetModeFlag
+                                    577 ;E:\sanquentin\MSXgl\engine/src/vdp.c:192: VDP_SetLayoutTable(VDP_T1_ADDR_NT);
+    0000002E 21 00 00         [10]  578 	ld	hl, #0x0000
+    00000031 CDr2Dr02         [17]  579 	call	_VDP_SetLayoutTable
+                                    580 ;E:\sanquentin\MSXgl\engine/src/vdp.c:193: VDP_SetPatternTable(VDP_T1_ADDR_PT);
+    00000034 21 00 08         [10]  581 	ld	hl, #0x0800
+                                    582 ;E:\sanquentin\MSXgl\engine/src/vdp.c:194: }
+    00000037 C3r54r02         [10]  583 	jp	_VDP_SetPatternTable
+                                    584 ;E:\sanquentin\MSXgl\engine/src/vdp.c:200: void VDP_SetModeMultiColor()
+                                    585 ;	---------------------------------
+                                    586 ; Function VDP_SetModeMultiColor
+                                    587 ; ---------------------------------
+    0000003A                        588 _VDP_SetModeMultiColor::
+                                    589 ;E:\sanquentin\MSXgl\engine/src/vdp.c:202: VDP_SetModeFlag(VDP_MC_MODE);
+    0000003A 3E 02            [ 7]  590 	ld	a, #0x02
+    0000003C CDr00r00         [17]  591 	call	_VDP_SetModeFlag
+                                    592 ;E:\sanquentin\MSXgl\engine/src/vdp.c:203: VDP_SetLayoutTable(VDP_MC_ADDR_NT);
+    0000003F 21 00 08         [10]  593 	ld	hl, #0x0800
+    00000042 CDr2Dr02         [17]  594 	call	_VDP_SetLayoutTable
+                                    595 ;E:\sanquentin\MSXgl\engine/src/vdp.c:204: VDP_SetPatternTable(VDP_MC_ADDR_PT);
+    00000045 21 00 00         [10]  596 	ld	hl, #0x0000
+    00000048 CDr54r02         [17]  597 	call	_VDP_SetPatternTable
+                                    598 ;E:\sanquentin\MSXgl\engine/src/vdp.c:206: VDP_SetSpriteAttributeTable(VDP_MC_ADDR_SAT);
+    0000004B 21 00 1B         [10]  599 	ld	hl, #0x1b00
+    0000004E CDr6Fr02         [17]  600 	call	_VDP_SetSpriteAttributeTable
+                                    601 ;E:\sanquentin\MSXgl\engine/src/vdp.c:207: VDP_SetSpritePatternTable(VDP_MC_ADDR_SPT);
+    00000051 21 00 38         [10]  602 	ld	hl, #0x3800
+                                    603 ;E:\sanquentin\MSXgl\engine/src/vdp.c:209: }
+    00000054 C3rA0r02         [10]  604 	jp	_VDP_SetSpritePatternTable
+                                    605 ;E:\sanquentin\MSXgl\engine/src/vdp.c:215: void VDP_SetModeGraphic1()
+                                    606 ;	---------------------------------
+                                    607 ; Function VDP_SetModeGraphic1
+                                    608 ; ---------------------------------
+    00000057                        609 _VDP_SetModeGraphic1::
+                                    610 ;E:\sanquentin\MSXgl\engine/src/vdp.c:217: VDP_SetModeFlag(VDP_G1_MODE);
+    00000057 AF               [ 4]  611 	xor	a, a
+    00000058 CDr00r00         [17]  612 	call	_VDP_SetModeFlag
+                                    613 ;E:\sanquentin\MSXgl\engine/src/vdp.c:218: VDP_SetLayoutTable(VDP_G1_ADDR_NT);
+    0000005B 21 00 18         [10]  614 	ld	hl, #0x1800
+    0000005E CDr2Dr02         [17]  615 	call	_VDP_SetLayoutTable
+                                    616 ;E:\sanquentin\MSXgl\engine/src/vdp.c:219: VDP_SetColorTable(VDP_G1_ADDR_CT);
+    00000061 21 00 20         [10]  617 	ld	hl, #0x2000
+    00000064 CDr3Dr02         [17]  618 	call	_VDP_SetColorTable
+                                    619 ;E:\sanquentin\MSXgl\engine/src/vdp.c:220: VDP_SetPatternTable(VDP_G1_ADDR_PT);
+    00000067 21 00 00         [10]  620 	ld	hl, #0x0000
+    0000006A CDr54r02         [17]  621 	call	_VDP_SetPatternTable
+                                    622 ;E:\sanquentin\MSXgl\engine/src/vdp.c:222: VDP_SetSpriteAttributeTable(VDP_G1_ADDR_SAT);
+    0000006D 21 00 1B         [10]  623 	ld	hl, #0x1b00
+    00000070 CDr6Fr02         [17]  624 	call	_VDP_SetSpriteAttributeTable
+                                    625 ;E:\sanquentin\MSXgl\engine/src/vdp.c:223: VDP_SetSpritePatternTable(VDP_G1_ADDR_SPT);
+    00000073 21 00 38         [10]  626 	ld	hl, #0x3800
+                                    627 ;E:\sanquentin\MSXgl\engine/src/vdp.c:225: }
+    00000076 C3rA0r02         [10]  628 	jp	_VDP_SetSpritePatternTable
+                                    629 ;E:\sanquentin\MSXgl\engine/src/vdp.c:231: void VDP_SetModeGraphic2()
+                                    630 ;	---------------------------------
+                                    631 ; Function VDP_SetModeGraphic2
+                                    632 ; ---------------------------------
+    00000079                        633 _VDP_SetModeGraphic2::
+                                    634 ;E:\sanquentin\MSXgl\engine/src/vdp.c:233: VDP_SetModeFlag(VDP_G2_MODE);
+    00000079 3E 04            [ 7]  635 	ld	a, #0x04
+    0000007B CDr00r00         [17]  636 	call	_VDP_SetModeFlag
+                                    637 ;E:\sanquentin\MSXgl\engine/src/vdp.c:234: VDP_SetLayoutTable(VDP_G2_ADDR_NT);
+    0000007E 21 00 18         [10]  638 	ld	hl, #0x1800
+    00000081 CDr2Dr02         [17]  639 	call	_VDP_SetLayoutTable
+                                    640 ;E:\sanquentin\MSXgl\engine/src/vdp.c:235: VDP_SetColorTable(VDP_G2_ADDR_CT);
+    00000084 21 00 20         [10]  641 	ld	hl, #0x2000
+    00000087 CDr3Dr02         [17]  642 	call	_VDP_SetColorTable
+                                    643 ;E:\sanquentin\MSXgl\engine/src/vdp.c:236: VDP_SetPatternTable(VDP_G2_ADDR_PT);
+    0000008A 21 00 00         [10]  644 	ld	hl, #0x0000
+    0000008D CDr54r02         [17]  645 	call	_VDP_SetPatternTable
+                                    646 ;E:\sanquentin\MSXgl\engine/src/vdp.c:238: VDP_SetSpriteAttributeTable(VDP_G2_ADDR_SAT);
+    00000090 21 00 1B         [10]  647 	ld	hl, #0x1b00
+    00000093 CDr6Fr02         [17]  648 	call	_VDP_SetSpriteAttributeTable
+                                    649 ;E:\sanquentin\MSXgl\engine/src/vdp.c:239: VDP_SetSpritePatternTable(VDP_G2_ADDR_SPT);
+    00000096 21 00 38         [10]  650 	ld	hl, #0x3800
+                                    651 ;E:\sanquentin\MSXgl\engine/src/vdp.c:241: }
+    00000099 C3rA0r02         [10]  652 	jp	_VDP_SetSpritePatternTable
+                                    653 ;E:\sanquentin\MSXgl\engine/src/vdp.c:252: void VDP_ClearVRAM()
+                                    654 ;	---------------------------------
+                                    655 ; Function VDP_ClearVRAM
+                                    656 ; ---------------------------------
+    0000009C                        657 _VDP_ClearVRAM::
+                                    658 ;E:\sanquentin\MSXgl\engine/src/vdp.c:255: VDP_FillVRAM_16K(0, 0x0000, 0x4000);  // Clear 16 KB of VRAM
+    0000009C 21 00 40         [10]  659 	ld	hl, #0x4000
+    0000009F E5               [11]  660 	push	hl
+    000000A0 11 00 00         [10]  661 	ld	de, #0x0000
+    000000A3 AF               [ 4]  662 	xor	a, a
+    000000A4 CDrD1r00         [17]  663 	call	_VDP_FillVRAM_16K
+                                    664 ;E:\sanquentin\MSXgl\engine/src/vdp.c:264: }
+    000000A7 C9               [10]  665 	ret
+                                    666 ;E:\sanquentin\MSXgl\engine/src/vdp.c:275: void VDP_WriteVRAM_16K(const u8* src, u16 dest, u16 count)
+                                    667 ;	---------------------------------
+                                    668 ; Function VDP_WriteVRAM_16K
+                                    669 ; ---------------------------------
+    000000A8                        670 _VDP_WriteVRAM_16K::
+                                    671 ;E:\sanquentin\MSXgl\engine/src/vdp.c:344: __endasm;
+    000000A8 FD 21 02 00      [14]  672 	ld iy, #2
+    000000AC FD 39            [15]  673 	add iy, sp
+    000000AE 7B               [ 4]  674 	ld a, e
+    000000AF F3               [ 4]  675 	di
+    000000B0 D3 99            [11]  676 	out (0x99), a
+    000000B2 7A               [ 4]  677 	ld a, d
+    000000B3 E6 3F            [ 7]  678 	and a, #0x3F
+    000000B5 F6 40            [ 7]  679 	or a, #0x40
+    000000B7 FB               [ 4]  680 	ei
+    000000B8 D3 99            [11]  681 	out (0x99), a
+    000000BA FD 5E 00         [19]  682 	ld e, 0(iy)
+    000000BD FD 56 01         [19]  683 	ld d, 1(iy)
+    000000C0 0E 98            [ 7]  684 	ld c, #0x98
+    000000C2 43               [ 4]  685 	ld b, e
+    000000C3 1B               [ 6]  686 	dec de
+    000000C4 14               [ 4]  687 	inc d
+    000000C5                        688 wrt16_loop_start:
+    000000C5 ED A3            [16]  689 	outi
+    000000C7 C2rC5r00         [10]  690 	jp nz, wrt16_loop_start
+    000000CA 15               [ 4]  691 	dec d
+    000000CB C2rC5r00         [10]  692 	jp nz, wrt16_loop_start
+    000000CE                        693 wrt16_loop_end:
+                                    694 ;E:\sanquentin\MSXgl\engine/src/vdp.c:345: }
+    000000CE E1               [10]  695 	pop	hl
+    000000CF F1               [10]  696 	pop	af
+    000000D0 E9               [ 4]  697 	jp	(hl)
+                                    698 ;E:\sanquentin\MSXgl\engine/src/vdp.c:354: void VDP_FillVRAM_16K(u8 value, u16 dest, u16 count) __NAKED // Stack: 4 bytes
+                                    699 ;	---------------------------------
+                                    700 ; Function VDP_FillVRAM_16K
+                                    701 ; ---------------------------------
+    000000D1                        702 _VDP_FillVRAM_16K::
+                                    703 ;E:\sanquentin\MSXgl\engine/src/vdp.c:405: __endasm;
+    000000D1 4F               [ 4]  704 	ld c, a
+    000000D2 7B               [ 4]  705 	ld a, e
+    000000D3 F3               [ 4]  706 	di
+    000000D4 D3 99            [11]  707 	out (0x99), a
+    000000D6 7A               [ 4]  708 	ld a, d
+    000000D7 E6 3F            [ 7]  709 	and a, #0x3F
+    000000D9 F6 40            [ 7]  710 	or a, #0x40
+    000000DB D3 99            [11]  711 	out (0x99), a
+    000000DD FD E1            [14]  712 	pop iy
+    000000DF D1               [10]  713 	pop de
+    000000E0 79               [ 4]  714 	ld a, c
+    000000E1 43               [ 4]  715 	ld b, e
+    000000E2 1B               [ 6]  716 	dec de
+    000000E3 14               [ 4]  717 	inc d
+    000000E4                        718 fll16_loop_start:
+    000000E4 D3 98            [11]  719 	out (0x98), a
+    000000E6 00               [ 4]  720 	nop
+    000000E7 10 FB            [13]  721 	djnz fll16_loop_start
+    000000E9 15               [ 4]  722 	dec d
+    000000EA C2rE4r00         [10]  723 	jp nz, fll16_loop_start
+    000000ED                        724 fll16_loop_end:
+    000000ED FB               [ 4]  725 	ei
+    000000EE FD E9            [ 8]  726 	jp (iy)
+                                    727 ;E:\sanquentin\MSXgl\engine/src/vdp.c:406: }
+                                    728 ;E:\sanquentin\MSXgl\engine/src/vdp.c:519: void VDP_ReadVRAM_16K(u16 src, u8* dest, u16 count)
+                                    729 ;	---------------------------------
+                                    730 ; Function VDP_ReadVRAM_16K
+                                    731 ; ---------------------------------
+    000000F0                        732 _VDP_ReadVRAM_16K::
+                                    733 ;E:\sanquentin\MSXgl\engine/src/vdp.c:589: __endasm;
+    000000F0 FD 21 02 00      [14]  734 	ld iy, #2
+    000000F4 FD 39            [15]  735 	add iy, sp
+    000000F6 7D               [ 4]  736 	ld a, l
+    000000F7 F3               [ 4]  737 	di
+    000000F8 D3 99            [11]  738 	out (0x99), a
+    000000FA 7C               [ 4]  739 	ld a, h
+    000000FB E6 3F            [ 7]  740 	and a, #0x3F
+    000000FD FB               [ 4]  741 	ei
+    000000FE D3 99            [11]  742 	out (0x99), a
+    00000100 EB               [ 4]  743 	ex de, hl
+    00000101 FD 5E 00         [19]  744 	ld e, 0(iy)
+    00000104 FD 56 01         [19]  745 	ld d, 1(iy)
+    00000107 0E 98            [ 7]  746 	ld c, #0x98
+    00000109 43               [ 4]  747 	ld b, e
+    0000010A 1B               [ 6]  748 	dec de
+    0000010B 14               [ 4]  749 	inc d
+    0000010C                        750 rd16_loop_start:
+    0000010C ED A2            [16]  751 	ini
+    0000010E C2r0Cr01         [10]  752 	jp nz, rd16_loop_start
+    00000111 15               [ 4]  753 	dec d
+    00000112 C2r0Cr01         [10]  754 	jp nz, rd16_loop_start
+    00000115                        755 rd16_loop_end:
+                                    756 ;E:\sanquentin\MSXgl\engine/src/vdp.c:590: }
+    00000115 E1               [10]  757 	pop	hl
+    00000116 F1               [10]  758 	pop	af
+    00000117 E9               [ 4]  759 	jp	(hl)
+                                    760 ;E:\sanquentin\MSXgl\engine/src/vdp.c:600: u8 VDP_Peek_16K(u16 dest) __NAKED __PRESERVES(b, c, d, e, iyl, iyh)
+                                    761 ;	---------------------------------
+                                    762 ; Function VDP_Peek_16K
+                                    763 ; ---------------------------------
+    00000118                        764 _VDP_Peek_16K::
+                                    765 ;E:\sanquentin\MSXgl\engine/src/vdp.c:636: __endasm;
+    00000118 7D               [ 4]  766 	ld a, l
+    00000119 F3               [ 4]  767 	di
+    0000011A D3 99            [11]  768 	out (0x99), a
+    0000011C 7C               [ 4]  769 	ld a, h
+    0000011D E6 3F            [ 7]  770 	and a, #0x3F
+    0000011F D3 99            [11]  771 	out (0x99), a
+    00000121 29               [11]  772 	add hl, hl
+    00000122 FB               [ 4]  773 	ei
+    00000123 DB 98            [11]  774 	in a, (0x98)
+    00000125 C9               [10]  775 	ret
+                                    776 ;E:\sanquentin\MSXgl\engine/src/vdp.c:637: }
+                                    777 ;E:\sanquentin\MSXgl\engine/src/vdp.c:645: void VDP_Poke_16K(u8 val, u16 dest) __PRESERVES(c, h, l, iyl, iyh)
+                                    778 ;	---------------------------------
+                                    779 ; Function VDP_Poke_16K
+                                    780 ; ---------------------------------
+    00000126                        781 _VDP_Poke_16K::
+                                    782 ;E:\sanquentin\MSXgl\engine/src/vdp.c:682: __endasm;
+    00000126 47               [ 4]  783 	ld b, a
+    00000127 7B               [ 4]  784 	ld a, e
+    00000128 F3               [ 4]  785 	di
+    00000129 D3 99            [11]  786 	out (0x99), a
+    0000012B 7A               [ 4]  787 	ld a, d
+    0000012C E6 3F            [ 7]  788 	and a, #0x3F
+    0000012E F6 40            [ 7]  789 	or a, #0x40
+    00000130 D3 99            [11]  790 	out (0x99), a
+    00000132 13               [ 6]  791 	inc de
+    00000133 78               [ 4]  792 	ld a, b
+    00000134 FB               [ 4]  793 	ei
+    00000135 D3 98            [11]  794 	out (0x98), a
+                                    795 ;E:\sanquentin\MSXgl\engine/src/vdp.c:683: }
+    00000137 C9               [10]  796 	ret
+                                    797 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1455: void VDP_Initialize()
+                                    798 ;	---------------------------------
+                                    799 ; Function VDP_Initialize
+                                    800 ; ---------------------------------
+    00000138                        801 _VDP_Initialize::
+                                    802 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1463: __endasm;
+    00000138 21 DF F3         [10]  803 	ld hl, #0xF3DF
+    0000013B 11r00r00         [10]  804 	ld de, #_g_VDP_REGSAV+0
+    0000013E 01 08 00         [10]  805 	ld bc, #8
+    00000141 ED B0            [21]  806 	ldir
+                                    807 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1486: g_VDPInitilized = TRUE;
+    00000143 21r00r00         [10]  808 	ld	hl, #_g_VDPInitilized
+    00000146 36 01            [10]  809 	ld	(hl), #0x01
+                                    810 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1488: }
+    00000148 C9               [10]  811 	ret
+                                    812 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1496: void VDP_SetMode(const u8 mode)
+                                    813 ;	---------------------------------
+                                    814 ; Function VDP_SetMode
+                                    815 ; ---------------------------------
+    00000149                        816 _VDP_SetMode::
+    00000149 4F               [ 4]  817 	ld	c, a
+                                    818 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1499: if (!g_VDPInitilized)
+    0000014A 3Ar00r00         [13]  819 	ld	a, (_g_VDPInitilized+0)
+    0000014D B7               [ 4]  820 	or	a, a
+    0000014E 20 05            [12]  821 	jr	nz, 00102$
+                                    822 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1500: VDP_Initialize();
+    00000150 C5               [11]  823 	push	bc
+    00000151 CDr38r01         [17]  824 	call	_VDP_Initialize
+    00000154 C1               [10]  825 	pop	bc
+    00000155                        826 00102$:
+                                    827 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1507: g_VDP_Data.Mode = mode;
+    00000155 21r1Cr00         [10]  828 	ld	hl, #_g_VDP_Data
+                                    829 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1508: switch (mode)
+    00000158 79               [ 4]  830 	ld	a,c
+    00000159 77               [ 7]  831 	ld	(hl),a
+    0000015A B7               [ 4]  832 	or	a, a
+    0000015B 28 10            [12]  833 	jr	z, 00103$
+    0000015D 79               [ 4]  834 	ld	a, c
+    0000015E 3D               [ 4]  835 	dec	a
+    0000015F 28 12            [12]  836 	jr	z, 00104$
+    00000161 79               [ 4]  837 	ld	a, c
+    00000162 FE 02            [ 7]  838 	cp	a, #0x02
+    00000164 28 13            [12]  839 	jr	z, 00105$
+    00000166 D6 03            [ 7]  840 	sub	a, #0x03
+    00000168 28 15            [12]  841 	jr	z, 00106$
+    0000016A C3r82r01         [10]  842 	jp	00113$
+                                    843 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1515: case VDP_MODE_TEXT1:
+    0000016D                        844 00103$:
+                                    845 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1516: VDP_SetModeText1();
+    0000016D CDr29r00         [17]  846 	call	_VDP_SetModeText1
+                                    847 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1517: break;
+    00000170 C3r82r01         [10]  848 	jp	00113$
+                                    849 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1522: case VDP_MODE_MULTICOLOR:
+    00000173                        850 00104$:
+                                    851 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1523: VDP_SetModeMultiColor();
+    00000173 CDr3Ar00         [17]  852 	call	_VDP_SetModeMultiColor
+                                    853 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1524: break;
+    00000176 C3r82r01         [10]  854 	jp	00113$
+                                    855 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1529: case VDP_MODE_GRAPHIC1:
+    00000179                        856 00105$:
+                                    857 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1530: VDP_SetModeGraphic1();
+    00000179 CDr57r00         [17]  858 	call	_VDP_SetModeGraphic1
+                                    859 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1531: break;
+    0000017C C3r82r01         [10]  860 	jp	00113$
+                                    861 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1536: case VDP_MODE_GRAPHIC2:
+    0000017F                        862 00106$:
+                                    863 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1537: VDP_SetModeGraphic2();
+    0000017F CDr79r00         [17]  864 	call	_VDP_SetModeGraphic2
+                                    865 ;E:\sanquentin\MSXgl\engine/src/vdp.h:710: inline void VDP_EnableDisplay(bool enable) { VDP_RegWriteBakMask(1, (u8)~R01_BL, enable ? R01_BL : 0); }
+    00000182                        866 00113$:
+    00000182 3E 40            [ 7]  867 	ld	a, #0x40
+    00000184 F5               [11]  868 	push	af
+    00000185 33               [ 6]  869 	inc	sp
+    00000186 2E BF            [ 7]  870 	ld	l, #0xbf
+    00000188 3E 01            [ 7]  871 	ld	a, #0x01
+    0000018A CDr07r02         [17]  872 	call	_VDP_RegWriteBakMask
+                                    873 ;E:\sanquentin\MSXgl\engine/src/vdp.h:717: inline void VDP_EnableVBlank(bool enable) { VDP_RegWriteBakMask(1, (u8)~R01_IE0, enable ? R01_IE0 : 0); }
+    0000018D 3E 20            [ 7]  874 	ld	a, #0x20
+    0000018F F5               [11]  875 	push	af
+    00000190 33               [ 6]  876 	inc	sp
+    00000191 2E DF            [ 7]  877 	ld	l, #0xdf
+    00000193 3E 01            [ 7]  878 	ld	a, #0x01
+    00000195 CDr07r02         [17]  879 	call	_VDP_RegWriteBakMask
+                                    880 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1620: VDP_EnableVBlank(TRUE);
+                                    881 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1643: }
+    00000198 C9               [10]  882 	ret
+                                    883 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1649: u8 VDP_GetVersion() __NAKED
+                                    884 ;	---------------------------------
+                                    885 ; Function VDP_GetVersion
+                                    886 ; ---------------------------------
+    00000199                        887 _VDP_GetVersion::
+                                    888 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1718: __endasm;
+    00000199                        889 VDP_GetVersionAsm:
+    00000199 CDrB8r01         [17]  890 	call VDP_IsTMS9918A
+    0000019C C8               [11]  891 	ret z
+    0000019D 3E 01            [ 7]  892 	ld a, #1
+    0000019F F3               [ 4]  893 	di
+    000001A0 D3 99            [11]  894 	out (0x99), a
+    000001A2 3E 8F            [ 7]  895 	ld a, #(0x80 | 15)
+    000001A4 D3 99            [11]  896 	out (0x99), a
+    000001A6 DB 99            [11]  897 	in a, (0x99)
+    000001A8 E6 3E            [ 7]  898 	and #0b00111110
+    000001AA 0F               [ 4]  899 	rrca
+    000001AB 08               [ 4]  900 	ex af, af'					; '
+    000001AC AF               [ 4]  901 	xor a
+    000001AD D3 99            [11]  902 	out (0x99), a
+    000001AF 3E 8F            [ 7]  903 	ld a, #(0x80 | 15)
+    000001B1 FB               [ 4]  904 	ei
+    000001B2 D3 99            [11]  905 	out (0x99), a
+    000001B4 08               [ 4]  906 	ex af, af'					; '
+    000001B5 C0               [11]  907 	ret nz
+    000001B6 3C               [ 4]  908 	inc a
+    000001B7 C9               [10]  909 	ret
+    000001B8                        910 VDP_IsTMS9918A:
+    000001B8 AF               [ 4]  911 	xor a
+    000001B9 F3               [ 4]  912 	di
+    000001BA D3 99            [11]  913 	out (0x99), a
+    000001BC 3E 8F            [ 7]  914 	ld a, #(0x80 | 15)
+    000001BE D3 99            [11]  915 	out (0x99), a
+    000001C0 DB 99            [11]  916 	in a, (0x99)
+    000001C2                        917 VDP_IsTMS9918A_Wait:
+    000001C2 DB 99            [11]  918 	in a,(0x99)
+    000001C4 A7               [ 4]  919 	and a
+    000001C5 F2rC2r01         [10]  920 	jp p, VDP_IsTMS9918A_Wait
+    000001C8 3E 02            [ 7]  921 	ld a, #2
+    000001CA D3 99            [11]  922 	out (0x99), a
+    000001CC 3E 8F            [ 7]  923 	ld a, #(0x80 | 15)
+    000001CE D3 99            [11]  924 	out (0x99), a
+    000001D0 DB 99            [11]  925 	in a, (0x99)
+    000001D2 08               [ 4]  926 	ex af, af'					; '
+    000001D3 AF               [ 4]  927 	xor a
+    000001D4 D3 99            [11]  928 	out (0x99), a
+    000001D6 3E 8F            [ 7]  929 	ld a, #(0x80 | 15)
+    000001D8 D3 99            [11]  930 	out (0x99), a
+    000001DA 3A E6 F3         [13]  931 	ld a, (0xF3E6)
+    000001DD D3 99            [11]  932 	out (0x99), a
+    000001DF 3E 87            [ 7]  933 	ld a, #(0x80 | 7)
+    000001E1 FB               [ 4]  934 	ei
+    000001E2 D3 99            [11]  935 	out (0x99), a
+    000001E4 08               [ 4]  936 	ex af, af'					; '
+    000001E5 E6 40            [ 7]  937 	and #0b01000000
+    000001E7 C9               [10]  938 	ret
+                                    939 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1719: }
+                                    940 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1727: void VDP_RegWrite(u8 reg, u8 value) __PRESERVES(b, c, d, e, iyl, iyh)
+                                    941 ;	---------------------------------
+                                    942 ; Function VDP_RegWrite
+                                    943 ; ---------------------------------
+    000001E8                        944 _VDP_RegWrite::
+                                    945 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1741: __endasm;
+    000001E8 67               [ 4]  946 	ld h, a
+    000001E9 7D               [ 4]  947 	ld a, l
+    000001EA F3               [ 4]  948 	di
+    000001EB D3 99            [11]  949 	out (0x99), a
+    000001ED 7C               [ 4]  950 	ld a, h
+    000001EE C6 80            [ 7]  951 	add #0x80
+    000001F0 FB               [ 4]  952 	ei
+    000001F1 D3 99            [11]  953 	out (0x99), a
+                                    954 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1742: }
+    000001F3 C9               [10]  955 	ret
+                                    956 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1750: void VDP_RegWriteBak(u8 reg, u8 value) __PRESERVES(d, e, iyl, iyh)
+                                    957 ;	---------------------------------
+                                    958 ; Function VDP_RegWriteBak
+                                    959 ; ---------------------------------
+    000001F4                        960 _VDP_RegWriteBak::
+                                    961 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1770: __endasm;
+    000001F4 4F               [ 4]  962 	ld c, a
+    000001F5 7D               [ 4]  963 	ld a, l
+    000001F6 06 00            [ 7]  964 	ld b, #0
+    000001F8 21r00r00         [10]  965 	ld hl, #_g_VDP_REGSAV
+    000001FB 09               [11]  966 	add hl, bc
+    000001FC 77               [ 7]  967 	ld (hl), a
+    000001FD F3               [ 4]  968 	di
+    000001FE D3 99            [11]  969 	out (0x99), a
+    00000200 79               [ 4]  970 	ld a, c
+    00000201 C6 80            [ 7]  971 	add #0x80
+    00000203 FB               [ 4]  972 	ei
+    00000204 D3 99            [11]  973 	out (0x99), a
+                                    974 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1771: }
+    00000206 C9               [10]  975 	ret
+                                    976 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1780: void VDP_RegWriteBakMask(u8 reg, u8 mask, u8 flag)
+                                    977 ;	---------------------------------
+                                    978 ; Function VDP_RegWriteBakMask
+                                    979 ; ---------------------------------
+    00000207                        980 _VDP_RegWriteBakMask::
+    00000207 DD E5            [15]  981 	push	ix
+    00000209 DD 21 00 00      [14]  982 	ld	ix,	#0
+    0000020D DD 39            [15]  983 	add	ix, sp
+    0000020F 4F               [ 4]  984 	ld	c, a
+    00000210 5D               [ 4]  985 	ld	e, l
+                                    986 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1782: u8 value = g_VDP_REGSAV[reg];
+    00000211 21r00r00         [10]  987 	ld	hl, #_g_VDP_REGSAV+0
+    00000214 79               [ 4]  988 	ld	a, c
+    00000215 85               [ 4]  989 	add	a, l
+    00000216 6F               [ 4]  990 	ld	l, a
+    00000217 3E 00            [ 7]  991 	ld	a, #0x00
+    00000219 8C               [ 4]  992 	adc	a, h
+    0000021A 67               [ 4]  993 	ld	h, a
+    0000021B 7E               [ 7]  994 	ld	a, (hl)
+                                    995 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1783: value &= mask;
+    0000021C A3               [ 4]  996 	and	a, e
+                                    997 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1784: value |= flag;
+    0000021D DD B6 04         [19]  998 	or	a, 4 (ix)
+                                    999 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1785: VDP_RegWriteBak(reg, value);
+    00000220 6F               [ 4] 1000 	ld	l, a
+    00000221 79               [ 4] 1001 	ld	a, c
+    00000222 CDrF4r01         [17] 1002 	call	_VDP_RegWriteBak
+                                   1003 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1786: }
+    00000225 DD E1            [14] 1004 	pop	ix
+    00000227 E1               [10] 1005 	pop	hl
+    00000228 33               [ 6] 1006 	inc	sp
+    00000229 E9               [ 4] 1007 	jp	(hl)
+                                   1008 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1790: u8 VDP_ReadDefaultStatus() __NAKED __PRESERVES(b, c, d, e, h, l, iyl, iyh)
+                                   1009 ;	---------------------------------
+                                   1010 ; Function VDP_ReadDefaultStatus
+                                   1011 ; ---------------------------------
+    0000022A                       1012 _VDP_ReadDefaultStatus::
+                                   1013 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1795: __endasm;
+    0000022A DB 99            [11] 1014 	in a, (0x99)
+    0000022C C9               [10] 1015 	ret
+                                   1016 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1796: }
+                                   1017 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1813: void VDP_SetLayoutTable(VADDR addr)
+                                   1018 ;	---------------------------------
+                                   1019 ; Function VDP_SetLayoutTable
+                                   1020 ; ---------------------------------
+    0000022D                       1021 _VDP_SetLayoutTable::
+                                   1022 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1815: g_ScreenLayoutLow = (u16)addr;
+    0000022D 22r31r00         [16] 1023 	ld	(_g_ScreenLayoutLow), hl
+                                   1024 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1818: reg = (u8)(addr >> 10);
+    00000230 7C               [ 4] 1025 	ld	a, h
+    00000231 0F               [ 4] 1026 	rrca
+    00000232 0F               [ 4] 1027 	rrca
+    00000233 E6 3F            [ 7] 1028 	and	a, #0x3f
+    00000235 0E 00            [ 7] 1029 	ld	c, #0x00
+                                   1030 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1839: VDP_RegWrite(2, reg);
+    00000237 6F               [ 4] 1031 	ld	l, a
+    00000238 3E 02            [ 7] 1032 	ld	a, #0x02
+                                   1033 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1844: }
+    0000023A C3rE8r01         [10] 1034 	jp	_VDP_RegWrite
+                                   1035 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1848: void VDP_SetColorTable(VADDR addr)
+                                   1036 ;	---------------------------------
+                                   1037 ; Function VDP_SetColorTable
+                                   1038 ; ---------------------------------
+    0000023D                       1039 _VDP_SetColorTable::
+                                   1040 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1850: g_ScreenColorLow = (u16)addr;
+    0000023D 22r33r00         [16] 1041 	ld	(_g_ScreenColorLow), hl
+                                   1042 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1853: reg = (u8)(addr >> 6);
+    00000240 29               [11] 1043 	add	hl, hl
+    00000241 29               [11] 1044 	add	hl, hl
+    00000242 4C               [ 4] 1045 	ld	c, h
+                                   1046 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1854: switch (g_VDP_Data.Mode)
+    00000243 3Ar1Cr00         [13] 1047 	ld	a, (#_g_VDP_Data + 0)
+    00000246 FE 03            [ 7] 1048 	cp	a, #0x03
+    00000248 20 04            [12] 1049 	jr	nz, 00102$
+                                   1050 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1874: reg |= 0b1111111;
+    0000024A 79               [ 4] 1051 	ld	a, c
+    0000024B F6 7F            [ 7] 1052 	or	a, #0x7f
+    0000024D 4F               [ 4] 1053 	ld	c, a
+                                   1054 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1876: };	
+    0000024E                       1055 00102$:
+                                   1056 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1877: VDP_RegWrite(3, reg);
+    0000024E 69               [ 4] 1057 	ld	l, c
+    0000024F 3E 03            [ 7] 1058 	ld	a, #0x03
+                                   1059 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1885: }
+    00000251 C3rE8r01         [10] 1060 	jp	_VDP_RegWrite
+                                   1061 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1889: void VDP_SetPatternTable(VADDR addr)
+                                   1062 ;	---------------------------------
+                                   1063 ; Function VDP_SetPatternTable
+                                   1064 ; ---------------------------------
+    00000254                       1065 _VDP_SetPatternTable::
+                                   1066 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1891: g_ScreenPatternLow = (u16)addr;
+    00000254 22r35r00         [16] 1067 	ld	(_g_ScreenPatternLow), hl
+                                   1068 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1894: reg = (u8)(addr >> 11);
+    00000257 7C               [ 4] 1069 	ld	a, h
+    00000258 0F               [ 4] 1070 	rrca
+    00000259 0F               [ 4] 1071 	rrca
+    0000025A 0F               [ 4] 1072 	rrca
+    0000025B E6 1F            [ 7] 1073 	and	a, #0x1f
+    0000025D 4F               [ 4] 1074 	ld	c, a
+                                   1075 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1895: switch (g_VDP_Data.Mode)
+    0000025E 3Ar1Cr00         [13] 1076 	ld	a, (#_g_VDP_Data + 0)
+    00000261 FE 03            [ 7] 1077 	cp	a, #0x03
+    00000263 20 04            [12] 1078 	jr	nz, 00102$
+                                   1079 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1909: reg |= 0b11;
+    00000265 79               [ 4] 1080 	ld	a, c
+    00000266 F6 03            [ 7] 1081 	or	a, #0x03
+    00000268 4F               [ 4] 1082 	ld	c, a
+                                   1083 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1910: };
+    00000269                       1084 00102$:
+                                   1085 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1911: VDP_RegWrite(4, reg);
+    00000269 69               [ 4] 1086 	ld	l, c
+    0000026A 3E 04            [ 7] 1087 	ld	a, #0x04
+                                   1088 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1916: }
+    0000026C C3rE8r01         [10] 1089 	jp	_VDP_RegWrite
+                                   1090 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1930: void VDP_SetSpriteAttributeTable(VADDR addr)
+                                   1091 ;	---------------------------------
+                                   1092 ; Function VDP_SetSpriteAttributeTable
+                                   1093 ; ---------------------------------
+    0000026F                       1094 _VDP_SetSpriteAttributeTable::
+    0000026F EB               [ 4] 1095 	ex	de, hl
+                                   1096 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1932: g_SpriteAttributeLow = (u16)addr;
+    00000270 ED 53r37r00      [20] 1097 	ld	(_g_SpriteAttributeLow), de
+                                   1098 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1935: reg = (u8)(addr >> 7);
+    00000274 6B               [ 4] 1099 	ld	l, e
+    00000275 7A               [ 4] 1100 	ld	a, d
+    00000276 CB 3F            [ 8] 1101 	srl	a
+    00000278 CB 1D            [ 8] 1102 	rr	l
+    0000027A CB 3F            [ 8] 1103 	srl	a
+    0000027C CB 1D            [ 8] 1104 	rr	l
+    0000027E CB 3F            [ 8] 1105 	srl	a
+    00000280 CB 1D            [ 8] 1106 	rr	l
+    00000282 CB 3F            [ 8] 1107 	srl	a
+    00000284 CB 1D            [ 8] 1108 	rr	l
+    00000286 CB 3F            [ 8] 1109 	srl	a
+    00000288 CB 1D            [ 8] 1110 	rr	l
+    0000028A CB 3F            [ 8] 1111 	srl	a
+    0000028C CB 1D            [ 8] 1112 	rr	l
+    0000028E CB 3F            [ 8] 1113 	srl	a
+    00000290 CB 1D            [ 8] 1114 	rr	l
+                                   1115 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1958: VDP_RegWrite(5, reg);
+    00000292 3E 05            [ 7] 1116 	ld	a, #0x05
+    00000294 CDrE8r01         [17] 1117 	call	_VDP_RegWrite
+                                   1118 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1967: addr -= 0x200;
+    00000297 6B               [ 4] 1119 	ld	l, e
+    00000298 7A               [ 4] 1120 	ld	a, d
+    00000299 C6 FE            [ 7] 1121 	add	a, #0xfe
+    0000029B 67               [ 4] 1122 	ld	h, a
+    0000029C 22r3Br00         [16] 1123 	ld	(_g_SpriteColorLow), hl
+                                   1124 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1968: g_SpriteColorLow = (u16)addr;
+                                   1125 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1972: }
+    0000029F C9               [10] 1126 	ret
+                                   1127 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1978: void VDP_SetSpritePatternTable(VADDR addr)
+                                   1128 ;	---------------------------------
+                                   1129 ; Function VDP_SetSpritePatternTable
+                                   1130 ; ---------------------------------
+    000002A0                       1131 _VDP_SetSpritePatternTable::
+                                   1132 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1980: g_SpritePatternLow  = (u16)addr;
+    000002A0 22r39r00         [16] 1133 	ld	(_g_SpritePatternLow), hl
+                                   1134 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1985: u8 reg = (u8)(addr >> 11);
+    000002A3 7C               [ 4] 1135 	ld	a, h
+    000002A4 0F               [ 4] 1136 	rrca
+    000002A5 0F               [ 4] 1137 	rrca
+    000002A6 0F               [ 4] 1138 	rrca
+    000002A7 E6 1F            [ 7] 1139 	and	a, #0x1f
+    000002A9 0E 00            [ 7] 1140 	ld	c, #0x00
+                                   1141 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1986: VDP_RegWrite(6, reg);
+    000002AB 6F               [ 4] 1142 	ld	l, a
+    000002AC 3E 06            [ 7] 1143 	ld	a, #0x06
+                                   1144 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1988: }
+    000002AE C3rE8r01         [10] 1145 	jp	_VDP_RegWrite
+                                   1146 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1992: void VDP_LoadSpritePattern(const u8* addr, u8 index, u8 count)
+                                   1147 ;	---------------------------------
+                                   1148 ; Function VDP_LoadSpritePattern
+                                   1149 ; ---------------------------------
+    000002B1                       1150 _VDP_LoadSpritePattern::
+    000002B1 DD E5            [15] 1151 	push	ix
+    000002B3 DD 21 00 00      [14] 1152 	ld	ix,	#0
+    000002B7 DD 39            [15] 1153 	add	ix, sp
+    000002B9 4D               [ 4] 1154 	ld	c, l
+    000002BA 44               [ 4] 1155 	ld	b, h
+                                   1156 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1994: u16 low = g_SpritePatternLow;
+    000002BB ED 5Br39r00      [20] 1157 	ld	de, (_g_SpritePatternLow)
+                                   1158 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1995: low += (index * 8);
+    000002BF DD 6E 04         [19] 1159 	ld	l, 4 (ix)
+    000002C2 26 00            [ 7] 1160 	ld	h, #0x00
+    000002C4 29               [11] 1161 	add	hl, hl
+    000002C5 29               [11] 1162 	add	hl, hl
+    000002C6 29               [11] 1163 	add	hl, hl
+    000002C7 19               [11] 1164 	add	hl, de
+    000002C8 EB               [ 4] 1165 	ex	de, hl
+                                   1166 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1996: VDP_WriteVRAM(addr, low, g_SpritePatternHigh, count * 8);
+    000002C9 DD 6E 05         [19] 1167 	ld	l, 5 (ix)
+    000002CC 26 00            [ 7] 1168 	ld	h, #0x00
+    000002CE 29               [11] 1169 	add	hl, hl
+    000002CF 29               [11] 1170 	add	hl, hl
+    000002D0 29               [11] 1171 	add	hl, hl
+    000002D1 E5               [11] 1172 	push	hl
+    000002D2 69               [ 4] 1173 	ld	l, c
+    000002D3 60               [ 4] 1174 	ld	h, b
+    000002D4 CDrA8r00         [17] 1175 	call	_VDP_WriteVRAM_16K
+                                   1176 ;E:\sanquentin\MSXgl\engine/src/vdp.c:1997: }
+    000002D7 DD E1            [14] 1177 	pop	ix
+    000002D9 E1               [10] 1178 	pop	hl
+    000002DA F1               [10] 1179 	pop	af
+    000002DB E9               [ 4] 1180 	jp	(hl)
+                                   1181 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2001: void VDP_SetSpriteSM1(u8 index, u8 x, u8 y, u8 shape, u8 color)
+                                   1182 ;	---------------------------------
+                                   1183 ; Function VDP_SetSpriteSM1
+                                   1184 ; ---------------------------------
+    000002DC                       1185 _VDP_SetSpriteSM1::
+    000002DC DD E5            [15] 1186 	push	ix
+    000002DE DD 21 00 00      [14] 1187 	ld	ix,	#0
+    000002E2 DD 39            [15] 1188 	add	ix, sp
+    000002E4 5F               [ 4] 1189 	ld	e, a
+    000002E5 4D               [ 4] 1190 	ld	c, l
+                                   1191 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2003: g_VDP_Sprite.Y = y;				// Y coordinate on screen (all lower priority sprite will be disable if equal to 216 or 0xD0)
+    000002E6 21r2Dr00         [10] 1192 	ld	hl, #_g_VDP_Sprite
+    000002E9 DD 7E 04         [19] 1193 	ld	a, 4 (ix)
+    000002EC 77               [ 7] 1194 	ld	(hl), a
+                                   1195 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2004: g_VDP_Sprite.X = x;				// X coordinate of the sprite
+    000002ED 23               [ 6] 1196 	inc	hl
+    000002EE 71               [ 7] 1197 	ld	(hl), c
+                                   1198 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2005: g_VDP_Sprite.Pattern = shape;	// Pattern index
+    000002EF 23               [ 6] 1199 	inc	hl
+    000002F0 DD 7E 05         [19] 1200 	ld	a, 5 (ix)
+    000002F3 77               [ 7] 1201 	ld	(hl), a
+                                   1202 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2006: g_VDP_Sprite.Color = color;		// Color index (Sprite Mode 1 only) + Early clock
+    000002F4 23               [ 6] 1203 	inc	hl
+    000002F5 DD 7E 06         [19] 1204 	ld	a, 6 (ix)
+    000002F8 77               [ 7] 1205 	ld	(hl), a
+                                   1206 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2008: u16 low = g_SpriteAttributeLow;
+    000002F9 ED 4Br37r00      [20] 1207 	ld	bc, (_g_SpriteAttributeLow)
+                                   1208 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2009: low += (index * 4);
+    000002FD 16 00            [ 7] 1209 	ld	d, #0x00
+    000002FF EB               [ 4] 1210 	ex	de, hl
+    00000300 29               [11] 1211 	add	hl, hl
+    00000301 29               [11] 1212 	add	hl, hl
+    00000302 09               [11] 1213 	add	hl, bc
+    00000303 EB               [ 4] 1214 	ex	de, hl
+                                   1215 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2010: VDP_WriteVRAM((u8*)&g_VDP_Sprite, low, g_SpriteAttributeHigh, 4);
+    00000304 21 04 00         [10] 1216 	ld	hl, #0x0004
+    00000307 E5               [11] 1217 	push	hl
+    00000308 21r2Dr00         [10] 1218 	ld	hl, #_g_VDP_Sprite
+    0000030B CDrA8r00         [17] 1219 	call	_VDP_WriteVRAM_16K
+                                   1220 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2011: }
+    0000030E DD E1            [14] 1221 	pop	ix
+    00000310 E1               [10] 1222 	pop	hl
+    00000311 F1               [10] 1223 	pop	af
+    00000312 33               [ 6] 1224 	inc	sp
+    00000313 E9               [ 4] 1225 	jp	(hl)
+                                   1226 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2015: void VDP_SetSprite(u8 index, u8 x, u8 y, u8 shape)
+                                   1227 ;	---------------------------------
+                                   1228 ; Function VDP_SetSprite
+                                   1229 ; ---------------------------------
+    00000314                       1230 _VDP_SetSprite::
+    00000314 DD E5            [15] 1231 	push	ix
+    00000316 DD 21 00 00      [14] 1232 	ld	ix,	#0
+    0000031A DD 39            [15] 1233 	add	ix, sp
+    0000031C 5F               [ 4] 1234 	ld	e, a
+    0000031D 55               [ 4] 1235 	ld	d, l
+                                   1236 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2017: g_VDP_Sprite.Y = y;				// Y coordinate on screen (all lower priority sprite will be disable if equal to 216 or 0xD0)
+    0000031E 01r2Dr00         [10] 1237 	ld	bc, #_g_VDP_Sprite+0
+    00000321 DD 7E 04         [19] 1238 	ld	a, 4 (ix)
+    00000324 02               [ 7] 1239 	ld	(bc), a
+                                   1240 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2018: g_VDP_Sprite.X = x;				// X coordinate of the sprite
+    00000325 21r2Er00         [10] 1241 	ld	hl, #(_g_VDP_Sprite + 1)
+    00000328 72               [ 7] 1242 	ld	(hl), d
+                                   1243 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2019: g_VDP_Sprite.Pattern = shape;	// Pattern index
+    00000329 03               [ 6] 1244 	inc	bc
+    0000032A 03               [ 6] 1245 	inc	bc
+    0000032B DD 7E 05         [19] 1246 	ld	a, 5 (ix)
+    0000032E 02               [ 7] 1247 	ld	(bc), a
+                                   1248 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2021: u16 low = g_SpriteAttributeLow;
+    0000032F ED 4Br37r00      [20] 1249 	ld	bc, (_g_SpriteAttributeLow)
+                                   1250 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2022: low += (index * 4);
+    00000333 16 00            [ 7] 1251 	ld	d, #0x00
+    00000335 EB               [ 4] 1252 	ex	de, hl
+    00000336 29               [11] 1253 	add	hl, hl
+    00000337 29               [11] 1254 	add	hl, hl
+    00000338 09               [11] 1255 	add	hl, bc
+    00000339 EB               [ 4] 1256 	ex	de, hl
+                                   1257 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2023: VDP_WriteVRAM((u8*)&g_VDP_Sprite, low, g_SpriteAttributeHigh, 3);
+    0000033A 21 03 00         [10] 1258 	ld	hl, #0x0003
+    0000033D E5               [11] 1259 	push	hl
+    0000033E 21r2Dr00         [10] 1260 	ld	hl, #_g_VDP_Sprite
+    00000341 CDrA8r00         [17] 1261 	call	_VDP_WriteVRAM_16K
+                                   1262 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2024: }
+    00000344 DD E1            [14] 1263 	pop	ix
+    00000346 E1               [10] 1264 	pop	hl
+    00000347 F1               [10] 1265 	pop	af
+    00000348 E9               [ 4] 1266 	jp	(hl)
+                                   1267 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2062: void VDP_SetSpritePosition(u8 index, u8 x, u8 y)
+                                   1268 ;	---------------------------------
+                                   1269 ; Function VDP_SetSpritePosition
+                                   1270 ; ---------------------------------
+    00000349                       1271 _VDP_SetSpritePosition::
+    00000349 DD E5            [15] 1272 	push	ix
+    0000034B DD 21 00 00      [14] 1273 	ld	ix,	#0
+    0000034F DD 39            [15] 1274 	add	ix, sp
+    00000351 5F               [ 4] 1275 	ld	e, a
+    00000352 4D               [ 4] 1276 	ld	c, l
+                                   1277 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2064: g_VDP_Sprite.Y = y;				// Y coordinate on screen (all lower priority sprite will be disable if equal to 216 or 0xD0)
+    00000353 21r2Dr00         [10] 1278 	ld	hl, #_g_VDP_Sprite+0
+    00000356 DD 7E 04         [19] 1279 	ld	a, 4 (ix)
+    00000359 77               [ 7] 1280 	ld	(hl), a
+                                   1281 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2065: g_VDP_Sprite.X = x;				// X coordinate of the sprite
+    0000035A 23               [ 6] 1282 	inc	hl
+    0000035B 71               [ 7] 1283 	ld	(hl), c
+                                   1284 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2067: u16 low = g_SpriteAttributeLow;
+    0000035C ED 4Br37r00      [20] 1285 	ld	bc, (_g_SpriteAttributeLow)
+                                   1286 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2068: low += (index * 4);
+    00000360 16 00            [ 7] 1287 	ld	d, #0x00
+    00000362 EB               [ 4] 1288 	ex	de, hl
+    00000363 29               [11] 1289 	add	hl, hl
+    00000364 29               [11] 1290 	add	hl, hl
+    00000365 09               [11] 1291 	add	hl, bc
+    00000366 EB               [ 4] 1292 	ex	de, hl
+                                   1293 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2069: VDP_WriteVRAM((u8*)&g_VDP_Sprite, low, g_SpriteAttributeHigh, 2);
+    00000367 21 02 00         [10] 1294 	ld	hl, #0x0002
+    0000036A E5               [11] 1295 	push	hl
+    0000036B 21r2Dr00         [10] 1296 	ld	hl, #_g_VDP_Sprite
+    0000036E CDrA8r00         [17] 1297 	call	_VDP_WriteVRAM_16K
+                                   1298 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2070: }
+    00000371 DD E1            [14] 1299 	pop	ix
+    00000373 E1               [10] 1300 	pop	hl
+    00000374 33               [ 6] 1301 	inc	sp
+    00000375 E9               [ 4] 1302 	jp	(hl)
+                                   1303 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2074: void VDP_SetSpritePositionX(u8 index, u8 x)
+                                   1304 ;	---------------------------------
+                                   1305 ; Function VDP_SetSpritePositionX
+                                   1306 ; ---------------------------------
+    00000376                       1307 _VDP_SetSpritePositionX::
+    00000376 4D               [ 4] 1308 	ld	c, l
+                                   1309 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2076: u16 low = g_SpriteAttributeLow;
+    00000377 ED 5Br37r00      [20] 1310 	ld	de, (_g_SpriteAttributeLow)
+                                   1311 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2077: low += (index * 4);
+    0000037B 6F               [ 4] 1312 	ld	l, a
+    0000037C 26 00            [ 7] 1313 	ld	h, #0x00
+    0000037E 29               [11] 1314 	add	hl, hl
+    0000037F 29               [11] 1315 	add	hl, hl
+    00000380 19               [11] 1316 	add	hl, de
+    00000381 EB               [ 4] 1317 	ex	de, hl
+                                   1318 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2078: VDP_Poke(x, ++low, g_SpriteAttributeHigh);
+    00000382 13               [ 6] 1319 	inc	de
+    00000383 79               [ 4] 1320 	ld	a, c
+                                   1321 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2079: }
+    00000384 C3r26r01         [10] 1322 	jp	_VDP_Poke_16K
+                                   1323 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2083: void VDP_SetSpritePositionY(u8 index, u8 y)
+                                   1324 ;	---------------------------------
+                                   1325 ; Function VDP_SetSpritePositionY
+                                   1326 ; ---------------------------------
+    00000387                       1327 _VDP_SetSpritePositionY::
+    00000387 4D               [ 4] 1328 	ld	c, l
+                                   1329 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2085: u16 low = g_SpriteAttributeLow;
+    00000388 ED 5Br37r00      [20] 1330 	ld	de, (_g_SpriteAttributeLow)
+                                   1331 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2086: low += (index * 4);
+    0000038C 6F               [ 4] 1332 	ld	l, a
+    0000038D 26 00            [ 7] 1333 	ld	h, #0x00
+    0000038F 29               [11] 1334 	add	hl, hl
+    00000390 29               [11] 1335 	add	hl, hl
+    00000391 19               [11] 1336 	add	hl, de
+    00000392 EB               [ 4] 1337 	ex	de, hl
+                                   1338 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2087: VDP_Poke(y, low, g_SpriteAttributeHigh);
+    00000393 79               [ 4] 1339 	ld	a, c
+                                   1340 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2088: }
+    00000394 C3r26r01         [10] 1341 	jp	_VDP_Poke_16K
+                                   1342 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2092: void VDP_SetSpritePattern(u8 index, u8 shape)
+                                   1343 ;	---------------------------------
+                                   1344 ; Function VDP_SetSpritePattern
+                                   1345 ; ---------------------------------
+    00000397                       1346 _VDP_SetSpritePattern::
+    00000397 4D               [ 4] 1347 	ld	c, l
+                                   1348 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2094: u16 low = g_SpriteAttributeLow + 2;
+    00000398 ED 5Br37r00      [20] 1349 	ld	de, (_g_SpriteAttributeLow)
+    0000039C 13               [ 6] 1350 	inc	de
+    0000039D 13               [ 6] 1351 	inc	de
+                                   1352 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2095: low += (index * 4);
+    0000039E 6F               [ 4] 1353 	ld	l, a
+    0000039F 26 00            [ 7] 1354 	ld	h, #0x00
+    000003A1 29               [11] 1355 	add	hl, hl
+    000003A2 29               [11] 1356 	add	hl, hl
+    000003A3 19               [11] 1357 	add	hl, de
+    000003A4 EB               [ 4] 1358 	ex	de, hl
+                                   1359 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2096: VDP_Poke(shape, low, g_SpriteAttributeHigh);
+    000003A5 79               [ 4] 1360 	ld	a, c
+                                   1361 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2097: }
+    000003A6 C3r26r01         [10] 1362 	jp	_VDP_Poke_16K
+                                   1363 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2101: void VDP_SetSpriteColorSM1(u8 index, u8 color)
+                                   1364 ;	---------------------------------
+                                   1365 ; Function VDP_SetSpriteColorSM1
+                                   1366 ; ---------------------------------
+    000003A9                       1367 _VDP_SetSpriteColorSM1::
+    000003A9 47               [ 4] 1368 	ld	b, a
+    000003AA 4D               [ 4] 1369 	ld	c, l
+                                   1370 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2103: u16 low = g_SpriteAttributeLow + 3;
+    000003AB 2Ar37r00         [16] 1371 	ld	hl, (_g_SpriteAttributeLow)
+    000003AE EB               [ 4] 1372 	ex	de, hl
+    000003AF 13               [ 6] 1373 	inc	de
+    000003B0 13               [ 6] 1374 	inc	de
+    000003B1 13               [ 6] 1375 	inc	de
+                                   1376 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2104: low += (index * 4);
+    000003B2 68               [ 4] 1377 	ld	l, b
+    000003B3 26 00            [ 7] 1378 	ld	h, #0x00
+    000003B5 29               [11] 1379 	add	hl, hl
+    000003B6 29               [11] 1380 	add	hl, hl
+    000003B7 19               [11] 1381 	add	hl, de
+    000003B8 EB               [ 4] 1382 	ex	de, hl
+                                   1383 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2105: VDP_Poke(color, low, g_SpriteAttributeHigh);
+    000003B9 79               [ 4] 1384 	ld	a, c
+                                   1385 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2106: }
+    000003BA C3r26r01         [10] 1386 	jp	_VDP_Poke_16K
+                                   1387 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2139: void VDP_DisableSpritesFrom(u8 index)
+                                   1388 ;	---------------------------------
+                                   1389 ; Function VDP_DisableSpritesFrom
+                                   1390 ; ---------------------------------
+    000003BD                       1391 _VDP_DisableSpritesFrom::
+                                   1392 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2146: VDP_SetSpritePositionY(index, y);
+    000003BD 2E D0            [ 7] 1393 	ld	l, #0xd0
+                                   1394 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2147: }
+    000003BF C3r87r03         [10] 1395 	jp	_VDP_SetSpritePositionY
+                                   1396 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2213: void VDP_LoadPattern_GM2(const u8* src, u8 count, u8 offset)
+                                   1397 ;	---------------------------------
+                                   1398 ; Function VDP_LoadPattern_GM2
+                                   1399 ; ---------------------------------
+    000003C2                       1400 _VDP_LoadPattern_GM2::
+    000003C2 DD E5            [15] 1401 	push	ix
+    000003C4 DD 21 00 00      [14] 1402 	ld	ix,	#0
+    000003C8 DD 39            [15] 1403 	add	ix, sp
+    000003CA 4D               [ 4] 1404 	ld	c, l
+    000003CB 44               [ 4] 1405 	ld	b, h
+                                   1406 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2215: u16 cnt = count == 0 ? 256 * 8 : count * 8;
+    000003CC DD 7E 04         [19] 1407 	ld	a, 4 (ix)
+    000003CF B7               [ 4] 1408 	or	a, a
+    000003D0 20 06            [12] 1409 	jr	nz, 00103$
+    000003D2 21 00 08         [10] 1410 	ld	hl, #0x0800
+    000003D5 C3rE0r03         [10] 1411 	jp	00104$
+    000003D8                       1412 00103$:
+    000003D8 DD 6E 04         [19] 1413 	ld	l, 4 (ix)
+    000003DB 26 00            [ 7] 1414 	ld	h, #0x00
+    000003DD 29               [11] 1415 	add	hl, hl
+    000003DE 29               [11] 1416 	add	hl, hl
+    000003DF 29               [11] 1417 	add	hl, hl
+    000003E0                       1418 00104$:
+                                   1419 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2216: u16 dst = g_ScreenPatternLow + (offset * 8);
+    000003E0 DD 5E 05         [19] 1420 	ld	e, 5 (ix)
+    000003E3 16 00            [ 7] 1421 	ld	d, #0x00
+    000003E5 EB               [ 4] 1422 	ex	de, hl
+    000003E6 29               [11] 1423 	add	hl, hl
+    000003E7 29               [11] 1424 	add	hl, hl
+    000003E8 29               [11] 1425 	add	hl, hl
+    000003E9 EB               [ 4] 1426 	ex	de, hl
+    000003EA FD 2Ar35r00      [20] 1427 	ld	iy, (_g_ScreenPatternLow)
+    000003EE FD 19            [15] 1428 	add	iy, de
+    000003F0 FD E5            [15] 1429 	push	iy
+    000003F2 D1               [10] 1430 	pop	de
+                                   1431 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2217: VDP_WriteVRAM(src, dst, g_ScreenPatternHigh, cnt);
+    000003F3 E5               [11] 1432 	push	hl
+    000003F4 C5               [11] 1433 	push	bc
+    000003F5 D5               [11] 1434 	push	de
+    000003F6 E5               [11] 1435 	push	hl
+    000003F7 69               [ 4] 1436 	ld	l, c
+    000003F8 60               [ 4] 1437 	ld	h, b
+    000003F9 CDrA8r00         [17] 1438 	call	_VDP_WriteVRAM_16K
+    000003FC D1               [10] 1439 	pop	de
+    000003FD C1               [10] 1440 	pop	bc
+    000003FE E1               [10] 1441 	pop	hl
+                                   1442 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2218: dst += 0x800;
+    000003FF 7A               [ 4] 1443 	ld	a, d
+    00000400 C6 08            [ 7] 1444 	add	a, #0x08
+    00000402 57               [ 4] 1445 	ld	d, a
+                                   1446 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2219: VDP_WriteVRAM(src, dst, g_ScreenPatternHigh, cnt);
+    00000403 E5               [11] 1447 	push	hl
+    00000404 C5               [11] 1448 	push	bc
+    00000405 D5               [11] 1449 	push	de
+    00000406 E5               [11] 1450 	push	hl
+    00000407 69               [ 4] 1451 	ld	l, c
+    00000408 60               [ 4] 1452 	ld	h, b
+    00000409 CDrA8r00         [17] 1453 	call	_VDP_WriteVRAM_16K
+    0000040C D1               [10] 1454 	pop	de
+    0000040D C1               [10] 1455 	pop	bc
+    0000040E E1               [10] 1456 	pop	hl
+                                   1457 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2220: dst += 0x800;
+    0000040F 7A               [ 4] 1458 	ld	a, d
+    00000410 C6 08            [ 7] 1459 	add	a, #0x08
+    00000412 57               [ 4] 1460 	ld	d, a
+                                   1461 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2221: VDP_WriteVRAM(src, dst, g_ScreenPatternHigh, cnt);
+    00000413 E5               [11] 1462 	push	hl
+    00000414 69               [ 4] 1463 	ld	l, c
+    00000415 60               [ 4] 1464 	ld	h, b
+    00000416 CDrA8r00         [17] 1465 	call	_VDP_WriteVRAM_16K
+                                   1466 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2222: }
+    00000419 DD E1            [14] 1467 	pop	ix
+    0000041B E1               [10] 1468 	pop	hl
+    0000041C F1               [10] 1469 	pop	af
+    0000041D E9               [ 4] 1470 	jp	(hl)
+                                   1471 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2226: void VDP_LoadColor_GM2(const u8* src, u8 count, u8 offset)
+                                   1472 ;	---------------------------------
+                                   1473 ; Function VDP_LoadColor_GM2
+                                   1474 ; ---------------------------------
+    0000041E                       1475 _VDP_LoadColor_GM2::
+    0000041E DD E5            [15] 1476 	push	ix
+    00000420 DD 21 00 00      [14] 1477 	ld	ix,	#0
+    00000424 DD 39            [15] 1478 	add	ix, sp
+    00000426 4D               [ 4] 1479 	ld	c, l
+    00000427 44               [ 4] 1480 	ld	b, h
+                                   1481 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2228: u16 cnt = count == 0 ? 256 * 8 : count * 8;
+    00000428 DD 7E 04         [19] 1482 	ld	a, 4 (ix)
+    0000042B B7               [ 4] 1483 	or	a, a
+    0000042C 20 06            [12] 1484 	jr	nz, 00103$
+    0000042E 21 00 08         [10] 1485 	ld	hl, #0x0800
+    00000431 C3r3Cr04         [10] 1486 	jp	00104$
+    00000434                       1487 00103$:
+    00000434 DD 6E 04         [19] 1488 	ld	l, 4 (ix)
+    00000437 26 00            [ 7] 1489 	ld	h, #0x00
+    00000439 29               [11] 1490 	add	hl, hl
+    0000043A 29               [11] 1491 	add	hl, hl
+    0000043B 29               [11] 1492 	add	hl, hl
+    0000043C                       1493 00104$:
+                                   1494 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2229: u16 dst = g_ScreenColorLow + (offset * 8);
+    0000043C DD 5E 05         [19] 1495 	ld	e, 5 (ix)
+    0000043F 16 00            [ 7] 1496 	ld	d, #0x00
+    00000441 EB               [ 4] 1497 	ex	de, hl
+    00000442 29               [11] 1498 	add	hl, hl
+    00000443 29               [11] 1499 	add	hl, hl
+    00000444 29               [11] 1500 	add	hl, hl
+    00000445 EB               [ 4] 1501 	ex	de, hl
+    00000446 FD 2Ar33r00      [20] 1502 	ld	iy, (_g_ScreenColorLow)
+    0000044A FD 19            [15] 1503 	add	iy, de
+    0000044C FD E5            [15] 1504 	push	iy
+    0000044E D1               [10] 1505 	pop	de
+                                   1506 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2230: VDP_WriteVRAM(src, dst, g_ScreenColorHigh, cnt);
+    0000044F E5               [11] 1507 	push	hl
+    00000450 C5               [11] 1508 	push	bc
+    00000451 D5               [11] 1509 	push	de
+    00000452 E5               [11] 1510 	push	hl
+    00000453 69               [ 4] 1511 	ld	l, c
+    00000454 60               [ 4] 1512 	ld	h, b
+    00000455 CDrA8r00         [17] 1513 	call	_VDP_WriteVRAM_16K
+    00000458 D1               [10] 1514 	pop	de
+    00000459 C1               [10] 1515 	pop	bc
+    0000045A E1               [10] 1516 	pop	hl
+                                   1517 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2231: dst += 0x800;
+    0000045B 7A               [ 4] 1518 	ld	a, d
+    0000045C C6 08            [ 7] 1519 	add	a, #0x08
+    0000045E 57               [ 4] 1520 	ld	d, a
+                                   1521 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2232: VDP_WriteVRAM(src, dst, g_ScreenColorHigh, cnt);
+    0000045F E5               [11] 1522 	push	hl
+    00000460 C5               [11] 1523 	push	bc
+    00000461 D5               [11] 1524 	push	de
+    00000462 E5               [11] 1525 	push	hl
+    00000463 69               [ 4] 1526 	ld	l, c
+    00000464 60               [ 4] 1527 	ld	h, b
+    00000465 CDrA8r00         [17] 1528 	call	_VDP_WriteVRAM_16K
+    00000468 D1               [10] 1529 	pop	de
+    00000469 C1               [10] 1530 	pop	bc
+    0000046A E1               [10] 1531 	pop	hl
+                                   1532 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2233: dst += 0x800;
+    0000046B 7A               [ 4] 1533 	ld	a, d
+    0000046C C6 08            [ 7] 1534 	add	a, #0x08
+    0000046E 57               [ 4] 1535 	ld	d, a
+                                   1536 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2234: VDP_WriteVRAM(src, dst, g_ScreenColorHigh, cnt);
+    0000046F E5               [11] 1537 	push	hl
+    00000470 69               [ 4] 1538 	ld	l, c
+    00000471 60               [ 4] 1539 	ld	h, b
+    00000472 CDrA8r00         [17] 1540 	call	_VDP_WriteVRAM_16K
+                                   1541 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2235: }
+    00000475 DD E1            [14] 1542 	pop	ix
+    00000477 E1               [10] 1543 	pop	hl
+    00000478 F1               [10] 1544 	pop	af
+    00000479 E9               [ 4] 1545 	jp	(hl)
+                                   1546 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2239: void VDP_WriteLayout_GM2(const u8* src, u8 dx, u8 dy, u8 nx, u8 ny)
+                                   1547 ;	---------------------------------
+                                   1548 ; Function VDP_WriteLayout_GM2
+                                   1549 ; ---------------------------------
+    0000047A                       1550 _VDP_WriteLayout_GM2::
+    0000047A DD E5            [15] 1551 	push	ix
+    0000047C DD 21 00 00      [14] 1552 	ld	ix,	#0
+    00000480 DD 39            [15] 1553 	add	ix, sp
+    00000482 F5               [11] 1554 	push	af
+    00000483 4D               [ 4] 1555 	ld	c, l
+    00000484 44               [ 4] 1556 	ld	b, h
+                                   1557 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2241: u16 dst = g_ScreenLayoutLow + (dy * 32) + dx;
+    00000485 DD 6E 05         [19] 1558 	ld	l, 5 (ix)
+    00000488 26 00            [ 7] 1559 	ld	h, #0x00
+    0000048A 29               [11] 1560 	add	hl, hl
+    0000048B 29               [11] 1561 	add	hl, hl
+    0000048C 29               [11] 1562 	add	hl, hl
+    0000048D 29               [11] 1563 	add	hl, hl
+    0000048E 29               [11] 1564 	add	hl, hl
+    0000048F ED 5Br31r00      [20] 1565 	ld	de, (_g_ScreenLayoutLow)
+    00000493 19               [11] 1566 	add	hl, de
+    00000494 DD 5E 04         [19] 1567 	ld	e, 4 (ix)
+    00000497 16 00            [ 7] 1568 	ld	d, #0x00
+    00000499 19               [11] 1569 	add	hl, de
+    0000049A E3               [19] 1570 	ex	(sp), hl
+                                   1571 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2242: for (u8 y = 0; y < ny; ++y)
+    0000049B 2E 00            [ 7] 1572 	ld	l, #0x00
+    0000049D                       1573 00103$:
+    0000049D 7D               [ 4] 1574 	ld	a, l
+    0000049E DD 96 07         [19] 1575 	sub	a, 7 (ix)
+    000004A1 30 30            [12] 1576 	jr	nc, 00105$
+                                   1577 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2244: VDP_WriteVRAM(src, dst, g_ScreenLayoutHigh, nx);
+    000004A3 DD 5E 06         [19] 1578 	ld	e, 6 (ix)
+    000004A6 16 00            [ 7] 1579 	ld	d, #0x00
+    000004A8 E5               [11] 1580 	push	hl
+    000004A9 C5               [11] 1581 	push	bc
+    000004AA D5               [11] 1582 	push	de
+    000004AB DD 5E FE         [19] 1583 	ld	e, -2 (ix)
+    000004AE DD 56 FF         [19] 1584 	ld	d, -1 (ix)
+    000004B1 69               [ 4] 1585 	ld	l, c
+    000004B2 60               [ 4] 1586 	ld	h, b
+    000004B3 CDrA8r00         [17] 1587 	call	_VDP_WriteVRAM_16K
+    000004B6 C1               [10] 1588 	pop	bc
+    000004B7 E1               [10] 1589 	pop	hl
+                                   1590 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2245: src += nx;
+    000004B8 79               [ 4] 1591 	ld	a, c
+    000004B9 DD 86 06         [19] 1592 	add	a, 6 (ix)
+    000004BC 4F               [ 4] 1593 	ld	c, a
+    000004BD 30 01            [12] 1594 	jr	nc, 00124$
+    000004BF 04               [ 4] 1595 	inc	b
+    000004C0                       1596 00124$:
+                                   1597 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2246: dst += 32;
+    000004C0 DD 7E FE         [19] 1598 	ld	a, -2 (ix)
+    000004C3 DD 56 FF         [19] 1599 	ld	d, -1 (ix)
+    000004C6 C6 20            [ 7] 1600 	add	a, #0x20
+    000004C8 5F               [ 4] 1601 	ld	e, a
+    000004C9 30 01            [12] 1602 	jr	nc, 00125$
+    000004CB 14               [ 4] 1603 	inc	d
+    000004CC                       1604 00125$:
+    000004CC 33               [ 6] 1605 	inc	sp
+    000004CD 33               [ 6] 1606 	inc	sp
+    000004CE D5               [11] 1607 	push	de
+                                   1608 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2242: for (u8 y = 0; y < ny; ++y)
+    000004CF 2C               [ 4] 1609 	inc	l
+    000004D0 C3r9Dr04         [10] 1610 	jp	00103$
+    000004D3                       1611 00105$:
+                                   1612 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2248: }
+    000004D3 DD F9            [10] 1613 	ld	sp, ix
+    000004D5 DD E1            [14] 1614 	pop	ix
+    000004D7 E1               [10] 1615 	pop	hl
+    000004D8 F1               [10] 1616 	pop	af
+    000004D9 F1               [10] 1617 	pop	af
+    000004DA E9               [ 4] 1618 	jp	(hl)
+                                   1619 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2252: void VDP_FillLayout_GM2(u8 value, u8 dx, u8 dy, u8 nx, u8 ny)
+                                   1620 ;	---------------------------------
+                                   1621 ; Function VDP_FillLayout_GM2
+                                   1622 ; ---------------------------------
+    000004DB                       1623 _VDP_FillLayout_GM2::
+    000004DB DD E5            [15] 1624 	push	ix
+    000004DD DD 21 00 00      [14] 1625 	ld	ix,	#0
+    000004E1 DD 39            [15] 1626 	add	ix, sp
+    000004E3 4F               [ 4] 1627 	ld	c, a
+    000004E4 45               [ 4] 1628 	ld	b, l
+                                   1629 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2254: u16 dst = g_ScreenLayoutLow + (dy * 32) + dx;
+    000004E5 DD 6E 04         [19] 1630 	ld	l, 4 (ix)
+    000004E8 26 00            [ 7] 1631 	ld	h, #0x00
+    000004EA 29               [11] 1632 	add	hl, hl
+    000004EB 29               [11] 1633 	add	hl, hl
+    000004EC 29               [11] 1634 	add	hl, hl
+    000004ED 29               [11] 1635 	add	hl, hl
+    000004EE 29               [11] 1636 	add	hl, hl
+    000004EF ED 5Br31r00      [20] 1637 	ld	de, (_g_ScreenLayoutLow)
+    000004F3 19               [11] 1638 	add	hl, de
+    000004F4 58               [ 4] 1639 	ld	e, b
+    000004F5 16 00            [ 7] 1640 	ld	d, #0x00
+    000004F7 19               [11] 1641 	add	hl, de
+    000004F8 EB               [ 4] 1642 	ex	de, hl
+                                   1643 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2255: for (u8 y = 0; y < ny; ++y)
+    000004F9 06 00            [ 7] 1644 	ld	b, #0x00
+    000004FB                       1645 00103$:
+    000004FB 78               [ 4] 1646 	ld	a, b
+    000004FC DD 96 06         [19] 1647 	sub	a, 6 (ix)
+    000004FF 30 17            [12] 1648 	jr	nc, 00105$
+                                   1649 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2257: VDP_FillVRAM(value, dst, g_ScreenLayoutHigh, nx);
+    00000501 DD 6E 05         [19] 1650 	ld	l, 5 (ix)
+    00000504 26 00            [ 7] 1651 	ld	h, #0x00
+    00000506 C5               [11] 1652 	push	bc
+    00000507 D5               [11] 1653 	push	de
+    00000508 E5               [11] 1654 	push	hl
+    00000509 79               [ 4] 1655 	ld	a, c
+    0000050A CDrD1r00         [17] 1656 	call	_VDP_FillVRAM_16K
+    0000050D D1               [10] 1657 	pop	de
+    0000050E C1               [10] 1658 	pop	bc
+                                   1659 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2258: dst += 32;
+    0000050F 21 20 00         [10] 1660 	ld	hl, #0x0020
+    00000512 19               [11] 1661 	add	hl, de
+    00000513 EB               [ 4] 1662 	ex	de, hl
+                                   1663 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2255: for (u8 y = 0; y < ny; ++y)
+    00000514 04               [ 4] 1664 	inc	b
+    00000515 C3rFBr04         [10] 1665 	jp	00103$
+    00000518                       1666 00105$:
+                                   1667 ;E:\sanquentin\MSXgl\engine/src/vdp.c:2260: }
+    00000518 DD E1            [14] 1668 	pop	ix
+    0000051A E1               [10] 1669 	pop	hl
+    0000051B F1               [10] 1670 	pop	af
+    0000051C 33               [ 6] 1671 	inc	sp
+    0000051D E9               [ 4] 1672 	jp	(hl)
+                                   1673 	.area _CODE
+                                   1674 	.area _INITIALIZER
+    00000000                       1675 __xinit__g_VDPInitilized:
+    00000000 00                    1676 	.db #0x00	; 0
+                                   1677 	.area _CABS (ABS)
