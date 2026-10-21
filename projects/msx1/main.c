@@ -8,11 +8,14 @@
 // Marco atual: sequencia inicial ate a primeira entrada de comando.
 //-----------------------------------------------------------------------------
 #include "msxgl.h"
+#include "out/build_version.h"
 #include "../../src/sq_game.h"
 #include "../../src/sq_intro.h"
 #include "../../src/sq_title.h"
 #include "../../src/sq_input.h"
 #include "../../src/sq_random.h"
+
+const c8 g_SQ_BuildVersion[] = "San Quentin " SQ_BUILD_VERSION;
 
 void main(void)
 {

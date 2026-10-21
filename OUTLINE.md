@@ -7,7 +7,11 @@
 
 O repositório preserva **San Quentin**, aventura textual de Ricardo Augusto Mata Costa publicada na revista *Micro Sistemas*. A listagem original em MSX-BASIC 1 já foi digitada e executa; ela é a referência de comportamento da recriação.
 
-O requisito vigente é reproduzir **exatamente o jogo do fonte original em MSX-BASIC 1**, sem melhorias, correções, simplificações ou alterações de conteúdo ou comportamento. O trabalho atual é a conversão fiel para MSX1. Qualquer edição MSX2 ou variante fica adiada e exige decisão explícita.
+O requisito do MSX1 é reproduzir **exatamente o jogo do fonte original em
+MSX-BASIC 1**, sem melhorias ou alterações deliberadas. Em paralelo, a edição
+MSX2 foi autorizada e começou pela abertura ampliada. O pré-release
+**1.1 / Danny Trejo** contém a aventura MSX1 jogável, ainda em auditoria,
+e a abertura MSX2 com dez cards; a aventura MSX2 ainda não foi integrada.
 
 Como referência técnica, foram estudados:
 
@@ -88,7 +92,9 @@ O código atual deve manter responsabilidades separadas para permitir testes da 
 - testes comportamentais no host;
 - backend MSX1 separado das regras do jogo.
 
-Toda a arquitetura e validação atuais existem para comparar a conversão com o programa BASIC original. Não introduzir melhorias visuais ou funcionais nesta etapa.
+A arquitetura e validação do MSX1 existem para comparar a conversão com o
+BASIC original. Não introduzir melhorias visuais ou funcionais nessa edição.
+O backend MSX2 permanece separado, sem redefinir as regras do motor.
 
 ## 5. Fases
 
@@ -98,18 +104,23 @@ Toda a arquitetura e validação atuais existem para comparar a conversão com o
 | 1 | Especificar integralmente o BASIC: mapa, parser, objetos, aleatoriedade, finais e textos | **Em andamento** — mapa/saídas transcritos; eventos e validação integral pendentes |
 | 2 | Fazer protótipo mínimo de build MSX1 e validar target/geração de disco | **Concluída** |
 | 3 | Implementar núcleo portável e testes host | **Em andamento** — parser, estado, mapa, ações de sala/guarda e suítes host |
-| 4 | Implementar e validar San Quentin MSX1 fiel | **Em andamento** — ações e encontros ligados; validação no emulador pendente |
+| 4 | Implementar e validar San Quentin MSX1 fiel | **Em andamento** — aventura jogável e rotas validadas no emulador; auditoria integral pendente |
 | 5 | Congelar baseline fiel da versão MSX1, sem divergências intencionais | Pendente |
-| 6 | Definir uma eventual edição MSX2 | **Adiada — fora do escopo atual** |
-| 7 | Implementar uma eventual edição MSX2 | **Adiada — fora do escopo atual** |
-| 8 | Testes completos, hardware real, distribuição e documentação | Pendente |
+| 6 | Definir a edição MSX2 | **Plataforma definida** — DOS2, mapper ≥512 KB, PSG+FM; abertura SCREEN 5 |
+| 7 | Implementar a edição MSX2 | **Abertura concluída nesta fase** — dez cards, introdução integral, blecaute e S/N; aventura/áudio pendentes |
+| 8 | Testes completos, hardware real, distribuição e documentação | **Pré-release 1.1** com capturas, build versionado e pacote; auditoria integral e hardware real pendentes |
 
 Os critérios detalhados de cada fase estão em `SPEC.md`.
 
 ## 6. Decisões já tomadas
 
 - A versão atual deve reproduzir integralmente o programa original em BASIC, sem melhorar ou mudar nada.
-- A edição MSX2 está fora do escopo atual e depende de decisão explícita futura.
+- A edição MSX2 foi autorizada em paralelo, sem alterar a fidelidade da edição MSX1.
+- MSX2: DOS2/COM, disco de 720 KB, mapper principal ≥512 KB e VRAM ≥128 KB.
+  Abertura em SCREEN 5; PSG+FM previstos, sem áudio implementado em 1.1.
+- Versão compartilhada `marco.compilação`, iniciada em 1.1 / Danny Trejo.
+  Builds incrementam o segundo número automaticamente; novo marco é explícito.
+  Consulte [versioning.md](docs/versioning.md) e [notas 1.1](docs/releases/1.1.md).
 - A implementação será em C com SDCC/MSXgl.
 - O original BASIC é a referência funcional.
 - Textos e comandos devem preservar a saída observável do original; não transliterar ou alterar conteúdo como simplificação.
@@ -136,9 +147,9 @@ Os critérios detalhados de cada fase estão em `SPEC.md`.
 Não presumir respostas para estes itens:
 
 - requisitos mínimos de RAM da versão MSX1;
-- target final e requisitos mínimos da versão MSX2;
+- layout e orçamento de memória do futuro runtime da aventura MSX2;
 - formato e política de save em cada versão;
-- formato e requisitos de uma eventual edição MSX2;
+- organização dos bancos do mapper e conteúdo da aventura MSX2;
 - suporte a joystick;
 - recursos visuais, imagens, áudio e música exclusivos do MSX2;
 - glifos e codificação necessários para reproduzir o texto apresentado pelo original;
@@ -151,7 +162,8 @@ Cada decisão deve ser registrada na seção “Registro de decisões” de `SPE
 
 1. Ler `OUTLINE.md` e `SPEC.md` por inteiro.
 2. Confirmar `git status` para não sobrescrever trabalho local.
-3. Reconstruir e rodar a abertura: `build.bat` e `run.bat` em `projects/msx1/`.
+3. Consultar `release.bat status`; usar `build.bat` da raiz para ambas as edições
+   com o mesmo número e os launchers de cada projeto para executar.
 4. Executar as suítes `run_random_tests.bat`, `run_engine_tests.bat`, `run_parser_tests.bat` e `run_solver_tests.bat`; manter o oráculo da ROM reproduzível por `tests/capture_random_oracle.tcl`.
 5. Validar no openMSX as ações, finais, guarda/confisco e rotas de várias salas contra o disco original.
 6. Continuar a conversão das regras restantes sem usar o comportamento parcial como especificação.

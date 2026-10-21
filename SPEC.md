@@ -2,14 +2,20 @@
 
 > Documento operacional para pessoas e IAs retomarem o projeto em outro computador ou sessão.  
 > Ler também [`OUTLINE.md`](OUTLINE.md).  
-> Estado do documento: **implementação MSX1 em andamento; fidelidade integral ao original é requisito**.  
+> Estado do documento: **MSX1 jogável em auditoria de fidelidade; abertura MSX2 implementada; pré-release conjunto 1.1**.
+>
 > Última atualização: **21 de outubro de 2026**.
 
 ## 1. Missão
 
 Recriar **San Quentin**, de Ricardo Augusto Mata Costa, em C com SDCC/MSXgl, reproduzindo integralmente o programa original em MSX-BASIC 1.
 
-O escopo atual é uma conversão fiel para MSX1. Não modernizar, corrigir, simplificar, ampliar ou reinterpretar regras, textos, mapa, aleatoriedade, interface ou fluxo. Uma eventual edição para MSX2 ou qualquer variante fica adiada e exigirá decisão explícita; não faz parte da implementação atual.
+A edição MSX1 continua sendo uma conversão fiel: não modernizar, corrigir,
+simplificar, ampliar ou reinterpretar suas regras, textos, mapa, aleatoriedade,
+interface ou fluxo. Em paralelo, foi autorizada e iniciada a edição MSX2:
+DOS2, mapper principal de pelo menos 512 KB, PSG+FM previstos e backend visual
+separado. O pré-release 1.1 entrega a aventura MSX1 em auditoria e somente
+a abertura MSX2; não confundir os estados das duas edições.
 
 ## 2. Estado atual
 
@@ -19,7 +25,7 @@ O escopo atual é uma conversão fiel para MSX1. Não modernizar, corrigir, simp
 - Listagem BASIC digitada e versão em disco disponíveis.
 - MSXgl incluído e estudado quanto a toolchain, targets, APIs e build.
 - SuperNova incluído e estudado quanto a arquitetura, SCREEN 7, texto, parser, overlays, dados, áudio e save.
-- Requisito de fidelidade integral ao BASIC original definido; edição MSX2 aprimorada fora do escopo atual.
+- Requisito de fidelidade integral ao BASIC original mantido para MSX1; edição MSX2 aprimorada autorizada separadamente.
 - `OUTLINE.md` e este documento criados.
 - `basic/quentin.asc` transliterado para ASCII de 7 bits.
 - Projeto MSXgl da edição MSX1 criado em `projects/msx1/`, com build reproduzível gerando `quentin.com` (MSX-DOS 1) e disco de boot de 360K.
@@ -46,13 +52,22 @@ O escopo atual é uma conversão fiel para MSX1. Não modernizar, corrigir, simp
 - Reset de `TA` na cela condicionado à exibição das direções (520–530), inclusive em redesenhos sem nova visita.
 - RNG decimal portável em `src/sq_random.*`: estado de 14 dígitos, semente de RUN, avanço `RND(1)`, repetição `RND(0)` e reseed de `RND(-TIME)`. Compartilhado pelas estrelas, posições dos objetos e encontros/confiscos.
 - Comparação com a ROM MSX-BASIC 1.0: 65.637 valores de RNDX, incluindo todas as sementes 0–65535, e 91 pares de coordenadas das estrelas. Estados e escalas do executável SDCC também conferidos no openMSX.
+- Abertura MSX2 em `src/sq_title_msx2.*`: dez cards SCREEN 5, primitivas do V9938,
+  introdução completa do BASIC 2380–2400, persianas, noite/blecaute e pergunta S/N.
+- S confirma e exibe aviso de aventura MSX2 em desenvolvimento; N reinicia
+  o slideshow. Pergunta e confirmação não avançam automaticamente.
+- Build compartilhado `marco.compilação`, iniciado em 1.1 / Danny Trejo.
+  `version.json` persiste o estado; `build.bat` da raiz compila as duas edições
+  uma vez por número, por padrão com DEBUG=0.
+- Capturas atuais de ambas as edições em `images/releases/1.1`, com scripts
+  reproduzíveis de emulação e pacote/manifesto/SHA-256 automatizados.
 
 ### Não iniciado
 
 - Auditoria integral dos ramos restantes e da apresentação contra o BASIC.
 - Runner host de transcript comparativo com o BASIC original.
 - Matriz integral de equivalência com o BASIC.
-- Assets novos da edição MSX2.
+- Integração da aventura na edição MSX2, uso de bancos do mapper e áudio PSG/FM.
 
 ### Próximo marco
 
@@ -316,9 +331,15 @@ A edição MSX1 estará concluída quando:
 - o artefato final iniciar numa configuração MSX1 limpa do openMSX;
 - requisitos e comando exato de build estiverem documentados.
 
-## 8. Possível edição MSX2 futura — fora do escopo atual
+## 8. Edição MSX2 — abertura implementada, aventura pendente
 
-Esta seção é apenas referência para uma possível decisão futura. Não implementar nem usar SuperNova para alterar a edição atual. Qualquer proposta de edição MSX2 deverá ser aprovada separadamente e não poderá substituir o requisito vigente de reprodução fiel do original.
+A edição MSX2 foi autorizada em paralelo ao MSX1. A abertura atual está em
+`projects/msx2`, com DOS2/COM, disco de 720 KB, mapper principal ≥512 KB e
+128 KB de VRAM. Usa SCREEN 5 (256×212, 16 cores), dez cards, legendas,
+transições, blecaute e decisão S/N. A música PSG+FM e a aventura não foram
+integradas. As subseções abaixo orientam as fases futuras do runtime;
+recursos do SuperNova não são automaticamente requisitos implementados.
+Não usar essa edição para alterar a reprodução fiel do MSX1.
 
 ### 8.1 Objetivo
 
@@ -348,7 +369,7 @@ Esses itens são opções comprovadas no projeto de referência, não requisitos
 - Implementar backend visual separado.
 - Definir mockups e orçamento de VRAM/RAM antes de produzir assets.
 - Manter legibilidade do português e input responsivo.
-- Escolher SCREEN 5, 7 ou outro modo somente após protótipo visual e medição.
+- A abertura usa SCREEN 5; avaliar separadamente o layout da futura aventura.
 - Usar overlays, mapper e pools apenas se o tamanho justificar.
 - Se houver save, definir formato versionado e política de compatibilidade.
 
@@ -398,14 +419,18 @@ tests/
   run_engine_tests.bat compila e executa os testes do motor
   run_parser_tests.bat compila com warnings como erro e executa a suíte
 projects/msx1/         edição MSX1
-  build.bat            invoca o build do MSXgl
+  build.bat            wrapper de build versionado
   project_config.js    configuração do projeto
   msxgl_config.h       configuração da engine (cópia do template)
   make_dsk.bat         pós-build: regera o disco de boot
   run.bat              abre o disco no openMSX
   main.c               ponto de entrada
   out/, emul/          artefatos, ignorados pelo Git
-projects/msx2/         edição MSX2 (ainda não criada)
+projects/msx2/         abertura MSX2/DOS2, SCREEN 5, aventura pendente
+tools/release.js       numeração, build conjunto, pacote e publicação
+version.json           estado compartilhado marco.compilação
+build.bat              compila ambas as edições
+release.bat            consulta, pacote e publicação
 ```
 
 `ProjModules` aceita caminhos relativos fora do diretório do projeto, por isso `src/` é referenciado como `../../src/sq_gfx2`. Headers são incluídos por caminho relativo ao arquivo (`#include "../../src/sq_title.h"`).
@@ -418,20 +443,25 @@ A partir de `projects/msx1/`:
 build.bat
 ```
 
-`build.bat` define `MSXGL_PATH=%~dp0..\..\MSXgl` e executa:
+O wrapper chama `tools/release.js build msx1`, que reserva a próxima versão,
+gera o header, muda para o diretório do projeto e executa internamente:
 
 ```bat
 %MSXGL_PATH%\tools\build\Node\node.exe %MSXGL_PATH%\engine\script\js\build.js
 ```
 
-O diretório corrente é significativo: `ProjDir` é `process.cwd()`. Toda documentação de build deve mostrar primeiro o diretório em que o comando deve ser executado.
+O diretório corrente é significativo para o MSXgl: `ProjDir` é `process.cwd()`.
+Os wrappers fazem essa troca automaticamente. Para as duas edições no mesmo
+número, use `build.bat` da raiz. Invocar diretamente o script MSXgl ignora
+a gestão de versões; não usar para releases.
+As regras completas estão em [docs/versioning.md](docs/versioning.md).
 
 Configurações centrais: `ProjName`, `ProjModules`, `LibModules`, `Machine`, `Target`, `ROMSize`, `RawFiles`, `DiskFiles`, `DiskSize`, `PostBuildScripts`, ISR e localização.
 
 ### 9.4 Targets
 
 - MSX1: **`DOS1`**, programa `.COM` iniciado em 0100h. Decidido pelo mantenedor.
-- MSX2: `DOS2` é referência do SuperNova e do plano antigo, mas continua **TBD**.
+- MSX2: **`DOS2`**, programa `.COM`, disco de 720 KB.
 
 ### 9.5 Disco de boot MSX-DOS 1
 
@@ -581,21 +611,25 @@ Entregáveis: release candidata MSX1, transcripts, screenshots, documentação e
 
 Saída: baseline validado contra o original, sem divergências intencionais.
 
-### Fase 6 — design MSX2 (ADIADA; fora do escopo atual)
+### Fase 6 — design MSX2 (plataforma e abertura definidas)
 
-Entregáveis: requisitos, mockups, escolha de modo VDP, orçamento de memória, áudio/assets e target.
+Definido: DOS2/COM, mapper principal ≥512 KB, VRAM ≥128 KB, abertura SCREEN 5,
+PSG+FM previstos. O orçamento/layout da aventura e do áudio continua pendente.
 
 Saída: decisões aprovadas antes da implementação visual.
 
-### Fase 7 — edição MSX2 (ADIADA; fora do escopo atual)
+### Fase 7 — edição MSX2 (abertura entregue em 1.1)
 
-Entregáveis: backend MSX2, assets, empacotamento e recursos aprovados.
+Entregue: backend da abertura com dez cards, introdução integral, transições,
+blecaute e decisão S/N. Pendente: aventura, bancos do mapper e áudio.
 
 Saída: critérios da seção 8.4 e suíte comum verde.
 
 ### Fase 8 — validação/release
 
-Entregáveis: testes em emulador e hardware, imagens finais, manual, créditos, licença e instruções reproduzíveis.
+Pré-release 1.1: testes em emulador, screenshots atuais, manual, créditos,
+licenças, metadados/SHA-256 e build/publicação reproduzíveis. Ainda faltam
+hardware real, auditoria integral e os critérios de conclusão de cada edição.
 
 ## 12. Registro de decisões
 
@@ -623,6 +657,10 @@ Entregáveis: testes em emulador e hardware, imagens finais, manual, créditos, 
 | 2026-10-20 | Preservar ordem da tabela e regra “última correspondência vence” | É o comportamento literal do `FOR K=1 TO 21` sem saída antecipada nas linhas BASIC 1360–1380 |
 | 2026-10-20 | Estado e despacho também ficam em módulo portável, separado da interface MSX | Permite testar ordem de condições, inventário e transições sem VDP ou temporização humana |
 | 2026-10-20 | Aguardar apenas a liberação da última tecla reconhecida | A espera pela matriz inteira livre perdia letras quando duas teclas se sobrepunham durante digitação rápida |
+| 2026-10-21 | Autorizar a edição MSX2 em paralelo: DOS2, mapper principal ≥512 KB, PSG+FM previstos; iniciar pela abertura SCREEN 5. Substitui o adiamento do MSX2, sem relaxar a fidelidade do MSX1. | Solicitação explícita do mantenedor |
+| 2026-10-21 | Abertura MSX2 com dez cards, texto narrativo integral do BASIC, blecaute e pergunta S/N; S informa que a aventura está em desenvolvimento e N reinicia. | Solicitação do mantenedor e confirmação do fluxo S/N |
+| 2026-10-21 | Versão compartilhada marco.compilação a partir de 1.1 / Danny Trejo; build conjunto conta uma compilação; novo marco explícito reinicia em .1; subtítulo por build. | Regra solicitada e confirmada pelo mantenedor |
+| 2026-10-21 | Publicar pré-release GitHub com commit, tag, binários de ambas as edições, screenshots e documentação; wrappers usam DEBUG=0 por padrão. | Confirmação do mantenedor; não anunciar fases ainda incompletas como concluídas |
 
 Adicionar novas decisões, sem reescrever retroativamente as anteriores. Se uma decisão mudar, adicionar nova linha declarando que substitui a anterior.
 
@@ -820,6 +858,28 @@ Resolver uma questão por vez quando ela bloquear a fase corrente; registrar a r
 - Próximo passo: matriz comparativa de mensagens, finais, edição de entrada,
   largura textual e glifos contra o disco original. Não marcar a versão 1:1
   como concluída apenas porque a fuga e o RNG passaram.
+
+### 2026-10-21 — abertura MSX2 e primeiro pré-release compartilhado
+
+- Edição MSX2 criada sem modificar o comportamento da aventura MSX1:
+  mapper principal ≥512 KB verificado via DOS2, SCREEN 5 e perfil PSG/FM-PAC.
+- Dez cards com história real, narrativa integral do BASIC e pergunta S/N;
+  casa de força, cores noturnas e blecaute mantêm legendas legíveis.
+- Teste Node compara o texto narrativo integral com as linhas 2380–2400,
+  desconsiderando somente espaços. Teste openMSX verifica dez cards,
+  VRAM frente/fundo, pausa, avanço, blecaute, escolhas e retorno ao DOS.
+- Pré-release **1.1 / Danny Trejo**, subtítulo
+  **Abertura MSX2 completa e baseline jogável MSX1**.
+- Ambas as edições compiladas em conjunto com DEBUG=0. Capturas atuais,
+  metadados e checksums foram gerados a partir desses executáveis.
+- MSX1 validado novamente no Sony HB-701FD: abertura, introdução, cela,
+  pegar/listar serra, serrar grade e sair ao corredor. Suítes host passaram.
+- `tools/release.js` automatiza builds, numeração, pacote, tag e publicação.
+  Primeiro número sobe por integração/fim de fase explicitamente declarado;
+  segundo sobe a cada build bem-sucedido. Build conjunto conta uma vez.
+- Documentação de release em `docs/releases/1.1.md` e fluxo em
+  `docs/versioning.md`. Não anunciar equivalência integral MSX1 nem
+  aventura/música MSX2 como concluídas.
 
 ### Modelo para próximas entradas
 
