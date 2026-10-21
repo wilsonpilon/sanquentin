@@ -3,6 +3,10 @@ set throttle off
 set output [file normalize [file join [file dirname [info script]] .. projects msx1 out]]
 set log [open [file join $output release-test.log] w]
 set failed 0
+set fontFile [open [file join [file dirname [info script]] .. resource vram.dat] rb]
+set expectedFont [read $fontFile]
+close $fontFile
+if {[string length $expectedFont] != 2048} {error "Expected a 2048-byte SCREEN 0 font"}
 
 proc check {condition message} {
 	puts $::log "[expr {$condition ? {PASS} : {FAIL}}]: $message"
@@ -12,6 +16,11 @@ proc check {condition message} {
 
 proc text {} {
 	return [debug read_block VRAM 0 16384]
+}
+
+proc check_font {stage} {
+	set base [expr {([debug read {VDP regs} 4] & 7) * 2048}]
+	check [expr {[debug read_block VRAM $base 2048] eq $::expectedFont}] "$stage custom font: all 256 glyphs"
 }
 
 proc tap {} {
@@ -48,11 +57,13 @@ debug set_bp $waitAddress {} {
 	} elseif {$::waits == 2} {
 		after time 0.5 {
 			check [expr {[string first "Scarp Lantra" [text]] >= 0}] "original introduction"
+			check_font introduction
 			snap release-intro.png
 		}
 		after time 1 {tap}
 		after time 4 {
 			check [expr {[string first "SERRA" [text]] >= 0}] "playable initial cell"
+			check_font cell
 			snap release-cell.png
 		}
 		after time 5 {type "PEGAR SERRA\r"}
@@ -65,6 +76,7 @@ debug set_bp $waitAddress {} {
 		after time 22 {type "LESTE\r"}
 		after time 28 {
 			check [expr {[string first "CORREDOR" [text]] >= 0}] "cell escape to corridor"
+			check_font corridor
 			snap release-corridor.png
 		}
 		after time 30 {finish}

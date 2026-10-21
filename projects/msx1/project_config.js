@@ -11,6 +11,8 @@ Optim = "Size";
 CompileComplexity = "Default";
 Verbose = true;
 
+PreBuildScripts = [ `"${process.execPath}" "${ProjDir}../../tools/font.js"` ];
+
 // O deploy do MSXgl grava MSXDOS.SYS por ultimo no diretorio raiz, o que
 // impede o boot do MSX-DOS 1. Este script regera o disco na ordem correta.
 PostBuildScripts = [ `"${ProjDir}make_dsk.bat"` ];

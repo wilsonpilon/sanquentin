@@ -24,7 +24,7 @@ void Intro_Show(void)
 	VDP_SetMode(VDP_MODE_SCREEN0);
 	BIOS_SetColor(COLOR_WHITE, COLOR_BLACK, COLOR_BLACK);
 	VDP_SetColor2(COLOR_BLACK, COLOR_WHITE);
-	Print_SetTextFont(g_Font_BIOS_EU, 0);
+	Font_LoadScreen0();
 
 	// 2380 CLS:PRINT"..."
 	Print_Clear();

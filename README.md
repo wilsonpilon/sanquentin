@@ -6,20 +6,20 @@ O jogador assume o papel de Scarp Lantra, um prisioneiro que pretende aproveitar
 
 ![Tela de abertura do jogo original San Quentin no MSX](images/SanQuentin-00.png)
 
-## Versões disponíveis — 1.1 / Danny Trejo
+## Versões disponíveis — 1.3 / Danny Trejo
 
-**Subtítulo:** Abertura MSX2 completa e baseline jogável MSX1.
+**Subtítulo:** Fonte personalizada MSX1 e MSX2 e validação diferencial.
 
 **Estado:** pré-release de desenvolvimento, não uma versão final.
 
-[Baixar o release 1.1](https://github.com/wilsonpilon/sanquentin/releases/tag/v1.1) ·
-[Notas e limitações](docs/releases/1.1.md) ·
+[Baixar o release 1.3](https://github.com/wilsonpilon/sanquentin/releases/tag/v1.3) ·
+[Notas e limitações](docs/releases/1.3.md) ·
 [Versionamento automático](docs/versioning.md)
 
 | | MSX1 | MSX2 |
 | --- | --- | --- |
 | Objetivo | Conversão fiel ao BASIC original | Edição com apresentação ampliada |
-| Estado em 1.1 | **Aventura jogável; fidelidade integral ainda em auditoria** | **Abertura concluída nesta fase; aventura ainda não integrada** |
+| Estado em 1.3 | **Aventura jogável; fidelidade integral ainda em auditoria** | **Abertura concluída nesta fase; aventura ainda não integrada** |
 | Vídeo | SCREEN 2 na abertura e SCREEN 0 no jogo | SCREEN 5, 256×212, 16 cores |
 | Sistema | MSX-DOS 1; disco de 360 KB | MSX-DOS 2; disco de 720 KB |
 | Memória | Validado no Sony HB-701FD; RAM mínima ainda não certificada | Mapper principal ≥512 KB, VRAM ≥128 KB |
@@ -32,29 +32,36 @@ comando auxiliar `RESOLVER` nessa distribuição. A fuga já foi exercitada com
 o auxiliar em builds de desenvolvimento; isso **não certifica equivalência
 integral** com o BASIC. Nenhuma das edições foi certificada em hardware real.
 
+**Novidades em 1.3:** fonte personalizada na introdução e aventura MSX1
+e nos textos da abertura MSX2, com avanço de 6×8 pixels. A validação
+diferencial compara 1.989 cenários BASIC × C, sem divergências nos valores
+comparados; veja o [escopo e as limitações](docs/validation.md).
+
 ### Capturas atuais do MSX1
 
-Capturadas no openMSX/Sony HB-701FD a partir do executável **1.1**:
+Capturadas no openMSX/Sony HB-701FD a partir do executável **1.3**.
+A fonte nova aparece em SCREEN 0; a abertura SCREEN 2 foi preservada:
 
 | Abertura SCREEN 2 | Introdução original |
 | --- | --- |
-| ![MSX1 1.1: abertura](images/releases/1.1/msx1-abertura.png) | ![MSX1 1.1: introdução](images/releases/1.1/msx1-introducao.png) |
+| ![MSX1 1.3: abertura](images/releases/1.3/msx1-abertura.png) | ![MSX1 1.3: introdução com fonte nova](images/releases/1.3/msx1-introducao.png) |
 | **Cela jogável** | **Corredor após pegar a serra e serrar a grade** |
-| ![MSX1 1.1: cela](images/releases/1.1/msx1-cela.png) | ![MSX1 1.1: corredor](images/releases/1.1/msx1-corredor.png) |
+| ![MSX1 1.3: cela com fonte nova](images/releases/1.3/msx1-cela.png) | ![MSX1 1.3: corredor com fonte nova](images/releases/1.3/msx1-corredor.png) |
 
 ### Capturas atuais do MSX2
 
 Capturadas no openMSX/Philips NMS 8250 com DOS2, mapper de 512 KB e FM-PAC,
-a partir do executável **1.1**. As legendas “PAUSADO” nas capturas indicam
+a partir do executável **1.3**, com a fonte nova em SCREEN 5.
+As legendas “PAUSADO” nas capturas indicam
 a pausa acionada pelo teste, não uma limitação da reprodução automática.
 
 | Baía | Scarp Lantra na cela |
 | --- | --- |
-| ![MSX2 1.1: baía](images/releases/1.1/msx2-baia.png) | ![MSX2 1.1: Scarp Lantra](images/releases/1.1/msx2-scarp.png) |
+| ![MSX2 1.3: baía](images/releases/1.3/msx2-baia.png) | ![MSX2 1.3: Scarp Lantra](images/releases/1.3/msx2-scarp.png) |
 | **Casa de força antes da falha** | **Blecaute** |
-| ![MSX2 1.1: casa de força](images/releases/1.1/msx2-casa-de-forca.png) | ![MSX2 1.1: blecaute](images/releases/1.1/msx2-blecaute.png) |
+| ![MSX2 1.3: casa de força](images/releases/1.3/msx2-casa-de-forca.png) | ![MSX2 1.3: blecaute](images/releases/1.3/msx2-blecaute.png) |
 
-![MSX2 1.1: pergunta com opções S e N](images/releases/1.1/msx2-pergunta.png)
+![MSX2 1.3: pergunta com opções S e N](images/releases/1.3/msx2-pergunta.png)
 
 ### Compilar ambas as edições
 
@@ -66,8 +73,8 @@ projects\msx1\run.bat
 projects\msx2\run.bat
 ```
 
-O primeiro build compartilhado gerou **1.1**. O próximo build bem-sucedido
-gera **1.2**, depois **1.3**, sem editar números manualmente.
+O primeiro build compartilhado gerou **1.1**. O release atual é **1.3**;
+o próximo build bem-sucedido gera **1.4**, sem editar números manualmente.
 O comando `build.bat --milestone --codename "Nome" --subtitle "Recurso"`
 abre o próximo marco em **2.1**. O número não é SemVer:
 representa **marco.compilação**, com codinome por marco e subtítulo por build.
@@ -107,6 +114,62 @@ A implementação fiel é para **MSX1**, usando **SDCC** e **MSXgl**, como progr
 | MSX-DOS 1 | Ambiente de execução da recriação atual. |
 | openMSX | Emulação do MSX para execução e testes. |
 
+### Fonte em SCREEN 0
+
+A introdução e a aventura em SCREEN 0 usam a fonte fornecida em
+[vram.dat](resource/vram.dat): 2.048 bytes, com 256 caracteres de oito bytes.
+O build incorpora os padrões ao executável e os carrega na tabela de
+caracteres da VRAM após a abertura em SCREEN 2, sem modificar o desenho
+da abertura nem as regras e os textos do jogo. SCREEN 0 mostra os seis bits
+mais à esquerda de cada linha dos glifos. Para experimentar outra fonte
+com a mesma codificação, substitua o arquivo e recompile; tamanhos diferentes
+são rejeitados. Esta é uma mudança visual autorizada em relação à fonte
+anterior, não uma alegação de que a fonte pertence ao jogo Amazônia.
+
+### Fonte bitmap no MSXgl
+
+A abertura MSX2 também usa [vram.dat](resource/vram.dat), via
+`Print_SetBitmapFont(g_Font_VRAM)`, com avanço de **6×8 pixels** em SCREEN 5.
+Isso substitui a fonte de exemplo do MSXgl, sem mudar textos ou coordenadas.
+Os mesmos padrões monocromáticos servem para os modos bitmap SCREEN 5–8;
+as cores são escolhidas por `Print_SetColor`, não pelo arquivo da fonte.
+A integração atual foi validada em SCREEN 5.
+
+O [conversor](tools/font.js) gera um cabeçalho C reutilizável, seguindo o
+formato de [font_mgl_sample6.h](MSXgl/engine/content/font/font_mgl_sample6.h):
+
+| Campo | Valor | Significado |
+| --- | --- | --- |
+| Byte 0 | `0x88` | Padrão de 8×8 pixels |
+| Byte 1 | `0x68` | Avanço de 6 pixels na horizontal e 8 na vertical |
+| Byte 2 | `0x00` | Primeiro código: 0 |
+| Byte 3 | `0xFE` | Último código declarado: 254 |
+| Restante | 2.048 bytes | 256 padrões, oito linhas por caractere, bit 7 à esquerda |
+
+O limite declarado segue as fontes BIOS do MSXgl: `CharCount` é `u8` e
+não comporta 256. O padrão 255 permanece no cabeçalho como dado adicional;
+o carregador SCREEN 0 o envia separadamente. Ele é vazio no arquivo atual.
+Em bitmap, o intervalo declarado é 0–254. Não há recodificação de caracteres
+nem alteração dos padrões. Alguns símbolos usam os oito bits; com
+`PRINT_WIDTH_6`, somente os seis à esquerda são desenhados. Para exibir os
+oito, uma integração deve usar `PRINT_WIDTH_8` e avanço `0x88`, revendo o layout.
+
+Os pré-builds geram `out\font_vram.h` em cada projeto. Para gerar manualmente:
+
+```bat
+node tools\font.js msx1
+node tools\font.js msx2
+node tests\test_font.js
+```
+
+O cabeçalho define `const unsigned char g_Font_VRAM[]`. Inclua-o em apenas
+uma unidade C e, após selecionar o modo de vídeo, chame
+`Print_SetBitmapFont(g_Font_VRAM)`. Habilite `PRINT_USE_BITMAP`, o modo VDP
+desejado, `PRINT_WIDTH_6` e `PRINT_HEIGHT_8` na configuração do MSXgl.
+As dimensões da tela não redimensionam os glifos automaticamente.
+O [teste da abertura MSX2](tests/capture_msx2_intro.tcl) compara os pixels
+do título em VRAM com o arquivo original, incluindo avanço e cores.
+
 ### Testar a fuga na conversão
 
 Com `DEBUG=1`, digite `RESOLVER`
@@ -134,6 +197,19 @@ O RNG original e as coordenadas aleatórias da abertura são cobertos por
 [run_random_tests.bat](tests/run_random_tests.bat), com checksum de valores
 extraídos do MSX-BASIC 1.0. A reprodução do oráculo está documentada na
 [especificação](SPEC.md#verificação-reproduzível-do-rng).
+
+### Matriz automatizada BASIC x C
+
+Execute `tests\run_differential_tests.bat` para comparar cenários de parser,
+mapa, inventário, ações e guarda com a listagem original executada no
+MSX-BASIC 1.0/openMSX. A suíte compara estados e encerramento, controla o
+relógio aleatório e gera um relatório de divergências e linhas alcançadas.
+Não recompila os jogos nem incrementa a versão.
+
+Consulte a [matriz de validação](docs/validation.md) para os requisitos,
+funcionamento e limites. Transcrições, fidelidade visual, sequências completas
+e hardware real continuam sendo etapas separadas; aprovação da matriz não
+certifica equivalência integral.
 
 ## Edição MSX2 — abertura histórica
 

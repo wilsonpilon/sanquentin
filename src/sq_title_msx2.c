@@ -1,7 +1,7 @@
 #include "msxgl.h"
 #include "draw.h"
 #include "sq_title_msx2.h"
-#include "font/font_mgl_sample6.h"
+#include "../projects/msx2/out/font_vram.h"
 
 #define BACK_Y 256
 #define CARD_COUNT 10
@@ -514,7 +514,7 @@ void Title2_Show(void)
 	VDP_SetColor(NIGHT);
 	VDP_SetPage(0);
 	VDP_SetPalette(s_Palette);
-	Print_SetBitmapFont(g_Font_MGL_Sample6);
+	Print_SetBitmapFont(g_Font_VRAM);
 	VDP_CommandHMMV(0, 0, 256, 212, 0x11);
 	VDP_CommandWait();
 	Render(card);

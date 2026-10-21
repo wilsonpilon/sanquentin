@@ -9,5 +9,6 @@
 
 #include "msxgl.h"
 
-// Definida uma unica vez em sq_font.c pelo recurso font_bios_latin.h.
 extern const u8 g_Font_BIOS_EU[];
+
+void Font_LoadScreen0(void);

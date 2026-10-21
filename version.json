@@ -1,6 +1,6 @@
 {
   "milestone": 1,
-  "build": 1,
+  "build": 3,
   "codename": "Danny Trejo",
-  "subtitle": "Abertura MSX2 completa e baseline jogavel MSX1"
+  "subtitle": "Fonte personalizada MSX1 e MSX2 e validacao diferencial"
 }

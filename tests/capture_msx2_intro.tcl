@@ -5,6 +5,9 @@ set output [file normalize [file join [file dirname [info script]] .. projects m
 set log [open [file join $output intro-test.log] w]
 set failed 0
 array set cards {}
+set fontFile [open [file join [file dirname [info script]] .. resource vram.dat] rb]
+set fontData [read $fontFile]
+close $fontFile
 
 proc check {condition message} {
 	if {!$condition} {
@@ -30,6 +33,29 @@ proc ready {} {
 		[debug read_block VRAM 32768 [expr {212 * 128}]]}]
 }
 
+proc check_font {} {
+	set matches 1
+	set x 8
+	foreach character [split "SAN QUENTIN" ""] {
+		scan $character %c code
+		binary scan [string range $::fontData [expr {$code * 8}] [expr {$code * 8 + 7}]] cu* rows
+		set y 5
+		foreach row $rows {
+			set expected {}
+			for {set bit 7} {$bit >= 2} {incr bit -2} {
+				set left [expr {($row & (1 << $bit)) ? 14 : 1}]
+				set right [expr {($row & (1 << ($bit - 1))) ? 14 : 1}]
+				lappend expected [expr {($left << 4) | $right}]
+			}
+			binary scan [debug read_block VRAM [expr {$y * 128 + $x / 2}] 3] cu* actual
+			if {$actual ne $expected} {set matches 0}
+			incr y
+		}
+		incr x 6
+	}
+	check $matches "title pixels match vram.dat with 6-pixel advance and SCREEN 5 colors"
+}
+
 proc capture {card} {
 	check [expr {([debug read {VDP regs} 0] & 14) == 6}] "SCREEN 5 active"
 	check [expr {([debug read {VDP regs} 9] & 128) != 0}] "212 lines active"
@@ -37,6 +63,7 @@ proc capture {card} {
 	set front [debug read_block VRAM 0 [expr {212 * 128}]]
 	set back [debug read_block VRAM 32768 [expr {212 * 128}]]
 	check [expr {$front eq $back}] "transition completed without partial drawing"
+	check_font
 	set ::cards($card) [picture]
 	binary scan $::cards($card) cu* bytes
 	set colors [dict create]

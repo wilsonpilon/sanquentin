@@ -8,3 +8,5 @@ DiskSize = "720K";
 Optim = "Size";
 CompileComplexity = "Default";
 Verbose = true;
+
+PreBuildScripts = [ `"${process.execPath}" "${ProjDir}../../tools/font.js" msx2` ];

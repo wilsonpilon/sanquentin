@@ -17,6 +17,12 @@ DOS2, mapper principal de pelo menos 512 KB, PSG+FM previstos e backend visual
 separado. O pré-release 1.1 entrega a aventura MSX1 em auditoria e somente
 a abertura MSX2; não confundir os estados das duas edições.
 
+Exceção visual autorizada em 21/10/2026: a fonte da introdução e da aventura
+MSX1 em SCREEN 0 passa a usar `resource/vram.dat`, fornecida pelo usuário.
+Preservar os textos, códigos dos caracteres, layout e regras; a abertura
+SCREEN 2 mantém sua fonte anterior. A procedência como fonte de Amazônia
+não foi confirmada.
+
 ## 2. Estado atual
 
 ### Concluído
@@ -880,6 +886,42 @@ Resolver uma questão por vez quando ela bloquear a fase corrente; registrar a r
 - Documentação de release em `docs/releases/1.1.md` e fluxo em
   `docs/versioning.md`. Não anunciar equivalência integral MSX1 nem
   aventura/música MSX2 como concluídas.
+
+### 2026-10-21 — fonte personalizada SCREEN 0 no MSX1
+
+- `resource/vram.dat`: 2.048 bytes, 256 glifos de oito linhas, incorporados
+  ao COM por `tools/font.js` no pré-build. Tamanho inválido interrompe o build.
+- `Font_LoadScreen0` carrega a fonte após a troca de modo na introdução;
+  a aventura mantém a mesma tabela. O último glifo é enviado separadamente
+  porque o contador de caracteres do MSXgl admite no máximo 255.
+- A fonte BIOS anterior continua disponível para os textos da abertura
+  SCREEN 2; nenhuma alteração na apresentação MSX2.
+- Build local MSX1 **1.2 / Danny Trejo**, DEBUG=0; release público e
+  executável MSX2 permanecem em 1.1. Não houve publicação de novo release.
+- Teste Node confere os 2.048 bytes gerados, substituição do recurso e
+  rejeição de tamanhos inválidos.
+- openMSX/Sony HB-701FD conferiu os 2.048 bytes da VRAM na introdução,
+  cela e corredor, além da abertura e sequência pegar/listar/serrar/sair.
+  Capturas em `projects/msx1/out/release-intro.png` e `release-cell.png`.
+- A alteração é visual e explicitamente autorizada; não redefine a meta
+  de fidelidade das regras nem confirma a origem da fonte.
+
+### 2026-10-21 — pacote conjunto 1.3, fonte bitmap e validacao diferencial
+
+- Build conjunto **1.3 / Danny Trejo**, DEBUG=0 nas duas edicoes, sucedendo
+  o build local 1.2 e o pre-release publico 1.1.
+- A abertura MSX2 passa a usar os mesmos padroes de `resource/vram.dat`,
+  convertidos para o formato bitmap do MSXgl, com avanco de 6x8 pixels.
+  Textos, coordenadas, cenas e controles permanecem inalterados.
+- Pre-builds independentes geram `out/font_vram.h` para MSX1 e MSX2;
+  o teste Node verifica todos os glifos, cabecalho e selecao da edicao.
+- openMSX valida os 256 glifos em SCREEN 0 e os pixels do titulo em
+  SCREEN 5, incluindo avanco e cores, alem das suites de abertura e jogo.
+- A matriz diferencial BASIC x C cobre 1.989 cenarios e 27 valores por
+  cenario, sem divergencias nesses valores. Escopo, instrumentacao e
+  limitacoes em `docs/validation.md`; nao certifica equivalencia integral.
+- README, notas e capturas versionadas em `images/releases/1.3`
+  acompanham o pacote conjunto. Fotografias locais nao sao distribuidas.
 
 ### Modelo para próximas entradas
 
