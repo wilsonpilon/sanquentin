@@ -5,8 +5,9 @@
 // |  |_| |___||_|_||___|     |
 // |__________________________|
 //
-// Transcricao fiel das linhas 2370 a 2430 de basic/quentin.asc. O wrapping
-// automatico de Print reproduz o PRINT do BASIC em WIDTH 40.
+// Transcricao das linhas 2370 a 2430 de basic/quentin.asc, conferida com a
+// listagem da revista. O wrapping automatico de Print reproduz o PRINT do
+// BASIC em WIDTH 40.
 //-----------------------------------------------------------------------------
 #include "sq_font.h"
 #include "sq_input.h"
@@ -30,20 +31,26 @@ void Intro_Show(void)
 	Print_Clear();
 	Print_SetPosition(0, 0);
 	Intro_PrintLine(
-		"Scarp Lantra, o temivel ladrao de bancose assassino, condenado a prisao perpetua"
-		"encontra-se no Presidio de San Quentin, de onde jurou escapar, aproveitando-se  "
-		"do primeiro 'cochilo' dos carcereiros.");
+		"Scarp Lantra, o temivel ladrao de       "
+		"bancos e assassino, condenado a prisao  "
+		"perpetua, encontra-se no Presidio de    "
+		"San Quentin, de onde jurou escapar,     "
+		"aproveitando-se do primeiro 'cochilo'   "
+		"dos carcereiros.");
 
 	// 2390 PRINT:PRINT"..."
 	Print_Return();
 	Intro_PrintLine(
-		"Certa noite, valendo-se de um blecauta  proveniente de um curto-circuito nas "
-		"instalacoes eletricas da casa de forca do  presidio, os facinora julgou chegado o  "
-		"momento exato para empreender sua fuga eassim alcancar a sonhada liberdade.");
+		"Certa noite, valendo-se de um blecaute  "
+		"proveniente de um curto-circuito nas    "
+		"instalacoes eletricas da casa de forca  "
+		"do presidio, o facinora julgou chegado  "
+		"o momento exato para empreender a fuga  "
+		"e assim alcancar a sonhada liberdade.");
 
 	// 2400 PRINT:PRINT"Aceita..."
 	Print_Return();
-	Intro_PrintLine("Aceita acompanha-lo nessa dificil e perigosa empreitada?");
+	Intro_PrintLine("Aceita acompanha-lo nessa dificil e     perigosa empreitada ?");
 
 	// 2410 PRINT:PRINT:PRINTTAB(8)"Aperte qualquer tecla"
 	Print_Return();

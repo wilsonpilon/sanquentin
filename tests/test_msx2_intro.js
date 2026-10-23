@@ -19,7 +19,7 @@ const original = [2380, 2390, 2400].map(number => {
     assert.ok(line, `Missing BASIC line ${number}`);
     return line.match(/"([^"]*)"/)[1];
 }).join("");
-// BASIC embeds WIDTH 40 padding and joins words across physical screen lines.
+// Corrected against the magazine listing; BASIC embeds WIDTH 40 padding.
 const compact = text => text.replace(/\s/g, "");
 const story = lines.slice(9, -1).join("");
 assert.strictEqual(compact(story), compact(original),

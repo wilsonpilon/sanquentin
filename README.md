@@ -83,6 +83,12 @@ checksums, tag e publicação.
 
 ## O programa original
 
+### Mapa e solução
+
+- [Mapa do jogo](docs/mapa.md): diagrama das salas e ligações, objetos fixos,
+  condições das passagens e nota sobre os objetos aleatórios (**spoilers**).
+- [Roteiro de fuga](docs/solution.md) (**spoilers**).
+
 O programa e o artigo que o apresenta saíram originalmente no número **79** da revista **Micro Sistemas**. A versão em BASIC já foi digitada e está funcionando; ela serve como referência para a recriação.
 
 ![Capa do número 79 da revista Micro Sistemas](images/SanQuentin-capa.png)
@@ -103,6 +109,62 @@ A implementação fiel é para **MSX1**, usando **SDCC** e **MSXgl**, como progr
 
 - **Computador:** MSX1 ou superior, em modo compatível com MSX1.
 - **Sistema operacional:** MSX-DOS 1.
+
+### Correções de texto
+
+A listagem disponível não é a digitação original do autor da recriação, e
+continha erros de digitação. Ela foi conferida linha a linha com a
+[listagem impressa na revista](docs/SanQuentin.pdf), e as diferenças foram
+corrigidas na [listagem BASIC](basic/quentin.asc), no
+[programa tokenizado](basic/QUENTIN.BAS) e na conversão em C, sem acentos e
+sem mudar o estilo coloquial do autor (por exemplo, "O GUARDA LHE VIU").
+A tela continua com 40 colunas: os espaços de alinhamento foram recalculados
+para que nenhuma palavra seja cortada no fim da linha.
+
+| Local | Listagem digitada | Revista (adotado) |
+| --- | --- | --- |
+| Introdução | `blecauta` | `blecaute` |
+| Introdução | `os facinora julgou` | `o facinora julgou` |
+| Introdução | `prisao perpetua encontra-se` | `prisao perpetua, encontra-se` |
+| Introdução | `empreender sua fuga` | `empreender a fuga` |
+| Introdução | `perigosa empreitada?` | `perigosa empreitada ?` |
+| Livro | `HA UM LIVRO GROSSO AQUI.` | `HA UM LIVRO MUITO GROSSO AQUI.` |
+| Guarda | `TESTE SUBORNALO.` | `TENTE SUBORNA-LO.` |
+| Horta (sala 6) | `HORTA.CUIDADO` | `HORTA. CUIDADO` |
+| Diretor (sala 13) | `NAO PARE, VOCE ESTA` | `NAO PARE, POIS VOCE ESTA` |
+| Corredor (sala 14) | `...UM CORREDOR` | `...UM CORREDOR.` |
+| Pátio (sala 15) | `HOLO-FOTES O DENUNCIARAO.` | `HOLOFOTES LHE DENUNCIARAO.` |
+| Portão (sala 24) | `PORTAO DE SAIDA` | `PORTAO DE SAIDA!` |
+| Prompt | `O QUE FARA AGORA?` | `QUAL O COMANDO ?` |
+| `LISTAR` | `VOCE CARREGA:` | `VOCE CARREGA :` |
+| Objeto que não tem | `VOCE NAO TEM!` | `VOCE NAO PODE <VERBO> O QUE NAO TEM.` |
+| `NADAR` com a serra | `VOCE AFOGOU! A SERRA ERA MUITO PESADA!` | `VOCE SE AFOGOU! A SERRA QUE VOCE LEVAVA ERA MUITO PESADA.` |
+| `CAVAR` com a escada | `QUE VOCE ENTALASSE` | `QUE VOCE SE ENTALASSE` |
+| `CAVAR` sem colher | `VOCE MAO TEM A COLHER!` | `VOCE NAO TEM A COLHER!` |
+| `ABRIR` com o osso | `LEVAVA. OS CAES` | `LEVAVA, OS CAES` |
+| Guarda, sem objetos | `ELE O PRENDE.` | `ELE O PRENDE EM NOME DA LEI.` |
+| `ACENDER`/`APAGAR` | `ISSO NAO ACENDE!`/`ISSO NAO APAGA!` | `ISSO NAO ACENDE.`/`ISSO NAO APAGA.` |
+| Perguntas curtas | `ONDE?`, `O QUE?`, `COM O QUE?`, `MATAR QUEM?` | `ONDE ?`, `O QUE ?`, `COM O QUE ?`, `MATAR QUEM ?` |
+| Final | `ACEITA OUTRA FUGA?` | `ACEITA OUTRA FUGA (S/N)?` |
+
+Palavras que a listagem digitada cortava com hífen no fim da linha
+(`ACE-SA`, `TEN-TE`, `OBJE- TOS`, `SUBOR- NAR`, `CASTIGA-DOS`) aparecem
+inteiras, como na revista. Também foram corrigidos três desvios digitados
+errados que mudavam o funcionamento:
+
+- **`AJUDAR`** (linhas 1410 e 1420): `THEN420` e `TEN1450` tornavam as dicas
+  inalcançáveis; agora, como na revista, o jogo responde
+  `CERTOS OBJETOS CHAMAM MUITA ATENCAO!` no corredor (14) com a lanterna acesa,
+  `VOCE NAO DEVIA TER ENTRADO AQUI SEM A LANTERNA!...` no necrotério (12) sem
+  a lanterna, e `DESCULPE, NAO POSSO AJUDAR AGORA!` nos demais casos;
+- **linha 960:** a mensagem usa o verbo digitado, como na revista;
+- **linha 2350:** `E=0` em vez de um segundo `W=0`; sem efeito visível, pois
+  o portão sempre é alcançado com leste desabilitado.
+
+Foram mantidas diferenças em que a listagem digitada é melhor ou equivalente:
+`JA ESTA APAGADA.` (a revista imprime `J EST APAGADA.`), `DO BEM, POIS`
+(sem o espaço na revista) e a resposta a `ACEITA OUTRA FUGA (S/N)?`, que
+aceita qualquer tecla (`S` reinicia) em vez de esperar `S` ou `N`.
 
 ### Ferramentas e tecnologias
 
@@ -299,9 +361,9 @@ Waban e construção com trabalho de detentos até 1854, no contexto posterior
 afirmações sobre a situação atual da prisão presentes no artigo.
 Do quarto card em diante, o texto reproduz a introdução da aventura original,
 das linhas 2380–2400 de [quentin.asc](basic/quentin.asc), integralmente e na
-mesma ordem. Apenas os espaços de alinhamento do WIDTH 40 foram reorganizados
-para as legendas; grafias do original, como "blecauta" e "os facinora", foram
-mantidas. A antiga instrução "Aperte qualquer tecla" foi substituída pela escolha
+mesma ordem. Os espaços de alinhamento do WIDTH 40 foram reorganizados
+para as legendas, e o texto segue a revista, como no MSX1
+(veja [Correções de texto](#correções-de-texto)). A antiga instrução "Aperte qualquer tecla" foi substituída pela escolha
 **S/N**. A casa de força e o efeito de blecaute ilustram essa ficção, não eventos
 da história real do presídio.
 

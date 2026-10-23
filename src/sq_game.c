@@ -227,12 +227,7 @@ static void Game_DrawRoom(bool clear)
 
 	Engine_GetRoomInfo(&g_GameState, &info);
 	if(info.Description != NULL)
-	{
-		if(info.ContinueLine)
-			Game_Print(info.Description);
-		else
-			Game_PrintLine(info.Description);
-	}
+		Game_PrintLine(info.Description);
 	if(info.Detail != NULL)
 		Game_PrintLine(info.Detail);
 	Game_DrawObjects();
@@ -245,7 +240,7 @@ static void Game_PrintInventory(void)
 	bool empty = TRUE;
 
 	Game_Return();
-	Game_PrintLine("VOCE CARREGA:");
+	Game_PrintLine("VOCE CARREGA :");
 	for(i = 0; i < ENGINE_OBJECT_COUNT; ++i)
 	{
 		if(g_GameState.ObjectLocations[i] == ENGINE_INVENTORY)
@@ -284,9 +279,24 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		Game_PrintLine("ALGUNS OBJETOS PODEM SER PESADOS!");
 		Game_Return();
 		break;
+	case ENGINE_RESPONSE_HELP_ATTENTION:
+		Game_Return();
+		Game_PrintLine("CERTOS OBJETOS CHAMAM MUITA ATENCAO!");
+		Game_Return();
+		break;
+	case ENGINE_RESPONSE_HELP_LOST:
+		Game_Return();
+		Game_PrintLine("VOCE NAO DEVIA TER ENTRADO AQUI SEM A   LANTERNA! DESISTA, VOCE ESTA PERDIDO!");
+		Game_Return();
+		break;
+	case ENGINE_RESPONSE_HELP_NONE:
+		Game_Return();
+		Game_PrintLine("DESCULPE, NAO POSSO AJUDAR AGORA!");
+		Game_Return();
+		break;
 	case ENGINE_RESPONSE_HEADBANG:
 		Game_Return();
-		Game_PrintLine("VOCE ESTA DANDO CABECADA NA PAREDE. TEN-TE OUTRO CAMINHO.");
+		Game_PrintLine("VOCE ESTA DANDO CABECADA NA PAREDE.     TENTE OUTRO CAMINHO.");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_UNKNOWN_OBJECT:
@@ -304,7 +314,7 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		break;
 	case ENGINE_RESPONSE_INVENTORY_FULL:
 		Game_Return();
-		Game_PrintLine("VOCE NAO TEM COMO CARREGAR TANTOS OBJE- TOS. DEIXE UM!");
+		Game_PrintLine("VOCE NAO TEM COMO CARREGAR TANTOS       OBJETOS. DEIXE UM!");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_ALREADY_HAVE:
@@ -320,17 +330,20 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		break;
 	case ENGINE_RESPONSE_DO_NOT_HAVE:
 		Game_Return();
-		Game_PrintLine("VOCE NAO TEM!");
+		Game_Print("VOCE NAO PODE ");
+		Game_Print(parsed->Verb);
+		Game_PrintLine(" O QUE NAO TEM.");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_WHAT:
 		Game_Return();
-		Game_PrintLine("O QUE?");
+		Game_PrintLine("O QUE ?");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_WHERE:
 		Game_Return();
-		Game_PrintLine("ONDE?");
+		Game_PrintLine("ONDE ?");
+		Game_Return();
 		break;
 	case ENGINE_RESPONSE_NO_SAW:
 		Game_Return();
@@ -344,18 +357,18 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		break;
 	case ENGINE_RESPONSE_NO_SPOON:
 		Game_Return();
-		Game_PrintLine("VOCE MAO TEM A COLHER!");
+		Game_PrintLine("VOCE NAO TEM A COLHER!");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_KILL_WHO:
 		Game_Return();
 		Game_Print(parsed->Verb);
-		Game_PrintLine(" QUEM?");
+		Game_PrintLine(" QUEM ?");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_DOES_NOT_LIGHT:
 		Game_Return();
-		Game_PrintLine("ISSO NAO ACENDE!");
+		Game_PrintLine("ISSO NAO ACENDE.");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_ALREADY_LIT:
@@ -364,7 +377,8 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_DOES_NOT_EXTINGUISH:
-		Game_PrintLine("ISSO NAO APAGA!");
+		Game_Return();
+		Game_PrintLine("ISSO NAO APAGA.");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_ALREADY_DARK:
@@ -390,12 +404,12 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		break;
 	case ENGINE_RESPONSE_OPEN_NO_KEY:
 		Game_Return();
-		Game_PrintLine("COM O QUE?");
+		Game_PrintLine("COM O QUE ?");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_DROWNED:
 		Game_Return();
-		Game_PrintLine("VOCE AFOGOU! A SERRA ERA MUITO PESADA!");
+		Game_PrintLine("VOCE SE AFOGOU! A SERRA QUE VOCE LEVAVA ERA MUITO PESADA.");
 		break;
 	case ENGINE_RESPONSE_COIN_FOUND:
 		Game_Return();
@@ -412,15 +426,15 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		return TRUE;
 	case ENGINE_RESPONSE_ESCAPED_WITH_BONE:
 		Game_Return();
-		Game_PrintLine("VOCE FUGIU! MAS DEVIDO AO OSSO QUE VOCE LEVAVA. OS CAES LHE FAREJARAM.");
+		Game_PrintLine("VOCE FUGIU! MAS DEVIDO AO OSSO QUE VOCE LEVAVA, OS CAES LHE FAREJARAM.");
 		return TRUE;
 	case ENGINE_RESPONSE_GUARD_CAUGHT:
 		Game_Return();
-		Game_PrintLine("COMO VOCE NAO TEM NADA QUE POSSA SUBOR- NAR O GUARDA, ELE O PRENDE.");
+		Game_PrintLine("COMO VOCE NAO TEM NADA QUE POSSA        SUBORNAR O GUARDA, ELE O PRENDE EM NOME DA LEI.");
 		return TRUE;
 	case ENGINE_RESPONSE_GUARD_UNIFORM:
 		Game_Return();
-		Game_PrintLine("ELE LHE VIU UNIFORMIZADO DE GUARDA E LHECONFUNDIU COM OUTRO GUARDA.");
+		Game_PrintLine("ELE LHE VIU UNIFORMIZADO DE GUARDA E    LHE CONFUNDIU COM OUTRO GUARDA.");
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_GUARD_CONFISCATED:
@@ -443,11 +457,11 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		break;
 	case ENGINE_RESPONSE_PATIO_DEATH:
 		Game_Return();
-		Game_PrintLine("VOCE PASSOU NO PATIO COM A LANTERNA ACE-SA E FOI FUZILADO!");
+		Game_PrintLine("VOCE PASSOU NO PATIO COM A LANTERNA     ACESA E FOI FUZILADO!");
 		return TRUE;
 	case ENGINE_RESPONSE_DIG_DEATH:
 		Game_Return();
-		Game_PrintLine("A ESCADA FEZ COM QUE VOCE ENTALASSE NO  TUNEL!");
+		Game_PrintLine("A ESCADA FEZ COM QUE VOCE SE ENTALASSE  NO TUNEL!");
 		return TRUE;
 	}
 	return response->Type == ENGINE_RESPONSE_QUIT;
@@ -479,7 +493,7 @@ static bool Game_EndGame(unsigned char won, unsigned char shame)
 	Game_Return();
 	Game_Return();
 	Print_SetPositionX(7);
-	Game_Print("ACEITA OUTRA FUGA?");
+	Game_Print("ACEITA OUTRA FUGA (S/N)?");
 	key = Input_ReadKey();
 	return key == 'S';
 }
@@ -503,7 +517,7 @@ bool Game_Run(void)
 
 		// BASIC 590
 		Game_Return();
-		Game_Print("O QUE FARA AGORA? ");
+		Game_Print("QUAL O COMANDO ? ");
 #if DEBUG
 		if(solving)
 		{

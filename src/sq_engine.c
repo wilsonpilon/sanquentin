@@ -12,18 +12,18 @@ const Engine_Object g_EngineObjects[ENGINE_OBJECT_COUNT] =
 	// BASIC 210-340
 	{ 3,  "COLHER",    "HA UMA COLHER NO CHAO." },
 	{ 4,  "LENCOL",    "HA UM LENCOL BRANCO AQUI." },
-	{ 5,  "ESCADA",    "TEM UMA PEQUENA ESCADA ALI NAQUELE CANTO ESCURO." },
+	{ 5,  "ESCADA",    "TEM UMA PEQUENA ESCADA ALI NAQUELE      CANTO ESCURO." },
 	{ 1,  "SERRA",     "TEM UMA SERRA POR AQUI." },
-	{ 7,  "LIVRO",     "HA UM LIVRO GROSSO AQUI." },
+	{ 7,  "LIVRO",     "HA UM LIVRO MUITO GROSSO AQUI." },
 	{ 10, "CRUCIFIXO", "TEM UM CRUCIFIXO DOURADO AQUI." },
 	{ 16, "CORDA",     "AQUI TEM UMA CORDA." },
 	{ 19, "OSSO",      "TEM UM OSSO PONTIAGUDO NO CHAO." },
 	{ 20, "UNIFORME",  "TEM UM UNIFORME DE GUARDA AQUI." },
 	{ 0,  "MOEDA",     "VEJA! TEM UMA MOEDA ALI!" },
 	{ 0,  "CANIVETE",  "TEM UM CANIVETE ALI." },
-	{ 0,  "LANTERNA",  "CUIDADO COM A LANTERNA NO CHAO. NAO VA PISA-LA!" },
+	{ 0,  "LANTERNA",  "CUIDADO COM A LANTERNA NO CHAO. NAO VA  PISA-LA!" },
 	{ 0,  "CHAVE",     "ACHOU A CHAVE! SERA ESTA?" },
-	{ 0,  "GUARDA",    "CUIDADO! O GUARDA LHE VIU. TESTE SUBORNALO." },
+	{ 0,  "GUARDA",    "CUIDADO! O GUARDA LHE VIU. TENTE        SUBORNA-LO." },
 };
 
 static signed char Engine_FindObject(const char* noun)
@@ -248,9 +248,9 @@ void Engine_EnterRoom(Engine_State* state)
 		break;
 	case 24:
 		state->North = 1;
+		state->East = 0;
 		state->South = 0;
 		state->West = 0;
-		// BASIC 2350 assigns W twice and leaves E unchanged.
 		break;
 	}
 }
@@ -259,7 +259,6 @@ void Engine_GetRoomInfo(const Engine_State* state, Engine_RoomInfo* info)
 {
 	info->Description = 0;
 	info->Detail = 0;
-	info->ContinueLine = 0;
 
 	switch(state->Location)
 	{
@@ -269,10 +268,10 @@ void Engine_GetRoomInfo(const Engine_State* state, Engine_RoomInfo* info)
 			info->Detail = "ESTA PRESO.";
 		break;
 	case 2:
-		info->Description = "VOCE SE ENCONTRA EM UM LONGO CORREDOR DECELAS.";
+		info->Description = "VOCE SE ENCONTRA EM UM LONGO CORREDOR   DE CELAS.";
 		break;
 	case 3:
-		info->Description = "CHEGOU AO REFEITORIO, A LONGA MESA DE MADEIRA AINDA CONTEM OS PRATOS DO JANTAR.";
+		info->Description = "CHEGOU AO REFEITORIO, A LONGA MESA DE   MADEIRA AINDA CONTEM OS PRATOS DO       JANTAR.";
 		break;
 	case 4:
 		info->Description = "VOCE ENTRA NA ENFERMARIA NA PONTA DOS   PES.";
@@ -281,7 +280,7 @@ void Engine_GetRoomInfo(const Engine_State* state, Engine_RoomInfo* info)
 		info->Description = "VOCE ESTA NO ALMOXARIFADO.";
 		break;
 	case 6:
-		info->Description = "VOCE ESTA NA HORTA.CUIDADO, NAO PISE NOSLEGUMES!";
+		info->Description = "VOCE ESTA NA HORTA. CUIDADO, NAO PISE   NOS LEGUMES!";
 		break;
 	case 7:
 		info->Description = "VOCE ESTA NA BIBLIOTECA.";
@@ -296,24 +295,23 @@ void Engine_GetRoomInfo(const Engine_State* state, Engine_RoomInfo* info)
 		info->Description = "VOCE ESTA NA CAPELA. REZE PARA NAO SER  PEGO.";
 		break;
 	case 11:
-		info->Description = "VOCE ENTROU NUM TUNEL SECRETO COM VARIASPASSAGENS.";
+		info->Description = "VOCE ENTROU NUM TUNEL SECRETO COM       VARIAS PASSAGENS.";
 		if(state->ObjectLocations[ENGINE_OBJECT_SPOON] != ENGINE_INVENTORY || !state->HoleDug)
 			info->Detail = "ALGUMAS VOCE NAO PODE VER.";
 		break;
 	case 12:
 		info->Description = "VOCE ESTA NO NECROTERIO ESCURO.";
 		if(state->ObjectLocations[ENGINE_OBJECT_FLASHLIGHT] != ENGINE_INVENTORY || !state->LampLit)
-			info->Detail = "ESTA FRIO E MUITO ESCURO PARA VER AS SAIDAS.";
+			info->Detail = "ESTA FRIO E MUITO ESCURO PARA VER AS    SAIDAS.";
 		break;
 	case 13:
-		info->Description = "NAO PARE, VOCE ESTA NA SALA DO DIRETOR.";
+		info->Description = "NAO PARE, POIS VOCE ESTA NA SALA DO     DIRETOR.";
 		break;
 	case 14:
-		info->Description = "VOCE ESTA AGORA ATRAVESSANDO UM CORREDOR";
-		info->ContinueLine = 1;
+		info->Description = "VOCE ESTA AGORA ATRAVESSANDO UM         CORREDOR.";
 		break;
 	case 15:
-		info->Description = "VOCE ESTA NO PATIO. CUIDADO, OU OS HOLO-FOTES O DENUNCIARAO.";
+		info->Description = "VOCE ESTA NO PATIO. CUIDADO, OU OS      HOLOFOTES LHE DENUNCIARAO.";
 		break;
 	case 16:
 		info->Description = "VOCE ACABA DE ENTRAR NA OFICINA.";
@@ -325,17 +323,16 @@ void Engine_GetRoomInfo(const Engine_State* state, Engine_RoomInfo* info)
 		info->Description = "VOCE ESTA PASSANDO PELA GUARITA LESTE.  CUIDADO, E MUITO ARRISCADO!";
 		break;
 	case 19:
-		info->Description = "CELA SURDA,  ONDE OS PRESOS SAO CASTIGA-DOS.";
+		info->Description = "CELA SURDA, ONDE OS PRESOS SAO          CASTIGADOS.";
 		break;
 	case 20:
 		info->Description = "VOCE ENTROU NA LAVANDERIA.";
 		break;
 	case 21:
-		info->Description = "MUITA ATENCAO, VOCE ESTA DIANTE DA GUARITA SUL.";
+		info->Description = "MUITA ATENCAO, VOCE ESTA DIANTE DA      GUARITA SUL.";
 		break;
 	case 24:
-		info->Description = "VOCE CONSEGUIU CHEGAR AO PORTAO DE SAIDA";
-		info->ContinueLine = 1;
+		info->Description = "VOCE CONSEGUIU CHEGAR AO PORTAO DE      SAIDA!";
 		break;
 	}
 }
@@ -595,14 +592,15 @@ void Engine_Dispatch(Engine_State* state, const Parser_Result* command, Engine_R
 		response->Type = ENGINE_RESPONSE_INVENTORY;
 		break;
 	case PARSER_ACTION_HELP:
-		// BASIC 1410 always jumps: lines 1420-1430 are unreachable.
+		// BASIC 1410-1470
 		if(state->Location == 17 && state->ObjectLocations[ENGINE_OBJECT_SAW] == ENGINE_INVENTORY)
 			response->Type = ENGINE_RESPONSE_HELP_HEAVY;
+		else if(state->Location == 14 && state->ObjectLocations[ENGINE_OBJECT_FLASHLIGHT] == ENGINE_INVENTORY && state->LampLit)
+			response->Type = ENGINE_RESPONSE_HELP_ATTENTION;
+		else if(state->Location == 12 && state->ObjectLocations[ENGINE_OBJECT_FLASHLIGHT] != ENGINE_INVENTORY)
+			response->Type = ENGINE_RESPONSE_HELP_LOST;
 		else
-		{
-			response->Type = ENGINE_RESPONSE_REDRAW;
-			response->Flow = ENGINE_FLOW_CLEAR_VISIT;
-		}
+			response->Type = ENGINE_RESPONSE_HELP_NONE;
 		break;
 	}
 

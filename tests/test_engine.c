@@ -113,7 +113,7 @@ static void TestOtherCellActions(void)
 	Engine_Initialize(&state, 7);
 
 	assert(Dispatch(&state, "XYZ").Type == ENGINE_RESPONSE_UNKNOWN_VERB);
-	assert(Dispatch(&state, "AJUDAR").Type == ENGINE_RESPONSE_REDRAW);
+	assert(Dispatch(&state, "AJUDAR").Type == ENGINE_RESPONSE_HELP_NONE);
 	assert(Dispatch(&state, "SERRAR").Type == ENGINE_RESPONSE_NO_SAW);
 	assert(Dispatch(&state, "CAVAR").Type == ENGINE_RESPONSE_WHERE);
 	assert(Dispatch(&state, "ABRIR").Type == ENGINE_RESPONSE_WHAT);
@@ -154,7 +154,7 @@ static void TestRoomMapAndConditionalExits(void)
 	Engine_EnterRoom(&state);
 	assert(state.East && state.South && state.West && !state.North);
 	Engine_GetRoomInfo(&state, &info);
-	assert(strcmp(info.Description, "VOCE SE ENCONTRA EM UM LONGO CORREDOR DECELAS.") == 0);
+	assert(strcmp(info.Description, "VOCE SE ENCONTRA EM UM LONGO CORREDOR   DE CELAS.") == 0);
 
 	state.Location = 11;
 	state.ObjectLocations[ENGINE_OBJECT_SPOON] = 3;
@@ -177,7 +177,7 @@ static void TestRoomMapAndConditionalExits(void)
 	Engine_EnterRoom(&state);
 	assert(!state.North && !state.East && !state.South && !state.West);
 	Engine_GetRoomInfo(&state, &info);
-	assert(strcmp(info.Detail, "ESTA FRIO E MUITO ESCURO PARA VER AS SAIDAS.") == 0);
+	assert(strcmp(info.Detail, "ESTA FRIO E MUITO ESCURO PARA VER AS    SAIDAS.") == 0);
 
 	state.LampLit = 1;
 	Engine_EnterRoom(&state);
@@ -188,16 +188,17 @@ static void TestRoomMapAndConditionalExits(void)
 	state.Location = 14;
 	Engine_EnterRoom(&state);
 	Engine_GetRoomInfo(&state, &info);
-	assert(info.ContinueLine);
+	assert(strcmp(info.Description, "VOCE ESTA AGORA ATRAVESSANDO UM         CORREDOR.") == 0);
 
 	state.East = 1;
 	state.Location = 24;
 	Engine_EnterRoom(&state);
-	assert(state.North && state.East && !state.South && !state.West);
+	assert(state.North && !state.East && !state.South && !state.West);
 	Engine_GetRoomInfo(&state, &info);
-	assert(info.ContinueLine);
+	assert(strcmp(info.Description, "VOCE CONSEGUIU CHEGAR AO PORTAO DE      SAIDA!") == 0);
 
 	state.Location = 22;
+	state.East = 1;
 	Engine_EnterRoom(&state);
 	assert(state.North && state.East && !state.South && !state.West);
 	Engine_GetRoomInfo(&state, &info);
@@ -265,7 +266,7 @@ static void TestAllRoomExits(void)
 		state.Location = 24;
 		state.East = 1;
 		Engine_EnterRoom(&state);
-		assert(state.North && state.East && !state.South && !state.West);
+		assert(state.North && !state.East && !state.South && !state.West);
 	}
 }
 
@@ -484,9 +485,10 @@ static void TestBasicReturnTargets(void)
 
 	Parser_Parse(help, &command);
 	Engine_Dispatch(&state, &command, &response);
-	assert(response.Flow == ENGINE_FLOW_CLEAR_VISIT);
+	assert(response.Type == ENGINE_RESPONSE_HELP_NONE);
+	assert(response.Flow == ENGINE_FLOW_ROOM);
 	Engine_Resume(&state, &response, RandomTraced, &trace);
-	assert(trace.Calls == 4);
+	assert(trace.Calls == 2); // GOTO 450 skips the lottery at BASIC 440.
 	assert(state.GuardActive == 1);
 	state.GrateSawed = 1;
 	assert(Engine_ShowDirections(&state));
@@ -498,10 +500,28 @@ static void TestBasicReturnTargets(void)
 	assert(response.Type == ENGINE_RESPONSE_HELP_HEAVY);
 	assert(response.Flow == ENGINE_FLOW_ROOM);
 	Engine_Resume(&state, &response, RandomTraced, &trace);
-	assert(trace.Calls == 4);
+	assert(trace.Calls == 2);
 	state.ObjectLocations[ENGINE_OBJECT_SAW] = 1;
 	Engine_Dispatch(&state, &command, &response);
-	assert(response.Flow == ENGINE_FLOW_CLEAR_VISIT);
+	assert(response.Type == ENGINE_RESPONSE_HELP_NONE);
+	assert(response.Flow == ENGINE_FLOW_ROOM);
+
+	state.Location = 14;
+	state.ObjectLocations[ENGINE_OBJECT_FLASHLIGHT] = ENGINE_INVENTORY;
+	state.LampLit = 1;
+	Engine_Dispatch(&state, &command, &response);
+	assert(response.Type == ENGINE_RESPONSE_HELP_ATTENTION);
+	state.LampLit = 0;
+	Engine_Dispatch(&state, &command, &response);
+	assert(response.Type == ENGINE_RESPONSE_HELP_NONE);
+
+	state.Location = 12;
+	Engine_Dispatch(&state, &command, &response);
+	assert(response.Type == ENGINE_RESPONSE_HELP_NONE);
+	state.ObjectLocations[ENGINE_OBJECT_FLASHLIGHT] = 11;
+	Engine_Dispatch(&state, &command, &response);
+	assert(response.Type == ENGINE_RESPONSE_HELP_LOST);
+	assert(response.Flow == ENGINE_FLOW_ROOM);
 
 	state.Location = 12;
 	state.East = 1;
@@ -510,7 +530,7 @@ static void TestBasicReturnTargets(void)
 	assert(response.Flow == ENGINE_FLOW_OBJECTS);
 	Engine_Resume(&state, &response, RandomTraced, &trace);
 	assert(state.East == 1); // GOTO 490 skips the room routine.
-	assert(trace.Calls == 4);
+	assert(trace.Calls == 2);
 
 	state.Location = 1;
 	state.GrateSawed = 0;

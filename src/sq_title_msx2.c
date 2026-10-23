@@ -31,7 +31,7 @@ static const c8* const s_Names[CARD_COUNT] =
 	"05 / PRISAO PERPETUA",
 	"06 / A ESPERA",
 	"07 / CERTA NOITE...",
-	"08 / O BLECAUTA",
+	"08 / O BLECAUTE",
 	"09 / A SONHADA LIBERDADE",
 	"10 / ACEITA ACOMPANHA-LO?"
 };
@@ -58,7 +58,7 @@ static const c8* const s_Captions[CARD_COUNT][3] =
 	{
 		"Scarp Lantra, o temivel ladrao de",
 		"bancos e assassino, condenado a",
-		"prisao perpetua"
+		"prisao perpetua,"
 	},
 	{
 		"encontra-se no Presidio de San Quentin,",
@@ -71,23 +71,23 @@ static const c8* const s_Captions[CARD_COUNT][3] =
 		""
 	},
 	{
-		"Certa noite, valendo-se de um blecauta",
+		"Certa noite, valendo-se de um blecaute",
 		"proveniente de um curto-circuito nas",
 		""
 	},
 	{
 		"instalacoes eletricas da casa de forca",
-		"do presidio, os facinora julgou",
+		"do presidio, o facinora julgou",
 		"chegado o"
 	},
 	{
-		"momento exato para empreender sua fuga",
+		"momento exato para empreender a fuga",
 		"e assim alcancar a sonhada liberdade.",
 		""
 	},
 	{
 		"Aceita acompanha-lo nessa dificil e",
-		"perigosa empreitada?",
+		"perigosa empreitada ?",
 		"[S] SIM                 [N] NAO"
 	}
 };

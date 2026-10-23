@@ -44,10 +44,9 @@ estado inicial, comando e semente, permitindo reproduzir uma falha.
 | Guarda | 216 | 0 |
 | **Total** | **1.989** | **0** |
 
-Foram alcancadas 153 das 158 linhas instrumentadas dentro do escopo.
-As linhas 1420, 1430, 1450, 1460 e 1470 nao foram alcancadas; no fonte
-atual, o desvio incondicional da linha 1410 evita esse trecho de ajuda.
-Isso e registrado como comportamento do original, nao corrigido pela suite.
+Foram alcancadas as 158 linhas instrumentadas dentro do escopo. Com os
+desvios das linhas 1410 e 1420 corrigidos conforme a revista, o trecho de
+ajuda (1420-1470) passou a ser alcancado.
 Inicializacao substituida (100) e resposta/reinicio apos finais (1020-1040)
 ficam explicitamente fora dessa contagem. As suites existentes de motor e
 parser C tambem passaram.
@@ -65,7 +64,7 @@ incompletos, fora de ordem ou com formato incorreto tambem sao rejeitados.
 
 ## Como o oraculo e controlado
 
-- A listagem `basic\quentin.asc` nunca e modificada. A copia temporaria
+- A listagem `basic\quentin.asc` nunca e modificada pelo teste. A copia temporaria
   contem as linhas do jogo 100-2350; abertura e introducao nao fazem parte
   desta camada.
 - A inicializacao cria as tabelas originais. Cada cenario injeta um estado,

@@ -54,7 +54,7 @@ não foi confirmada.
 - Testes host do auxiliar: 3.030 fugas, incluindo 1.500 com o RNG decimal original e relógio simulado; cobrem as 15 distribuições iniciais, guarda, retomada e redistribuição da chave confiscada.
 - Fuga completa executada no openMSX/Sony HB-701FD por `RESOLVER`, até `PARABENS!` e o portão (sala 24), com verificações da barra de direções e do buffer BIOS vazio ao sair.
 - Retornos explícitos do motor para as linhas BASIC 370, 430, 440, 450 e 490: sorteios são executados depois das mensagens e da limpeza de tela correspondentes, não durante o despacho.
-- `MATAR` sem canivete ou, com canivete, sem guarda retorna a 440 sem CLS; `AJUDAR` retorna a 430, exceto no rio carregando a serra (aviso de peso). As linhas 1420–1430 continuam inacessíveis, como no original.
+- `MATAR` sem canivete ou, com canivete, sem guarda retorna a 440 sem CLS; `AJUDAR` retorna a 450 com a dica das linhas 1410–1470 (rio com a serra, corredor 14 com a lanterna acesa, necrotério sem lanterna ou "não posso ajudar"). Os desvios `THEN1420`/`THEN1450` seguem a listagem da revista; a listagem digitada tinha `THEN420`/`TEN1450`.
 - Reset de `TA` na cela condicionado à exibição das direções (520–530), inclusive em redesenhos sem nova visita.
 - RNG decimal portável em `src/sq_random.*`: estado de 14 dígitos, semente de RUN, avanço `RND(1)`, repetição `RND(0)` e reseed de `RND(-TIME)`. Compartilhado pelas estrelas, posições dos objetos e encontros/confiscos.
 - Comparação com a ROM MSX-BASIC 1.0: 65.637 valores de RNDX, incluindo todas as sementes 0–65535, e 91 pares de coordenadas das estrelas. Estados e escalas do executável SDCC também conferidos no openMSX.
@@ -135,6 +135,8 @@ Não regenerar nem sobrescrever fontes originais. Código gerado deve ficar sepa
 
 O programa original em `basic/QUENTIN.BAS` é a especificação a reproduzir; `basic/quentin.asc` é sua listagem de trabalho legível. Executar o disco original em MSX-BASIC serve para confirmar semântica, comportamento dependente da máquina e resultados. Se fonte, listagem e execução parecerem divergir, registrar o caso e investigá-lo; não corrigir nem escolher uma interpretação por conveniência. Bugs, erros de texto, peculiaridades do parser, ordem de avaliação, aleatoriedade e demais detalhes observáveis também fazem parte do requisito. Não são aceitas divergências intencionais.
 
+A listagem digitada disponível foi conferida com a listagem impressa na revista (`docs/SanQuentin.pdf`). Por decisão do autor da recriação, os erros de digitação de texto e de desvios foram corrigidos em `quentin.asc`, `QUENTIN.BAS` e na conversão em C, mantendo a tela em 40 colunas; a lista está no README, em "Correções de texto". A revista prevalece sobre a digitação nos pontos corrigidos.
+
 ## 5. Requisitos comuns
 
 ### 5.1 Funcionais
@@ -194,7 +196,7 @@ Esta seção registra apenas o que já foi verificado na listagem. A Fase 1 deve
 - Abertura desenhada em SCREEN 2; aguarda tecla.
 - Introdução em SCREEN 0, largura 40; aguarda tecla.
 - F1–F4 digitam e submetem norte, sul, leste e oeste.
-- O laço limpa a tela ao entrar em novo local, descreve sala/objetos/saídas e solicita `O QUE FARA AGORA` na listagem transliterada.
+- O laço limpa a tela ao entrar em novo local, descreve sala/objetos/saídas e solicita `QUAL O COMANDO ?` como na listagem da revista.
 
 A edição MSX1 deve reproduzir composição, ordem e ritmo observáveis, dentro das diferenças inevitáveis entre BASIC e C.
 
@@ -922,6 +924,22 @@ Resolver uma questão por vez quando ela bloquear a fase corrente; registrar a r
   limitacoes em `docs/validation.md`; nao certifica equivalencia integral.
 - README, notas e capturas versionadas em `images/releases/1.3`
   acompanham o pacote conjunto. Fotografias locais nao sao distribuidas.
+
+### 2026-10-22 — conferência com a listagem da revista (build 1.5)
+
+- Objetivo: corrigir os erros da listagem digitada usando o scan da revista
+  (`docs/SanQuentin.pdf`), por decisão do mantenedor.
+- Textos corrigidos em `basic/quentin.asc` (43 linhas), `src/sq_engine.c`,
+  `src/sq_game.c`, `src/sq_intro.c` e `src/sq_title_msx2.c`; tela mantida em
+  40 colunas, com espaços de alinhamento recalculados.
+- Lógica corrigida conforme a revista: desvios de AJUDAR (1410/1420), prompt
+  `QUAL O COMANDO ?`, mensagem `VOCE NAO PODE <VERBO> O QUE NAO TEM.` e
+  `E=0` na linha 2350 (portão, sala 24).
+- `basic/QUENTIN.BAS` regenerado sem acentos a partir de `quentin.asc` (LOAD/SAVE
+  no openMSX, Sony HB-701FD); as linhas inalteradas ficam idênticas, salvo os acentos.
+- Mantidos: `JA ESTA APAGADA.`, `BEM, POIS` e qualquer tecla em `(S/N)?`.
+- Testes: motor, parser, abertura MSX2, solver, release MSX1 e diferencial
+  (1.989 cenários, 0 divergências, 158/158 linhas) passaram.
 
 ### Modelo para próximas entradas
 

@@ -45,8 +45,15 @@ close $symbols
 if {![regexp {DEF _Input_WaitKey (0x[0-9A-Fa-f]+)} $symbolText -> waitAddress]} {
 	error "Input_WaitKey symbol not found; build the release first"
 }
+# COMMAND.COM also runs in the TPA while DOS boots; only count hits on game code.
+set binaryFile [open [file join $output quentin.com] rb]
+set binary [read $binaryFile]
+close $binaryFile
+set waitOffset [expr {$waitAddress - 0x100}]
+set waitCode [string range $binary $waitOffset [expr {$waitOffset + 7}]]
+if {[string length $waitCode] != 8} {error "Input_WaitKey outside quentin.com"}
 set waits 0
-debug set_bp $waitAddress {} {
+debug set_bp $waitAddress {[debug read_block memory $::waitAddress 8] eq $::waitCode} {
 	incr ::waits
 	if {$::waits == 1} {
 		after time 0.5 {

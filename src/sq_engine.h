@@ -71,6 +71,9 @@ enum ENGINE_RESPONSE
 	ENGINE_RESPONSE_OPEN_NO_KEY,
 	ENGINE_RESPONSE_CONTINUE,
 	ENGINE_RESPONSE_HELP_HEAVY,
+	ENGINE_RESPONSE_HELP_ATTENTION,
+	ENGINE_RESPONSE_HELP_LOST,
+	ENGINE_RESPONSE_HELP_NONE,
 };
 
 enum ENGINE_FLOW
@@ -112,7 +115,6 @@ typedef struct
 {
 	const char* Description;
 	const char* Detail;
-	unsigned char ContinueLine;
 } Engine_RoomInfo;
 
 typedef struct

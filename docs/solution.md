@@ -2,6 +2,8 @@
 
 > **Spoilers:** este roteiro revela itens, caminhos e condições importantes para escapar.
 
+Para acompanhar as salas e os objetos, consulte o [mapa do jogo](mapa.md).
+
 Roteiro de uma possível solução para *San Quentin*, jogo de aventura para MSX.
 Como a posição inicial do **canivete**, da **lanterna** e da **chave** varia a
 cada partida, não há uma sequência única de comandos que funcione em todos os
