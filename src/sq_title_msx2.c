@@ -1,6 +1,7 @@
 #include "msxgl.h"
 #include "draw.h"
 #include "sq_title_msx2.h"
+#include "sq_music_msx2.h"
 #include "../projects/msx2/out/font_vram.h"
 
 #define BACK_Y 256
@@ -442,6 +443,7 @@ static void Reveal(void)
 	for(step = 0; step < 27; ++step)
 	{
 		Halt();
+		Music2_Update();
 		for(band = 0; band < 8; ++band)
 		{
 			u16 y = band * 27 + step;
@@ -463,7 +465,10 @@ static void Blackout(void)
 			VDP_SetPaletteEntry(color, flash & 1 ?
 				((u16)s_Palette[color * 2 + 1] << 8) | s_Palette[color * 2] : 0);
 		for(frame = 0; frame < 5; ++frame)
+		{
 			Halt();
+			Music2_Update();
+		}
 	}
 	VDP_SetPalette(s_Palette);
 }
@@ -520,6 +525,7 @@ void Title2_Show(void)
 	Render(card);
 	VDP_EnableDisplay(TRUE);
 	Reveal();
+	Music2_Start();
 	previous = Keys();
 
 	while(TRUE)
@@ -527,6 +533,7 @@ void Title2_Show(void)
 		u8 held, pressed;
 		bool change = FALSE;
 		Halt();
+		Music2_Update();
 		held = Keys();
 		pressed = held & ~previous;
 		previous = held;
@@ -584,6 +591,7 @@ void Title2_Show(void)
 		}
 	}
 
+	Music2_Stop();
 	VDP_CommandWait();
 	VDP_SetDefaultPalette();
 	g_GETPNT = g_PUTPNT;

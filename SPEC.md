@@ -2,9 +2,9 @@
 
 > Documento operacional para pessoas e IAs retomarem o projeto em outro computador ou sessão.  
 > Ler também [`OUTLINE.md`](OUTLINE.md).  
-> Estado do documento: **MSX1 jogável em auditoria de fidelidade; abertura MSX2 implementada; pré-release conjunto 1.1**.
+> Estado do documento: **MSX1 jogável em auditoria de fidelidade; abertura MSX2 com música original PSG/FM integrada, reprodução ainda em validação; aventura MSX2 pendente**.
 >
-> Última atualização: **21 de outubro de 2026**.
+> Última atualização: **27 de outubro de 2026**.
 
 ## 1. Missão
 
@@ -60,6 +60,9 @@ não foi confirmada.
 - Comparação com a ROM MSX-BASIC 1.0: 65.637 valores de RNDX, incluindo todas as sementes 0–65535, e 91 pares de coordenadas das estrelas. Estados e escalas do executável SDCC também conferidos no openMSX.
 - Abertura MSX2 em `src/sq_title_msx2.*`: dez cards SCREEN 5, primitivas do V9938,
   introdução completa do BASIC 2380–2400, persianas, noite/blecaute e pergunta S/N.
+- Música instrumental original na abertura MSX2: blues lento em 12 compassos,
+  em Mi, com balanço shuffle; guitarra/baixo FM no YM2413 e percussão no PSG.
+  A presença do FM é detectada; sem YM2413, a abertura mantém a percussão PSG.
 - S confirma e exibe aviso de aventura MSX2 em desenvolvimento; N reinicia
   o slideshow. Pergunta e confirmação não avançam automaticamente.
 - Build compartilhado `marco.compilação`, iniciado em 1.1 / Danny Trejo.
@@ -73,7 +76,7 @@ não foi confirmada.
 - Auditoria integral dos ramos restantes e da apresentação contra o BASIC.
 - Runner host de transcript comparativo com o BASIC original.
 - Matriz integral de equivalência com o BASIC.
-- Integração da aventura na edição MSX2, uso de bancos do mapper e áudio PSG/FM.
+- Integração da aventura na edição MSX2 e uso de bancos do mapper; áudio da aventura.
 
 ### Próximo marco
 
@@ -344,8 +347,9 @@ A edição MSX1 estará concluída quando:
 A edição MSX2 foi autorizada em paralelo ao MSX1. A abertura atual está em
 `projects/msx2`, com DOS2/COM, disco de 720 KB, mapper principal ≥512 KB e
 128 KB de VRAM. Usa SCREEN 5 (256×212, 16 cores), dez cards, legendas,
-transições, blecaute e decisão S/N. A música PSG+FM e a aventura não foram
-integradas. As subseções abaixo orientam as fases futuras do runtime;
+transições, blecaute e decisão S/N. A música PSG/FM da abertura está integrada;
+a aventura e seu áudio ainda não foram integrados. As subseções abaixo orientam
+as fases futuras do runtime;
 recursos do SuperNova não são automaticamente requisitos implementados.
 Não usar essa edição para alterar a reprodução fiel do MSX1.
 
@@ -940,6 +944,28 @@ Resolver uma questão por vez quando ela bloquear a fase corrente; registrar a r
 - Mantidos: `JA ESTA APAGADA.`, `BEM, POIS` e qualquer tecla em `(S/N)?`.
 - Testes: motor, parser, abertura MSX2, solver, release MSX1 e diferencial
   (1.989 cenários, 0 divergências, 158/158 linhas) passaram.
+
+### 2026-10-27 — música original para a abertura MSX2
+
+- Criada faixa instrumental original em blues shuffle de 12 compassos em Mi:
+  riffs e baixo no YM2413, bateria percussiva no PSG.
+- A faixa acompanha os cards, segue tocando durante pausas e é silenciada ao sair.
+  Se não houver YM2413, a percussão PSG continua disponível.
+- Build MSX2 concluído como 1.7. Captura manual em openMSX com throttling normal
+  mostrou o primeiro card; `run_msx2_intro_tests.bat` não concluiu: a captura
+  programada com throttling desligado encontrou a tela ainda preta/incompleta.
+  A suíte automatizada precisa de nova validação com temporização adequada.
+
+### 2026-10-27 — proteção de inicialização da música MSX2
+
+- `Music2_Update()` também é chamado durante a revelação inicial, antes do início
+  da faixa. O flag `s_Started` agora tem inicializador explícito em dados
+  inicializados, pois o CRT DOS copia `_INITIALIZER` mas não limpa `_BSS`.
+- Build conjunto 1.10 concluído. A suíte de introdução ainda falha em capturas
+  pretas/incompletas com throttling desligado; não foi possível confirmar
+  a reprodução limpa nem a passagem automática dos cards no emulador.
+- Próxima ação: validar áudio e slideshow em execução normal, com e sem FM-PAC;
+  revisar o harness de captura se ele continuar observando uma transição parcial.
 
 ### Modelo para próximas entradas
 
