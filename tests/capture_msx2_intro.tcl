@@ -5,6 +5,11 @@ set output [file normalize [file join [file dirname [info script]] .. projects m
 set log [open [file join $output intro-test.log] w]
 set failed 0
 array set cards {}
+set audioObserving 0
+set fmNotes [dict create]
+set psgVolumes [dict create]
+set fmVoices 0
+set drumPeak 0
 set fontFile [open [file join [file dirname [info script]] .. resource vram.dat] rb]
 set fontData [read $fontFile]
 close $fontFile
@@ -26,6 +31,41 @@ proc tap {row mask} {
 
 proc picture {} {
 	return [debug read_block VRAM [expr {20 * 128}] [expr {179 * 128}]]
+}
+
+proc observe_audio {} {
+	if {!$::audioObserving} {return}
+	dict set ::fmNotes [debug read_block {Panasoft SW-M004 FMPAC regs} 16 3] 1
+	dict set ::psgVolumes [debug read_block {PSG regs} 9 2] 1
+	set voices 0
+	for {set channel 0} {$channel < 6} {incr channel} {
+		if {[debug read {Panasoft SW-M004 FMPAC regs} [expr {32 + $channel}]] & 16} {
+			incr voices
+		}
+	}
+	if {$voices > $::fmVoices} {set ::fmVoices $voices}
+	set volume [debug read {PSG regs} 10]
+	if {$volume > $::drumPeak} {set ::drumPeak $volume}
+	after time 0.02 observe_audio
+}
+
+proc check_audio {} {
+	check [expr {[dict size $::fmNotes] > 4}] "FM melody advances while the card is paused"
+	check [expr {[dict size $::psgVolumes] > 2}] "PSG percussion advances while the card is paused"
+	check [expr {$::fmVoices == 6}] "six FM voices provide melody, bass and harmony"
+	check [expr {$::drumPeak == 15}] "PSG snare reaches the strong percussion accent"
+}
+
+proc check_silence {} {
+	set ::audioObserving 0
+	set silent 1
+	for {set channel 0} {$channel < 9} {incr channel} {
+		if {[debug read {Panasoft SW-M004 FMPAC regs} [expr {32 + $channel}]] & 16} {
+			set silent 0
+		}
+	}
+	check $silent "FM notes stop after the opening"
+	check [expr {[debug read_block {PSG regs} 8 3] eq "\x00\x00\x00"}] "PSG stops after the opening"
 }
 
 proc ready {} {
@@ -158,6 +198,7 @@ proc stage {number} {
 	switch $number {
 		0 {
 			check [expr {[picture] eq $::cards(0)}] "pause holds card for more than 12 seconds"
+			check_audio
 			move 8 128 {tour 1}
 		}
 		2 {
@@ -179,9 +220,16 @@ proc stage {number} {
 		}
 		6 {
 			check [expr {[picture] eq $::cards(0)}] "N restarts the slideshow"
+			set ::restartBack [debug read_block VRAM 32768 [expr {212 * 128}]]
 			after time 11 {
 				check [expr {[picture] eq $::cards(0)}] "restart resets the reading timer"
-				await_change $::cards(0) {stage 7} 40
+				check [expr {[debug read_block VRAM 32768 [expr {212 * 128}]] eq
+					$::restartBack}] "next card does not start rendering before 12 seconds"
+				after time 1 {
+					check [expr {[debug read_block VRAM 32768 [expr {212 * 128}]] ne
+						$::restartBack}] "next card starts rendering after the 12-second reading interval"
+					await_change $::cards(0) {stage 7} 40
+				}
 			}
 		}
 		7 {
@@ -194,37 +242,29 @@ proc stage {number} {
 		}
 		11 {
 			check [expr {[picture] eq $::cards(9)}] "first card wraps backwards to question"
-			move 5 1 {stage 12}
+			tap 5 1
+			after time 4 {stage 12}
 		}
 		12 {
-			set ::accepted [picture]
-			check [expr {$::accepted ne $::cards(9)}] "S displays development notice"
-			snap intro-accepted.png {after time 14 {stage 13}}
-		}
-		13 {
-			check [expr {[picture] eq $::accepted}] "accepted notice does not auto-advance"
-			move 4 8 {stage 14}
-		}
-		14 {
-			check [expr {[picture] eq $::cards(0)}] "N can replay after accepting"
-			move 8 16 {stage 15}
-		}
-		15 {move 5 1 {stage 16}}
-		16 {
-			tap 7 128
-			after time 3 {stage 9}
+			check [expr {[picture] ne $::cards(9)}] "S starts the MSX2 adventure"
+			check_silence
+			snap intro-game.png {
+				type "DESISTIR\r"
+				after time 10 {stage 9}
+			}
 		}
 		9 {
+			check_silence
 			set mode [expr {[debug read {VDP regs} 0] & 14}]
-			check [expr {$mode == 0 || $mode == 4}] "Enter after accepting restores DOS text mode"
+			check [expr {$mode == 0 || $mode == 4}] "quitting the adventure restores DOS text mode"
 			snap intro-dos.png {
 				type_via_keybuf "echo DOS-RETURN-OK\r"
-				after time 2 {stage 10}
+				after time 5 {stage 10}
 			}
 		}
 		10 {
 			set text [debug read_block VRAM 0 2000]
-			check [expr {[string first "DOS-RETURN-OK" $text] >= 0}] "DOS accepts commands after ESC"
+			check [expr {[string first "DOS-RETURN-OK" $text] >= 0}] "DOS accepts commands after the adventure"
 			finish
 		}
 	}
@@ -237,5 +277,15 @@ proc finish {} {
 }
 
 after time 30 {tap 4 32}
-after time 31 {capture 0; snap intro-01.png {after time 14 {stage 0}}}
+after time 31 {
+	if {[catch {
+		capture 0
+		set ::audioObserving 1
+		observe_audio
+		snap intro-01.png {after time 14 {stage 0}}
+	} message]} {
+		check 0 "initial audio capture: $message"
+		finish
+	}
+}
 after time 360 {check 0 "global timeout"; finish}

@@ -2,13 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { spawnSync } = require("child_process");
+const { buildDisks, editions } = require("./disks");
 
 const root = path.resolve(__dirname, "..");
 const stateFile = path.join(root, "version.json");
-const editions = {
-    msx1: { name: "quentin", disk: "DOS1_quentin.dsk", debug: 0 },
-    msx2: { name: "quentin2", disk: "DOS2_quentin2.dsk", debug: 0 }
-};
 
 function validate(state) {
     if (!Number.isSafeInteger(state.milestone) || state.milestone < 1 ||
@@ -62,8 +59,9 @@ function writeJSON(file, data) {
 }
 
 function build(selection, args) {
-    const selected = selection === "all" ? Object.keys(editions) : [selection];
-    if (selected.some(name => !editions[name])) throw new Error("Select all, msx1 or msx2");
+    if (selection !== "all" && !Object.hasOwn(editions, selection)) throw new Error("Select all, msx1 or msx2");
+    // Each disk contains both programs, so all entry points build the same pair.
+    const selected = Object.keys(editions);
     const options = {};
     const compilerArgs = [];
     const defines = new Set();
@@ -101,17 +99,28 @@ function build(selection, args) {
         for (const file of [binary, disk, path.join(out, "build.json")]) {
             if (fs.existsSync(file)) fs.unlinkSync(file);
         }
-        const debug = compilerArgs.find(arg => arg.startsWith("define=DEBUG:"));
         execute(process.execPath, [path.join(root, "MSXgl", "engine", "script", "js", "build.js"),
             `define=DEBUG:${edition.debug}`, ...compilerArgs], project);
         if (!fs.existsSync(binary) || !fs.existsSync(disk)) {
             throw new Error(`Build did not generate both COM and DSK for ${name}`);
         }
-        writeJSON(path.join(out, "build.json"), {
+    }
+    buildDisks();
+    const debug = compilerArgs.find(arg => arg.startsWith("define=DEBUG:"));
+    const programs = Object.fromEntries(selected.map(name => {
+        const edition = editions[name];
+        return [edition.name + ".com", hash(path.join(root, "projects", name, "out", edition.name + ".com"))];
+    }));
+    for (const name of selected) {
+        const edition = editions[name];
+        const project = path.join(root, "projects", name);
+        writeJSON(path.join(project, "out", "build.json"), {
             ...state, version: version(state), edition: name,
             debug: debug ? Number(debug.split(":")[1]) : edition.debug,
             compilerArgs, builtAt: new Date().toISOString(),
-            files: { [path.basename(binary)]: hash(binary), [edition.disk]: hash(disk) }
+            programs,
+            files: { [edition.name + ".com"]: programs[edition.name + ".com"],
+                [edition.disk]: hash(path.join(project, "emul", "dsk", edition.disk)) }
         });
     }
     writeJSON(stateFile, state);
@@ -143,6 +152,13 @@ function pack() {
         for (const file of files) {
             if (hash(file) !== metadata.files[path.basename(file)]) {
                 throw new Error(`Binary changed since build: ${file}`);
+            }
+        }
+        for (const [programEdition, program] of Object.entries(editions)) {
+            const programName = program.name + ".com";
+            if (!metadata.programs || metadata.programs[programName] !==
+                hash(path.join(root, "projects", programEdition, "out", programName))) {
+                throw new Error(`Rebuild both disks with the current ${programName} (${name})`);
             }
         }
         builds[name] = { metadata, files };

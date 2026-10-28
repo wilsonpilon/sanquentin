@@ -1,5 +1,7 @@
 @echo off
 setlocal
+call "%~dp0..\MSXgl\tools\build\Node\node.exe" "%~dp0test_music_msx2.js"
+if errorlevel 1 exit /b 1
 call "%~dp0..\MSXgl\tools\build\Node\node.exe" "%~dp0test_msx2_intro.js"
 if errorlevel 1 exit /b 1
 set "LOG=%~dp0..\projects\msx2\out\intro-test.log"

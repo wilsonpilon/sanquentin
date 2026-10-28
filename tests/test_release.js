@@ -23,6 +23,7 @@ for (const args of [
     ["build", "all", "define=DEBUG:0", "define=DEBUG:1"],
     ["build", "all", "compile=off"],
     ["build", "unknown"],
+    ["build", "toString"],
     ["build", "all", "--subtitle"]
 ]) {
     const result = spawnSync(process.execPath, [path.join(root, "tools", "release.js"), ...args]);

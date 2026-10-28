@@ -1,7 +1,8 @@
 # Capture the actual release binary, without enabling the debug solver.
 set throttle off
 set output [file normalize [file join [file dirname [info script]] .. projects msx1 out]]
-set log [open [file join $output release-test.log] w]
+if {![info exists logName]} {set logName release-test.log}
+set log [open [file join $output $logName] w]
 set failed 0
 set fontFile [open [file join [file dirname [info script]] .. resource vram.dat] rb]
 set expectedFont [read $fontFile]
@@ -38,7 +39,17 @@ proc finish_snap {name} {
 	set ::throttle off
 }
 
-after time 5 {type_via_keybuf "\r"}
+if {[info exists testDos2] && $testDos2} {
+	# Leave the MSX2 opening and run the very same MSX1 COM under DOS2.
+	after time 5 {type_via_keybuf "\r"}
+	after time 30 {
+		keymatrixdown 7 4
+		after time 0.15 {keymatrixup 7 4}
+	}
+	after time 34 {type_via_keybuf "quentin\r"}
+} else {
+	after time 5 {type_via_keybuf "\r"}
+}
 set symbols [open [file join $output quentin.noi] r]
 set symbolText [read $symbols]
 close $symbols

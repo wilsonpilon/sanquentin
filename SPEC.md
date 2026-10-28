@@ -2,9 +2,9 @@
 
 > Documento operacional para pessoas e IAs retomarem o projeto em outro computador ou sessão.  
 > Ler também [`OUTLINE.md`](OUTLINE.md).  
-> Estado do documento: **MSX1 jogável em auditoria de fidelidade; abertura MSX2 com música original PSG/FM integrada, reprodução ainda em validação; aventura MSX2 pendente**.
+> Estado do documento: **MSX1 jogável em auditoria de fidelidade; MSX2 com abertura musical, interface jogável em três painéis, ambientes ilustrados e motor compartilhado; validação integral pendente**.
 >
-> Última atualização: **27 de outubro de 2026**.
+> Última atualização: **28 de outubro de 2026**.
 
 ## 1. Missão
 
@@ -13,9 +13,10 @@ Recriar **San Quentin**, de Ricardo Augusto Mata Costa, em C com SDCC/MSXgl, rep
 A edição MSX1 continua sendo uma conversão fiel: não modernizar, corrigir,
 simplificar, ampliar ou reinterpretar suas regras, textos, mapa, aleatoriedade,
 interface ou fluxo. Em paralelo, foi autorizada e iniciada a edição MSX2:
-DOS2, mapper principal de pelo menos 512 KB, PSG+FM previstos e backend visual
-separado. O pré-release 1.1 entrega a aventura MSX1 em auditoria e somente
-a abertura MSX2; não confundir os estados das duas edições.
+DOS2, mapper principal de pelo menos 512 KB, PSG+FM na abertura e backend
+visual separado. O pré-release 1.19 entrega a aventura MSX1 em auditoria e
+a aventura MSX2 ilustrada; rotas completas/finais na nova interface ainda
+precisam de validação. Não confundir esses critérios de conclusão.
 
 Exceção visual autorizada em 21/10/2026: a fonte da introdução e da aventura
 MSX1 em SCREEN 0 passa a usar `resource/vram.dat`, fornecida pelo usuário.
@@ -60,15 +61,20 @@ não foi confirmada.
 - Comparação com a ROM MSX-BASIC 1.0: 65.637 valores de RNDX, incluindo todas as sementes 0–65535, e 91 pares de coordenadas das estrelas. Estados e escalas do executável SDCC também conferidos no openMSX.
 - Abertura MSX2 em `src/sq_title_msx2.*`: dez cards SCREEN 5, primitivas do V9938,
   introdução completa do BASIC 2380–2400, persianas, noite/blecaute e pergunta S/N.
-- Música instrumental original na abertura MSX2: blues lento em 12 compassos,
-  em Mi, com balanço shuffle; guitarra/baixo FM no YM2413 e percussão no PSG.
+- Música instrumental original na abertura MSX2: Mi menor, 60 BPM,
+  32 compassos/128 segundos em quatro seções; guitarra, baixo e harmonias
+  FM no YM2413 e percussão forte no PSG.
   A presença do FM é detectada; sem YM2413, a abertura mantém a percussão PSG.
-- S confirma e exibe aviso de aventura MSX2 em desenvolvimento; N reinicia
-  o slideshow. Pergunta e confirmação não avançam automaticamente.
+- S inicia a aventura; N reinicia o slideshow. A pergunta não avança sozinha.
+  Cada card anterior tem cerca de 12 segundos de leitura após sua revelação.
+- Aventura MSX2: `sq_game.c` compartilhado e backend SCREEN 5 próprio,
+  com local ilustrado à esquerda, inventário à direita e mensagens/entrada
+  embaixo. Cela, necrotério e túnel respondem ao estado do motor.
+- Ambos os discos incluem os dois COM, sem arquivos de dados externos.
 - Build compartilhado `marco.compilação`, iniciado em 1.1 / Danny Trejo.
   `version.json` persiste o estado; `build.bat` da raiz compila as duas edições
   uma vez por número, por padrão com DEBUG=0.
-- Capturas atuais de ambas as edições em `images/releases/1.1`, com scripts
+- Capturas atuais de ambas as edições em `images/releases/1.19`, com scripts
   reproduzíveis de emulação e pacote/manifesto/SHA-256 automatizados.
 
 ### Não iniciado
@@ -76,7 +82,17 @@ não foi confirmada.
 - Auditoria integral dos ramos restantes e da apresentação contra o BASIC.
 - Runner host de transcript comparativo com o BASIC original.
 - Matriz integral de equivalência com o BASIC.
-- Integração da aventura na edição MSX2 e uso de bancos do mapper; áudio da aventura.
+- Validação integral de rotas/finais/reinícios pela interface MSX2.
+- Uso de bancos do mapper se necessário; áudio durante a aventura.
+
+### Entrega atual
+
+Pré-release **1.19 / Danny Trejo**, subtítulo **Aventura MSX2 ilustrada,
+trilha FM e PSG e discos duplos**. As notas estão em
+[`docs/releases/1.19.md`](docs/releases/1.19.md), as capturas em
+[`images/releases/1.19`](images/releases/1.19) e o procedimento de
+compilação/validação/publicação em
+[`docs/versioning.md`](docs/versioning.md).
 
 ### Próximo marco
 
@@ -342,14 +358,19 @@ A edição MSX1 estará concluída quando:
 - o artefato final iniciar numa configuração MSX1 limpa do openMSX;
 - requisitos e comando exato de build estiverem documentados.
 
-## 8. Edição MSX2 — abertura implementada, aventura pendente
+## 8. Edição MSX2 — abertura musical e aventura ilustrada
 
 A edição MSX2 foi autorizada em paralelo ao MSX1. A abertura atual está em
 `projects/msx2`, com DOS2/COM, disco de 720 KB, mapper principal ≥512 KB e
 128 KB de VRAM. Usa SCREEN 5 (256×212, 16 cores), dez cards, legendas,
 transições, blecaute e decisão S/N. A música PSG/FM da abertura está integrada;
-a aventura e seu áudio ainda não foram integrados. As subseções abaixo orientam
-as fases futuras do runtime;
+S inicia a aventura na cela e interrompe a trilha. A interface SCREEN 5 usa
+miniatura do local à esquerda, inventário de até três ícones à direita e
+nove linhas de mensagens embaixo, com prompt/entrada fixos. Enter envia,
+Backspace apaga e F1-F4 enviam N/S/L/O; `DESISTIR` retorna ao DOS.
+Todos os ambientes têm arte própria; o motor/parser/RNG e textos são
+compartilhados com MSX1. Não há áudio durante a aventura nem overlays.
+As subseções abaixo orientam a evolução e certificação do runtime;
 recursos do SuperNova não são automaticamente requisitos implementados.
 Não usar essa edição para alterar a reprodução fiel do MSX1.
 
@@ -381,7 +402,8 @@ Esses itens são opções comprovadas no projeto de referência, não requisitos
 - Implementar backend visual separado.
 - Definir mockups e orçamento de VRAM/RAM antes de produzir assets.
 - Manter legibilidade do português e input responsivo.
-- A abertura usa SCREEN 5; avaliar separadamente o layout da futura aventura.
+- A abertura e a aventura usam SCREEN 5, 256×212; manter os três painéis
+  aprovados sem misturar scroll textual com a região gráfica.
 - Usar overlays, mapper e pools apenas se o tamanho justificar.
 - Se houver save, definir formato versionado e política de compatibilidade.
 
@@ -419,12 +441,17 @@ Estrutura em uso:
 src/                   código compartilhado entre os projetos MSXgl
   sq_engine.h/.c       estado e despacho portáveis
   sq_font.h/.c         fonte latina compilada compartilhada
-  sq_game.h/.c         interface textual e ciclo MSX
+  sq_game.h/.c         ciclo MSX e mensagens compartilhadas
+  sq_game_ui.h         contrato dos backends de apresentação
+  sq_game_ui_msx1.c    backend textual fiel SCREEN 0
+  sq_game_ui_msx2.c    três painéis, cenas e ícones SCREEN 5
   sq_gfx2.h/.c         primitivas de SCREEN 2 e interpretador de DRAW
   sq_input.h/.c        espera e leitura textual pela matriz do PPI
   sq_intro.h/.c        apresentação em SCREEN 0 (BASIC 2370-2430)
   sq_parser.h/.c       parser portável (BASIC 1310-1390)
   sq_title.h/.c        tela de abertura (BASIC 2450-2910)
+  sq_title_msx2.h/.c   dez cards e decisão S/N para iniciar a aventura
+  sq_music_msx2.h/.c   trilha original da abertura FM + PSG
 tests/
   test_engine.c        testes host de estado, ações e transições
   test_parser.c        testes host do parser e de prefixos
@@ -434,11 +461,12 @@ projects/msx1/         edição MSX1
   build.bat            wrapper de build versionado
   project_config.js    configuração do projeto
   msxgl_config.h       configuração da engine (cópia do template)
-  make_dsk.bat         pós-build: regera o disco de boot
+  make_dsk.bat         regera os dois discos com os COM existentes
   run.bat              abre o disco no openMSX
   main.c               ponto de entrada
   out/, emul/          artefatos, ignorados pelo Git
-projects/msx2/         abertura MSX2/DOS2, SCREEN 5, aventura pendente
+projects/msx2/         abertura e aventura MSX2/DOS2, SCREEN 5
+tools/disks.js         montagem dos dois discos com ambos os COM
 tools/release.js       numeração, build conjunto, pacote e publicação
 version.json           estado compartilhado marco.compilação
 build.bat              compila ambas as edições
@@ -482,7 +510,13 @@ Duas armadilhas foram encontradas e resolvidas:
 1. **Tamanho.** O padrão do MSXgl é 720K (face dupla). Drives de MSX1 da época são de face única e não inicializam esse formato — a máquina cai no BASIC. `DiskSize = "360K"` resolve.
 2. **Ordem dos arquivos.** O carregador de boot do MSX-DOS 1 só encontra o sistema quando `MSXDOS.SYS` é a **primeira** entrada do diretório raiz. O deploy do MSXgl grava sempre na ordem `autoexec.bat`, programa, `COMMAND.COM`, `MSXDOS.SYS`, o que impede o boot.
 
-Como `MSXgl/` é árvore de referência e não deve ser alterada, `projects/msx1/make_dsk.bat` roda como `PostBuildScripts` e regera `emul/dsk/DOS1_quentin.dsk` com `msxtar` na ordem `MSXDOS.SYS COMMAND.COM autoexec.bat quentin.com`.
+Como `MSXgl/` é árvore de referência e não deve ser alterada,
+`tools/release.js` chama `tools/disks.js` após compilar os dois programas.
+O disco DOS1 é regenerado com `msxtar` na ordem
+`MSXDOS.SYS COMMAND.COM autoexec.bat quentin.com quentin2.com`.
+O disco DOS2 também recebe os dois COM, com seus próprios arquivos de sistema
+e AUTOEXEC. O tamanho permanece 360 KB no DOS1 e 720 KB no DOS2.
+O atalho `projects/msx1/make_dsk.bat` regenera ambos sem compilar.
 
 ## 10. Plano de testes
 
@@ -514,9 +548,14 @@ Suítes disponíveis, a partir de `tests/`:
 ```bat
 run_parser_tests.bat
 run_engine_tests.bat
+run_random_tests.bat
+run_solver_tests.bat
+run_differential_tests.bat
 ```
 
-Os scripts usam `gcc -std=c11 -Wall -Wextra -Werror`, gravam os executáveis temporários em `%TEMP%` e os removem após a execução.
+Os testes host C usam GCC com warnings como erro. A suíte diferencial
+também usa Node e openMSX; veja `docs/validation.md`. Os testes Node de
+fonte, versionamento e música estão listados em `docs/versioning.md`.
 
 ### 10.2 Testes em MSX
 
@@ -529,6 +568,14 @@ Os scripts usam `gcc -std=c11 -Wall -Wextra -Werror`, gravam os executáveis tem
 - áudio e silêncio, se implementados;
 - leitura/escrita e erros de disco, se aplicáveis;
 - screenshots de telas de referência.
+
+Suítes reproduzíveis na raiz: `tests\run_msx1_release_tests.bat`,
+`tests\run_msx2_intro_tests.bat`, `tests\run_msx2_game_tests.bat`,
+`tests\run_msx2_rooms_tests.bat` e `tests\run_disk_tests.bat`.
+A galeria de salas injeta estados apenas no emulador; testa diferenças
+visuais, iluminação e limites dos painéis, não a alcançabilidade das rotas.
+O smoke test de gameplay executa comandos reais e fixa TIME nas visitas
+para impedir confisco aleatório da serra. Não cobre encontros com guarda.
 
 #### Receita no openMSX
 
@@ -605,7 +652,9 @@ Pendente desta fase: medidas finais de RAM/dados só farão sentido com o núcle
 
 Entregáveis: parser, modelo, motor, RNG injetável, dados iniciais e runner de transcript.
 
-Progresso: parser, estado, objetos, mapa/saídas, ações de cavar/nadar/abrir e encontros com o guarda implementados e testados. A fonte de produção ainda é um LCG temporário, não o `RND(-TIME)` do BASIC; faltam regras e runner de transcript.
+Progresso: parser, estado, objetos, mapa/saídas, ações e guarda implementados,
+com RNG decimal original, resolvedor e matriz diferencial de 1.989 cenários.
+Falta o runner de transcript para comparar mensagens/apresentação.
 
 Saída: regras críticas e caminho de vitória passam no host.
 
@@ -613,7 +662,8 @@ Saída: regras críticas e caminho de vitória passam no host.
 
 Entregáveis: backend MSX1, abertura, interface, teclado e distribuição.
 
-Progresso: abertura, apresentação, entrada, parser, movimento e ações/guarda ligados. As novas sequências ainda precisam ser validadas no emulador contra o original.
+Progresso: aventura jogável, fuga executada no emulador e transições
+comparadas ao BASIC; falta auditoria integral de textos, entrada e apresentação.
 
 Saída: todos os critérios da seção 7.4.
 
@@ -623,23 +673,26 @@ Entregáveis: release candidata MSX1, transcripts, screenshots, documentação e
 
 Saída: baseline validado contra o original, sem divergências intencionais.
 
-### Fase 6 — design MSX2 (plataforma e abertura definidas)
+### Fase 6 — design MSX2 (plataforma e layout definidos)
 
 Definido: DOS2/COM, mapper principal ≥512 KB, VRAM ≥128 KB, abertura SCREEN 5,
-PSG+FM previstos. O orçamento/layout da aventura e do áudio continua pendente.
+SCREEN 5 em três painéis e trilha FM+PSG na abertura implementados.
+O orçamento de memória final ainda precisa de certificação.
 
 Saída: decisões aprovadas antes da implementação visual.
 
-### Fase 7 — edição MSX2 (abertura entregue em 1.1)
+### Fase 7 — edição MSX2 (abertura e primeira interface jogável)
 
-Entregue: backend da abertura com dez cards, introdução integral, transições,
-blecaute e decisão S/N. Pendente: aventura, bancos do mapper e áudio.
+Entregue: abertura com dez cards, música FM/PSG, transições, blecaute e S/N;
+interface jogável em três painéis ligada ao motor compartilhado, com ambientes
+ilustrados, cela dinâmica e inventário por ícones. Pendentes: validação
+integral de rotas/finais/reinícios, áudio da aventura e bancos se necessários.
 
 Saída: critérios da seção 8.4 e suíte comum verde.
 
 ### Fase 8 — validação/release
 
-Pré-release 1.1: testes em emulador, screenshots atuais, manual, créditos,
+Pré-release 1.19: testes em emulador, screenshots atuais, manual, créditos,
 licenças, metadados/SHA-256 e build/publicação reproduzíveis. Ainda faltam
 hardware real, auditoria integral e os critérios de conclusão de cada edição.
 
@@ -966,6 +1019,118 @@ Resolver uma questão por vez quando ela bloquear a fase corrente; registrar a r
   a reprodução limpa nem a passagem automática dos cards no emulador.
 - Próxima ação: validar áudio e slideshow em execução normal, com e sem FM-PAC;
   revisar o harness de captura se ele continuar observando uma transição parcial.
+
+### 2026-10-28 — correção de áudio e travamento da apresentação MSX2
+
+- As chamadas `BIOS_ReadPSG`/`BIOS_WritePSG` acessavam diretamente endereços
+  da ROM principal, cobertos por RAM no DOS2. Substituídas por acesso às
+  portas do PSG via módulo `psg`, configurado como `PSG_DIRECT`.
+- `Sys_Is50Hz()` usava a leitura interslot do DOS, que retorna com interrupções
+  desativadas. Na inicialização da música, isso congelava `JIFFY` e o próximo
+  `HALT`. Música e apresentação agora consultam a frequência ativa do VDP
+  com `VDP_GetFrequency()`, sem alterar as interrupções.
+- Mantida a espera de 12 segundos de leitura por quadro, após a transição.
+  A pergunta final continua esperando S/N, sem reinício automático.
+- A suíte `tests/run_msx2_intro_tests.bat` passou no openMSX: dez quadros,
+  avanço automático, pausa, navegação, blecaute, decisão e retorno ao DOS.
+  Foram acrescentadas verificações de progressão das notas FM e da percussão
+  PSG durante a pausa, de silêncio ao sair e do início da renderização
+  seguinte somente após o intervalo de leitura.
+
+### 2026-10-28 — trilha longa, melancólica e pesada para MSX2
+
+- Substituído o blues curto por composição original em Mi menor, 60 BPM,
+  32 compassos e 128 segundos antes de repetir. Quatro seções desenvolvem
+  31 compassos melódicos distintos, com notas sustentadas, silêncios,
+  tensão e despedida, em vez de repetir o mesmo riff.
+- Seis canais YM2413: guitarra elétrica, baixo sintetizado e quatro vozes
+  de harmonia com violino. PSG: bumbo com queda de frequência, caixa com
+  corpo tonal e ruído, pratos e viradas; acentos chegam ao volume 15.
+- O sequenciador conserva todos os ticks e trata o wrap de `JIFFY`.
+  Desenhos também atualizam a música entre primitivas, evitando notas
+  congeladas ao preparar o próximo quadro.
+- `node tests/test_music_msx2.js` compila o sequenciador real com registros
+  simulados: duração integral e variação a 50/60 Hz, com/sem FM, percussão,
+  atraso de atualização, wrap de relógio e silêncio após sair.
+  A suíte de abertura também verifica seis vozes FM e acentos do PSG.
+- Build MSX2 1.13 e suíte completa da abertura aprovados. Na abertura
+  automática, o último quadro começa em aproximadamente 123 segundos
+  após o início da música. Gravação de 131 segundos no openMSX confirmou
+  sinal ao longo de toda a execução, sem clipping PCM.
+
+### 2026-10-28 — dois executáveis nos dois discos (build 1.14)
+
+- Ambos os discos incluem `QUENTIN.COM` (MSX1) e `QUENTIN2.COM` (MSX2).
+  Os recursos são incorporados aos COM; não há dados externos necessários.
+- Preservados tamanho, boot e início automático: DOS1/360 KB inicia MSX1;
+  DOS2/720 KB inicia MSX2. A presença do COM MSX2 no disco DOS1 não elimina
+  os requisitos de MSX2, DOS2 e mapper de 512 KB.
+- Todos os atalhos versionados compilam as duas edições, conforme confirmado
+  pelo mantenedor. Discos finais são montados após ambas as compilações,
+  em diretórios temporários isolados; metadados registram os dois programas.
+- Validados: build conjunto, testes de release, extração byte a byte dos
+  dois COM de cada disco, ordem do sistema no diretório raiz, hashes,
+  boot/jogo MSX1 no DOS1, abertura/áudio MSX2 no DOS2 e jogo MSX1 no DOS2
+  (introdução, inventário, serra e saída da cela).
+
+### 2026-10-28 — primeira fatia jogável MSX2 (build 1.16)
+
+- S na pergunta final inicia a aventura. O mesmo `sq_game.c` coordena parser,
+  motor, respostas, RNG, finais e reinício nas duas edições. A saída textual
+  foi separada em `sq_game_ui_msx1.c` e `sq_game_ui_msx2.c`; regras intactas.
+- SCREEN 5, 256×212: painel do local em cima à esquerda, inventário em cima
+  à direita e mensagens embaixo. Nove linhas de histórico, 40 colunas,
+  entrada e instruções fixas fora do scroll. Enter/BS e F1-F4 disponíveis.
+- Cela ilustra cama, janela, grade e serra; pegar remove a serra do chão,
+  serrar corta a grade. Inventário usa ícones de 16×16 e nomes para até três
+  objetos, conforme o limite do motor. Cache evita redesenhos sem mudança.
+- Outros ambientes têm nomes corretos e desenho provisório, não arte final.
+  Escuridão do necrotério e túnel cavado consultam o estado do motor.
+  A trilha para ao começar a aventura; `DESISTIR` retorna ao DOS.
+- Validados: build conjunto; motor/parser host; jogo MSX1 em DOS1 e DOS2;
+  discos com os dois COM; abertura/áudio MSX2 e S para iniciar; jogo MSX2
+  com pegar/serrar, grade dinâmica, inventário, Backspace, F3, ida/volta
+  ao corredor, largar e comandos DOS após sair.
+- `tests/run_msx2_game_tests.bat` gera capturas da cela, inventário, grade
+  e corredor. Próximo passo: revisar visualmente a cela e expandir a arte;
+  rotas completas/finais na interface MSX2 ainda precisam de certificação.
+
+### 2026-10-28 — miniaturas dos ambientes MSX2 (build 1.18)
+
+- Cada local agora tem desenho identificável por mobiliário e silhueta:
+  refeitório com pratos, enfermaria com camas, almoxarifado com caixas,
+  horta com canteiros, biblioteca com livros, visitas com cadeiras, cozinha
+  com fogão/panelas, capela, túnel, necrotério, diretor, pátio, oficina,
+  rio, guaritas, cela surda, lavanderia e portão. Os dois corredores e
+  as duas guaritas usam composições distintas; estados 22/23 do rio também.
+- Mantidas a cela dinâmica, a escuridão do necrotério sem lanterna acesa
+  no inventário e as passagens ocultas do túnel sem colher e escavação.
+- `tests/run_msx2_rooms_tests.bat` injeta 24 estados de local e cinco
+  variantes no openMSX, compara a região gráfica sem títulos, verifica
+  divisórias, inventário vazio e prompt, e captura cada miniatura.
+  Essa galeria testa o renderer, não rotas completas/finais da aventura.
+- Motor, parser, mensagens e backend MSX1 não alterados.
+- Validados: build conjunto sem warnings, 29 capturas/estados gráficos,
+  jogo MSX2 com pegar/serrar/ir/voltar/largar/sair, motor/parser host,
+  metadados e conteúdo dos dois discos e jogo MSX1 sob DOS2.
+  O smoke test MSX2 fixa o relógio nas visitas para evitar confisco aleatório
+  da serra; o estado do motor continua sendo alterado pelos comandos reais.
+
+### 2026-10-28 — documentação e pacote conjunto 1.19
+
+- Documentação vigente reconciliada: README, OUTLINE, SPEC, versionamento,
+  validação, mapa e solução. Notas e evidências de 1.1/1.3 preservadas.
+- Build conjunto 1.19 com subtítulo atualizado, DEBUG=0 e sem warnings.
+  Capturas dos executáveis finais em `images/releases/1.19`: abertura e
+  gameplay real nas duas edições, além da galeria de 29 estados visuais.
+- Aprovados: testes Node de fonte/versionamento; motor/parser/RNG/resolvedor;
+  matriz diferencial (1.989 cenários, zero divergências, 158/158 linhas);
+  MSX1 sob DOS1/DOS2; abertura/áudio, gameplay e galeria MSX2; hashes,
+  payloads e boot dos dois discos.
+- Limitações preservadas: não certificar hardware real, fidelidade integral
+  nem rotas completas/finais/reinícios pela interface MSX2.
+- Próximo passo técnico: testar fugas completas e reinícios MSX2 e ampliar
+  a auditoria diferencial de mensagens, entrada e apresentação.
 
 ### Modelo para próximas entradas
 

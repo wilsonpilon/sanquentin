@@ -3,6 +3,9 @@
 #include "dos.h"
 #include "dos_mapper.h"
 #include "../../src/sq_title_msx2.h"
+#include "../../src/sq_game.h"
+#include "../../src/sq_input.h"
+#include "../../src/sq_random.h"
 
 const c8 g_SQ_BuildVersion[] = "San Quentin " SQ_BUILD_VERSION;
 
@@ -32,6 +35,15 @@ void main(void)
 		return;
 	}
 
-	Title2_Show();
+	if(Title2_Show())
+	{
+		do
+		{
+			Random_Initialize(&g_RandomState);
+			Game_Initialize();
+		}
+		while(Game_Run());
+		Input_Flush();
+	}
 	BIOS_Exit(0);
 }

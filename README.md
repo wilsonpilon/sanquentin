@@ -6,62 +6,74 @@ O jogador assume o papel de Scarp Lantra, um prisioneiro que pretende aproveitar
 
 ![Tela de abertura do jogo original San Quentin no MSX](images/SanQuentin-00.png)
 
-## Versões disponíveis — 1.3 / Danny Trejo
+## Versões disponíveis — 1.19 / Danny Trejo
 
-**Subtítulo:** Fonte personalizada MSX1 e MSX2 e validação diferencial.
+**Subtítulo:** Aventura MSX2 ilustrada, trilha FM e PSG e discos duplos.
 
 **Estado:** pré-release de desenvolvimento, não uma versão final.
 
-[Baixar o release 1.3](https://github.com/wilsonpilon/sanquentin/releases/tag/v1.3) ·
-[Notas e limitações](docs/releases/1.3.md) ·
+[Baixar o release 1.19](https://github.com/wilsonpilon/sanquentin/releases/tag/v1.19) ·
+[Notas e limitações](docs/releases/1.19.md) ·
 [Versionamento automático](docs/versioning.md)
 
 | | MSX1 | MSX2 |
 | --- | --- | --- |
 | Objetivo | Conversão fiel ao BASIC original | Edição com apresentação ampliada |
-| Estado em 1.3 | **Aventura jogável; fidelidade integral ainda em auditoria** | **Abertura concluída nesta fase; aventura ainda não integrada** |
+| Estado em 1.19 | **Aventura jogável; fidelidade integral ainda em auditoria** | **Aventura integrada e ilustrada; rotas completas na interface ainda em validação** |
 | Vídeo | SCREEN 2 na abertura e SCREEN 0 no jogo | SCREEN 5, 256×212, 16 cores |
 | Sistema | MSX-DOS 1; disco de 360 KB | MSX-DOS 2; disco de 720 KB |
 | Memória | Validado no Sony HB-701FD; RAM mínima ainda não certificada | Mapper principal ≥512 KB, VRAM ≥128 KB |
-| Recursos prontos | Parser, mapa, inventário, ações, guarda, mortes/fuga, RNG original | Dez quadros, introdução completa, persianas, blecaute, escolha S/N |
-| Áudio | Sem trilha adicionada | PSG+FM previstos; música ainda não implementada |
-| Próxima fase | Comparação integral de textos, glifos, entrada e ramos com o BASIC | Integrar a aventura e depois desenvolver áudio PSG/FM |
+| Recursos prontos | Parser, mapa, inventário, ações, guarda, mortes/fuga, RNG original | Abertura, motor compartilhado, três painéis, ambientes ilustrados e inventário com ícones |
+| Áudio | Sem trilha adicionada | Trilha original em Mi menor, FM + percussão PSG, cerca de 2min08s |
+| Próxima fase | Comparação integral de textos, glifos, entrada e ramos com o BASIC | Validar rotas completas na nova interface |
 
-As duas compilações do release usam **`DEBUG=0`**. O MSX1 não inclui o
+As duas compilações do release usam **`DEBUG=0`**. Nenhuma edição inclui o
 comando auxiliar `RESOLVER` nessa distribuição. A fuga já foi exercitada com
 o auxiliar em builds de desenvolvimento; isso **não certifica equivalência
 integral** com o BASIC. Nenhuma das edições foi certificada em hardware real.
 
-**Novidades em 1.3:** fonte personalizada na introdução e aventura MSX1
-e nos textos da abertura MSX2, com avanço de 6×8 pixels. A validação
-diferencial compara 1.989 cenários BASIC × C, sem divergências nos valores
-comparados; veja o [escopo e as limitações](docs/validation.md).
+**Novidades desde 1.3:** aventura MSX2 ligada ao motor compartilhado,
+interface em três painéis, miniaturas de todos os ambientes, inventário
+com ícones e trilha de abertura mais longa, triste e pesada em FM + PSG.
+Corrigidos áudio/temporização sob DOS2; os dois discos incluem agora os
+dois programas. Também entram as correções de textos e lógica já
+conferidas com a revista e o [mapa ilustrado](docs/mapa.md).
+A validação diferencial compara 1.989 cenários BASIC × C, sem divergências
+nos valores comparados; veja o [escopo e as limitações](docs/validation.md).
 
 ### Capturas atuais do MSX1
 
-Capturadas no openMSX/Sony HB-701FD a partir do executável **1.3**.
+Capturadas no openMSX/Sony HB-701FD a partir do executável **1.19**.
 A fonte nova aparece em SCREEN 0; a abertura SCREEN 2 foi preservada:
 
 | Abertura SCREEN 2 | Introdução original |
 | --- | --- |
-| ![MSX1 1.3: abertura](images/releases/1.3/msx1-abertura.png) | ![MSX1 1.3: introdução com fonte nova](images/releases/1.3/msx1-introducao.png) |
+| ![MSX1 1.19: abertura](images/releases/1.19/msx1-abertura.png) | ![MSX1 1.19: introdução com fonte nova](images/releases/1.19/msx1-introducao.png) |
 | **Cela jogável** | **Corredor após pegar a serra e serrar a grade** |
-| ![MSX1 1.3: cela com fonte nova](images/releases/1.3/msx1-cela.png) | ![MSX1 1.3: corredor com fonte nova](images/releases/1.3/msx1-corredor.png) |
+| ![MSX1 1.19: cela com fonte nova](images/releases/1.19/msx1-cela.png) | ![MSX1 1.19: corredor com fonte nova](images/releases/1.19/msx1-corredor.png) |
 
 ### Capturas atuais do MSX2
 
 Capturadas no openMSX/Philips NMS 8250 com DOS2, mapper de 512 KB e FM-PAC,
-a partir do executável **1.3**, com a fonte nova em SCREEN 5.
+a partir do executável **1.19**, com a fonte personalizada em SCREEN 5.
 As legendas “PAUSADO” nas capturas indicam
 a pausa acionada pelo teste, não uma limitação da reprodução automática.
 
 | Baía | Scarp Lantra na cela |
 | --- | --- |
-| ![MSX2 1.3: baía](images/releases/1.3/msx2-baia.png) | ![MSX2 1.3: Scarp Lantra](images/releases/1.3/msx2-scarp.png) |
+| ![MSX2 1.19: baía](images/releases/1.19/msx2-baia.png) | ![MSX2 1.19: Scarp Lantra](images/releases/1.19/msx2-scarp.png) |
 | **Casa de força antes da falha** | **Blecaute** |
-| ![MSX2 1.3: casa de força](images/releases/1.3/msx2-casa-de-forca.png) | ![MSX2 1.3: blecaute](images/releases/1.3/msx2-blecaute.png) |
+| ![MSX2 1.19: casa de força](images/releases/1.19/msx2-casa-de-forca.png) | ![MSX2 1.19: blecaute](images/releases/1.19/msx2-blecaute.png) |
 
-![MSX2 1.3: pergunta com opções S e N](images/releases/1.3/msx2-pergunta.png)
+| Cela e inventário após pegar a serra | Corredor após serrar a grade |
+| --- | --- |
+| ![MSX2 1.19: jogo em três painéis](images/releases/1.19/msx2-inventario.png) | ![MSX2 1.19: corredor ilustrado](images/releases/1.19/msx2-corredor.png) |
+| **Biblioteca** | **Horta** |
+| ![MSX2 1.19: biblioteca](images/releases/1.19/msx2-biblioteca.png) | ![MSX2 1.19: horta](images/releases/1.19/msx2-horta.png) |
+
+As capturas de biblioteca e horta usam estados injetados pelo teste visual,
+não uma rota completa. Todas as 29 capturas de locais/variantes ficam no
+[diretório do release](images/releases/1.19).
 
 ### Compilar ambas as edições
 
@@ -73,13 +85,35 @@ projects\msx1\run.bat
 projects\msx2\run.bat
 ```
 
-O primeiro build compartilhado gerou **1.1**. O release atual é **1.3**;
-o próximo build bem-sucedido gera **1.4**, sem editar números manualmente.
+O primeiro build compartilhado gerou **1.1**. O release atual é **1.19**;
+o próximo build bem-sucedido gera **1.20**, sem editar números manualmente.
 O comando `build.bat --milestone --codename "Nome" --subtitle "Recurso"`
 abre o próximo marco em **2.1**. O número não é SemVer:
 representa **marco.compilação**, com codinome por marco e subtítulo por build.
 Veja [o fluxo completo](docs/versioning.md), inclusive geração do ZIP,
 checksums, tag e publicação.
+
+### Dois programas em cada disco
+
+Os discos gerados agora incluem **`QUENTIN.COM` (jogo MSX1)** e
+**`QUENTIN2.COM` (abertura e aventura MSX2)**:
+
+| Disco | Boot | Início automático |
+| --- | --- | --- |
+| `projects\msx1\emul\dsk\DOS1_quentin.dsk` (360 KB) | MSX-DOS 1 | `QUENTIN` |
+| `projects\msx2\emul\dsk\DOS2_quentin2.dsk` (720 KB) | MSX-DOS 2 | `QUENTIN2` |
+
+No prompt do DOS2, digite `QUENTIN` para jogar a edição MSX1; **Esc**
+fecha a abertura MSX2 e retorna ao prompt. Na pergunta final, **S** inicia
+a aventura MSX2; `DESISTIR` retorna ao DOS. `QUENTIN2` continua exigindo
+MSX2, DOS2 e mapper de 512 KB: estar no disco DOS1 não remove esses requisitos.
+Não há arquivos de dados externos necessários: fontes, gráficos, música
+e dados do jogo estão incorporados nos COM.
+
+Todos os atalhos de build, inclusive os de cada projeto, compilam as duas
+edições e regeneram ambos os discos com a mesma versão.
+Execute `tests\run_disk_tests.bat` após compilar para conferir os arquivos,
+hashes e a execução do MSX1 pelo DOS2.
 
 ## O programa original
 
@@ -173,7 +207,7 @@ aceita qualquer tecla (`S` reinicia) em vez de esperar `S` ou `N`.
 | MSX-BASIC 1 | Linguagem do jogo original, cuja lógica e comportamento devem ser reproduzidos. |
 | SDCC | Compilador C da recriação. |
 | MSXgl | Biblioteca de desenvolvimento para MSX usada na recriação. |
-| MSX-DOS 1 | Ambiente de execução da recriação atual. |
+| MSX-DOS 1 / 2 | Ambiente de execução das edições MSX1 / MSX2. |
 | openMSX | Emulação do MSX para execução e testes. |
 
 ### Fonte em SCREEN 0
@@ -190,7 +224,7 @@ anterior, não uma alegação de que a fonte pertence ao jogo Amazônia.
 
 ### Fonte bitmap no MSXgl
 
-A abertura MSX2 também usa [vram.dat](resource/vram.dat), via
+A abertura e a aventura MSX2 também usam [vram.dat](resource/vram.dat), via
 `Print_SetBitmapFont(g_Font_VRAM)`, com avanço de **6×8 pixels** em SCREEN 5.
 Isso substitui a fonte de exemplo do MSXgl, sem mudar textos ou coordenadas.
 Os mesmos padrões monocromáticos servem para os modos bitmap SCREEN 5–8;
@@ -273,7 +307,7 @@ funcionamento e limites. Transcrições, fidelidade visual, sequências completa
 e hardware real continuam sendo etapas separadas; aprovação da matriz não
 certifica equivalência integral.
 
-## Edição MSX2 — abertura histórica
+## Edição MSX2 — abertura musical e aventura ilustrada
 
 A edição em [projects/msx2](projects/msx2) começa com uma abertura independente:
 dez cards desenhados em tempo de execução, com vistas da baía, da fachada,
@@ -283,19 +317,47 @@ completa do jogo original e fazem a pergunta final. Mantém o espírito do desen
 mas usa **SCREEN 5, 256×212, 16 cores escolhidas entre 512**, áreas preenchidas,
 sombras e linhas do V9938. Não carrega fotografias nem bitmaps das cenas:
 as primitivas `Draw_Line`, `Draw_FillBox` e comandos de cópia do VDP fazem o
-papel dos comandos gráficos/DRAW do BASIC. A fonte de texto vem do MSXgl.
+papel dos comandos gráficos/DRAW do BASIC. A fonte personalizada é desenhada
+pelo módulo de impressão do MSXgl.
 
 ### Plataforma e escopo
 
 - **MSX2**, V9938 e **128 KB de VRAM**.
 - **MSX-DOS 2** e **mapper principal de pelo menos 512 KB**; a abertura verifica
   a disponibilidade do mapper pelo DOS2 antes de entrar em modo gráfico.
-- Plataforma sonora prevista: **PSG + MSX-MUSIC/FM (YM2413)**. O perfil de
-  emulação já inclui FM-PAC, mas **esta abertura ainda não toca música**.
-- Este primeiro executável apresenta somente o slideshow; ainda não executa
-  a aventura MSX1. **Esc** retorna ao DOS.
+- Trilha original lenta e sombria em **Mi menor**, a 60 BPM: 32 compassos,
+  aproximadamente **2min08s**, com quatro seções e desenvolvimento melódico.
+  **MSX-MUSIC/FM (YM2413)** fornece guitarra elétrica, baixo e harmonias;
+  o **PSG** toca bumbo grave, caixa e pratos, com percussão mais forte.
+  O perfil de emulação inclui FM-PAC. Sem FM, permanece somente a percussão.
+  A trilha continua durante desenhos, transições e pausas; repete apenas
+  após a composição inteira e para ao retornar ao DOS.
+- **S** na pergunta final inicia a aventura com o mesmo parser, motor,
+  aleatoriedade e mensagens da edição MSX1. **Esc** na abertura retorna ao DOS.
 
-Cada cena é montada na página 1 da VRAM enquanto a página 0 permanece visível.
+### Aventura ilustrada em três painéis
+
+- **Superior esquerdo:** miniatura própria de cada ambiente: corredores
+  distintos, mesa com pratos, camas da enfermaria, caixas, canteiros,
+  livros, visitas, fogão, capela, túnel, necrotério, escritório, pátio,
+  oficina, rio, guaritas, cela surda, lavanderia e portão. A cela mantém
+  a serra no chão e a grade que muda após `SERRAR`. O necrotério só revela
+  detalhes com a lanterna carregada e acesa; passagens do túnel seguem
+  as condições do motor.
+- **Superior direito:** até três objetos carregados, com ícones de 16×16
+  pixels e nomes. Pegar, largar e perder objetos atualiza o painel.
+- **Inferior:** histórico textual de nove linhas em 40 colunas, com scroll
+  restrito à área de mensagens; prompt e entrada permanecem fixos.
+- **Enter** envia, **Backspace** apaga e **F1/F2/F3/F4** enviam
+  Norte/Sul/Leste/Oeste. `DESISTIR` encerra e retorna ao DOS.
+
+A música da abertura termina ao entrar na aventura. As regras não foram
+reescritas; apenas a apresentação foi separada em backends MSX1 e MSX2.
+O primeiro roteiro validado é `PEGAR SERRA`, `SERRAR`, `LESTE`, `OESTE`,
+`LARGAR SERRA`. A validação de rotas completas pela interface MSX2
+continua pendente.
+
+Na abertura, cada cena é montada na página 1 da VRAM enquanto a página 0 permanece visível.
 O efeito de persianas revela a cena pronta em oito faixas horizontais.
 O avanço automático ocorre após aproximadamente **12 segundos de leitura**,
 além do tempo de desenho/transição. A sequência para na pergunta final:
@@ -308,16 +370,14 @@ As legendas permanecem legíveis.
 | Espaço, Enter ou seta direita | Próximo card, antes da pergunta final |
 | Seta esquerda | Card anterior |
 | P | Pausar/retomar o avanço automático |
-| S, na pergunta final | Aceitar acompanhar Scarp Lantra |
+| S, na pergunta final | Iniciar a aventura |
 | N, na pergunta final | Reiniciar o slideshow e retomar o avanço automático |
 | Esc | Voltar ao MSX-DOS 2 |
 
 A navegação manual continua funcionando em pausa. Seta esquerda no primeiro
 card leva à pergunta final; na pergunta, seta esquerda permite reler a história.
 Espaço, Enter e seta direita não substituem a escolha explícita de **S** ou **N**.
-Ao aceitar, aparece a confirmação e o aviso de que a aventura MSX2 ainda está
-em desenvolvimento. Nessa confirmação, **N** reinicia a abertura, enquanto
-**Espaço/Enter/seta direita** ou **Esc** retornam ao DOS.
+Ao aceitar, a abertura termina e o jogo começa na cela.
 
 ### Compilar e executar
 
@@ -329,21 +389,31 @@ projects\msx2\run.bat
 ```
 
 O build usa o SDCC/MSXgl já incluído e gera
-`projects\msx2\emul\dsk\DOS2_quentin2.dsk` (720 KB), com `QUENTIN2.COM`
-e os arquivos de inicialização do DOS2. O launcher usa o openMSX no PATH,
+`projects\msx2\emul\dsk\DOS2_quentin2.dsk` (720 KB), com `QUENTIN.COM`,
+`QUENTIN2.COM` e os arquivos de inicialização do DOS2. O launcher usa o openMSX no PATH,
 Philips NMS 8250, expansor de slots, DOS2, mapper de 512 KB e FM-PAC.
 As ROMs dessa máquina e das extensões devem estar instaladas no openMSX;
 não são fornecidas pelo projeto.
 A configuração da biblioteca reaproveita a base MSX1 e sobrescreve apenas
 as opções necessárias à edição MSX2, sem modificar o projeto MSX1.
-Cada build individual também avança o contador compartilhado; para distribuir
-as duas edições com o mesmo número, use o `build.bat` da raiz.
+Esse atalho também compila MSX1 e atualiza o disco DOS1; todos os builds
+versionados mantêm ambos os programas e discos na mesma versão.
 
 Após compilar, execute [run_msx2_intro_tests.bat](tests/run_msx2_intro_tests.bat)
 para conferir a integridade do texto original, os limites das legendas e,
 no emulador, os dez cards, modo/cores, transições, blecaute, pausa,
 navegação, avanço automático, respostas S/N e retorno ao DOS. O teste gera capturas e
 `intro-test.log` em `projects\msx2\out`.
+Execute também [run_msx2_game_tests.bat](tests/run_msx2_game_tests.bat)
+para validar os painéis, inventário, edição com Backspace, movimento por F3,
+grade serrada e retorno funcional ao DOS. As capturas `game-*.png`
+e o log ficam no mesmo diretório de saída.
+O teste [run_msx2_rooms_tests.bat](tests/run_msx2_rooms_tests.bat) percorre
+24 estados de local e cinco variantes de iluminação/escavação, verifica
+diferenças gráficas sem contar os títulos e preservação dos demais painéis,
+e grava `room-*.png` e `rooms-test.log` no mesmo diretório.
+Ele injeta estados apenas no emulador para testar o desenho: não certifica
+que esses estados foram alcançados pelas rotas do jogo.
 
 ### Referências e história
 

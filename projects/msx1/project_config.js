@@ -1,6 +1,6 @@
 //-- San Quentin - MSX1 edition (MSX-DOS 1 .COM)
 ProjName = "quentin";
-ProjModules = [ "main", "../../src/sq_font", "../../src/sq_parser", "../../src/sq_engine", "../../src/sq_random", "../../src/sq_solver", "../../src/sq_game", "../../src/sq_gfx2", "../../src/sq_input", "../../src/sq_intro", "../../src/sq_title" ];
+ProjModules = [ "main", "../../src/sq_font", "../../src/sq_parser", "../../src/sq_engine", "../../src/sq_random", "../../src/sq_solver", "../../src/sq_game", "../../src/sq_game_ui_msx1", "../../src/sq_gfx2", "../../src/sq_input", "../../src/sq_intro", "../../src/sq_title" ];
 LibModules = [ "system", "bios", "vdp", "memory", "input", "print" ];
 Machine = "1";
 Target = "DOS1";
@@ -13,6 +13,4 @@ Verbose = true;
 
 PreBuildScripts = [ `"${process.execPath}" "${ProjDir}../../tools/font.js"` ];
 
-// O deploy do MSXgl grava MSXDOS.SYS por ultimo no diretorio raiz, o que
-// impede o boot do MSX-DOS 1. Este script regera o disco na ordem correta.
-PostBuildScripts = [ `"${ProjDir}make_dsk.bat"` ];
+// tools/release.js rebuilds both disks after both COM files are ready.

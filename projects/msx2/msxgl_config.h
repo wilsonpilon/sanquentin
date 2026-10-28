@@ -5,6 +5,9 @@
 
 #undef BIOS_CALL_MAINROM
 #define BIOS_CALL_MAINROM BIOS_CALL_INTERSLOT
+// MSX-DOS 2 maps RAM over the main BIOS; sound uses the PSG ports directly.
+#undef PSG_ACCESS
+#define PSG_ACCESS PSG_DIRECT
 #undef VDP_VRAM_ADDR
 #define VDP_VRAM_ADDR VDP_VRAM_ADDR_17
 #undef VDP_UNIT

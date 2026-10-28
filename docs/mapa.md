@@ -2,7 +2,9 @@
 
 > **Spoilers:** salas, objetos, passagens secretas e condições de fuga.
 
-Mapa da aventura original em BASIC e da conversão fiel em C para MSX1.
+Mapa da aventura original em BASIC e do motor C compartilhado pelas edições
+MSX1 e MSX2. A apresentação gráfica do MSX2 não altera ligações nem condições.
+Os desenhos são miniaturas ilustrativas, não plantas das saídas.
 Os números são os identificadores dos locais no jogo, não a ordem de visita.
 Os objetos indicados nas salas têm **posição inicial fixa**: depois de pegá-los,
 deixá-los ou de um encontro com o guarda, sua localização pode mudar.

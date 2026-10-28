@@ -33,7 +33,7 @@ estado inicial, comando e semente, permitindo reproduzir uma falha.
 | Acoes | Serrar, cavar, nadar, abrir, acender/apagar, matar, ajudar e desistir | Flags, inventario, local e encerramento |
 | Guarda | Sem objetos, uniforme, canivete, chave e inventario misto, diferentes sementes | Prisao, morte, confisco, redistribuicao e estado do guarda |
 
-### Resultado verificado em 21/10/2026
+### Resultado verificado em 28/10/2026 — release 1.19
 
 | Grupo | Cenarios comparados | Divergencias nos valores comparados |
 | --- | ---: | ---: |
@@ -50,6 +50,8 @@ ajuda (1420-1470) passou a ser alcancado.
 Inicializacao substituida (100) e resposta/reinicio apos finais (1020-1040)
 ficam explicitamente fora dessa contagem. As suites existentes de motor e
 parser C tambem passaram.
+O motor e parser sao compartilhados pelas edicoes MSX1 e MSX2; esta
+comparacao de estado nao certifica automaticamente os backends de video.
 
 Cada cenario compara **27 valores**: local, carga, grade, tunel, luz,
 estado do guarda, quatro saidas, posicoes dos 14 objetos, encerramento,
@@ -104,6 +106,40 @@ o texto ou o motivo impresso do final.
 | Teclado, edicao de entrada, wrapping, glifos e scroll | Auditoria diferencial pendente |
 | Reinicio e nova partida apos finais | Auditoria diferencial pendente |
 | Equivalencia do binario SDCC, RAM minima e hardware real | Certificacao pendente |
+
+## Regressao visual e integracao MSX2
+
+O pre-release 1.19 tambem foi validado com:
+
+- `run_msx2_intro_tests.bat`: dez cards, fonte bitmap, espera de leitura
+  de 12 segundos, pausa/navegacao, blecaute, S/N, musica em execucao e
+  silencio ao iniciar a aventura; retorno funcional ao DOS.
+- O mesmo wrapper executa testes host da musica: 128 segundos,
+  31 compassos melodicos distintos, FM presente/ausente, 50/60 Hz,
+  ticks atrasados, wrap do JIFFY e parada.
+- `run_msx2_game_tests.bat`: comandos reais para pegar a serra, serrar,
+  ir ao corredor por F3, voltar, largar e desistir; edicao Backspace,
+  inventario e prompt fixo. O relogio TIME das visitas e fixado para
+  impedir confisco aleatorio da serra. Nao testa o guarda nessa rota.
+- `run_msx2_rooms_tests.bat`: injecao de 24 estados de local e cinco
+  variantes de escavacao/iluminacao, comparacao dos pixels sem os titulos
+  e preservacao de divisorias, inventario vazio, prompt e instrucoes.
+  Lanterna apagada ou ausente mantem o necroterio escuro; tunel exige
+  escavacao e colher carregada para revelar as passagens.
+- `run_disk_tests.bat`: extracao dos dois COM de cada disco, hashes,
+  ordem dos arquivos de boot, AUTOEXEC e metadados; MSX1 executado sob DOS2.
+  `run_msx1_release_tests.bat` tambem verifica a edicao MSX1 sob DOS1.
+
+As capturas `msx2-local-*.png` de
+[images/releases/1.19](../images/releases/1.19) sao fixtures do renderer,
+nao prova de uma partida alcancando cada local. As mensagens na metade
+inferior podem refletir a iteracao anterior, pois a fixture muda o estado
+no ponto de atualizacao do desenho. Capturas `msx2-inventario.png` e
+`msx2-corredor.png` vem do roteiro de comandos reais.
+Ainda faltam rotas completas, todos os finais e reinicios pela interface
+MSX2, auditoria diferencial de apresentacao e testes em hardware real.
+
+## Proximo incremento
 
 O proximo incremento deve acrescentar transcricoes e rotas de varios comandos,
 priorizando os ramos nao cobertos. A participacao humana e principalmente

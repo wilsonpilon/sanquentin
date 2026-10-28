@@ -1,4 +1,6 @@
 #pragma once
 
-// Standalone opening; returns to DOS until the MSX2 game is implemented.
-void Title2_Show(void);
+#include "msxgl.h"
+
+// TRUE starts the adventure; FALSE returns to DOS.
+bool Title2_Show(void);

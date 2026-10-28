@@ -114,16 +114,19 @@ static u8 ImageColor(u8 color)
 static void Fill(u16 x1, u16 y1, u16 x2, u16 y2, u8 color)
 {
 	Draw_FillBox(x1, y1 + BACK_Y, x2, y2 + BACK_Y, ImageColor(color), VDP_OP_IMP);
+	Music2_Update();
 }
 
 static void Line(u16 x1, u16 y1, u16 x2, u16 y2, u8 color)
 {
 	Draw_Line(x1, y1 + BACK_Y, x2, y2 + BACK_Y, ImageColor(color), VDP_OP_IMP);
+	Music2_Update();
 }
 
 static void Box(u16 x1, u16 y1, u16 x2, u16 y2, u8 color)
 {
 	Draw_Box(x1, y1 + BACK_Y, x2, y2 + BACK_Y, ImageColor(color), VDP_OP_IMP);
+	Music2_Update();
 }
 
 static void Text(u16 x, u16 y, const c8* text, u8 color, u8 bg)
@@ -131,6 +134,7 @@ static void Text(u16 x, u16 y, const c8* text, u8 color, u8 bg)
 	Print_SetColor(color, bg);
 	Print_SetPosition(x, y + BACK_Y);
 	Print_DrawText(text);
+	Music2_Update();
 }
 
 // Filled sloping surfaces, using horizontal V9938 lines rather than a bitmap.
@@ -490,25 +494,12 @@ static u8 Keys(void)
 	return result;
 }
 
-static void Accepted(void)
-{
-	Fill(4, 154, 251, 198, INK);
-	Box(4, 154, 251, 198, GOLD);
-	Text(10, 157, "VOCE ACEITOU ACOMPANHAR SCARP LANTRA.", GOLD, INK);
-	Text(10, 169, "A aventura MSX2 ainda esta", PAPER, INK);
-	Text(10, 180, "em desenvolvimento.", PAPER, INK);
-	Fill(0, 202, 255, 211, NIGHT);
-	Text(8, 203, "ESP/ENTER:DOS   N:REVER", MIST, NIGHT);
-	VDP_CommandWait();
-	Reveal();
-}
-
-void Title2_Show(void)
+bool Title2_Show(void)
 {
 	u8 card = 0;
 	u8 previous;
 	u16 elapsed = 0;
-	u16 duration = (Sys_Is50Hz() ? 50 : 60) * 12;
+	u16 duration;
 	bool paused = FALSE;
 	bool accepted = FALSE;
 
@@ -519,6 +510,7 @@ void Title2_Show(void)
 	VDP_SetColor(NIGHT);
 	VDP_SetPage(0);
 	VDP_SetPalette(s_Palette);
+	duration = (VDP_GetFrequency() == VDP_FREQ_50HZ ? 50 : 60) * 12;
 	Print_SetBitmapFont(g_Font_VRAM);
 	VDP_CommandHMMV(0, 0, 256, 212, 0x11);
 	VDP_CommandWait();
@@ -539,22 +531,10 @@ void Title2_Show(void)
 		previous = held;
 		if(pressed & 1)
 			break;
-		if(accepted)
-		{
-			if(pressed & 2)
-				break;
-			if(!(pressed & 32))
-				continue;
-			accepted = FALSE;
-			paused = FALSE;
-			card = 0;
-			change = TRUE;
-		}
-		else if(card == QUESTION_CARD && (pressed & 16))
+		if(card == QUESTION_CARD && (pressed & 16))
 		{
 			accepted = TRUE;
-			Accepted();
-			continue;
+			break;
 		}
 		else if(card == QUESTION_CARD && (pressed & 32))
 		{
@@ -595,4 +575,5 @@ void Title2_Show(void)
 	VDP_CommandWait();
 	VDP_SetDefaultPalette();
 	g_GETPNT = g_PUTPNT;
+	return accepted;
 }

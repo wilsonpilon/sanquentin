@@ -9,6 +9,12 @@ Como a posição inicial do **canivete**, da **lanterna** e da **chave** varia a
 cada partida, não há uma sequência única de comandos que funcione em todos os
 jogos.
 
+As edições C MSX1 e MSX2 usam o mesmo motor e mapa. No MSX2, escolha **S**
+ao fim da abertura para começar; a cena e os ícones não mudam as condições
+deste roteiro. No pré-release 1.19, a interface MSX2 foi validada no percurso
+inicial; a fuga completa e todos os finais por essa interface ainda não
+foram certificados.
+
 *Walkthrough original por Alex Dijkstra. Tradução e organização desta versão
 em Markdown.*
 

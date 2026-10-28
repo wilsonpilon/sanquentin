@@ -1,7 +1,7 @@
 # San Quentin — Outline do projeto
 
 > Documento de contexto e roteiro. Deve ser lido junto com [`SPEC.md`](SPEC.md).  
-> Última atualização: 21 de outubro de 2026.
+> Última atualização: 28 de outubro de 2026.
 
 ## 1. Origem desta etapa
 
@@ -10,8 +10,11 @@ O repositório preserva **San Quentin**, aventura textual de Ricardo Augusto Mat
 O requisito do MSX1 é reproduzir **exatamente o jogo do fonte original em
 MSX-BASIC 1**, sem melhorias ou alterações deliberadas. Em paralelo, a edição
 MSX2 foi autorizada e começou pela abertura ampliada. O pré-release
-**1.1 / Danny Trejo** contém a aventura MSX1 jogável, ainda em auditoria,
-e a abertura MSX2 com dez cards; a aventura MSX2 ainda não foi integrada.
+**1.19 / Danny Trejo** contém a aventura MSX1 jogável, ainda em auditoria,
+e a aventura MSX2 com motor compartilhado, três painéis e ambientes
+ilustrados, além da abertura de dez cards com trilha FM + PSG de 128 segundos.
+Os dois programas estão nos dois discos; rotas completas/finais pela
+interface MSX2 e hardware real continuam pendentes.
 
 Como referência técnica, foram estudados:
 
@@ -103,12 +106,12 @@ O backend MSX2 permanece separado, sem redefinir as regras do motor.
 | 0 | Reunir fontes e estudar MSXgl/SuperNova | **Concluída** |
 | 1 | Especificar integralmente o BASIC: mapa, parser, objetos, aleatoriedade, finais e textos | **Em andamento** — mapa/saídas transcritos; eventos e validação integral pendentes |
 | 2 | Fazer protótipo mínimo de build MSX1 e validar target/geração de disco | **Concluída** |
-| 3 | Implementar núcleo portável e testes host | **Em andamento** — parser, estado, mapa, ações de sala/guarda e suítes host |
+| 3 | Implementar núcleo portável e testes host | **Em andamento** — motor completo, RNG original, resolvedor e matriz diferencial; transcripts pendentes |
 | 4 | Implementar e validar San Quentin MSX1 fiel | **Em andamento** — aventura jogável e rotas validadas no emulador; auditoria integral pendente |
 | 5 | Congelar baseline fiel da versão MSX1, sem divergências intencionais | Pendente |
-| 6 | Definir a edição MSX2 | **Plataforma definida** — DOS2, mapper ≥512 KB, PSG+FM; abertura SCREEN 5 |
-| 7 | Implementar a edição MSX2 | **Abertura concluída nesta fase** — dez cards, introdução integral, blecaute e S/N; aventura/áudio pendentes |
-| 8 | Testes completos, hardware real, distribuição e documentação | **Pré-release 1.1** com capturas, build versionado e pacote; auditoria integral e hardware real pendentes |
+| 6 | Definir a edição MSX2 | **Plataforma e layout definidos** — DOS2, mapper ≥512 KB, SCREEN 5 em três painéis; FM+PSG na abertura |
+| 7 | Implementar a edição MSX2 | **Aventura integrada e ilustrada** — entrada, mensagens e regras compartilhadas; rotas/finais completos na interface pendentes |
+| 8 | Testes completos, hardware real, distribuição e documentação | **Pré-release 1.19** com capturas, discos duplos e pacote; auditoria integral e hardware real pendentes |
 
 Os critérios detalhados de cada fase estão em `SPEC.md`.
 
@@ -117,19 +120,21 @@ Os critérios detalhados de cada fase estão em `SPEC.md`.
 - A versão atual deve reproduzir integralmente o programa original em BASIC, sem melhorar ou mudar nada.
 - A edição MSX2 foi autorizada em paralelo, sem alterar a fidelidade da edição MSX1.
 - MSX2: DOS2/COM, disco de 720 KB, mapper principal ≥512 KB e VRAM ≥128 KB.
-  Abertura em SCREEN 5; PSG+FM previstos, sem áudio implementado em 1.1.
+  Abertura SCREEN 5 com dez cards, transições e S/N; S inicia a aventura.
+  Layout 256×212: cena à esquerda e inventário à direita na metade superior;
+  mensagens, prompt e entrada na metade inferior. Música para ao iniciar o jogo.
 - Versão compartilhada `marco.compilação`, iniciada em 1.1 / Danny Trejo.
   Builds incrementam o segundo número automaticamente; novo marco é explícito.
-  Consulte [versioning.md](docs/versioning.md) e [notas 1.1](docs/releases/1.1.md).
+  Consulte [versioning.md](docs/versioning.md) e [notas 1.19](docs/releases/1.19.md).
 - A implementação será em C com SDCC/MSXgl.
 - O original BASIC é a referência funcional.
 - Textos e comandos devem preservar a saída observável do original; não transliterar ou alterar conteúdo como simplificação.
 - A edição MSX1 é distribuída como `.COM` de MSX-DOS 1 (`Target = "DOS1"`), com disco de teste de 360K.
 - As primitivas de SCREEN 2 são próprias, incluindo um interpretador das cadeias de `DRAW` do BASIC, para que o desenho original seja colado literalmente.
-- A apresentação usa o módulo `print` do MSXgl em SCREEN 0, com fonte latina compilada e wrapping de 40 colunas.
+- A apresentação usa o módulo `print` do MSXgl em SCREEN 0, com fonte personalizada de `resource/vram.dat` e wrapping de 40 colunas. A abertura SCREEN 2 mantém a fonte anterior.
 - A espera de tecla compartilhada lê o PPI diretamente e consome a tecla antes de avançar.
 - A entrada textual lê A–Z, espaço, backspace, Enter e F1–F4 diretamente da matriz; letras entram em maiúsculas.
-- Vocabulário e objetos das linhas BASIC 100–410 são tabelas C auditáveis em `src/sq_game.*`.
+- Vocabulário e objetos das linhas BASIC 100–410 são tabelas C auditáveis em `src/sq_parser.*` e `src/sq_engine.*`.
 - O parser das linhas BASIC 1310–1390 é independente de MSXgl e preserva a regra de prefixos em que a última correspondência da tabela vence.
 - `INSTR` com prefixo vazio foi medido no MSX-BASIC 1.0 e retorna 1; o caso está coberto pela suíte host.
 - Estado, objetos e despacho estão em `src/sq_engine.*`, independentes do backend MSX e cobertos por testes host.
@@ -140,6 +145,14 @@ Os critérios detalhados de cada fase estão em `SPEC.md`.
 - Corrigidos os retornos de `MATAR` e `AJUDAR`, o reset condicional do guarda na cela e o momento da redistribuição da chave confiscada. O motor distingue 370/430/440/450/490; a interface imprime antes de prosseguir ao sorteio.
 - RNG decimal do MSX-BASIC em `src/sq_random.*`, compartilhado pela abertura e pelo jogo. Conferidos 65.637 valores da ROM, todas as sementes TIME 0–65535, os 91 pares das estrelas e estados/escalas do executável SDCC.
 - O núcleo deve ser testável fora do MSX sempre que prático, sem alterar a semântica do BASIC.
+- `sq_game.c` coordena as duas edições; `sq_game_ui_msx1.c` e
+  `sq_game_ui_msx2.c` isolam apresentação e entrada. O renderer não altera regras.
+- Cada COM incorpora seus recursos; ambos os discos incluem `QUENTIN.COM`
+  e `QUENTIN2.COM`, preservando o boot DOS1/DOS2 e o AUTOEXEC de cada edição.
+- Trilha original em Mi menor, 60 BPM, 32 compassos/128 segundos; guitarra,
+  baixo e harmonias FM, percussão PSG. Sem YM2413, permanece a percussão.
+- Matriz diferencial de 1.989 cenários BASIC × C, 27 campos por cenário,
+  sem divergências nos valores comparados; não certifica textos nem sequências completas.
 - Fatos verificados, inferências e decisões futuras devem permanecer claramente separados na documentação.
 
 ## 7. Decisões ainda abertas
@@ -147,14 +160,13 @@ Os critérios detalhados de cada fase estão em `SPEC.md`.
 Não presumir respostas para estes itens:
 
 - requisitos mínimos de RAM da versão MSX1;
-- layout e orçamento de memória do futuro runtime da aventura MSX2;
+- certificação do orçamento de memória final da aventura MSX2;
 - formato e política de save em cada versão;
-- organização dos bancos do mapper e conteúdo da aventura MSX2;
+- necessidade e organização dos bancos do mapper, se o conteúdo crescer;
 - suporte a joystick;
-- recursos visuais, imagens, áudio e música exclusivos do MSX2;
+- áudio durante a aventura MSX2, além da trilha da abertura já implementada;
 - glifos e codificação necessários para reproduzir o texto apresentado pelo original;
-- formato dos dados de autoria e da compressão;
-- nome dos executáveis e estrutura final das imagens de disco.
+- formato dos dados de autoria e da compressão.
 
 Cada decisão deve ser registrada na seção “Registro de decisões” de `SPEC.md` antes de alterar a arquitetura.
 
@@ -164,9 +176,12 @@ Cada decisão deve ser registrada na seção “Registro de decisões” de `SPE
 2. Confirmar `git status` para não sobrescrever trabalho local.
 3. Consultar `release.bat status`; usar `build.bat` da raiz para ambas as edições
    com o mesmo número e os launchers de cada projeto para executar.
-4. Executar as suítes `run_random_tests.bat`, `run_engine_tests.bat`, `run_parser_tests.bat` e `run_solver_tests.bat`; manter o oráculo da ROM reproduzível por `tests/capture_random_oracle.tcl`.
-5. Validar no openMSX as ações, finais, guarda/confisco e rotas de várias salas contra o disco original.
-6. Continuar a conversão das regras restantes sem usar o comportamento parcial como especificação.
+4. Executar as suítes host e diferencial listadas em `docs/versioning.md`;
+   manter o oráculo da ROM reproduzível por `tests/capture_random_oracle.tcl`.
+5. Validar no openMSX rotas completas, finais e reinícios da interface MSX2,
+   além da comparação MSX1 × BASIC de textos, entrada e apresentação.
+6. Usar `run_msx2_rooms_tests.bat` para regressão visual; seus estados
+   injetados não substituem a execução de uma fuga completa.
 
 O RNG temporário e as posições aleatórias das estrelas foram substituídos e
 verificados. Continuam pendentes as diferenças de textos/glifos, entrada e

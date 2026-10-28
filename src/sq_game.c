@@ -9,6 +9,7 @@
 #include "sq_input.h"
 #include "sq_solver.h"
 #include "sq_random.h"
+#include "sq_game_ui.h"
 
 #define GAME_CURSOR_CHAR	0xDB
 
@@ -21,43 +22,14 @@ static unsigned char Game_Random(void* context, unsigned char range)
 	return (unsigned char)Random_Range(&g_RandomState, range);
 }
 
-static void Game_Scroll(void)
-{
-	u8 row;
-	u8 buffer[40];
-
-	for(row = 1; row < 23; ++row)
-	{
-		VDP_ReadVRAM_16K(g_ScreenLayoutLow + (row * 40), buffer, 40);
-		VDP_WriteVRAM_16K(buffer, g_ScreenLayoutLow + ((row - 1) * 40), 40);
-	}
-	VDP_FillVRAM_16K(0, g_ScreenLayoutLow + (22 * 40), 40);
-	Print_SetPosition(0, 22);
-}
-
-static void Game_CheckScroll(void)
-{
-	if(PRINT_DATA.CursorY >= 23)
-		Game_Scroll();
-}
-
 static void Game_Return(void)
 {
-	Print_Return();
-	Game_CheckScroll();
+	GameUI_Return();
 }
 
 static void Game_DrawChar(u8 character)
 {
-	if(character == '\n')
-	{
-		Game_Return();
-		return;
-	}
-	if(PRINT_DATA.CursorX >= 40)
-		Game_Return();
-	Game_CheckScroll();
-	Print_DrawChar(character);
+	GameUI_Char(character);
 }
 
 #if DEBUG
@@ -79,13 +51,12 @@ static void Game_Print(const c8* text)
 		Game_DrawChar(*text++);
 }
 
+#if MSX_VERSION == MSX_1
 static void Game_Backspace(void)
 {
-	if(PRINT_DATA.CursorX == 0 && PRINT_DATA.CursorY > 0)
-		Print_SetPosition(40, PRINT_DATA.CursorY - 1);
-	if(PRINT_DATA.CursorX > 0)
-		Print_Backspace(1);
+	GameUI_Backspace();
 }
+#endif
 
 static void Game_PrintLine(const c8* text)
 {
@@ -93,6 +64,7 @@ static void Game_PrintLine(const c8* text)
 	Game_Return();
 }
 
+#if MSX_VERSION == MSX_1
 static const c8* Game_FunctionCommand(u8 key)
 {
 	switch(key)
@@ -153,6 +125,9 @@ static void Game_ReadCommand(c8* buffer)
 		Game_DrawChar(GAME_CURSOR_CHAR);
 	}
 }
+#else
+static void Game_ReadCommand(c8* buffer) { GameUI_ReadCommand(buffer); }
+#endif
 
 void Game_Initialize(void)
 {
@@ -164,15 +139,15 @@ void Game_Initialize(void)
 
 static void Game_DrawFunctionBar(void)
 {
-	Print_DrawTextAt(1, 23, "NORTE   SUL   LESTE   OESTE");
+	GameUI_FunctionBar();
 }
 
 static void Game_ClearRoom(void)
 {
-	Print_Clear();
-	Print_SetPosition(0, 0);
+	GameUI_Clear();
+	GameUI_Position(0, 0);
 	Game_DrawFunctionBar();
-	Print_SetPosition(0, 0);
+	GameUI_Position(0, 0);
 }
 
 static void Game_DrawObjects(void)
@@ -195,22 +170,22 @@ static void Game_DrawDirections(void)
 		Game_Print("PODE SEGUIR:");
 		if(g_GameState.North)
 		{
-			Print_SetPositionX(13);
+			GameUI_PositionX(13);
 			Game_PrintLine("NORTE");
 		}
 		if(g_GameState.East)
 		{
-			Print_SetPositionX(13);
+			GameUI_PositionX(13);
 			Game_PrintLine("LESTE");
 		}
 		if(g_GameState.South)
 		{
-			Print_SetPositionX(13);
+			GameUI_PositionX(13);
 			Game_PrintLine("SUL  ");
 		}
 		if(g_GameState.West)
 		{
-			Print_SetPositionX(13);
+			GameUI_PositionX(13);
 			Game_PrintLine("OESTE");
 		}
 		if(!g_GameState.North && !g_GameState.East && !g_GameState.South && !g_GameState.West)
@@ -245,7 +220,7 @@ static void Game_PrintInventory(void)
 	{
 		if(g_GameState.ObjectLocations[i] == ENGINE_INVENTORY)
 		{
-			Print_SetPositionX(14);
+			GameUI_PositionX(14);
 			Game_PrintLine(g_EngineObjects[i].Name);
 			empty = FALSE;
 		}
@@ -253,7 +228,7 @@ static void Game_PrintInventory(void)
 	Game_Return();
 	if(empty)
 	{
-		Print_SetPositionX(14);
+		GameUI_PositionX(14);
 		Game_PrintLine("NADA!!");
 		Game_Return();
 	}
@@ -387,8 +362,8 @@ static bool Game_PrintResponse(const Parser_Result* parsed, const Engine_Respons
 		Game_Return();
 		break;
 	case ENGINE_RESPONSE_QUIT:
-		Print_Clear();
-		Print_SetPosition(12, 0);
+		GameUI_Clear();
+		GameUI_Position(12, 0);
 		Game_PrintLine("QUE VERGONHA!");
 		return TRUE;
 	case ENGINE_RESPONSE_MOVED:
@@ -473,18 +448,18 @@ static bool Game_EndGame(unsigned char won, unsigned char shame)
 
 	if(shame)
 	{
-		Print_Clear();
-		Print_SetPosition(12, 0);
+		GameUI_Clear();
+		GameUI_Position(12, 0);
 		Game_PrintLine("QUE VERGONHA!");
 		return FALSE;
 	}
 
 	if(won)
 	{
-		Print_Clear();
-		Print_SetPosition(0, 0);
+		GameUI_Clear();
+		GameUI_Position(0, 0);
 		Game_Return();
-		Print_SetPositionX(14);
+		GameUI_PositionX(14);
 		Game_PrintLine("PARABENS!");
 		Game_Return();
 		Game_PrintLine("VOCE CONSEGUIU A LIBERDADE!");
@@ -492,7 +467,7 @@ static bool Game_EndGame(unsigned char won, unsigned char shame)
 	}
 	Game_Return();
 	Game_Return();
-	Print_SetPositionX(7);
+	GameUI_PositionX(7);
 	Game_Print("ACEITA OUTRA FUGA (S/N)?");
 	key = Input_ReadKey();
 	return key == 'S';
@@ -510,14 +485,18 @@ bool Game_Run(void)
 	Solver_Initialize(&solver);
 #endif
 
+	GameUI_Initialize();
 	Game_DrawRoom(TRUE);
 	for(;;)
 	{
 		Engine_Response preCommand;
 
 		// BASIC 590
+		GameUI_Refresh();
+#if MSX_VERSION == MSX_1
 		Game_Return();
 		Game_Print("QUAL O COMANDO ? ");
+#endif
 #if DEBUG
 		if(solving)
 		{
@@ -577,6 +556,7 @@ bool Game_Run(void)
 			response.Type == ENGINE_RESPONSE_GUARD_CAUGHT ||
 			response.Type == ENGINE_RESPONSE_PATIO_DEATH)
 		{
+			GameUI_Refresh();
 			if(Game_EndGame(response.Type == ENGINE_RESPONSE_WON,
 				parsed.Action == PARSER_ACTION_QUIT))
 				return TRUE;
